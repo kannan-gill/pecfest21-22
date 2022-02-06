@@ -1,10 +1,10 @@
 import './App.css';
-import LandingPage from './Components/LandingPage';
-import Navbar from './Components/Navbar';
+import LandingPage from './Components/CampusTour/LandingPage';
+import Navbar from './Components/Navbar/Navbar';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
-import Events from './Components/Events';
-import Competitions from './Components/Competitions';
-import TeamRegister from './Components/TeamRegister';
+import Events from './Components/Events/EventEvents';
+import Competitions from './Components/Competitions/Competitions';
+import TeamRegister from './Components/Registration/TeamRegister';
 function App() {
   return (<div>
     <TeamRegister/>
