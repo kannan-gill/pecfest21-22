@@ -1,20 +1,27 @@
 import './App.css';
 import LandingPage from './Components/CampusTour/LandingPage';
 import Navbar from './Components/Navbar/Navbar';
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
-import Events from './Components/Events/EventEvents';
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import Events from './Components/Events/Events';
 import Competitions from './Components/Competitions/Competitions';
 import TeamRegister from './Components/Registration/TeamRegister';
+import ContactUs from './Components/ContactUS/ContactUs';
+import Developers from './Components/Developers/Developers';
+import Admin from './Components/Admin/Admin';
+
 function App() {
   return (<div>
-    <TeamRegister/>
-    <Router>
+    <Navbar/>
+    <BrowserRouter>
       <Routes>
-       <Route exact path = '/' component={LandingPage}/>
-       <Route exact path = '/events' component={Events}/>
-       <Route exact path = '/competitions' component={Competitions}/>
+       <Route path = '/' element={<LandingPage/>}/>
+       <Route path = '/events' element={<Events/>}/>
+       <Route path = '/competitions' element={<Competitions/>}/>
+       <Route path = '/developers' element={<Developers/>}/>
+       <Route path = '/contactUs' element={<ContactUs/>}/>
+       <Route path = '/admin' element={<Admin/>}/>
       </Routes>
-    </Router>
+    </BrowserRouter>
     </div>
   );
 }

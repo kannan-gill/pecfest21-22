@@ -12,6 +12,8 @@ function LandingPage() {
 
     useEffect(()=>{
         vidRef.current.load();
+        var element = document.querySelector('.videoCont');
+        element.scroll(350,0);
     },[videosrc])
 
     function handlevideoend(){
@@ -50,7 +52,7 @@ function LandingPage() {
 
     document.addEventListener('keydown',function(event){
         var keynum = event.key;
-        if(vidRef.current && keynum === 'ArrowUp'){
+        if(vidRef.current && event.keyCode === 87){
             if(vidRef.current.currentTime === vidRef.current.duration){
                 handlevideoend();
                 vidRef.current.pause();
@@ -59,19 +61,20 @@ function LandingPage() {
                 vidRef.current.play();
             }
         }
-        else if (vidRef.current && keynum === 'ArrowRight'){
-           vidRef.current.scrollRight+=100; 
+        else if (vidRef.current && event.keyCode === 68){
+           var element = document.querySelector(".videoCont");
+           var positionx = element.scrollLeft;
+           element.scroll(positionx+20,0);
         }
-        else if (vidRef.current && keynum === 'ArrowDown'){
-            myInterval= setInterval(()=>{
-                if(vidRef.current.currentTime>0){
-                    vidRef.current.currentTime += -0.1;
-                }
-                else{
-                    vidRef.current.currentTime=0;
-                }
-                // vidRef.current.play();
-            },30)
+        else if (vidRef.current && event.keyCode === 65){
+            var element = document.querySelector(".videoCont");
+            var positionx = element.scrollLeft;
+            element.scroll(positionx-20,0);
+         }
+        else if (vidRef.current && event.keyCode === 83){
+            if(vidRef.current.currentTime>0){
+                vidRef.current.currentTime-=0.1;
+            }
             
         }
 
