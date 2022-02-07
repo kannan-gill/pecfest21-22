@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 
 // this page opens only if
-
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 function Register() {
+  const navigate = useNavigate();
   const [user, editUser] = useState({
     name: "",
     college: "",
@@ -10,9 +12,27 @@ function Register() {
     phone: "",
     year: "",
     gender: "",
+    password: "default",
+    // TODO please add a password field....
   });
 
   function appendUser() {
+    const auth = getAuth();
+    
+    createUserWithEmailAndPassword(auth, user.email, user.password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user);
+        navigate("/events");
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage);
+        // ..
+      });
     // store this user in db and redirect to events page
   }
 
@@ -61,6 +81,7 @@ function Register() {
         </div>
 
         <button
+          type="button"
           className="btn btn-primary m-3 my-button"
           onClick={(e) => appendUser(e)}
         >

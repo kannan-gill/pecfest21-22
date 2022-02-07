@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from "react";
 // being used to invoke the firebase config, DO NOT DELETE
-import { } from "../../config";
+import {} from "../../config";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { Navigate, useLocation } from "react-router-dom";
+import Register from "../../Pages/Registration/Register";
 
 const PrivateRoutes = (props) => {
   const [user, setUser] = useState(null);
-  const location = useLocation();
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const auth = getAuth();
     const cleanUp = onAuthStateChanged(auth, (userRes) => {
       if (userRes) {
         setUser(userRes);
+        setLoading(false);
       } else {
         setUser(null);
+        setLoading(false);
       }
     });
     return cleanUp;
@@ -21,7 +23,8 @@ const PrivateRoutes = (props) => {
 
   return (
     <>
-      {user ? props.children : <Navigate to="/login" state={{ from: location }} />}
+      {/* TODO: Change to this login */}
+      {!loading && (user ? props.children : <Register />)}
     </>
   );
 };

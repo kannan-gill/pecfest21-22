@@ -9,6 +9,7 @@ import ContactUs from "./Pages/ContactUS/ContactUs";
 import Developers from "./Pages/Developers/Developers";
 import Admin from "./Pages/Admin/Admin";
 import PrivateRoutes from "./Components/PrivateRoutes";
+import Register from "./Pages/Registration/Register";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/developers" element={<Developers />} />
           <Route path="/contactUs" element={<ContactUs />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/register" element={<Register />} />
           <Route
             path="/events"
             element={
