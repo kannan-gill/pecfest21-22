@@ -5,6 +5,8 @@ import {
   getDoc,
   getDocs,
   onSnapshot,
+  setDoc,
+  addDoc,
 } from "firebase/firestore";
 
 export const getList = async (collectionParam) => {
@@ -32,10 +34,7 @@ export const getDocById = async (collectionParam, docIdParam) => {
   }
 };
 
-export const getListRealTime = async (
-  collectionParam,
-  callbackFunction
-) => {
+export const getListRealTime = async (collectionParam, callbackFunction) => {
   const cleanup = onSnapshot(
     collection(firestore, collectionParam),
     (docList) => {
@@ -48,7 +47,7 @@ export const getListRealTime = async (
       callbackFunction(data);
     }
   );
-
+  // call this to stop getting realtime updates
   return cleanup;
 };
 
@@ -66,3 +65,10 @@ export const getDocByIdRealTime = async (
   // call this to stop getting realtime updates
   return cleanup;
 };
+
+export const updateDoc = async (collectionParam, docIdParam, body) => {
+  await setDoc(doc(firestore, collectionParam, docIdParam), body);
+};
+
+export const createDoc = async (collectionParam, body) =>
+  await addDoc(collection(firestore, collectionParam), body);
