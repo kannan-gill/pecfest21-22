@@ -10,9 +10,11 @@ function Register() {
     college: "",
     email: "",
     phone: "",
+    degree:"",
     year: "",
     gender: "",
     password: "default",
+    isVerified:false,
     // TODO please add a password field....
   });
 
@@ -79,13 +81,40 @@ function Register() {
             onChange={(e) => editUser({ ...user, phone: e.target.value })}
           ></input>
         </div>
+        <div>
+        <label>Password</label>
+          <input value={user.password} onChange={(e)=>editUser({...user, password:e.target.value})} type="password" name="password"/>
+        </div>
+        <div>
+          <label>Degree</label>
+          <input
+            type="text"
+            name="degree"
+            placeholder="Degree"
+            value={user.degree}
+            onChange={(e) => editUser({ ...user, degree: e.target.value })}
+          ></input>
+        </div>
+        <div onChange={(e)=>editUser({...user, gender:e.target.value})}>
+          <input type="radio" value="Male" name="gender" /> Male
+          <input type="radio" value="Female" name="gender" /> Female
+          <input type="radio" value="Other" name="gender" /> Other
+        </div>
+        <div onChange={(e)=>editUser({...user, year:e.target.value})}>
+          <input type="radio" value="First" name="year" /> First
+          <input type="radio" value="Second" name="year" /> Second
+          <input type="radio" value="Third" name="year" /> Third
+          <input type="radio" value="Fourth" name="year" /> Fourth
+          <input type="radio" value="Fifth" name="year" /> Fifth
+        </div>
+        
 
         <button
           type="button"
           className="btn btn-primary m-3 my-button"
           onClick={(e) => appendUser(e)}
         >
-          Add User
+          Register
         </button>
       </form>
     </div>
