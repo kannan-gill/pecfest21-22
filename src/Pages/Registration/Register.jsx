@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 // this page opens only if
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {} from "../../config";
 import { useNavigate } from "react-router-dom";
 function Register() {
   const navigate = useNavigate();
