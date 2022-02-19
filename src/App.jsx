@@ -12,6 +12,8 @@ import PrivateRoutes from "./Components/PrivateRoutes";
 // import Admin from "./Pages/Admin/Admin";
 // import Register from "./Pages/Registration/Register";
 // import Login from "./Pages/Login/Login";
+import Register from "./Pages/Registration/Register";
+import Home2 from "./Pages/Home/Home2"
 
 function App() {
   // TODO: update these routes

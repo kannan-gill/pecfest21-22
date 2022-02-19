@@ -3,17 +3,16 @@ import React,{useState} from 'react'
 var id = 1;
 
 function TeamEventRegistration(props) {
-    const [members,setMembers] = useState([{ID:0,mail:"kannan"}]);
+    const [members,setMembers] = useState([{ID:0,mail:props.teamLeader}]);
     const [memberMail, setMemberMail] = useState({ID:id,mail:""});
     const [limitreached,setlimitreached]=useState(false);
 
     function handleMemberSubmit(e){
         e.preventDefault();
-        if(members.length >= 3){
+        if(members.length >= props.maxMembers){
             setlimitreached(true);
         }
         else{
-            console.log(id);
             var memberslist = members;
             memberslist.push(memberMail);
             setMembers(memberslist);
@@ -36,7 +35,6 @@ function TeamEventRegistration(props) {
     function handleDelete(e,ID){
         e.preventDefault();
         var index = members.findIndex(user=>user.ID === ID);
-        console.log(index);
         members.splice(index,1);
         setMembers(members);
         setlimitreached(false);
