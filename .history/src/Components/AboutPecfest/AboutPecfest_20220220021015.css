@@ -1,0 +1,10 @@
+.AboutPecfest{
+    height: 100vh;
+    background: black;
+    color: white;
+    text-align: center;
+    font-size: 8vw;
+    position: relative;
+    z-index: 500;
+    padding-top: 100px;
+}
