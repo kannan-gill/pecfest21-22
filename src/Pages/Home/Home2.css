@@ -12,6 +12,13 @@
     filter: brightness(80%);
 }
 
+.bgImage{
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    filter: brightness(80%);
+}
+
 .landing div{
    
 }

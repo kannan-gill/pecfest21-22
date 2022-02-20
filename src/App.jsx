@@ -1,5 +1,6 @@
 import "./App.css";
 import Navbar from "./Components/Navbar/Navbar";
+// import Button from "./Components/Utilities/Button";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import EventList from "./Pages/Events/EventList";
 // import Home from "./Pages/Home/Home";
@@ -17,7 +18,7 @@ import Home2 from "./Pages/Home/Home2"
 
 function App() {
   // TODO: update these routes
-  const publicRoutes = [{ path: "/", component: <Home2 /> }];
+  const publicRoutes = [{ path: "/", component: <Register /> }];
   const privateRoutes = [{ path: "/events", component: <EventList /> }];
 
   const privateRouteComponent = (route) => (

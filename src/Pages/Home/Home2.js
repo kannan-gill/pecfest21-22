@@ -24,7 +24,7 @@ function Home2() {
                 const y = (window.innerHeight - e.pageY*speed)/250;
                 element.style.transform = `translate(${x}px) translateY(${y}px)`
             })
-        }
+        }       
 
         return ()=>{
             window.removeEventListener('mousemove',handleMouse);
