@@ -2,7 +2,7 @@ import "./App.css";
 import Navbar from "./Components/Navbar/Navbar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import EventList from "./Pages/Events/EventList";
-import Home from "./Pages/Home/Home";
+// import Home from "./Pages/Home/Home";
 import PrivateRoutes from "./Components/PrivateRoutes";
 // import LandingPage from "./Pages/CampusTour/LandingPage";
 // import Competitions from "./Pages/Competitions/Competitions";
@@ -17,7 +17,7 @@ import Home2 from "./Pages/Home/Home2"
 
 function App() {
   // TODO: update these routes
-  const publicRoutes = [{ path: "/", component: <Home /> }];
+  const publicRoutes = [{ path: "/", component: <Home2 /> }];
   const privateRoutes = [{ path: "/events", component: <EventList /> }];
 
   const privateRouteComponent = (route) => (
@@ -34,7 +34,7 @@ function App() {
   );
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <BrowserRouter>
         <Routes>
           {/*<Route path="/" element={<Home />} />
