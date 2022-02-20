@@ -2,7 +2,7 @@ import "./App.css";
 // import Navbar from "./Components/Navbar/Navbar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import EventList from "./Pages/Events/EventList";
-import Home from "./Pages/Home/Home";
+// import Home from "./Pages/Home/Home";
 import PrivateRoutes from "./Components/PrivateRoutes";
 import LandingPage from "./Pages/CampusTour/LandingPage";
 import Competitions from "./Pages/Competitions/Competitions";
