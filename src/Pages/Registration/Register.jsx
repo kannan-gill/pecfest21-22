@@ -6,7 +6,10 @@ import {} from "../../config";
 import { useNavigate } from "react-router-dom";
 import styles from "./Register.module.css";
 import Button from "../../Components/Utilities/Button";
-import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
+import { Container, Row, Col, InputGroup,Icon, InputGroupElement} from "react-bootstrap";
+import SimpleInput from "../../Components/Utilities/SimpleInput";
+import DropDown from "../../Components/Utilities/RadioInput";
+import RadioInput from "../../Components/Utilities/RadioInput";
 
 function Register() {
   const navigate = useNavigate();
@@ -48,20 +51,47 @@ function Register() {
   }
 
   return (
-    <MDBContainer fluid className="p-0 m-0">  
+    <Container fluid className="p-0 m-0">  
       <div
         style={{ backgroundImage: "url('../../Images/login_register_bg.jpg')" }}
         className={`vw-100 vh-100 ${styles.bg_img}`}
       >
-        <MDBRow className="m-0 py-md-4 py-sm-0 vh-100 d-flex justify-content-lg-end justify-content-md-center align-items-center">
-          <MDBCol
+        <Row className="m-0 py-md-4 py-sm-0 vh-100 d-flex justify-content-lg-end justify-content-md-center align-items-center">
+          <Col
             className="p-0 h-100 me-lg-5 z-index-2 col-lg-4 col-md-6 col-sm-12 rounded"
             style={{ backgroundColor: "#5dc3d34f" }}
           >
-            {/* <div className="text-center text-uppercase fs-1" style={{"font-family": "'Audiowide', serif", "color":"white"}}>REGISTER</div> */}
-            <form onSubmit={submitHandler}>
-              {/* <Button type="submit" text="Sign Up" icon="space-shuttle" btnClasses="fs-6"/> */}
-            </form>
+            <div className="text-center text-uppercase fs-1" style={{"font-family": "'Audiowide', serif", "color":"white"}}>REGISTER</div>
+              <form onSubmit={submitHandler} className="d-flex flex-column align-items-center mt-3">
+                <SimpleInput type="text" icon="user" placeholder="Name"/>
+                <SimpleInput type="text" icon="at" placeholder="Email Address"/>
+                <SimpleInput type="text" icon="university" placeholder="College Name"/>
+                <SimpleInput type="text" icon="phone-alt" placeholder="Mobile Number"/>
+                <RadioInput name="gender" options={["Male", "Female", "Other"]}/>
+                {/* <div>
+                  <Radio name='gender' id='male' value='Male' label='Male' inline />
+                  <Radio name='gender' id='female' value='Female' label='Female' inline />
+                  <Radio name='gender' id='other' value='Other' label='Other' inline />
+                </div> */}
+
+                <InputGroup noWrap className="p-2 w-75">
+                  {/* <InputGroupText>
+                    <Icon fas icon="transgender-alt" className="text-light" />
+                  </InputGroupText> */}
+                  <select name="grad_year" className="form-control">
+                    <option value="" disabled selected>Graduation Year</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                  </select>
+                </InputGroup>
+
+                {/* <DropDown icon="book" name="Course" options={["BTech","MTech", "PhD"]}/> */}
+                <SimpleInput type="password" icon="key" placeholder="Password"/>
+                {/* <Button type="submit" text="Sign Up" icon="space-shuttle" btnClasses="fs-6"/> */}
+              </form>
+            {/* </div> */}
             {/* <form>    
               <div> 
                 <label>Name</label>
@@ -139,10 +169,10 @@ function Register() {
                 Register
               </button>
             </form> */}
-          </MDBCol>
-        </MDBRow>
+          </Col>
+        </Row>
       </div>
-    </MDBContainer>
+    </Container>
   );
 }
 

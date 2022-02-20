@@ -12,7 +12,7 @@ import PrivateRoutes from "./Components/PrivateRoutes";
 // import Developers from "./Pages/Developers/Developers";
 // import Admin from "./Pages/Admin/Admin";
 // import Register from "./Pages/Registration/Register";
-// import Login from "./Pages/Login/Login";
+// import Login from "./Pages/Login/Login"; 
 import Register from "./Pages/Registration/Register";
 import Home2 from "./Pages/Home/Home2"
 
