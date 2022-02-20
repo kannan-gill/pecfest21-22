@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {} from "../../config";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import InputGroup from "../../Components/Utilities/InputGroup";
+import Button from "../../Components/Utilities/Button";
 
 function Login() {
   const [login, setlogin] = useState({ email: "", password: "" });
@@ -27,9 +28,9 @@ function Login() {
 
   return (
     <div>
-      <img src="" className='img-fluid shadow-4' alt='...' />
       <InputGroup type='email' placeholder='Email' icon="envelope" />
       <InputGroup type='password' placeholder='Password' icon="key" />
+      <Button text="Login" type="button" clickHandler={handleSubmit} />
 
       {/* <label>Pecfest Email</label>
       <input
@@ -45,9 +46,12 @@ function Login() {
         value={login.password}
         onChange={(e) => setlogin({ ...login, password: e.target.value })}
       /> */}
-      <button type="button" onClick={(e) => handleSubmit(e)}>
+      {/* <button type="button" onClick={(e) => handleSubmit(e)}>
         Login
-      </button>
+      </button> */}
+
+
+
     </div>
   );
 }
