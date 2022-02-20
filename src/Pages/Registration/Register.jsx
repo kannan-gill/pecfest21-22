@@ -19,6 +19,10 @@ function Register() {
     // TODO please add a password field....
   });
 
+  function handleChange(e){
+    editUser({...user, [e.target.name]:e.target.value})
+  }
+
   function appendUser() {
     const auth = getAuth();
     
@@ -49,7 +53,7 @@ function Register() {
             name="name"
             placeholder="Name"
             value={user.name}
-            onChange={(e) => editUser({ ...user, name: e.target.value })}
+            onChange={handleChange}
           ></input>
         </div>
         <div>
@@ -59,7 +63,7 @@ function Register() {
             name="college"
             placeholder="College"
             value={user.college}
-            onChange={(e) => editUser({ ...user, college: e.target.value })}
+            onChange={handleChange}
           ></input>
         </div>
         <div>
@@ -69,22 +73,22 @@ function Register() {
             name="email"
             placeholder="Email"
             value={user.email}
-            onChange={(e) => editUser({ ...user, email: e.target.value })}
+            onChange={handleChange}
           ></input>
         </div>
         <div>
           <label>Phone Number</label>
           <input
             type="text"
-            name="phone number"
+            name="phone"
             placeholder="Phone Number"
             value={user.phone}
-            onChange={(e) => editUser({ ...user, phone: e.target.value })}
+            onChange={handleChange}
           ></input>
         </div>
         <div>
         <label>Password</label>
-          <input value={user.password} onChange={(e)=>editUser({...user, password:e.target.value})} type="password" name="password"/>
+          <input value={user.password} onChange={handleChange} type="password" name="password"/>
         </div>
         <div>
           <label>Degree</label>
@@ -93,15 +97,15 @@ function Register() {
             name="degree"
             placeholder="Degree"
             value={user.degree}
-            onChange={(e) => editUser({ ...user, degree: e.target.value })}
+            onChange={handleChange}
           ></input>
         </div>
-        <div onChange={(e)=>editUser({...user, gender:e.target.value})}>
+        <div onChange={handleChange}>
           <input type="radio" value="Male" name="gender" /> Male
           <input type="radio" value="Female" name="gender" /> Female
           <input type="radio" value="Other" name="gender" /> Other
         </div>
-        <div onChange={(e)=>editUser({...user, year:e.target.value})}>
+        <div onChange={handleChange}>
           <input type="radio" value="First" name="year" /> First
           <input type="radio" value="Second" name="year" /> Second
           <input type="radio" value="Third" name="year" /> Third
