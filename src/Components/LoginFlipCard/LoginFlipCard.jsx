@@ -20,7 +20,7 @@ const LoginFlipCard = ({ isRegister }) => {
   }
 
   return (
-    <div className={`vh-100 vw-100 m-0 py-md-4 py-sm-0 d-flex flex-row justify-content-lg-end justify-content-md-center align-items-center`}>
+    <div className={`overflow-hidden vh-100 vw-100 m-0 py-md-4 py-sm-0 d-flex flex-row justify-content-lg-end justify-content-md-center align-items-center`}>
       <Row
         className={`me-lg-5 m-0 h-100 col-lg-4 col-md-6 col-sm-12 col-12 position-relative ${
           styles.loginCard
@@ -28,13 +28,13 @@ const LoginFlipCard = ({ isRegister }) => {
       >
         
           <Col
-            className={`p-0 h-100 me-lg-5 z-index-2 rounded position-absolute ${styles.bgColorCard} ${styles.loginCardFace} ${styles.loginCardFaceFront}`}
+            className={`mh-100 overflow-auto h-sm-100 p-0 me-lg-5 z-index-2 rounded position-absolute ${styles.bgColorCard} ${styles.loginCardFace} ${styles.loginCardFaceFront} ${styles.top_50}`}
           >
             <h1 onClick={LoginFlipHandler}>Login</h1>
           </Col>
         
           <Col
-            className={`p-0 h-100 me-lg-5 z-index-2 rounded position-absolute ${styles.bgColorCard} ${styles.loginCardFace} ${styles.loginCardFaceBack}`}
+            className={`mh-100 overflow-auto p-0 me-lg-5 z-index-2 rounded position-absolute ${styles.bgColorCard} ${styles.loginCardFace} ${styles.loginCardFaceBack} ${styles.top_50}`}
           >
             <Register onFlip={RegisterFlipHandler}/>
           </Col>

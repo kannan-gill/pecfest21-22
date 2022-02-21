@@ -1,19 +1,17 @@
-// import React from "react";
-// import { Btn, Icon } from "mdb-react-ui-kit";
+import React from "react";
+import styles from "./Utilities.module.css";
 
-// function Button({ btnClasses, iconClasses, clickHandler, icon, text, type }) {
-//   return (
-//     <Btn color="warning" className={btnClasses} rounded="true" type={type}>
-//       {text}
-//       <Icon
-//         className={`${iconClasses} ms-2`}
-//         fas
-//         icon={icon}
-//         onClick={clickHandler}
-//       />
-//     </Btn>
-//   );
-// }
+function Button({children, type, onClickFunc}) {
 
-// export default Button;
-  
+  const clickHandler = (e) => {
+    onClickFunc();
+  } 
+
+  return (
+    <div className={styles.buttonGroup}>
+        <button type={type} onClick={clickHandler} className={`${styles.color} ${styles.btn}`}>{children}</button>
+    </div>
+  );
+}
+
+export default Button;

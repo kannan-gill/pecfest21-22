@@ -5,10 +5,10 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import {} from "../../config";
 import { useNavigate } from "react-router-dom";
 import styles from "./Register.module.css";
-import { Button } from "react-bootstrap";
 import SimpleInput from "../Utilities/SimpleInput";
 import SelectInput from "../Utilities/SelectInput";
 import DatePickerInput from "../Utilities/DatePickerInput";
+import Button from "../Utilities/Button"; 
 
 function Register({ onFlip }) {
   const navigate = useNavigate();
@@ -63,15 +63,16 @@ function Register({ onFlip }) {
   return (
     <>
       <div
-        className="text-center text-uppercase fs-1"
+        className="text-center text-uppercase fs-1 my-3"
         style={{ "font-family": "'Audiowide', serif", color: "white" }}
       >
         REGISTER
       </div>
       <form
         onSubmit={submitHandler}
-        className="mh-75 overflow-y-scroll d-flex flex-column align-items-center mt-3"
+        className="h-100 mt-3 overflow-hidden"
       >
+      <div className={`w-100 d-flex flex-column align-items-center ${styles.overflow_auto}`}>
         <SimpleInput
           type="text"
           icon="user"
@@ -93,8 +94,8 @@ function Register({ onFlip }) {
           value={user.name}
           onChange={changeHandler}
         />
-        {/* <SimpleInput type="text" icon="phone-alt" placeholder="Mobile Number"/>
-                <SelectInput label="gender" icon="transgender-alt" disabledOption="Gender" options={["Male", "Female", "Other"]}/> */}
+        <SimpleInput type="text" icon="phone-alt" placeholder="Mobile Number"/>
+        <SelectInput label="gender" icon="transgender-alt" disabledOption="Gender" options={["Male", "Female", "Other"]}/>
         <DatePickerInput label="dob" icon="calendar" />
         <SelectInput
           label="grad_year"
@@ -114,13 +115,14 @@ function Register({ onFlip }) {
           icon="key"
           placeholder="Password"
         />
-        <div className="d-flex flex-row justify-content-center mt-3">
-          <Button variant="primary" className="mx-3" type="button" onClick={onFlip}>
+        </div>
+        <div className="d-flex flex-row justify-content-center my-2">
+          <Button className="mx-3" type="button" onClickFunc={onFlip}>
             Back
           </Button>
-          <Button variant="primary" className="mx-3" type="submit">
+          <Button className="mx-3" type="submit" >
             Sign Up
-          </Button>
+          </Button> 
         </div>
       </form>
     </>
