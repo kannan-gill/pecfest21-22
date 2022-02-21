@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import { Button } from "react-bootstrap";
+import SimpleInput from "../Utilities/SimpleInput";
+import SelectInput from "../Utilities/SelectInput";
+import DatePickerInput from "../Utilities/DatePickerInput";
 
 // this page opens only if
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
@@ -17,11 +21,24 @@ function Register({ onFlip }) {
     college: "",
     email: "",
     phone: "",
+    dob: "",
     degree: "",
     year: "",
     gender: "",
     password: "",
     isVerified: false,
+  });
+
+  const [checkValidStates, setCheckValidStates] = useState({
+    isNameValid: true,  
+    isCollegeValid: true,
+    isEmailValid: true,
+    isPhoneValid: true,
+    isDobValid: true,
+    isDegreeValid: true,
+    isYearValid: true,
+    isGenderValid: true,
+    isPasswordValid: true
   });
 
   function appendUser() {
@@ -51,7 +68,46 @@ function Register({ onFlip }) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(user);
+
+    for(var det in user) {
+      if(det === "name") {
+        if((user[det].length < 2 || user[det].length > 50)){
+          setCheckValidStates((prevState) => { return {...prevState, isNameValid: false}});
+        }
+        else setCheckValidStates((prevState) => { return {...prevState, isNameValid: true}});
+      }
+
+      else if(det === "college") {
+        if( user[det].length === 0 || user[det].length > 50){
+          setCheckValidStates((prevState) => {return  {...prevState, isCollegeValid: false }});
+        }
+        else setCheckValidStates((prevState) => {return  {...prevState, isCollegeValid: true }});
+      }
+
+      else if(det === "email") {
+        if(!user[det].includes("@")){
+          setCheckValidStates((prevState) => {return  {...prevState, isEmailValid: false }});
+        }
+        else setCheckValidStates((prevState) => {return  {...prevState, isEmailValid: true }});
+      }
+
+      else if(det === "phone") {
+        if(user[det].length != 10){
+          setCheckValidStates((prevState) => {return  {...prevState, isPhoneValid: false }});
+        }
+        else setCheckValidStates((prevState) => {return  {...prevState, isPhoneValid: true }});
+      }
+      
+      else if(det === "password") {
+        if(user[det].length < 8){
+          setCheckValidStates((prevState) => {return  {...prevState, isPasswordValid: false }});
+        }
+        else setCheckValidStates((prevState) => {return  {...prevState, isPasswordValid: true }});
+      }
+
+    }
+
+    // MG CODE
     // for(const prop in user) {
     //   editUser({ ...user, [prop]: "" });
     // }
@@ -80,19 +136,25 @@ function Register({ onFlip }) {
           name="name"
           val={user.name}
           changeFunc={changeHandler}
+          isValid = {checkValidStates.isNameValid}
         />
         <SimpleInput
           type="text"
           icon="at"
           name="email"
           placeholder="Email Address"
+          val={user.email}
+          changeFunc={changeHandler}
+          isValid = {checkValidStates.isEmailValid}
         />
         <SimpleInput
           type="text"
           icon="university"
+          name="college"
           placeholder="College Name"
-          value={user.name}
-          onChange={changeHandler}
+          val={user.college}
+          changeFunc={changeHandler}
+          isValid = {checkValidStates.isCollegeValid}
         />
         <SimpleInput type="text" icon="phone-alt" placeholder="Mobile Number"/>
         <SelectInput label="gender" icon="transgender-alt" disabledOption="Gender" options={["Male", "Female", "Other"]}/>
@@ -111,9 +173,13 @@ function Register({ onFlip }) {
         />
         <SimpleInput
           type="password"
+          name="password"
+          val={user.password}
           password="true"
           icon="key"
           placeholder="Password"
+          changeFunc={changeHandler}
+          isValid = {checkValidStates.isPasswordValid}
         />
         </div>
         <div className="d-flex flex-row justify-content-center my-2">
