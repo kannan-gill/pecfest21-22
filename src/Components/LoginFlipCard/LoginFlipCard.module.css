@@ -1,0 +1,26 @@
+.loginCard {
+  transition: transform 1s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  /* position: relative; */
+   border: 0; 
+}
+
+.loginCardFace {
+  /* position: absolute; */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.loginCardFaceFront {
+  background: #5dc3d34f;
+}
+
+.loginCardFaceBack {
+  background: blue;
+  transform: rotateY(180deg);
+}
+
+.isFlipped {
+  transform: rotateY(180deg);
+}

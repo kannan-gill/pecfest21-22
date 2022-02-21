@@ -12,13 +12,14 @@ import PrivateRoutes from "./Components/PrivateRoutes";
 // import Developers from "./Pages/Developers/Developers";
 // import Admin from "./Pages/Admin/Admin";
 // import Register from "./Pages/Registration/Register";
-// import Login from "./Pages/Login/Login"; 
+import Login from "./Pages/Login/Login"; 
 import Register from "./Pages/Registration/Register";
 import Home2 from "./Pages/Home/Home2"
+import LogRegFlipCard from "./Components/LoginFlipCard/LoginFlipCard";
 
 function App() {
   // TODO: update these routes
-  const publicRoutes = [{ path: "/", component: <Register /> }];
+  const publicRoutes = [{ path: "/", component: <LogRegFlipCard /> }];
   const privateRoutes = [{ path: "/events", component: <EventList /> }];
 
   const privateRouteComponent = (route) => (
