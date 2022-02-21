@@ -4,14 +4,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import EventList from "./Pages/Events/EventList";
 import Home from "./Pages/Home/Home";
 import PrivateRoutes from "./Components/PrivateRoutes";
-// import LandingPage from "./Pages/CampusTour/LandingPage";
-// import Competitions from "./Pages/Competitions/Competitions";
-// import TeamEventRegistration from "./Pages/TeamEventRegistration/TeamEventRegistration";
-// import ContactUs from "./Pages/ContactUS/ContactUs";
-// import Developers from "./Pages/Developers/Developers";
-// import Admin from "./Pages/Admin/Admin";
-// import Register from "./Pages/Registration/Register";
-// import Login from "./Pages/Login/Login";
+import LandingPage from "./Pages/CampusTour/LandingPage";
+import Competitions from "./Pages/Competitions/Competitions";
+import TeamEventRegistration from "./Pages/TeamEventRegistration/TeamEventRegistration";
+import ContactUs from "./Pages/ContactUS/ContactUs";
+import Developers from "./Pages/Developers/Developers";
+import Admin from "./Pages/Admin/Admin";
+import Login from "./Pages/Login/Login";
 import Register from "./Pages/Registration/Register";
 import Home2 from "./Pages/Home/Home2"
 
@@ -34,10 +33,10 @@ function App() {
   );
   return (
     <div>
-      <Navbar />
+
       <BrowserRouter>
         <Routes>
-          {/*<Route path="/" element={<Home />} />
+          <Route path="/" element={<Home2 />} />
            <Route path="/campusTour" element={<LandingPage />} />
           <Route path="/competitions" element={<Competitions />} />
           <Route path="/developers" element={<Developers />} />
@@ -45,7 +44,7 @@ function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/teamregister" element={<TeamEventRegistration />} /> */}
+          <Route path="/teamregister" element={<TeamEventRegistration />} />
           {publicRoutes.map((route) => publicRouteComponent(route))}
           {privateRoutes.map((route) => privateRouteComponent(route))}
         </Routes>
