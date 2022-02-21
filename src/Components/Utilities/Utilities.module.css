@@ -9,3 +9,7 @@
 .icon_size{
   width: 14px;
 }
+
+::-ms-reveal {
+  display: none;
+}
