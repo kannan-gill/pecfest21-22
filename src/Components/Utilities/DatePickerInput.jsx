@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { InputGroup, FormControl } from "react-bootstrap";
+import styles from "./Utilities.module.css";
+
 
 const DatePickerInput = ({ label, icon }) => {
   const [textType, setTextType] = useState(true);
@@ -19,7 +21,7 @@ const DatePickerInput = ({ label, icon }) => {
     <InputGroup className="mb-3 w-75">
       {textType && (
         <InputGroup.Text>
-          <i class={`fas fa-${icon}`} />
+          <i class={`fas fa-${icon} ${styles.icon_size}`} />
         </InputGroup.Text>
       )}
       <FormControl
@@ -28,6 +30,7 @@ const DatePickerInput = ({ label, icon }) => {
         type="text"
         placeholder="Date of Birth"
         aria-label={label}
+        className={styles.no_box_shadow}
       />
     </InputGroup>
   );

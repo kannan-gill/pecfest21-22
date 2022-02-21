@@ -1,0 +1,11 @@
+.no_border_right{
+  border-right: 0;
+}
+
+.no_box_shadow:focus{
+  box-shadow: none;
+}
+
+.icon_size{
+  width: 14px;
+}

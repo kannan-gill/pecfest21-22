@@ -3,13 +3,3 @@
   background-size: cover;
   background-position: left top;
 }
-
-.signUp_btn{
-  /* transition: 1s ease-out all; */
-}
-
-.signUp_btn_clicked{
-  margin-left: 100px;
-  transition: 1s ease-out all;
-
-}
