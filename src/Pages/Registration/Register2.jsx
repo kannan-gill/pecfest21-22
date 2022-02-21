@@ -77,7 +77,7 @@ function Register() {
             >
               REGISTER
             </div>
-            <form
+            <form 
               onSubmit={submitHandler}
               className="mh-75 overflow-y-scroll d-flex flex-column align-items-center mt-3"
             >

@@ -30,6 +30,7 @@ const SimpleInput = ({ placeholder, icon, type, password = false, val, name, cha
         onChange={changeHandler}
         value = {value}
         name = {name}
+        required
       />
       {password && focus && (
         <InputGroup.Text className="bg-white" onClick={passwordClickHandler}>

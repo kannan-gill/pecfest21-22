@@ -12,14 +12,18 @@ import PrivateRoutes from "./Components/PrivateRoutes";
 // import Developers from "./Pages/Developers/Developers";
 // import Admin from "./Pages/Admin/Admin";
 // import Register from "./Pages/Registration/Register";
-import Login from "./Pages/Login/Login"; 
-import Register from "./Pages/Registration/Register";
-import Home2 from "./Pages/Home/Home2"
-import LogRegFlipCard from "./Components/LoginFlipCard/LoginFlipCard";
+import Login from "./Pages/Login/Login";
+// import Register2 from "./Pages/Registration/Register2";
+import RegisterLogin from "./Pages/Registration/RegisterLogin";
+import Home2 from "./Pages/Home/Home2";
 
 function App() {
   // TODO: update these routes
-  const publicRoutes = [{ path: "/", component: <LogRegFlipCard /> }];
+  const publicRoutes = [
+    { path: "/", component: <Home2 /> },
+    { path: "/login", component: <RegisterLogin /> },
+    { path: "/register", component: <RegisterLogin isRegister="true"/> },
+  ];
   const privateRoutes = [{ path: "/events", component: <EventList /> }];
 
   const privateRouteComponent = (route) => (
@@ -29,10 +33,7 @@ function App() {
     />
   );
   const publicRouteComponent = (route) => (
-    <Route
-      path={route.path}
-      element={route.component}
-    />
+    <Route path={route.path} element={route.component} />
   );
   return (
     <div>
