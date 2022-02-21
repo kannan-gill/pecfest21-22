@@ -20,27 +20,25 @@ const LoginFlipCard = ({ isRegister }) => {
   }
 
   return (
-    <div className="vh-100 m-0 py-md-4 py-sm-0 d-flex flex-row justify-content-lg-end justify-content-md-center align-items-center">
+    <div className={`vh-100 vw-100 m-0 py-md-4 py-sm-0 d-flex flex-row justify-content-lg-end justify-content-md-center align-items-center`}>
       <Row
-        className={`me-lg-5 m-0 h-100 col-lg-4 col-md-6 col-sm-12 position-relative ${
+        className={`me-lg-5 m-0 h-100 col-lg-4 col-md-6 col-sm-12 col-12 position-relative ${
           styles.loginCard
         } ${toggleFlip ? styles.isFlipped : ""} `}
       >
-        {!toggleFlip ? (
+        
           <Col
-            className={`p-0 h-100 me-lg-5 z-index-2 rounded position-absolute ${styles.loginCardFace} ${styles.loginCardFaceFront}`}
-            style={{ backgroundColor: "#5dc3d34f" }}
+            className={`p-0 h-100 me-lg-5 z-index-2 rounded position-absolute ${styles.bgColorCard} ${styles.loginCardFace} ${styles.loginCardFaceFront}`}
           >
             <h1 onClick={LoginFlipHandler}>Login</h1>
           </Col>
-        ) : (
+        
           <Col
-            className={`p-0 h-100 me-lg-5 z-index-2 rounded position-absolute ${styles.loginCardFace} ${styles.loginCardFaceBack}`}
-            style={{ backgroundColor: "#5dc3d34f" }}
+            className={`p-0 h-100 me-lg-5 z-index-2 rounded position-absolute ${styles.bgColorCard} ${styles.loginCardFace} ${styles.loginCardFaceBack}`}
           >
             <Register onFlip={RegisterFlipHandler}/>
           </Col>
-        )}
+        
       </Row>
     </div>
   );

@@ -1,9 +1,9 @@
 .loginCard {
-  transition: transform 1s;
+  transition: transform 1.3s;
   transform-style: preserve-3d;
   cursor: pointer;
   /* position: relative; */
-   border: 0; 
+   border: none; 
 }
 
 .loginCardFace {
@@ -17,10 +17,13 @@
 }
 
 .loginCardFaceBack {
-  background: blue;
   transform: rotateY(180deg);
 }
 
 .isFlipped {
   transform: rotateY(180deg);
+}
+
+.bgColorCard {
+  background: #5dc3d34f;
 }
