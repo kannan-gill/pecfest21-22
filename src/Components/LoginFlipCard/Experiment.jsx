@@ -3,7 +3,7 @@ import { Row, Col } from "react-bootstrap";
 import Login from "../../Pages/Login/Login";
 import styles from "./LoginFlipCard.module.css";
 
-const LoginFlipCard = ({ children }) => {
+const Experiment = ({ children }) => {  
   const [toggleFlip, setToggleFlip] = useState(false);
 
   const flipHandler = (e) => {
@@ -17,24 +17,24 @@ const LoginFlipCard = ({ children }) => {
           styles.loginCard
         } ${toggleFlip ? styles.isFlipped : ""} `}
       >
-        {!toggleFlip ? (
+         
           <Col
             className={`p-0 h-100 me-lg-5 z-index-2 rounded position-absolute ${styles.bgColorCard} ${styles.loginCardFace} ${styles.loginCardFaceFront}`}
             // style={{ backgroundColor: "#5dc3d34f" }}
           >
             <h1 onClick={flipHandler}>Login</h1>
           </Col>
-        ) : (
+        
           <Col
             className={`p-0 h-100 me-lg-5 z-index-2 rounded position-absolute ${styles.bgColorCard} ${styles.loginCardFace} ${styles.loginCardFaceBack}`}
             // style={{ backgroundColor: "#5dc3d34f" }}
           >
             <h1 onClick={flipHandler}>REGISTER!!</h1>
           </Col>
-        )}
+        
       </Row>
     </div>
   );
 };
 
-export default LoginFlipCard;
+export default Experiment;

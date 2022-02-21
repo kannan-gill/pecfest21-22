@@ -15,11 +15,12 @@ import PrivateRoutes from "./Components/PrivateRoutes";
 import Login from "./Pages/Login/Login"; 
 import Register from "./Pages/Registration/Register";
 import Home2 from "./Pages/Home/Home2"
-import LogRegFlipCard from "./Components/LoginFlipCard/LoginFlipCard";
+import LoginFlipCard from "./Components/LoginFlipCard/LoginFlipCard";
+import Experiment from "./Components/LoginFlipCard/Experiment";
 
 function App() {
   // TODO: update these routes
-  const publicRoutes = [{ path: "/", component: <LogRegFlipCard /> }];
+  const publicRoutes = [{ path: "/", component: <Experiment /> }];
   const privateRoutes = [{ path: "/events", component: <EventList /> }];
 
   const privateRouteComponent = (route) => (
