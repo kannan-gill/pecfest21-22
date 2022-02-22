@@ -3,11 +3,11 @@ import styles from "./BackButton.module.css"
 
 function BackButton({classes, clickHandler}) {
   return (
-    <button class={`${styles.btn} ${classes}`} onClick={clickHandler}>
-      <span class={styles.circle} aria-hidden="true">
-        <span class={`${styles.icon} ${styles.arrow}`}></span>
+    <button className={`${styles.btn} ${classes}`} onClick={clickHandler}>
+      <span className={styles.circle} aria-hidden="true">
+        <span className={`${styles.icon} ${styles.arrow}`}></span>
       </span>
-      <span class={`${styles.button_text} ${styles.btn_display}`}>Home</span>
+      <span className={`${styles.button_text} ${styles.btn_display}`}>Home</span>
     </button>
   );
 }

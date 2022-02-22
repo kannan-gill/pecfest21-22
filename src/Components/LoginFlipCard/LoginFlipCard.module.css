@@ -32,3 +32,10 @@
 .top_50{
   top: 50%;
 }
+
+
+@media(max-width: 676px){
+  .card{
+    height: 100% !important;
+  }
+}
