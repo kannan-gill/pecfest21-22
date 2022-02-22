@@ -1,15 +1,27 @@
 import React from "react";
 import { Form, InputGroup } from "react-bootstrap";
 import styles from "./Utilities.module.css";
+import ErrorTooltip from "./ErrorTooltip";
 
-function SelectInput({ label, disabledOption, options, icon }) {
+const errorMessages = {
+  gender: "Please select a gender",
+  degree: "Please select a degree",
+  year: "Please select a year"
+}
+
+function SelectInput({ label, disabledOption, options, icon, changeFunc, name, isValid }) {
+  
+  const changeHandler = (e) => {
+    changeFunc(name, e.target.value);
+  }
+
   return (
     <InputGroup className="mb-3 w-75">
       <InputGroup.Text>
         <i className={`fas fa-${icon} ${styles.icon_size}`} />
       </InputGroup.Text>
-      <Form.Select aria-label={label} className={styles.no_box_shadow}>
-        <option disabled selected>
+      <Form.Select aria-label={label} className={styles.no_box_shadow} onChange={changeHandler} defaultValue={disabledOption} >
+        <option value={disabledOption} disabled>
           {disabledOption}
         </option>
         {options.map((option, index) => (
@@ -18,6 +30,11 @@ function SelectInput({ label, disabledOption, options, icon }) {
           </option>
         ))}
       </Form.Select>
+
+      {!isValid ? (
+        <ErrorTooltip title={errorMessages[name]} />
+      ) : null}
+
     </InputGroup>
   );
 }

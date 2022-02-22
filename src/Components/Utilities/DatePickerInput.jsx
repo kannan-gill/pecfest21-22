@@ -4,10 +4,10 @@ import styles from "./Utilities.module.css";
 import ErrorTooltip from "./ErrorTooltip";
 
 const errorMessages = {
-  date: "Please enter a valid date"
+  dob: "Please enter a valid date"
 };
 
-const DatePickerInput = ({ label, icon, isValid, name, changeFunc }) => {
+const DatePickerInput = ({ label, icon, isValid, name, changeFunc, val}) => {
   const [textType, setTextType] = useState(true);
 
   const focusHandler = (e) => {
@@ -21,6 +21,10 @@ const DatePickerInput = ({ label, icon, isValid, name, changeFunc }) => {
     setTextType(true);
   };
 
+  const changeHandler = (e) => {
+    changeFunc(name, e.target.value);
+  }
+
   return (
     <InputGroup className="mb-3 w-75">
       {textType && (
@@ -31,6 +35,7 @@ const DatePickerInput = ({ label, icon, isValid, name, changeFunc }) => {
       <FormControl
         onFocus={focusHandler}
         onBlur={blurHandler}
+        onChange={changeHandler}
         type="text"
         placeholder="Date of Birth"
         aria-label={label}

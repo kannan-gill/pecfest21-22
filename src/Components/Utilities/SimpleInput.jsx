@@ -22,7 +22,7 @@ const SimpleInput = ({
   val,
   name,
   changeFunc,
-  isValid,
+  isValid = true,
 }) => {
   const [inputType, setInputType] = useState(type);
   const [focus, setFocus] = useState(false);

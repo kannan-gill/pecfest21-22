@@ -22,6 +22,31 @@ const isValidEmailAddress = (email) => {
   return /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
 }
 
+const initialStateUser = {
+  name: "",
+  college: "",
+  email: "",
+  phone: "",
+  dob: "",
+  degree: "",
+  year: "",
+  gender: "",
+  password: "",
+  isVerified: false,
+};
+
+const initialValidStates = {
+  isNameValid: true,
+  isCollegeValid: true,
+  isEmailValid: true,
+  isPhoneValid: true,
+  isDobValid: true,
+  isDegreeValid: true,
+  isYearValid: true,
+  isGenderValid: true,
+  isPasswordValid: true,
+};
+
 function Register({ onFlip }) {
   const navigate = useNavigate();
   const [user, editUser] = useState({
@@ -78,7 +103,6 @@ function Register({ onFlip }) {
     e.preventDefault();
 
     for (var det in user) {
-      console.log(user[det]);
       if (det === "name") {
         if (user[det].length < 2 || user[det].length > 50) {
           setCheckValidStates((prevState) => {
@@ -146,7 +170,7 @@ function Register({ onFlip }) {
       }
 
       else if (det === "degree") {
-        if (user[det].length < 8) {
+        if (user[det] === "") {
           setCheckValidStates((prevState) => {
             return { ...prevState, isDegreeValid: false };
           });
@@ -157,7 +181,7 @@ function Register({ onFlip }) {
       }
 
       else if (det === "year") {
-        if (user[det].length < 8) {
+        if (user[det] === "") {
           setCheckValidStates((prevState) => {
             return { ...prevState, isYearValid: false };
           });
@@ -168,7 +192,7 @@ function Register({ onFlip }) {
       }
 
       else if (det === "gender") {
-        if (user[det].length < 8) {
+        if (user[det] === "") {
           setCheckValidStates((prevState) => {
             return { ...prevState, isGenderValid: false };
           });
@@ -197,7 +221,7 @@ function Register({ onFlip }) {
       >
         REGISTER
       </div>
-      <form onSubmit={submitHandler} className="h-100 mt-3 overflow-hidden">
+      <form className="h-100 mt-3 overflow-hidden">
         <div
           className={`w-100 d-flex flex-column align-items-center ${styles.overflow_auto}`}
         >
@@ -239,30 +263,43 @@ function Register({ onFlip }) {
           />
 
           <SelectInput
-            label="gender"
+            value={user.gender}
+            changeFunc={changeHandler}
+            name="gender"
             icon="transgender-alt"
+            label="gender"
             disabledOption="Gender"
             options={["Male", "Female", "Other"]}
+            isValid={checkValidStates.isGenderValid}
           />
           <DatePickerInput 
             label="dob" 
             icon="calendar" 
-            name="date"
+            name="dob"
+            val={user.dob}
             changeFunc={changeHandler}
             isValid={checkValidStates.isDobValid}
           />
 
           <SelectInput
-            label="grad_year"
+            val={user.year}
+            changeFunc={changeHandler}
+            name="year"
             icon="graduation-cap"
+            label="grad_year"
             disabledOption="Graduation Year"
             options={["2022", "2023", "2024", "2025"]}
+            isValid={checkValidStates.isYearValid}
           />
           <SelectInput
+            val={user.degree}
+            changeFunc={changeHandler}
+            name="degree"
             icon="book"
             label="course"
             disabledOption="Course"
             options={["BTech", "MTech", "PhD"]}
+            isValid={checkValidStates.isDegreeValid}
           />
           <SimpleInput
             type="password"
