@@ -3,8 +3,8 @@ import styles from "./Utilities.module.css";
 
 function Button({ children, type, onClickFunc }) {
   const clickHandler = (e) => {
-    onClickFunc();
-  };
+    onClickFunc(e);
+  } 
 
   return (
     <div className={styles.buttonGroup}>
