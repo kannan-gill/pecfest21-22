@@ -14,6 +14,7 @@
 
 .loginCardFaceFront {
   background: #5dc3d34f;
+  transform: translate(0,-50%);  
 }
 
 .loginCardFaceBack {

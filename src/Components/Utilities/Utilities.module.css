@@ -52,6 +52,9 @@
     box-shadow: 0 4px 15px 0 #002644; */
     /* background-image: linear-gradient(to right, #6253e1, #852D91, #A3A1FF, #F24645);
     box-shadow: 0 4px 15px 0 rgba(126, 52, 161, 0.75); */
+    /* background-image: linear-gradient(to right, #979dcc, #002647, #275664, #004576);
+    box-shadow: 0 4px 15px 0 rgb(10 36 49); */
+
 }
 
 .buttonGroup{
@@ -62,3 +65,5 @@
 ::-ms-reveal {
   display: none;
 }
+
+

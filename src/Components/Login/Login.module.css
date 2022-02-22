@@ -1,0 +1,33 @@
+.overflow_auto{
+  overflow-y: auto;
+  max-height: 70%;
+  overflow-x: hidden;
+}
+
+
+/* scrollbar */
+::-webkit-scrollbar {
+width: 8px;
+}
+::-webkit-scrollbar-track {
+background: rgb(182, 182, 182);;
+border-radius: 6px;
+
+}
+::-webkit-scrollbar-thumb {
+background-color: #0f2532;
+border-radius: 6px;
+border: 3px solid rgb(182, 182, 182);
+}
+
+.div_login{
+  margin-left: 12.5%;
+}
+
+.color_text{
+  color: #dad7e0;
+}
+
+.color_fadeblue{
+  color:#667be5
+}

@@ -9,10 +9,6 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import {} from "../../config";
 import { useNavigate } from "react-router-dom";
 import styles from "./Register.module.css";
-import SimpleInput from "../Utilities/SimpleInput";
-import SelectInput from "../Utilities/SelectInput";
-import DatePickerInput from "../Utilities/DatePickerInput";
-import Button from "../Utilities/Button"; 
 
 function Register({ onFlip }) {
   const navigate = useNavigate();
