@@ -49,30 +49,17 @@ const initialValidStates = {
 
 function Register({ onFlip }) {
   const navigate = useNavigate();
-  const [user, editUser] = useState({
-    name: "",
-    college: "",
-    email: "",
-    phone: "",
-    dob: "",
-    degree: "",
-    year: "",
-    gender: "",
-    password: "",
-    isVerified: false,
-  });
+  const [user, editUser] = useState(initialStateUser);
 
-  const [checkValidStates, setCheckValidStates] = useState({
-    isNameValid: true,
-    isCollegeValid: true,
-    isEmailValid: true,
-    isPhoneValid: true,
-    isDobValid: true,
-    isDegreeValid: true,
-    isYearValid: true,
-    isGenderValid: true,
-    isPasswordValid: true,
-  });
+  const [checkValidStates, setCheckValidStates] = useState(initialValidStates);
+
+  const [clearFields, setClearFields] = useState(false);
+
+  const onFlipBtnClick = () => {
+    onFlip();
+    editUser(initialStateUser);
+    setCheckValidStates(initialValidStates);
+  }
 
   function appendUser() {
     const auth = getAuth();
@@ -221,7 +208,7 @@ function Register({ onFlip }) {
       >
         REGISTER
       </div>
-      <form className="h-100 mt-3 overflow-hidden">
+      <form onSubmit={submitHandler} className="h-100 mt-3 overflow-hidden">
         <div
           className={`w-100 d-flex flex-column align-items-center ${styles.overflow_auto}`}
         >
@@ -268,6 +255,7 @@ function Register({ onFlip }) {
             name="gender"
             icon="transgender-alt"
             label="gender"
+            val={user.gender}
             disabledOption="Gender"
             options={["Male", "Female", "Other"]}
             isValid={checkValidStates.isGenderValid}
@@ -287,6 +275,7 @@ function Register({ onFlip }) {
             name="year"
             icon="graduation-cap"
             label="grad_year"
+            val={user.year}
             disabledOption="Graduation Year"
             options={["2022", "2023", "2024", "2025"]}
             isValid={checkValidStates.isYearValid}
@@ -297,6 +286,7 @@ function Register({ onFlip }) {
             name="degree"
             icon="book"
             label="course"
+            val={user.degree}
             disabledOption="Course"
             options={["BTech", "MTech", "PhD"]}
             isValid={checkValidStates.isDegreeValid}
@@ -313,10 +303,10 @@ function Register({ onFlip }) {
           />
         </div>
         <div className="d-flex flex-row justify-content-center my-2">
-          <Button className="mx-3" type="button" onClickFunc={onFlip}>
+          <Button className="mx-3" type="button" onClickFunc={onFlipBtnClick}>
             Back
           </Button>
-          <Button className="mx-3" type="submit" onClickFunc={submitHandler}>
+          <Button className="mx-3" type="submit" >
             Sign Up
           </Button>
         </div>

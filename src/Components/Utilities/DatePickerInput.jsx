@@ -37,6 +37,7 @@ const DatePickerInput = ({ label, icon, isValid, name, changeFunc, val}) => {
         onBlur={blurHandler}
         onChange={changeHandler}
         type="text"
+        value={val}
         placeholder="Date of Birth"
         aria-label={label}
         className={styles.no_box_shadow}

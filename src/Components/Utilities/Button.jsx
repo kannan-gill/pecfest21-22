@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Utilities.module.css";
 
-function Button({children, type, onClickFunc}) {
+function Button({children, type, onClickFunc = (e) => {} }) {
 
   const clickHandler = (e) => {
     onClickFunc(e);

@@ -1,9 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { InputGroup, FormControl } from "react-bootstrap";
 import styles from "./Utilities.module.css";
-import Tooltip from "@mui/material/Tooltip";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
 import ErrorTooltip from "./ErrorTooltip";
 
 const errorMessages = {
@@ -27,6 +24,8 @@ const SimpleInput = ({
   const [inputType, setInputType] = useState(type);
   const [focus, setFocus] = useState(false);
   const [value, setValue] = useState(val);
+
+  useEffect(() => {setValue(val)} , [val]);
 
   const passwordClickHandler = () => {
     inputType === "password" ? setInputType("text") : setInputType("password");
@@ -61,7 +60,7 @@ const SimpleInput = ({
       {password && focus && (
         <InputGroup.Text className="bg-white" onClick={passwordClickHandler}>
           <i
-            className={inputType === "password" ? "fas fa-eye" : "fas fa-eye-slash"}
+            className={value === "" ? "" : (inputType === "password" ? "fas fa-eye" : "fas fa-eye-slash")}
           ></i>
         </InputGroup.Text>
       )}
