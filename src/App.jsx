@@ -11,9 +11,6 @@ import PrivateRoutes from "./Components/PrivateRoutes";
 // import ContactUs from "./Pages/ContactUS/ContactUs";
 // import Developers from "./Pages/Developers/Developers";
 // import Admin from "./Pages/Admin/Admin";
-// import Register from "./Pages/Registration/Register";
-import Login from "./Pages/Login/Login";
-// import Register2 from "./Pages/Registration/Register2";
 import RegisterLogin from "./Pages/Registration/RegisterLogin";
 import Home2 from "./Pages/Home/Home2";
 

@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { Row, Col } from "react-bootstrap";
-import Login from "../../Pages/Login/Login";
+import Login from "../Login/Login";
 import Register from "../Register/Register";
 import styles from "./LoginFlipCard.module.css";
 import { useNavigate  } from "react-router-dom";
 
-const LoginFlipCard = ({ isRegister }) => {
+const LoginFlipCard = ({ isRegister = false }) => {
   const [toggleFlip, setToggleFlip] = useState(isRegister);
   const navigate = useNavigate ();
 
-  const RegisterFlipHandler = (e) => {
+  const RegisterFlipHandler = () => {
     setToggleFlip((prevState) => !prevState);
     navigate('/login');
   };
@@ -28,9 +28,9 @@ const LoginFlipCard = ({ isRegister }) => {
       >
         
           <Col
-            className={`mh-100 overflow-auto h-sm-100 p-0 me-lg-5 z-index-2 rounded position-absolute ${styles.bgColorCard} ${styles.loginCardFace} ${styles.loginCardFaceFront} ${styles.top_50}`}
+            className={`mh-100 overflow-auto d-flex flex-column justify-content-center h-auto p-0 me-lg-5 z-index-2 rounded position-absolute ${styles.bgColorCard} ${styles.loginCardFace} ${styles.loginCardFaceFront} ${styles.top_50} ${styles.card}`}
           >
-            <h1 onClick={LoginFlipHandler}>Login</h1>
+            <Login onFlip={LoginFlipHandler}/>
           </Col>
         
           <Col
@@ -38,7 +38,7 @@ const LoginFlipCard = ({ isRegister }) => {
           >
             <Register onFlip={RegisterFlipHandler}/>
           </Col>
-        
+
       </Row>
     </div>
   );

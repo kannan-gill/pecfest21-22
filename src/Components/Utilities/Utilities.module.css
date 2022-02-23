@@ -46,12 +46,17 @@
 .btn.color {
   /* background-image: linear-gradient(to right, #25aae1, #40e495, #30dd8a, #2bb673);
   box-shadow: 0 4px 15px 0 rgba(49, 196, 190, 0.75); */
-  background-image: linear-gradient(to right, #667eea, #764ba2, #6B8DD6, #8E37D7);
-    box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
+  /* background-image: linear-gradient(to right, #667eea, #764ba2, #6B8DD6, #8E37D7);
+    box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75); */
   /* background-image: linear-gradient(to right, #5bc1d2, #00284a, #057e9e, #005384);
     box-shadow: 0 4px 15px 0 #002644; */
     /* background-image: linear-gradient(to right, #6253e1, #852D91, #A3A1FF, #F24645);
     box-shadow: 0 4px 15px 0 rgba(126, 52, 161, 0.75); */
+    /* background-image: linear-gradient(to right, #979dcc, #002647, #275664, #004576);
+    box-shadow: 0 4px 15px 0 rgb(10 36 49); */
+    background-image: linear-gradient(to right, #009ec2, #8dab80, #30dd8a, #2bb673);
+    box-shadow: 0 4px 15px 0 rgb(59 69 74);
+
 }
 
 .buttonGroup{
@@ -62,3 +67,5 @@
 ::-ms-reveal {
   display: none;
 }
+
+

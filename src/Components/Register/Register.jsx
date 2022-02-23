@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import { Button } from "react-bootstrap";
 import SimpleInput from "../Utilities/SimpleInput";
 import SelectInput from "../Utilities/SelectInput";
 import DatePickerInput from "../Utilities/DatePickerInput";
@@ -9,9 +8,6 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import {} from "../../config";
 import { useNavigate } from "react-router-dom";
 import styles from "./Register.module.css";
-// import SimpleInput from "../Utilities/SimpleInput";
-// import SelectInput from "../Utilities/SelectInput";
-// import DatePickerInput from "../Utilities/DatePickerInput";
 import Button from "../Utilities/Button";
 
 const isDigit = (phoneNum) => {
@@ -220,7 +216,7 @@ function Register({ onFlip }) {
             val={user.name}
             changeFunc={changeHandler}
             isValid={checkValidStates.isNameValid}
-          />
+          />    
           <SimpleInput
             type="text"
             icon="at"

@@ -17,7 +17,7 @@ const SimpleInput = ({
   type,
   password = false,
   val,
-  name,
+  name, 
   changeFunc,
   isValid = true,
 }) => {
@@ -34,7 +34,7 @@ const SimpleInput = ({
   const changeHandler = (e) => {
     e.target.value.length === 0 ? setFocus(false) : setFocus(true);
     setValue(e.target.value);
-    changeFunc(name, e.target.value);
+    changeFunc(name, e.target.value===undefined ? e.target.checked : e.target.value); 
   };
 
   return (

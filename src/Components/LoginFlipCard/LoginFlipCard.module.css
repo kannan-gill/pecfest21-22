@@ -14,6 +14,7 @@
 
 .loginCardFaceFront {
   background: #5dc3d34f;
+  transform: translate(0,-50%);  
 }
 
 .loginCardFaceBack {
@@ -30,4 +31,11 @@
 
 .top_50{
   top: 50%;
+}
+
+
+@media(max-width: 767px){
+  .card{
+    height: 100% !important;
+  }
 }
