@@ -3,7 +3,8 @@ import Competition from './Competition'
 
 function Competitions() {
 
-    const [compDetails, setcompDetails] = useState([]);
+    const [CulturalComp, setCulturalComp] = useState([]);
+    const [TechnicalComp, setTechnicalComp] = useState([]);
 
     useEffect(()=>{
         //load events from firebase and store in react state
@@ -11,9 +12,18 @@ function Competitions() {
     },[])
 
   return <div>
-      {compDetails.map(element=>{
-          return <Competition id={element.id} name={element.name} desc={element.desc} maxUsers={element.maxUsers} teamEvent={element.teamEvent}/>
+      <section>
+      <div>Cultural Competitions</div>
+      {CulturalComp.map(element=>{
+          return <Competition element={element}/>
       })}
+      </section>
+      <section>
+      <div>Technical Competitions</div>
+      {TechnicalComp.map(element=>{
+          return <Competition element= {element}/>
+      })}
+      </section>
   </div>;
 }
 
