@@ -12,8 +12,6 @@ import TeamEventRegistration from "./Pages/TeamEventRegistration/TeamEventRegist
 import ContactUs from "./Pages/ContactUS/ContactUs";
 import Developers from "./Pages/Developers/Developers";
 import Admin from "./Pages/Admin/Admin";
-import Login from "./Pages/Login/Login";
-
 
 function App() {
   // TODO: update these routes
@@ -43,7 +41,6 @@ function App() {
           <Route path="/developers" element={<Developers />} />
           <Route path="/contactUs" element={<ContactUs />} />
           <Route path="/admin" element={<Admin />} />
-          <Route path="/login" element={<Login />} />
           <Route path="/teamregister" element={<TeamEventRegistration />} />
           {publicRoutes.map((route) => publicRouteComponent(route))}
           {privateRoutes.map((route) => privateRouteComponent(route))}

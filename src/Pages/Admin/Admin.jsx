@@ -15,7 +15,7 @@ import React,{useState} from 'react';
 // organising club or team
 // contact person number name 
 
-function admin() {
+function Admin() {
   
   const [competition, setCompetition] = useState({
     name: "",
@@ -125,4 +125,4 @@ function admin() {
   </div>;
 }
 
-export default admin;
+export default Admin;
