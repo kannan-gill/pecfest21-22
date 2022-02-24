@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SimpleInput from "../Utilities/SimpleInput";
 import SelectInput from "../Utilities/SelectInput";
 import DatePickerInput from "../Utilities/DatePickerInput";
@@ -48,10 +48,9 @@ function Register({ onFlip }) {
   const [user, editUser] = useState(initialStateUser);
 
   const [checkValidStates, setCheckValidStates] = useState(initialValidStates);
+ 
 
-  const [clearFields, setClearFields] = useState(false);
-
-  const onFlipBtnClick = () => {
+  const onFlipBtnClick = () => {  
     onFlip();
     editUser(initialStateUser);
     setCheckValidStates(initialValidStates);
@@ -65,6 +64,7 @@ function Register({ onFlip }) {
         // Signed in
         const user = userCredential.user;
         console.log(user);
+        
         navigate("/events");
         // ...
       })
@@ -78,30 +78,33 @@ function Register({ onFlip }) {
   }
 
   const changeHandler = (name, value) => {
-    console.log("change");
     editUser({ ...user, [name]: value });
   };
+  
 
   const submitHandler = (e) => {
     e.preventDefault();
 
-    for (var det in user) {
+    let formIsValid = true;
+
+    for (var det in user) { 
       if (det === "name") {
         if (user[det].length < 2 || user[det].length > 50) {
           setCheckValidStates((prevState) => {
             return { ...prevState, isNameValid: false };
           });
+          formIsValid = false;  
         } else
           setCheckValidStates((prevState) => {
             return { ...prevState, isNameValid: true };
           });
-      } 
-      
+      }         
       else if (det === "college") {
         if (user[det].length === 0 || user[det].length > 50) {
           setCheckValidStates((prevState) => {
             return { ...prevState, isCollegeValid: false };
           });
+          formIsValid = false;  
         } else
           setCheckValidStates((prevState) => {
             return { ...prevState, isCollegeValid: true };
@@ -113,6 +116,7 @@ function Register({ onFlip }) {
           setCheckValidStates((prevState) => {
             return { ...prevState, isEmailValid: false };
           });
+          formIsValid = false;  
         } else
           setCheckValidStates((prevState) => {
             return { ...prevState, isEmailValid: true };
@@ -124,6 +128,7 @@ function Register({ onFlip }) {
           setCheckValidStates((prevState) => {
             return { ...prevState, isPhoneValid: false };
           });
+          formIsValid = false;  
         } else
           setCheckValidStates((prevState) => {
             return { ...prevState, isPhoneValid: true };
@@ -135,6 +140,7 @@ function Register({ onFlip }) {
           setCheckValidStates((prevState) => {
             return { ...prevState, isPasswordValid: false };
           });
+          formIsValid = false;  
         } else
           setCheckValidStates((prevState) => {
             return { ...prevState, isPasswordValid: true };
@@ -146,6 +152,7 @@ function Register({ onFlip }) {
           setCheckValidStates((prevState) => {
             return { ...prevState, isDobValid: false };
           });
+          formIsValid = false;  
         } else
           setCheckValidStates((prevState) => {
             return { ...prevState, isDobValid: true };
@@ -157,6 +164,7 @@ function Register({ onFlip }) {
           setCheckValidStates((prevState) => {
             return { ...prevState, isDegreeValid: false };
           });
+          formIsValid = false;  
         } else
           setCheckValidStates((prevState) => {
             return { ...prevState, isDegreeValid: true };
@@ -168,6 +176,7 @@ function Register({ onFlip }) {
           setCheckValidStates((prevState) => {
             return { ...prevState, isYearValid: false };
           });
+          formIsValid = false;  
         } else
           setCheckValidStates((prevState) => {
             return { ...prevState, isYearValid: true };
@@ -179,6 +188,7 @@ function Register({ onFlip }) {
           setCheckValidStates((prevState) => {
             return { ...prevState, isGenderValid: false };
           });
+          formIsValid = false;  
         } else
           setCheckValidStates((prevState) => {
             return { ...prevState, isGenderValid: true };
@@ -187,12 +197,13 @@ function Register({ onFlip }) {
       
     }
 
-    // MG CODE
-    // for(const prop in user) {
-    //   editUser({ ...user, [prop]: "" });
-    // }
-    // console.log(user);
-
+    if(!formIsValid){
+      console.log(user);
+      return false;
+    }
+    editUser(initialStateUser);
+    setCheckValidStates(initialValidStates);
+    console.log("not stopped");
     // appendUser();
   };
 
@@ -204,9 +215,9 @@ function Register({ onFlip }) {
       >
         REGISTER
       </div>
-      <form onSubmit={submitHandler} className="h-100 mt-3 overflow-hidden">
+      <form onSubmit={submitHandler} className="h-auto mh-100 mt-3 overflow-auto">
         <div
-          className={`w-100 d-flex flex-column align-items-center ${styles.overflow_auto}`}
+          className={`w-100 d-flex flex-column align-items-center`}
         >
           <SimpleInput
             type="text"
@@ -271,7 +282,6 @@ function Register({ onFlip }) {
             name="year"
             icon="graduation-cap"
             label="grad_year"
-            val={user.year}
             disabledOption="Graduation Year"
             options={["2022", "2023", "2024", "2025"]}
             isValid={checkValidStates.isYearValid}
@@ -282,7 +292,6 @@ function Register({ onFlip }) {
             name="degree"
             icon="book"
             label="course"
-            val={user.degree}
             disabledOption="Course"
             options={["BTech", "MTech", "PhD"]}
             isValid={checkValidStates.isDegreeValid}
@@ -298,12 +307,12 @@ function Register({ onFlip }) {
             isValid={checkValidStates.isPasswordValid}
           />
         </div>
-        <div className="d-flex flex-row justify-content-center my-2">
+        <div className="d-flex flex-row justify-content-center mt-2 mb-4">
           <Button className="mx-3" type="button" onClickFunc={onFlipBtnClick}>
-            Back
+            BACK
           </Button>
           <Button className="mx-3" type="submit" >
-            Sign Up
+            SIGN UP
           </Button>
         </div>
       </form>

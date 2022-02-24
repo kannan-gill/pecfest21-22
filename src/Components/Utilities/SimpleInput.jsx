@@ -23,9 +23,9 @@ const SimpleInput = ({
 }) => {
   const [inputType, setInputType] = useState(type);
   const [focus, setFocus] = useState(false);
-  const [value, setValue] = useState(val);
+  // const [value, setValue] = useState(val);
 
-  useEffect(() => {setValue(val)} , [val]);
+  // useEffect(() => {setValue(val)} , [val]);
 
   const passwordClickHandler = () => {
     inputType === "password" ? setInputType("text") : setInputType("password");
@@ -33,7 +33,7 @@ const SimpleInput = ({
 
   const changeHandler = (e) => {
     e.target.value.length === 0 ? setFocus(false) : setFocus(true);
-    setValue(e.target.value);
+    // setValue(e.target.value);
     changeFunc(name, e.target.value===undefined ? e.target.checked : e.target.value); 
   };
 
@@ -48,7 +48,7 @@ const SimpleInput = ({
         placeholder={placeholder}
         aria-label={name}
         onChange={changeHandler}
-        value={value}
+        value={val}
         name={name}
         required
       />
@@ -60,7 +60,7 @@ const SimpleInput = ({
       {password && focus && (
         <InputGroup.Text className="bg-white" onClick={passwordClickHandler}>
           <i
-            className={value === "" ? "" : (inputType === "password" ? "fas fa-eye" : "fas fa-eye-slash")}
+            className={val === "" ? "" : (inputType === "password" ? "fas fa-eye" : "fas fa-eye-slash")}
           ></i>
         </InputGroup.Text>
       )}

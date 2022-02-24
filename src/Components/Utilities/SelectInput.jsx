@@ -10,12 +10,12 @@ const errorMessages = {
 }
 
 function SelectInput({ label, disabledOption, options, icon, changeFunc, name, isValid, val }) {
-  const [selectedVal, setSelectedVal]  = useState({
-    val: val
-  });
+  // const [selectedVal, setSelectedVal]  = useState({
+  //   val: val
+  // });
 
   const changeHandler = (e) => {
-    setSelectedVal((prevState) => {return { ...prevState, val: e.target.value}});
+    // setSelectedVal((prevState) => {return { ...prevState, val: e.target.value}});
     changeFunc(name, e.target.value);
   }
 
@@ -24,7 +24,7 @@ function SelectInput({ label, disabledOption, options, icon, changeFunc, name, i
       <InputGroup.Text>
         <i className={`fas fa-${icon} ${styles.icon_size}`} />
       </InputGroup.Text>
-      <Form.Select aria-label={label} className={styles.no_box_shadow} onChange={changeHandler} value={val === "" ? disabledOption : selectedVal.val} >
+      <Form.Select aria-label={label} className={styles.no_box_shadow} onChange={changeHandler} value={val === "" ? disabledOption : val} >
         <option value={disabledOption} disabled>
           {disabledOption}
         </option>

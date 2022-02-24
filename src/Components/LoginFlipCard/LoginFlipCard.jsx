@@ -34,7 +34,7 @@ const LoginFlipCard = ({ isRegister = false }) => {
           </Col>
         
           <Col
-            className={`mh-100 overflow-auto p-0 me-lg-5 z-index-2 rounded position-absolute ${styles.bgColorCard} ${styles.loginCardFace} ${styles.loginCardFaceBack} ${styles.top_50}`}
+            className={`mh-100 d-flex flex-column justify-content-center h-auto overflow-auto p-0 me-lg-5 z-index-2 rounded position-absolute ${styles.bgColorCard} ${styles.loginCardFace} ${styles.loginCardFaceBack} ${styles.top_50}  ${styles.card}`}
           >
             <Register onFlip={RegisterFlipHandler}/>
           </Col>

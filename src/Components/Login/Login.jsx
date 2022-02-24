@@ -6,15 +6,16 @@ import SimpleInput from "../Utilities/SimpleInput";
 import styles from "./Login.module.css";
 import Button from "../Utilities/Button";
 
+const initialLoginState = {email: "", password: "", rememberMe: false};
+
 function Login({ onFlip }) {
-  const initialLoginState = {email: "", password: "", rememberMe: false};
-  const [{email, password, rememberMe}, setlogin] = useState(initialLoginState);
+  const [{email, password, rememberMe}, setLogin] = useState(initialLoginState);
 
   function handleSubmit(e) {
     e.preventDefault();
     console.log(email, password, rememberMe);
     // const auth = getAuth();
-    // signInWithEmailAndPassword(auth, login.email, login.password)
+    // signInWithEmailAndPassword(auth, email, password)
     //   .then((userCredential) => {
     //     // Signed in
     //     const user = userCredential.user;
@@ -29,10 +30,16 @@ function Login({ onFlip }) {
     //   });
     // setlogin(() => {return {...initialLoginState}});
     // console.log(email, password, rememberMe);
+    setLogin(initialLoginState);
+  }
+
+  const signUpHandler = () => {
+    onFlip();
+    setLogin(initialLoginState);
   }
 
   const changeHandler = (name, value) => {  
-    setlogin((prevState) => {
+    setLogin((prevState) => {
       return { ...prevState, [name]: value };
     });
   };
@@ -41,13 +48,13 @@ function Login({ onFlip }) {
     <>
       <div
         className="text-center text-uppercase fs-1 my-3 text-white"
-        style={{ "font-family": "'Audiowide', serif" }}
+        style={{ fontFamily : "'Audiowide', serif" }}
       >
         LOGIN
       </div>
-      <form onSubmit={handleSubmit} className="h-auto mh-75 mt-3 overflow-hidden">
+      <form onSubmit={handleSubmit} className="h-auto mh-100 mt-3 overflow-auto">
         <div
-          className={`w-100 d-flex flex-column align-items-center ${styles.overflow_auto}`}
+          className={`w-100 d-flex flex-column align-items-center`}
         >
           <SimpleInput
             type="text"
@@ -76,7 +83,7 @@ function Login({ onFlip }) {
               name="rememberMe"
               checked={rememberMe}
               onChange={() => {
-                setlogin((prevState) => {
+                setLogin((prevState) => {
                   return { ...prevState, rememberMe: !prevState.rememberMe };
                 });
               }}  
@@ -89,7 +96,7 @@ function Login({ onFlip }) {
           <div className={`${styles.color_text} mb-3`}>
             Dont Have an account yet!{" "}
             <span
-              onClick={onFlip}
+              onClick={signUpHandler}
               className={`${styles.color_fadeblue} fw-bold text-decoration-underline`}
             >
               SIGN UP
