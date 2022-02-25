@@ -1,0 +1,12 @@
+.bg_img{
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: left top;
+  overflow-x: hidden;
+}
+
+.back_button{
+  position: absolute;
+  top: 15px;
+  left: 15px;
+}
