@@ -37,7 +37,7 @@ function App() {
     <Route path={route.path} element={route.component} />
   );
   return (
-    <div>
+    <div className="overflow-hidden vh-100">
       <BrowserRouter>
         <Routes>
           {publicRoutes.map((route) => publicRouteComponent(route))}
