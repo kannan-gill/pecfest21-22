@@ -14,11 +14,16 @@ import Developers from "./Pages/Developers/Developers";
 import Admin from "./Pages/Admin/Admin";
 
 function App() {
-  // TODO: update these routes
   const publicRoutes = [
     { path: "/", component: <Home2 /> },
     { path: "/login", component: <RegisterLogin /> },
     { path: "/register", component: <RegisterLogin isRegister="true"/> },
+    { path: "/campusTour", component: <LandingPage /> },
+    { path: "/competitions", component: <Competitions /> },
+    { path: "/developers", component: <Developers /> },
+    { path: "/contactUs", component: <ContactUs /> },
+    { path: "/admin", component: <Admin /> },
+    { path: "/teamregister", component: <TeamEventRegistration /> },
   ];
   const privateRoutes = [{ path: "/events", component: <EventList /> }];
 
@@ -35,13 +40,6 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          {/* <Route path="/" element={<Home2 />} /> */}
-          <Route path="/campusTour" element={<LandingPage />} />
-          <Route path="/competitions" element={<Competitions />} />
-          <Route path="/developers" element={<Developers />} />
-          <Route path="/contactUs" element={<ContactUs />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/teamregister" element={<TeamEventRegistration />} />
           {publicRoutes.map((route) => publicRouteComponent(route))}
           {privateRoutes.map((route) => privateRouteComponent(route))}
         </Routes>

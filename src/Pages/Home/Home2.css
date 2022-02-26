@@ -138,6 +138,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 1.4em;
     font-weight: 600;
     letter-spacing: 5px;
     color:white;
@@ -145,14 +146,18 @@
     width: 100px;
     margin:auto;
     text-align: center;
-    border-radius: 100%;
+    /* border-radius: 100%;
     border-color: white;
     border-style: solid;
-    border-width: 2px;
+    border-width: 2px; */
     position: absolute;
     bottom:10%;
     left:45%;
-    animation: explorebubble 1.5s infinite;
+    /* animation: explorebubble 1.5s infinite; */
+}
+
+.explore .left-arrow {
+    transform: rotate(180deg);
 }
 
 .headerRemove{
