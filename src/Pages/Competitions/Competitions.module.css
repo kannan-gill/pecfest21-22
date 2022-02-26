@@ -1,0 +1,29 @@
+.pageTitle{
+    color:white;
+    text-align: center;
+    padding:20px;
+    font-size: 5vw;
+    font-family: 'Russo One', sans-serif;
+}
+
+.divider{
+    border-top-width: 2px;
+    border-top-color: white;
+    border-top-style:solid;
+    height:10px;
+    width: 80%;
+    margin:auto;
+}
+
+.category{
+    color:white;
+    text-align: center;
+    padding:10px;
+    font-size: 3vw;
+    font-family: 'Russo One', sans-serif;
+}
+
+.compContainer{
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+}
