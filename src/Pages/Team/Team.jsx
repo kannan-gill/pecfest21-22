@@ -3,6 +3,7 @@ import {Container,Row,Col} from 'react-bootstrap'
 import styles from './Team.module.css'
 import BackButton from '../../Components/BackButton/BackButton'
 import { useNavigate } from "react-router-dom";
+import Card from '../../Components/Card/Card';
 
 function Team() {
 
@@ -17,6 +18,16 @@ function Team() {
         <Container fluid className='w-100 h-100'>
             <BackButton className={`${styles.back_Button}`} clickHandler={handleBack}/>
             <Row className={`d-flex justify-content-center ${styles.pageheader}`}>TEAM</Row>
+            <Row className = "w-100">
+                <Col md={6}><Card/></Col>
+                <Col md={6}><Card/></Col>
+            </Row>
+            <Row className = "w-100">
+                <Col md={3}><Card/></Col>
+                <Col md={3}><Card/></Col>
+                <Col md={3}><Card/></Col>
+                <Col md={3}><Card/></Col>
+            </Row>
             <Row className='d-flex justify-content-center p-2'>
                 <Col md={6} className='d-flex justify-content-center'><img className={`w-75 h-auto m-1 ${styles.image}`} src='../../Images/committee/3.png' alt='not-found'/></Col>
                 <Col md={6} className='d-flex justify-content-center'><img className={`w-75 h-auto m-1 ${styles.image}`} src='../../Images/committee/4.png' alt='not-found'/></Col>
