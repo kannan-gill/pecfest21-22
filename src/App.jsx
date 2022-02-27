@@ -1,3 +1,4 @@
+import React from 'react';
 import "./App.css";
 // import Button from "./Components/Utilities/Button";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -9,8 +10,8 @@ import Home2 from "./Pages/Home/Home2";
 import LandingPage from "./Pages/CampusTour/LandingPage";
 import Competitions from "./Pages/Competitions/Competitions";
 import TeamEventRegistration from "./Pages/TeamEventRegistration/TeamEventRegistration";
-import ContactUs from "./Pages/ContactUS/ContactUs";
-import Developers from "./Pages/Developers/Developers";
+// import ContactUs from "./Pages/ContactUS/ContactUs";
+// import Developers from "./Pages/Developers/Developers";
 import Admin from "./Pages/Admin/Admin";
 import Team from './Pages/Team/Team';
 
@@ -18,11 +19,11 @@ function App() {
   const publicRoutes = [
     { path: "/", component: <Home2 /> },
     { path: "/login", component: <RegisterLogin /> },
-    { path: "/register", component: <RegisterLogin isRegister="true"/> },
+    { path: "/register", component: <RegisterLogin isRegister/> },
     { path: "/campusTour", component: <LandingPage /> },
     { path: "/competitions", component: <Competitions /> },
-    { path: "/developers", component: <Developers /> },
-    { path: "/contactUs", component: <ContactUs /> },
+    // { path: "/developers", component: <Developers /> },
+    // { path: "/contactUs", component: <ContactUs /> },
     { path: "/admin", component: <Admin /> },
     { path: "/teamregister", component: <TeamEventRegistration /> },
     { path: "/team", component: <Team />}

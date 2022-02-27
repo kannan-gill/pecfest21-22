@@ -3,7 +3,7 @@ import useAnimatedRenderer from "../../hooks/useAnimatedRenderer";
 import LoadingDumb from "./LoadingDumb";
 const Loading = ({ isLoading, children }) => {
   const [hasTimePassed, setHasTimePassed] = useState(false);
-  const [visibilty, setVisibility] = useAnimatedRenderer(false);
+  const [visibilty, setVisibility] = useAnimatedRenderer(false, 1000);
   useEffect(() => {
     setTimeout(() => {
       setHasTimePassed(true);
@@ -11,7 +11,7 @@ const Loading = ({ isLoading, children }) => {
   }, []);
   useEffect(() => {
     setVisibility(hasTimePassed && !isLoading);
-  }, [isLoading, hasTimePassed]);
+  }, [isLoading, hasTimePassed, setVisibility]);
   return (
     <>
       {!visibilty && (
