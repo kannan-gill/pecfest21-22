@@ -9,6 +9,7 @@ import "./Home2.css";
 import AboutPecfest from "../../Components/AboutPecfest/AboutPecfest";
 import Navbar from "../../Components/Navbar";
 import Loading from "../../Components/Loading";
+import { useNavigate } from "react-router-dom";
 
 function Home2() {
   const [explore, setexplore] = useState(false);
@@ -18,7 +19,7 @@ function Home2() {
   function handleClick() {
     setexplore(!explore);
   }
-
+  const navigate = useNavigate();
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
 
@@ -36,13 +37,16 @@ function Home2() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+  function planetClick(page) {
+    navigate(page);
+  }
 
   function handleMouse(e) {
-    var cursor = document.querySelector(".cursor");
-    cursor.style.left = e.pageX + "px";
-    cursor.style.top = e.pageY + "px";
+    // var cursor = document.querySelector(".cursor");
+    // cursor.style.left = e.pageX + "px";
+    // cursor.style.top = e.pageY + "px";
 
-    document.querySelectorAll("img").forEach((element) => {
+    document.querySelectorAll(".landing .planet-img").forEach((element) => {
       const speed = element.getAttribute("data-speed");
       const x = (window.innerWidth - e.pageX * speed) / 250;
       const y = (window.innerHeight - e.pageY * speed) / 250;
@@ -90,9 +94,7 @@ function Home2() {
             onMouseMove={handleMouse}
           >
             <video
-              onCanPlayThrough={(e) => {
-                setIsLoading(false);
-              }}
+              onCanPlayThrough={() => setIsLoading(false)}
               autoPlay
               muted
               loop
@@ -100,45 +102,74 @@ function Home2() {
               <source src="../../Images/spacebgvid1.mp4" type="video/mp4" />
             </video>
             <div className={`header ${explore ? "headerRemove" : ""}`}>
-              PECFEST'21
+              PECFEST'22
             </div>
             {explore && (
               <div className="exploreBack" onClick={() => setexplore(false)}>
                 <i class="fa-solid fa-2x fa-angle-left"></i>
               </div>
             )}
-            <img
+            <div
               data-speed="2"
-              className={`img1 ${explore ? "alignCenter" : ""}`}
-              src="../../Images/Untitled.png"
-            />
-            <img
-              data-speed="-2"
-              className={`img2 ${explore ? "alignCenter" : ""}`}
-              src="../../Images/Untitled2.png"
-            />
-            <img
-              data-speed="1"
-              className={`img3 ${explore ? "alignCenter" : ""}`}
-              src="../../Images/Untitled3.png"
-            />
-            <img
-              data-speed="-1"
-              className={`img4 ${explore ? "alignCenter" : ""}`}
-              src="../../Images/Untitled4.png"
-            />
-            <img
-              data-speed="3"
-              className={`img5 ${explore ? "alignCenter" : ""}`}
-              src="../../Images/Untitled5.png"
-            />
-            <div className="cursor">
-              <img
-                className="rocket"
-                src="../../Images/rocket.png"
-                alt="cant be disp"
-              />
+              className={`img1 planet-img ${explore ? "alignCenter" : ""}`}
+            >
+              {explore ? (
+                <h3 onClick={() => navigate("/AboutPecfest")}>About Pecfest</h3>
+              ) : (
+                <></>
+              )}
             </div>
+            <div
+              data-speed="-2"
+              className={`img2 planet-img ${explore ? "alignCenter" : ""}`}
+            >
+              {explore ? (
+                <h3 onClick={() => navigate("/events")}>Events</h3>
+              ) : (
+                <></>
+              )}
+            </div>
+            <div
+              data-speed="1"
+              className={`img3 planet-img ${explore ? "alignCenter" : ""}`}
+            >
+              {explore ? (
+                <h3 onClick={() => navigate("/competitions")}>Competitions</h3>
+              ) : (
+                <></>
+              )}
+            </div>
+            <div
+              data-speed="-1"
+              className={`img4 planet-img ${explore ? "alignCenter" : ""}`}
+            >
+              {explore ? (
+                <h3 onClick={() => navigate("/sponsors")}>Sponsors</h3>
+              ) : (
+                <></>
+              )}
+            </div>
+            <div
+              data-speed="3"
+              className={`img5 planet-img ${explore ? "alignCenter" : ""}`}
+            >
+              {explore ? (
+                <h3 onClick={() => navigate("/team")}>Team</h3>
+              ) : (
+                <></>
+              )}
+            </div>
+            {explore && (
+              <div data-speed="2" className="otherMenu">
+                <h3 onClick={() => navigate("/brochure")}>Brochure</h3>
+                <h3 onClick={() => navigate("/merchandise")}>Merchandise</h3>
+                <h3 onClick={() => navigate("/contactUs")}>Contact Us</h3>
+              </div>
+            )}
+            <div className="cursor">
+             
+            </div>
+
             {!explore && (
               <div
                 className="explore cursor-pointer animate__animated animate__fadeInUp"

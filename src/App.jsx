@@ -12,6 +12,7 @@ import TeamEventRegistration from "./Pages/TeamEventRegistration/TeamEventRegist
 import ContactUs from "./Pages/ContactUS/ContactUs";
 import Developers from "./Pages/Developers/Developers";
 import Admin from "./Pages/Admin/Admin";
+import Team from './Pages/Team/Team';
 
 function App() {
   const publicRoutes = [
@@ -24,6 +25,8 @@ function App() {
     { path: "/contactUs", component: <ContactUs /> },
     { path: "/admin", component: <Admin /> },
     { path: "/teamregister", component: <TeamEventRegistration /> },
+    { path: "/team", component: <Team />}
+    
   ];
   const privateRoutes = [{ path: "/events", component: <EventList /> }];
 

@@ -7,7 +7,7 @@ const Loading = ({ isLoading, children }) => {
   useEffect(() => {
     setTimeout(() => {
       setHasTimePassed(true);
-    }, 3000);
+    }, 1500);
   }, []);
   useEffect(() => {
     setVisibility(hasTimePassed && !isLoading);

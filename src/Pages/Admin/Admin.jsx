@@ -1,4 +1,13 @@
 import React,{useState} from 'react';
+// import styles from "./RegisterLogin.module.css";
+import { Container, Row, Col } from "react-bootstrap";
+import LoginFlipCard from "../../Components/LoginFlipCard/LoginFlipCard";
+import BackButton from "../../Components/BackButton/BackButton";
+import { useNavigate } from "react-router-dom";
+import SimpleInput from '../../Components/Utilities/SimpleInput';
+import SelectInput from '../../Components/Utilities/SelectInput';
+import Button from '../../Components/Utilities/Button';
+
 
 // this will have admin authorisation and 2 options for admin, 1 to enter event (event id, name, organising society or people, description)
 // and this will have option to fetch all people who registered for a particular event.
@@ -21,99 +30,189 @@ function Admin() {
     name: "",
     code: "",
     description: "",
-    club: "",
     maxmembers:"",
     drivelink: "",
     CompCategory: "",
     TeamEvent: "",
     isOnline: "",
-  })
+  });
 
-  function handleChange(e){
-    setCompetition({...competition, [e.target.name] : e.target.value})
+  const [CompRegistrations, setCompRegistrations] = useState("");
+
+  const changeHandler = (name, value) => {  
+    setCompetition((prevState) => {
+      return { ...prevState, [name]: value };
+    });
+  };
+
+  function handleSubmit(e){
+
   }
 
-  function appendCompetition(){
+  function handleCodeSubmit(e){
 
   }
 
-  return <div>
-    <form>
-        <div>
-          <label>Name Of competition</label>
-          <input
+  function getListHandler(e){
+    setCompRegistrations(e.target.value)
+  }
+
+  return <div  style={{ backgroundImage: "url('../../Images/login_register_bg.jpg')",  backgroundPosition:"center", backgroundSize:"cover", minHeight:"100vh"}}
+  className={`vw-100 vh-auto`}>
+  <Container fluid className="p-0 m-0 h-100">
+      <div>
+        <div
+        className="text-center text-uppercase fs-1 my-3 text-white"
+        style={{ fontFamily : "'Audiowide', serif" , fontWeight:700}}
+      >
+        ADMIN
+      </div>
+      <Row>
+        <Col sm={12} md={6}>
+      <form onSubmit={handleSubmit} className="h-auto mh-100 mt-3 overflow-auto">
+        <div
+          className={`w-100 d-flex flex-column align-items-center`}
+        >
+          <SimpleInput
             type="text"
+            icon="at"
+            placeholder="Name of competition"
             name="name"
-            placeholder="Name"
-            value={competition.name}
-            onChange={handleChange}
-          ></input>
-        </div>
-        <div>
-          <label>Code of competition</label>
-          <input
+            val={competition.name}
+            changeFunc={changeHandler}
+          />
+          <SimpleInput
             type="text"
             name="code"
-            placeholder="Code of competition"
-            value={competition.code}
-            onChange={handleChange}
-          ></input>
-        </div>
-        <div>
-          <label>Description of the competiton</label>
-          <input
+            icon="key"
+            placeholder="Code of Competition"
+            val={competition.code}  
+            changeFunc={changeHandler}
+          />
+          <SimpleInput
             type="text"
             name="description"
+            icon="key"
             placeholder="Description"
-            value={competition.description}
-            onChange={handleChange}
-          ></input>
-        </div>
-        
-        <div>
-          <label>Organising Club</label>
-          <input
-            type="text"
-            name="club"
-            placeholder="Club"
-            value={competition.club}
-            onChange={handleChange}
-          ></input>
-        </div>
-        <div>
-          <label>Maximum members</label>
-          <input
+            val={competition.description}  
+            changeFunc={changeHandler}
+          />
+          <SelectInput
+            value={competition.CompCategory}
+            changeFunc={changeHandler}
+            name="CompCategory"
+            icon="key"
+            label="Competition Category"
+            val={competition.CompCategory}
+            disabledOption="Competition Category"
+            options={["Technical", "Cultural", "Other"]}
+            isValid="true"
+          />
+          <SelectInput
+            value={competition.isOnline}
+            changeFunc={changeHandler}
+            name="isOnline"
+            icon="key"
+            label="Competition Category"
+            val={competition.isOnline}
+            disabledOption="Competition Mode"
+            options={["Online", "Offline"]}
+            isValid="true"
+          />
+          <SelectInput
+            value={competition.TeamEvent}
+            changeFunc={changeHandler}
+            name="TeamEvent"
+            icon="key"
+            label="Competition Type"
+            val={competition.TeamEvent}
+            disabledOption="Competition Type"
+            options={["Individual", "Team"]}
+            isValid="true"
+          />
+          <SimpleInput
             type="text"
             name="members"
-            placeholder="Max. Members"
-            value={competition.maxmembers}
-            onChange={handleChange}
-          ></input>
-        </div>
-        <div>
-          <label>Drive Link</label>
-          <input
+            icon="key"
+            placeholder="Maximum members"
+            val={competition.maxmembers}  
+            changeFunc={changeHandler}
+          />
+          <SimpleInput
             type="text"
             name="drivelink"
-            placeholder="Drive link"
-            value={competition.drivelink}
-            onChange={handleChange}
-          ></input>
+            icon="key"
+            placeholder="Drive Link"
+            val={competition.drivelink}  
+            changeFunc={changeHandler}
+          />
         </div>
-        <div onChange={handleChange}>
-          <input type="radio" value="Technical" name="CompCategory" /> Technical
-          <input type="radio" value="Cultural" name="CompCategory" /> Cultural
-        </div>
-        <div onChange={handleChange}>
-          <input type="radio" value="Online" name="isOnline" /> Online
-          <input type="radio" value="Offline" name="isOnline" /> Offline
-        </div>
-        <div onChange={handleChange}>
-          <input type="radio" value="False" name="TypeOfComp" /> Individual
-          <input type="radio" value="True" name="TypeOfComp" /> Team
-        </div>
-        
 
+        <Button className="mx-3" type="button" onClickFunc={handleSubmit}>
+            ADD
+        </Button>
+
+      </form>
+      </Col>
+
+      <Col  sm={12} md={6}>
+
+      <form onSubmit={handleCodeSubmit} className="h-auto mh-100 mt-3 overflow-auto">
+        <div
+          className={`w-100 d-flex flex-column align-items-center`}
+        >
+          <div className='text-sm text-center text-uppercase fs-4 my-3 text-white'>Enter Code of competition for registration list</div>
+          <SimpleInput
+            type="text"
+            icon="at"
+            placeholder="Code of competition"
+            name="name"
+            val={CompRegistrations}
+            changeFunc={getListHandler}
+          />
+        </div>
+
+        <Button className="mb-3" type="button" onClickFunc={handleCodeSubmit} style={{margin:"20px"}}>
+            GET
+        </Button>
+
+      </form>
+      </Col>
+      </Row>
+
+      </div>
+    </Container>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {/* <form>
+
+      
         <button
           type="button"
           className="btn btn-primary m-3 my-button"
@@ -121,7 +220,7 @@ function Admin() {
         >
           Register
         </button>
-      </form>
+      </form> */}
   </div>;
 }
 
