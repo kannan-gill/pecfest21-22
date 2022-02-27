@@ -3,6 +3,7 @@ import Competition from './Competition';
 import {Container} from 'react-bootstrap';
 import Button from '../../Components/Utilities/Button';
 import styles from '../../Pages/Competitions/Competitions.module.css'
+import Navbar from 'Components/Navbar';
 
 function Competitions() {
 
@@ -17,6 +18,7 @@ function Competitions() {
     },[Technical])
 
   return <div className={`${styles.compContainer}`} style={{height:"100vh" , background: Technical ? `url("../../Images/technicalevents2.png")` : `url("../../Images/cultural4.png")`}}>
+     <Navbar />
     <Container fluid className="m-0 p-0 h-100" >
         <div className={`${styles.pageTitle}`}>COMPETITIONS</div>
         <div className='d-flex justify-content-center pb-4'>
