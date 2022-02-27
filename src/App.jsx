@@ -15,11 +15,18 @@ import Admin from "./Pages/Admin/Admin";
 import Team from './Pages/Team/Team';
 
 function App() {
-  // TODO: update these routes
   const publicRoutes = [
     { path: "/", component: <Home2 /> },
     { path: "/login", component: <RegisterLogin /> },
     { path: "/register", component: <RegisterLogin isRegister="true"/> },
+    { path: "/campusTour", component: <LandingPage /> },
+    { path: "/competitions", component: <Competitions /> },
+    { path: "/developers", component: <Developers /> },
+    { path: "/contactUs", component: <ContactUs /> },
+    { path: "/admin", component: <Admin /> },
+    { path: "/teamregister", component: <TeamEventRegistration /> },
+    { path: "/team", component: <Team />}
+    
   ];
   const privateRoutes = [{ path: "/events", component: <EventList /> }];
 
@@ -33,17 +40,9 @@ function App() {
     <Route path={route.path} element={route.component} />
   );
   return (
-    <div>
+    <div className="overflow-hidden vh-100">
       <BrowserRouter>
         <Routes>
-          {/* <Route path="/" element={<Home2 />} /> */}
-          <Route path="/campusTour" element={<LandingPage />} />
-          <Route path="/competitions" element={<Competitions />} />
-          <Route path="/developers" element={<Developers />} />
-          <Route path="/contactUs" element={<ContactUs />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/teamregister" element={<TeamEventRegistration />} />
-          <Route path="/team" element={<Team />} />
           {publicRoutes.map((route) => publicRouteComponent(route))}
           {privateRoutes.map((route) => privateRouteComponent(route))}
         </Routes>

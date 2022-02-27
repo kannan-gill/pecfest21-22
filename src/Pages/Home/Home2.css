@@ -133,7 +133,7 @@
     height: 200px;
 }
 
-.cursor{
+/* .cursor{
     position: fixed;
     width: 60px !important;
     height: 60px;
@@ -144,7 +144,7 @@
     pointer-events: none;
     mix-blend-mode: difference;
     z-index: 200;
-}
+} */
 
 .rocket{
     position: fixed;
@@ -197,6 +197,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 1.4em;
     font-weight: 600;
     letter-spacing: 5px;
     color:white;
@@ -204,14 +205,62 @@
     width: 100px;
     margin:auto;
     text-align: center;
-    border-radius: 100%;
+    /* border-radius: 100%;
     border-color: white;
     border-style: solid;
-    border-width: 2px;
+    border-width: 2px; */
     position: absolute;
-    bottom:10%;
+    bottom:20%;
     left:45%;
-    animation: explorebubble 1.5s infinite;
+    /* animation: explorebubble 1.5s infinite; */
+}
+
+.next-page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4em;
+    font-weight: 600;
+    letter-spacing: 5px;
+    color:white;
+    height:100px;
+    width: 100px;
+    margin:auto;
+    text-align: center;
+    /* border-radius: 100%;
+    border-color: white;
+    border-style: solid;
+    border-width: 2px; */
+    position: absolute;
+    bottom:2%;
+    left:45%;
+    /* animation: explorebubble 1.5s infinite; */
+}
+
+.prev-page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4em;
+    font-weight: 600;
+    letter-spacing: 5px;
+    color:white;
+    height:100px;
+    width: 100px;
+    margin:auto;
+    text-align: center;
+    /* border-radius: 100%;
+    border-color: white;
+    border-style: solid;
+    border-width: 2px; */
+    position: absolute;
+    top:2%;
+    left:45%;
+    /* animation: explorebubble 1.5s infinite; */
+}
+
+.explore .left-arrow {
+    transform: rotate(180deg);
 }
 
 .headerRemove{
@@ -226,9 +275,9 @@
     display: flex;
 }
 
-@keyframes alignPlanets {
+/* @keyframes alignPlanets {
     100%{top:30%};
-}
+} */
 
 @keyframes headerRev {
     0%{opacity: 1;}
@@ -247,4 +296,9 @@
     .img3{
         left: 35%;
     }
+}
+.landing .planet-img{
+ 
+  transition: transform 0.2s, top 0.8s;
+  /* transition-duration: 0.2s, 0.8s; */
 }
