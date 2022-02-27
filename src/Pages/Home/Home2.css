@@ -255,7 +255,7 @@
 
 .alignCenter{
     /* animation: alignPlanets 1s forwards; */
-    top:30%;
+    top:40%;
     text-align: center;
     display: flex;
 }
@@ -287,6 +287,10 @@
   transition: transform 0.2s, top 0.8s;
   /* transition-duration: 0.2s, 0.8s; */
 }
-.landing .planet-img:hover{
-    transform: scale(1.5) !important;
+.landing .planet-img.larger-planet{
+    transform: scale(1.1) !important;
 }
+.landing .planet-img.zoomed-planet{
+    transform: scale(10) !important;
+}
+

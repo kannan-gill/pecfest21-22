@@ -41,7 +41,7 @@ function App() {
     <Route path={route.path} element={route.component} />
   );
   return (
-    <div className="overflow-hidden vh-100">
+    <div className="overflow-hidden vh-100 bg-dark">
       <BrowserRouter>
         <Routes>
           {publicRoutes.map((route) => publicRouteComponent(route))}
