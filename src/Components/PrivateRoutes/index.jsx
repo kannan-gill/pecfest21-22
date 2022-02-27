@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 // being used to invoke the firebase config, DO NOT DELETE
 import {} from "../../config";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import Login from "../../Pages/Login/Login";
+import RegisterLogin from "../../Pages/RegisterLogin/RegisterLogin";
 
 const PrivateRoutes = (props) => {
   const [user, setUser] = useState(null);
@@ -24,7 +24,7 @@ const PrivateRoutes = (props) => {
   return (
     <>
       {/* TODO: Change to this login */}
-      {!loading && (user ? props.children : <Login />)}
+      {!loading && (user ? props.children : <RegisterLogin />)}
     </>
   );
 };

@@ -12,8 +12,23 @@
     filter: brightness(80%);
 }
 
-.landing div{
-   
+.exploreBack{
+   width: 50px;
+   height:50px;
+   color:white;
+   position: absolute;
+   z-index: 500;
+   top:18%;
+   left:10%;
+   border-style:solid ;
+   border-width: 2px;
+   border-radius: 50%;
+   border-color: white;
+   text-align: center;
+}
+
+.fa-solid{
+    padding-top: 8px;
 }
 
 .img1{
@@ -23,6 +38,7 @@
     width: 15%;
     filter: brightness(80%);
     max-width: 250px;
+    transition: top 0.8s ease-in-out;
 }
 
 .img2{
@@ -33,6 +49,7 @@
     width: 20%;
     max-width: 250px;
     z-index: 200;
+    transition: top 0.8s ease-in-out;
 }
 
 .img3{
@@ -43,6 +60,7 @@
     width: 30%;
     filter: brightness(80%);
     max-width: 250px;
+    transition: top 0.8s ease-in-out;
 }
 
 .img4{
@@ -52,15 +70,17 @@
     width: 30%;
     filter: brightness(80%);
     max-width: 250px;
+    transition: top 0.8s ease-in-out;
 }
 
 .img5{
     position: absolute;
     top:3%;
     left:60%;
-    width: 10%;
+    width: 15%;
     filter: brightness(80%);
     max-width: 250px;
+    transition: top 0.8s ease-in-out;
 }
 
 .cursor{
@@ -85,6 +105,9 @@
 }
 
 .header{
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+    font-family: 'Russo One', sans-serif;
     width: 100%;
     font-size: 17vw;
     margin: auto;
@@ -95,7 +118,20 @@
     color: white;
     top:10%;
     margin: auto;
-    user-select: none;
+    text-shadow: 1px 1px 1px #919191,
+        1px 2px 1px #919191,
+        1px 3px 1px #919191,
+        1px 4px 1px #919191,
+        1px 5px 1px #919191,
+        1px 6px 1px #919191,
+        1px 7px 1px #919191,
+        1px 8px 1px #919191,
+        1px 9px 1px #919191,
+        1px 10px 1px #919191,
+    1px 18px 6px rgba(16,16,16,0.4),
+    1px 22px 10px rgba(16,16,16,0.2),
+    1px 25px 35px rgba(16,16,16,0.2),
+    1px 30px 60px rgba(16,16,16,0.4);
 }
 
 .explore{
@@ -120,11 +156,12 @@
 }
 
 .headerRemove{
-    animation: headerRev 0.5s forwards;
+    opacity: 0;
 }
 
 .alignCenter{
-    animation: alignPlanets 1s forwards;
+    /* animation: alignPlanets 1s forwards; */
+    top:30%;
 }
 
 @keyframes alignPlanets {

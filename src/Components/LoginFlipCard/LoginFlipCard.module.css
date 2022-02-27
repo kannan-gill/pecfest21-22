@@ -1,0 +1,41 @@
+.loginCard {
+  transition: transform 1.3s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  /* position: relative; */
+   border: none; 
+}
+
+.loginCardFace {
+  /* position: absolute; */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.loginCardFaceFront {
+  background: #5dc3d34f;
+  transform: translate(0,-50%);  
+}
+
+.loginCardFaceBack {
+  transform: rotateY(180deg) translate(0,-50%);  
+}
+
+.isFlipped {
+  transform: rotateY(180deg);
+}
+
+.bgColorCard {
+  background: #5dc3d34f;
+}
+
+.top_50{
+  top: 50%;
+}
+
+
+@media(max-width: 767px){
+  .card{
+    height: 100% !important;
+  }
+}
