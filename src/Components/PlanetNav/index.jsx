@@ -11,7 +11,7 @@ const planets = [
     route: "/brochure",
     text: "Brochure",
     speed: "2",
-    color: "yellow",
+    color: "#fc9d15",
   },
   {
     route: "/events",
@@ -23,19 +23,19 @@ const planets = [
     route: "/competitions",
     text: "Competitions",
     speed: "1",
-    color: "red",
+    color: "#9a484b",
   },
   {
     route: "/merchandise",
     text: "Merchandise",
     speed: "-1",
-    color: "purple",
+    color: "#a941ce",
   },
   {
     route: "/schedule",
     text: "Schedule",
     speed: "3",
-    color: "pink",
+    color: "#fb6d62",
   },
 ];
 
@@ -46,6 +46,7 @@ const PlanetNav = ({ transitionAnimation, setIsLoading, bgVideo }) => {
   const [pageExitColor, setPageExitColor] = useState(null);
   const [pageExitX, setPageExitX] = useState(null);
   const [pageExitY, setPageExitY] = useState(null);
+  const [planetIndex, setPlanetIndex] = useState(null);
 
   useEffect(() => {
     setPageExitColor(null);
@@ -93,11 +94,14 @@ const PlanetNav = ({ transitionAnimation, setIsLoading, bgVideo }) => {
       element.style.transform = `translate(${x}px) translateY(${y}px)`;
     });
   }
-  const setPage = (route) => {
-    setTimeout(()=>{
-      navigate(route);
-    },1000);
-    
+  const setPage = (e, planet, ind) => {
+    setPageExitX(e.clientX);
+    setPageExitY(e.clientY);
+    setPageExitColor(planet.color);
+    setPlanetIndex(planet);
+    setTimeout(() => {
+      navigate(planet.route);
+    }, 1500);
   };
   return (
     <div
@@ -134,6 +138,7 @@ const PlanetNav = ({ transitionAnimation, setIsLoading, bgVideo }) => {
           initX={pageExitX}
           initY={pageExitY}
           color={pageExitColor}
+          text={planetIndex.text}
         />
       )}
       {planets.map((planet, ind) => (
@@ -146,16 +151,13 @@ const PlanetNav = ({ transitionAnimation, setIsLoading, bgVideo }) => {
           }}
           onClick={(e) => {
             if (explore) {
-              setPageExitX(e.clientX);
-              setPageExitY(e.clientY);
-              setPageExitColor(planet.color);
-              setPage(planet.route)
+              setPage(e, planet, ind);
             }
           }}
           data-speed={planet.speed}
           className={`cursor-pointer img${ind + 1} planet-img ${
             explore ? "alignCenter" : ""
-          } ${hoveredPlanet === ind + 1 && "larger-planet"}  `}
+          } ${hoveredPlanet === ind + 1 && "larger-planet"} `}
         >
           {explore ? (
             <h3 className="position-absolute top-50 start-50 translate-middle">

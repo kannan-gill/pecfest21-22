@@ -293,4 +293,6 @@
 .landing .planet-img.zoomed-planet{
     transform: scale(10) !important;
 }
-
+.landing .planet-img.overExpanding{
+    z-index: 1010 !important;
+}
