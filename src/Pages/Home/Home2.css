@@ -32,55 +32,105 @@
 }
 
 .img1{
+    background: url('../../Images/Untitled.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
     position: absolute;
     top:-2%;
     left:20%;
     width: 15%;
-    filter: brightness(80%);
+    /* filter: brightness(80%); */
     max-width: 250px;
     transition: top 0.8s ease-in-out;
+    height:200px;
+}
+
+.landing div h3{
+    display: inline-block;
+    /* position: relative; */
+    text-align: center;
+    margin: auto;
+    z-index: 1000;
+    color:rgba(255,255,255,1);
+    /* top:40%;
+    left:20%; */
+    font-size: 2.5vw;
+    font-family: 'Russo One', sans-serif;
+    padding: 15px 5px;
+    
+    /* border-style: solid;
+    border-color: white;
+    border-width: 2px;
+    border-radius: 10%; */
+}
+
+.landing div h3:hover{
+    font-size: 3vw;
+    background: rgba(0,0,0,0.5);
+    border-radius: 10%;
 }
 
 .img2{
+    background: url('../../Images/Untitled2.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
     position: absolute;
     top:20%;
     left:5%;
-    filter: brightness(80%);
+    /* filter: brightness(80%); */
     width: 20%;
     max-width: 250px;
     z-index: 200;
     transition: top 0.8s ease-in-out;
+    height:200px;
 }
 
 .img3{
+    background: url('../../Images/Untitled3.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
     position: absolute;
     top:45%;
     bottom:60%;
     left:40%;
     width: 30%;
-    filter: brightness(80%);
+    /* filter: brightness(80%); */
     max-width: 250px;
     transition: top 0.8s ease-in-out;
+    height: 200px;
 }
 
 .img4{
+    background: url('../../Images/Untitled4.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
     position: absolute;
     top:35%;
     right:5%;
     width: 30%;
-    filter: brightness(80%);
+    /* filter: brightness(80%); */
     max-width: 250px;
     transition: top 0.8s ease-in-out;
+    height: 200px;
 }
 
 .img5{
+    background: url('../../Images/Untitled5.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
     position: absolute;
     top:3%;
     left:60%;
     width: 15%;
-    filter: brightness(80%);
+    /* filter: brightness(80%); */
     max-width: 250px;
     transition: top 0.8s ease-in-out;
+    height: 200px;
 }
 
 .cursor{
@@ -104,12 +154,21 @@
     margin: auto;
 }
 
+.otherMenu{
+    position: absolute;
+    top:60%;
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin-left: 5%;
+}
+
 .header{
     opacity: 1;
     transition: opacity 0.5s ease-in-out;
     font-family: 'Russo One', sans-serif;
     width: 100%;
-    font-size: 17vw;
+    font-size: 16vw;
     margin: auto;
     text-align: center;
     position: fixed;
@@ -157,11 +216,14 @@
 
 .headerRemove{
     opacity: 0;
+    visibility: hidden;
 }
 
 .alignCenter{
     /* animation: alignPlanets 1s forwards; */
     top:30%;
+    text-align: center;
+    display: flex;
 }
 
 @keyframes alignPlanets {
@@ -176,4 +238,13 @@
 @keyframes explorebubble {
     0%{transform: scale(1);}
     100%{transform: scale(1.5);opacity: 0;}
+}
+
+@media screen and (max-width:800px) {
+    .landing div h3{
+        left: 25%;
+    }
+    .img3{
+        left: 35%;
+    }
 }

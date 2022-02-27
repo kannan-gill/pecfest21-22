@@ -1,0 +1,29 @@
+.committeeBackground{
+    background:url(../../Images/1845.jpg);
+    background-repeat:"no-repeat";
+    background-size: "conver";
+
+}
+
+.image{
+    border-color: white;
+    border-style: solid;
+    border-width: 2px;
+    
+}
+
+.pageheader{
+    color:white !important;
+    font-family: 'Russo One', sans-serif;
+    font-size: 5vw;
+    font-weight: 700;
+    letter-spacing: 5px;
+    text-shadow: 5px 5px 5px #000;
+    
+}
+
+.back_Button{
+    position: absolute;
+  top: 15px;
+  left: 15px;
+}

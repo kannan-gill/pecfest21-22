@@ -12,6 +12,7 @@ import TeamEventRegistration from "./Pages/TeamEventRegistration/TeamEventRegist
 import ContactUs from "./Pages/ContactUS/ContactUs";
 import Developers from "./Pages/Developers/Developers";
 import Admin from "./Pages/Admin/Admin";
+import Team from './Pages/Team/Team';
 
 function App() {
   // TODO: update these routes
@@ -42,6 +43,7 @@ function App() {
           <Route path="/contactUs" element={<ContactUs />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/teamregister" element={<TeamEventRegistration />} />
+          <Route path="/team" element={<Team />} />
           {publicRoutes.map((route) => publicRouteComponent(route))}
           {privateRoutes.map((route) => privateRouteComponent(route))}
         </Routes>
