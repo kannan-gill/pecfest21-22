@@ -133,6 +133,7 @@ const PlanetNav = ({ transitionAnimation, setIsLoading, bgVideo }) => {
           <img src={BackImg} alt="Back" width="100px" />
         </div>
       )}
+      
       {explore && pageExitX && pageExitY && (
         <ExpandingCircle
           initX={pageExitX}

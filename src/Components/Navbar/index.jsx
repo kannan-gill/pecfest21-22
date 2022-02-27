@@ -12,12 +12,14 @@ import {
   faInfoCircle,
   faLightbulb,
   faPhone,
+  faRocket,
   faShirt,
   faUserGroup,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import styles from "./Navbar.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
+import { Button } from "react-bootstrap";
 const routes = [
   {
     type: "divider",
@@ -144,6 +146,22 @@ const Navbar = () => {
 
   return (
     <>
+      {/* Login button */}
+      <div className="position-absolute top-0 end-0 zi-top ">
+        <Button
+          onClick={()=>{
+            navigate("/login");
+          }}
+          variant="warning"
+          className="fw-bold px-3 m-4"
+          style={{
+            borderRadius: "5em",
+          }}
+        >
+          <FontAwesomeIcon icon={faRocket} className="me-2" size="1x" />
+          Login
+        </Button>
+      </div>
       <div className="position-absolute top-0 start-0 vh-100 text-white zi-top animate__animated animate__fadeIn">
         <FontAwesomeIcon
           icon={faBars}
