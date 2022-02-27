@@ -12,11 +12,12 @@ import TeamEventRegistration from "./Pages/TeamEventRegistration/TeamEventRegist
 import ContactUs from "./Pages/ContactUS/ContactUs";
 import Developers from "./Pages/Developers/Developers";
 import Admin from "./Pages/Admin/Admin";
+import CompetitionDetails from "./Pages/CompetitionDetails/CompetitionDetails";
 
 function App() {
   // TODO: update these routes
   const publicRoutes = [
-    { path: "/", component: <Home2 /> },
+    { path: "/", component: <CompetitionDetails /> },
     { path: "/login", component: <RegisterLogin /> },
     { path: "/register", component: <RegisterLogin isRegister="true"/> },
   ];
