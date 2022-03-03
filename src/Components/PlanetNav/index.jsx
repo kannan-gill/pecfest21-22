@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import BackImg from "../../Images/back-img.png";
 import useAnimatedRenderer from "hooks/useAnimatedRenderer";
 import ExpandingCircle from "Components/ExpandingCircle";
+import { width } from "@mui/system";
 
 const planets = [
   {
@@ -103,6 +104,7 @@ const PlanetNav = ({ transitionAnimation, setIsLoading, bgVideo }) => {
       navigate(planet.route);
     }, 1500);
   };
+  setIsLoading(false);
   return (
     <div
       className={`landing vh-100 animate__fast overflow-hidden animate__animated animated__fadeIn ${
@@ -110,17 +112,24 @@ const PlanetNav = ({ transitionAnimation, setIsLoading, bgVideo }) => {
       } ${transitionAnimation === "landing" && "animate__slideOutUp"}`}
       onMouseMove={handleMouse}
     >
-      <video
+      <div style={{overflow:'hidden'}}>
+        <img style={{width:'100%',height:'100vh' ,minWidth:'1000px'}} className={`nebulaimg ${explore ? 'rotatebg':''}`} src='../../Images/nebulabgextracted.png' alt="not found"/>
+      </div>
+      {/* <video
         className="animate__animated animated__fadeIn"
         onCanPlayThrough={() => setIsLoading(false)}
         autoPlay
         muted
         loop
         src={bgVideo}
-      />
+      /> */}
       <div className={`header ${explore ? "headerRemove" : ""}`}>
         PECFEST'22
       </div>
+
+      <div id="stars"></div>
+      <div id="stars2"></div>
+      <div id="stars3"></div>
 
       {/* Back Button */}
       {showBack && (
