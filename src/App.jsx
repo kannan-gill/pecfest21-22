@@ -14,14 +14,17 @@ import TeamEventRegistration from "./Pages/TeamEventRegistration/TeamEventRegist
 // import Developers from "./Pages/Developers/Developers";
 import Admin from "./Pages/Admin/Admin";
 import Team from './Pages/Team/Team';
+import Schedule from 'Pages/Schedule/Schedule';
 
 function App() {
   const publicRoutes = [
     { path: "/", component: <Home2 /> },
     { path: "/login", component: <RegisterLogin /> },
     { path: "/register", component: <RegisterLogin isRegister/> },
-    { path: "/campusTour", component: <LandingPage /> },
+    // { path: "/campusTour", component: <LandingPage /> },
     { path: "/competitions", component: <Competitions /> },
+    { path: "/events", component: <EventList /> },
+    { path: "/schedule", component: <Schedule /> },
     // { path: "/developers", component: <Developers /> },
     // { path: "/contactUs", component: <ContactUs /> },
     { path: "/admin", component: <Admin /> },

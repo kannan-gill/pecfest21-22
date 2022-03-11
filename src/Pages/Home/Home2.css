@@ -5,6 +5,7 @@
     background: black;
     width: 100%;
     overflow-x: hidden;
+    min-height: 500px;
 }
 
 .landing video{
@@ -157,19 +158,29 @@
 .header{
     opacity: 1;
     transition: all 0.5s ease-in-out;
-    font-family: 'Russo One', sans-serif;
+    /* font-family: 'Russo One', sans-serif; */
+    font-family: 'Audiowide', cursive;
     width: 100%;
-    font-size: 15vw;
+    font-size: 13vw;
     margin: auto;
     text-align: center;
     position: fixed;
     z-index: 100;
-    font-weight: 800;
+    font-weight:700;
     color: white;
+    /* background-color: white;
+    background-image: linear-gradient(white, #f5d5e0);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    -moz-text-fill-color: transparent; */
+    text-shadow: 2px 2px 2px black;
     top:10%;
     margin: auto;
-    letter-spacing: 5px;
-    text-shadow: 1px 1px 1px #919191,
+    /* letter-spacing: 5px; */
+    /* text-shadow: 5px 5px 5px #000; */
+    /* text-shadow: 1px 1px 1px #919191,
         1px 2px 1px #919191,
         1px 3px 1px #919191,
         1px 4px 1px #919191,
@@ -182,7 +193,7 @@
     1px 18px 6px rgba(16,16,16,0.4),
     1px 22px 10px rgba(16,16,16,0.2),
     1px 25px 35px rgba(16,16,16,0.2),
-    1px 30px 60px rgba(16,16,16,0.4); 
+    1px 30px 60px rgba(16,16,16,0.4);  */
 }
 
 .explore{
@@ -901,10 +912,18 @@
 
 
 @keyframes animStar {
-    from {
+    0%{
         transform: translateY(0px);
+        opacity: 0;
     }
-    to {
+    10%{
+        opacity: 1;
+    }
+    90%{
+        opacity: 1;
+    }
+    100% {
         transform: translateY(-2000px);
+        opacity: 0;
     }
 }

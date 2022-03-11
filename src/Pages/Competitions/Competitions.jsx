@@ -17,9 +17,12 @@ function Competitions() {
 
     },[Technical])
 
-  return <div className={`${styles.compContainer}`} style={{height:"100vh" , background: Technical ? `url("../../Images/technicalevents2.png")` : `url("../../Images/cultural4.png")`}}>
+  return <div className={`${styles.compContainer}`} style={{height:"100vh" , background:"#9a484b"}}>
      <Navbar />
     <Container fluid className="m-0 p-0 h-100" >
+        <div id="stars"></div>
+        <div id="stars2"></div>
+        <div id="stars3"></div>
         <div className={`${styles.pageTitle}`}>COMPETITIONS</div>
         <div className='d-flex justify-content-center pb-4'>
         <Button onClickFunc={()=>setTechnical(true)}>Technical</Button>
