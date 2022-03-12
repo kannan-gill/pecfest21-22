@@ -3,6 +3,7 @@ import { faAnglesRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 import BackImg from "../../Images/back-img.png";
+import nebulaBg from "../../Images/nebulabgextracted.png";
 import useAnimatedRenderer from "hooks/useAnimatedRenderer";
 import ExpandingCircle from "Components/ExpandingCircle";
 import { width } from "@mui/system";
@@ -113,7 +114,7 @@ const PlanetNav = ({ transitionAnimation, setIsLoading, bgVideo }) => {
       onMouseMove={handleMouse}
     >
       <div style={{overflow:'hidden'}}>
-        <img style={{width:'100%',height:'100vh' ,minWidth:'1000px'}} className={`nebulaimg ${explore ? 'rotatebg':''}`} src='../../Images/nebulabgextracted.png' alt="not found"/>
+        <img style={{width:'100%',height:'100vh' ,minWidth:'1000px'}} className={`nebulaimg ${explore ? 'rotatebg':''}`} src={nebulaBg} alt="not found"/>
       </div>
       {/* <video
         className="animate__animated animated__fadeIn"
