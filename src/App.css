@@ -36,3 +36,10 @@
     transform: rotate(360deg);
   }
 }
+
+.nebula-bg{
+  background-image: url(./Images/nebulabgextracted.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}

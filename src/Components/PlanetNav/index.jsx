@@ -40,7 +40,7 @@ const planets = [
   },
 ];
 
-const PlanetNav = ({ transitionAnimation, setIsLoading }) => {
+const PlanetNav = ({ transitionAnimation }) => {
   const [explore, setExplore] = useState(false);
   const [showBack, setShowBack] = useAnimatedRenderer(explore);
   const [hoveredPlanet, setHoveredPlanet] = useState(null);
@@ -104,7 +104,6 @@ const PlanetNav = ({ transitionAnimation, setIsLoading }) => {
       navigate(planet.route);
     }, 1500);
   };
-  setIsLoading(false);
   return (
     <div
       className={`landing vh-100 animate__fast overflow-hidden animate__animated animated__fadeIn ${
@@ -157,8 +156,8 @@ const PlanetNav = ({ transitionAnimation, setIsLoading }) => {
             }
           }}
           data-speed={planet.speed}
-          className={`cursor-pointer img${ind + 1} planet-img ${
-            explore ? "alignCenter" : ""
+          className={`img${ind + 1} planet-img ${
+            explore ? "alignCenter cursor-pointer " : ""
           } ${hoveredPlanet === ind + 1 && "larger-planet"} `}
         >
           {explore ? (

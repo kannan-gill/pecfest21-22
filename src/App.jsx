@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from "react";
 import "./App.css";
 // import Button from "./Components/Utilities/Button";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -13,36 +13,53 @@ import TeamEventRegistration from "./Pages/TeamEventRegistration/TeamEventRegist
 // import ContactUs from "./Pages/ContactUS/ContactUs";
 // import Developers from "./Pages/Developers/Developers";
 import Admin from "./Pages/Admin/Admin";
-import Team from './Pages/Team/Team';
-import Schedule from 'Pages/Schedule/Schedule';
+import Team from "./Pages/Team/Team";
+import Schedule from "Pages/Schedule/Schedule";
+import ComingSoon from "Pages/ComingSoon/ComingSoon";
+import Navbar from "Components/Navbar";
 
 function App() {
+  const [isNavBarVisible, setIsNavbarVisible] = useState(true);
   const publicRoutes = [
-    { path: "/", component: <Home2 /> },
-    { path: "/login", component: <RegisterLogin /> },
-    { path: "/register", component: <RegisterLogin isRegister/> },
+    { path: "/", component: <Home2 initialPage="landing" /> },
+    {
+      path: "/login",
+      component: <RegisterLogin setIsNavbarVisible={setIsNavbarVisible} />,
+    },
+    {
+      path: "/register",
+      component: (
+        <RegisterLogin isRegister setIsNavbarVisible={setIsNavbarVisible} />
+      ),
+    },
     // { path: "/campusTour", component: <LandingPage /> },
-    { path: "/competitions", component:  <ComingSoon /> },
+    { path: "/competitions", component: <ComingSoon /> },
     { path: "/schedule", component: <ComingSoon /> },
     // { path: "/developers", component: <Developers /> },
     { path: "/contactUs", component: <ComingSoon /> },
     { path: "/admin", component: <Admin /> },
-    { path: "/teamregister", component:  <ComingSoon /> },
-    { path: "/team", component: <ComingSoon />},
-    { path: "/aboutUs", component: <ComingSoon />},
-    { path: "/sponsors", component: <ComingSoon />},
-    { path: "/merchandise", component: <ComingSoon />},
-    { path: "/brochure", component: <ComingSoon />},
-    { path: "/developer", component: <ComingSoon />},
-    { path: "/contact", component: <ComingSoon />}
-    
+    { path: "/teamregister", component: <ComingSoon /> },
+    { path: "/team", component: <ComingSoon /> },
+    { path: "/aboutUs", component: <Home2 initialPage="aboutUs" /> },
+    { path: "/sponsors", component: <ComingSoon /> },
+    { path: "/merchandise", component: <ComingSoon /> },
+    { path: "/brochure", component: <ComingSoon /> },
+    { path: "/developer", component: <ComingSoon /> },
+    { path: "/contact", component: <ComingSoon /> },
+    { path: "/events", component: <ComingSoon /> },
   ];
-  const privateRoutes = [{ path: "/events", component: <ComingSoon /> }];
+  const privateRoutes = [
+    // add events to this
+  ];
 
   const privateRouteComponent = (route) => (
     <Route
       path={route.path}
-      element={<PrivateRoutes>{route.component}</PrivateRoutes>}
+      element={
+        <PrivateRoutes setIsNavbarVisible={setIsNavbarVisible}>
+          {route.component}
+        </PrivateRoutes>
+      }
     />
   );
   const publicRouteComponent = (route) => (
@@ -51,6 +68,7 @@ function App() {
   return (
     <div className="overflow-hidden vh-100 bg-dark">
       <BrowserRouter>
+        {isNavBarVisible && <Navbar />}
         <Routes>
           {publicRoutes.map((route) => publicRouteComponent(route))}
           {privateRoutes.map((route) => privateRouteComponent(route))}
