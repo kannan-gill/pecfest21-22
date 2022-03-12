@@ -4,7 +4,8 @@ import {} from "../../config";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import RegisterLogin from "../../Pages/RegisterLogin/RegisterLogin";
 
-const PrivateRoutes = (props) => {
+const PrivateRoutes = ({ children, setIsNavbarVisible }) => {
+  console.log('received', setIsNavbarVisible);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -24,7 +25,12 @@ const PrivateRoutes = (props) => {
   return (
     <>
       {/* TODO: Change to this login */}
-      {!loading && (user ? props.children : <RegisterLogin />)}
+      {!loading &&
+        (user ? (
+          children
+        ) : (
+          <RegisterLogin setIsNavbarVisible={setIsNavbarVisible} />
+        ))}
     </>
   );
 };

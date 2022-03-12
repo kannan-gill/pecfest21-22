@@ -41,7 +41,7 @@ const planets = [
   },
 ];
 
-const PlanetNav = ({ transitionAnimation, setIsLoading, bgVideo }) => {
+const PlanetNav = ({ transitionAnimation }) => {
   const [explore, setExplore] = useState(false);
   const [showBack, setShowBack] = useAnimatedRenderer(explore);
   const [hoveredPlanet, setHoveredPlanet] = useState(null);
@@ -105,7 +105,6 @@ const PlanetNav = ({ transitionAnimation, setIsLoading, bgVideo }) => {
       navigate(planet.route);
     }, 1500);
   };
-  setIsLoading(false);
   return (
     <div
       className={`landing vh-100 animate__fast overflow-hidden animate__animated animated__fadeIn ${
@@ -116,14 +115,6 @@ const PlanetNav = ({ transitionAnimation, setIsLoading, bgVideo }) => {
       <div style={{overflow:'hidden'}}>
         <img style={{width:'100%',height:'100vh' ,minWidth:'1000px'}} className={`nebulaimg ${explore ? 'rotatebg':''}`} src={nebulaBg} alt="not found"/>
       </div>
-      {/* <video
-        className="animate__animated animated__fadeIn"
-        onCanPlayThrough={() => setIsLoading(false)}
-        autoPlay
-        muted
-        loop
-        src={bgVideo}
-      /> */}
       <div className={`header ${explore ? "headerRemove" : ""}`}>
         PECFEST'22
       </div>
@@ -166,8 +157,8 @@ const PlanetNav = ({ transitionAnimation, setIsLoading, bgVideo }) => {
             }
           }}
           data-speed={planet.speed}
-          className={`cursor-pointer img${ind + 1} planet-img ${
-            explore ? "alignCenter" : ""
+          className={`img${ind + 1} planet-img ${
+            explore ? "alignCenter cursor-pointer " : ""
           } ${hoveredPlanet === ind + 1 && "larger-planet"} `}
         >
           {explore ? (

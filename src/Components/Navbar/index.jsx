@@ -90,6 +90,7 @@ const routes = [
     icon: faPhone,
   },
 ];
+
 const Navbar = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const location = useLocation();
@@ -113,9 +114,9 @@ const Navbar = () => {
         onClick={() => {
           navigate(route.route);
         }}
-        className={`cursor-pointer px-3 my-2 py-1 ${styles.nav_item} ${
+        className={`cursor-pointer px-3 my-1 py-2 ${styles.nav_item} ${
           location.pathname === route.route && styles.nav_item_active
-        } ${location.pathname === route.route && "py-2"}`}
+        } ${location.pathname === route.route && "py-2 my-1"}`}
       >
         <FontAwesomeIcon
           icon={route.icon}
@@ -149,7 +150,7 @@ const Navbar = () => {
       {/* Login button */}
       <div className="position-absolute top-0 end-0 zi-top ">
         <Button
-          onClick={()=>{
+          onClick={() => {
             navigate("/login");
           }}
           variant="warning"
@@ -162,7 +163,7 @@ const Navbar = () => {
           Login
         </Button>
       </div>
-      <div className="position-absolute top-0 start-0 vh-100 text-white zi-top animate__animated animate__fadeIn">
+      <div className="position-absolute top-0 start-0 text-white zi-top animate__animated animate__fadeIn">
         <FontAwesomeIcon
           icon={faBars}
           color="white"
@@ -171,17 +172,24 @@ const Navbar = () => {
           onClick={() => setIsNavOpen(true)}
         />
       </div>
-      <div className="d-flex flex-row row ">
+      <div
+        className="d-flex flex-row row "
+        onWheel={(event) => {
+          event.stopPropagation();
+        }}
+      >
         <div
-          className={`position-absolute top-0 start-0 zi-top h-100 ${
+          className={`position-absolute top-0 d-flex flex-column start-0 zi-top h-100 ${
             styles.nav_item_container
           } col-sm-12 col-md-6 col-lg-3 col-xl-3 animate__animated animate__faster ${
             !closeNavAnimation && "invisible"
           } ${isNavOpen ? "animate__slideInLeft" : "animate__slideOutLeft"}`}
         >
-          <div className="d-flex flex-column overflow-auto justify-content-start">
+          <div className="d-flex flex-column overflow-none justify-content-start  ">
             <div className="d-flex justify-content-between align-items-center px-3 pt-4 pb-0 text-white">
-              <h4 className="display-6 fw-bold">PECFEST</h4>
+              <h4 onClick={() => navigate("/")} className="display-6 fw-bold">
+                PECFEST
+              </h4>
               <FontAwesomeIcon
                 className="cursor-pointer"
                 icon={faXmark}
@@ -192,7 +200,7 @@ const Navbar = () => {
             </div>
           </div>
           <div
-            className="overflow-auto h-100 pe-3"
+            className="overflow-auto flex-grow-1 d-flex flex-column pe-3 mb-3"
             onWheel={(event) => {
               event.stopPropagation();
             }}
