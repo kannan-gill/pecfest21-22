@@ -5,7 +5,7 @@ import LoginFlipCard from "../../Components/LoginFlipCard/LoginFlipCard";
 import BackButton from "../../Components/BackButton/BackButton";
 import { useNavigate } from "react-router-dom";
 
-function RegisterLogin({isRegister}) {
+function RegisterLogin({isRegister = false}) {
   const navigate = useNavigate();
 
   const clickHandler = () => {
@@ -13,7 +13,7 @@ function RegisterLogin({isRegister}) {
   }
 
   return (
-    <Container fluid className="p-0 m-0 h-100">
+    <Container fluid className="p-0 m-0 h-100 animate__animated animate__fadeIn">
       <div
         style={{ backgroundImage: "url('../../Images/login_register_bg.jpg')" }}
         className={`vw-100 vh-100 ${styles.bg_img}`}

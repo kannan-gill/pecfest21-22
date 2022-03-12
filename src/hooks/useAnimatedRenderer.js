@@ -1,12 +1,19 @@
-import React, { useEffect, useState } from "react";
-const useAnimatedRenderer = (initialValue, timeout = 1000) => {
+import { useEffect, useState } from "react";
+const useAnimatedRenderer = (
+  initialValue,
+  onTimeout = 0,
+  offTimeout = 1000
+) => {
   const [conditionalRender, setConditionalRenderer] = useState(initialValue);
   const [visibilityRenderer, setVisibilityRenderer] = useState(initialValue);
   useEffect(() => {
-    setTimeout(() => {
-      setVisibilityRenderer(conditionalRender);
-    }, timeout);
-  }, [conditionalRender, timeout]);
+    setTimeout(
+      () => {
+        setVisibilityRenderer(conditionalRender);
+      },
+      conditionalRender ? onTimeout : offTimeout
+    );
+  }, [conditionalRender, onTimeout, offTimeout]);
   return [visibilityRenderer, setConditionalRenderer];
 };
 export default useAnimatedRenderer;

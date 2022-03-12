@@ -4,8 +4,7 @@ function EventList() {
   const [eventDetails, seteventDetails] = useState([]);
 
   return (
-    <div>
-      hi
+    <div className="vh-100" style={{background:"#07202a"}}>
       {eventDetails.map((element) => {
         return (
           <Event

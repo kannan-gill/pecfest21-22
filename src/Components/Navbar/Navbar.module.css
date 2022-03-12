@@ -1,0 +1,29 @@
+.nav_item_container {
+  background-color: #0f1113 !important;
+  scroll-behavior: contain;
+}
+.nav_item_active {
+  border-radius: 0.5em;
+  background-color: #1864afaf !important;
+  color: white !important;
+}
+.nav_item {
+  color: rgb(163, 161, 161);
+}
+.nav_item:hover {
+  background-color: #343a40;
+  border-radius: 0.5em;
+  color: white;
+}
+.nav_item_heading {
+  color: rgb(105, 104, 104);
+  background-color: #0f1113 !important;
+  font-size: 0.8em;
+  margin-left: 1.2em;
+  margin-top: 1.5em;
+  z-index: 2;
+}
+.nav_item_line {
+  color: rgb(105, 104, 104);
+  z-index: 1;
+}
