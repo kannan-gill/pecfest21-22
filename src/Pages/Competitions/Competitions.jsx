@@ -20,8 +20,7 @@ function Competitions() {
 
   return <div className={`${styles.compContainer}`} style={{height:"100vh" , background:"#9a484b"}}>
      <Navbar />
-     <ComingSoon/>
-    {/* <Container fluid className="m-0 p-0 h-100" >
+    <Container fluid className="m-0 p-0 h-100" >
         <div id="stars"></div>
         <div id="stars2"></div>
         <div id="stars3"></div>
@@ -39,7 +38,7 @@ function Competitions() {
             return <Competition competition={competition}/>
         })
         }
-    </Container> */}
+    </Container>
   </div>;
 }
 

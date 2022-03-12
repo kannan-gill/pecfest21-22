@@ -6,7 +6,7 @@ function Schedule() {
   return (
     <div className='vh-100' style={{background:"#fb6d62"}}>
       <Navbar/>
-      <ComingSoon/>
+      Schedule
     </div>
   )
 }

@@ -20,23 +20,26 @@ import ComingSoon from 'Components/ComingSoon/ComingSoon'
 
 function App() {
   const publicRoutes = [
-    { path: "/comingsoon", component: <ComingSoon /> },
-    { path: "/loading", component: <LoadingDumb /> },
     { path: "/", component: <Home2 /> },
     { path: "/login", component: <RegisterLogin /> },
     { path: "/register", component: <RegisterLogin isRegister/> },
     // { path: "/campusTour", component: <LandingPage /> },
-    { path: "/competitions", component: <Competitions /> },
-    { path: "/events", component: <EventList /> },
-    { path: "/schedule", component: <Schedule /> },
+    { path: "/competitions", component:  <ComingSoon /> },
+    { path: "/schedule", component: <ComingSoon /> },
     // { path: "/developers", component: <Developers /> },
-    // { path: "/contactUs", component: <ContactUs /> },
+    { path: "/contactUs", component: <ComingSoon /> },
     { path: "/admin", component: <Admin /> },
-    { path: "/teamregister", component: <TeamEventRegistration /> },
-    { path: "/team", component: <Team />}
+    { path: "/teamregister", component:  <ComingSoon /> },
+    { path: "/team", component: <ComingSoon />},
+    { path: "/aboutUs", component: <ComingSoon />},
+    { path: "/sponsors", component: <ComingSoon />},
+    { path: "/merchandise", component: <ComingSoon />},
+    { path: "/brochure", component: <ComingSoon />},
+    { path: "/developer", component: <ComingSoon />},
+    { path: "/contact", component: <ComingSoon />}
     
   ];
-  const privateRoutes = [{ path: "/events", component: <EventList /> }];
+  const privateRoutes = [{ path: "/events", component: <ComingSoon /> }];
 
   const privateRouteComponent = (route) => (
     <Route
