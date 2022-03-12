@@ -1,0 +1,55 @@
+.middle{
+    width: 30%;
+    z-index: 2;
+    animation: moveLoader 1s infinite alternate-reverse;
+}
+
+.leftwing{
+    width:30%;
+    position: relative;
+    left:19%;
+    transform: rotate(-30deg);
+    transform-origin: top-left;
+    z-index: 1;
+    animation: moveleft 1s infinite alternate-reverse;
+}
+
+.rightwing{
+    width:30%;
+    position: relative;
+    right:21%;
+    transform: rotate(30deg);
+    z-index: 1;
+    animation: moveright 1s infinite alternate-reverse;
+}
+
+.comingsoon{
+    min-width: 300px;
+    letter-spacing: 5px;
+    /* animation: comingsoonComponent 8s infinite alternate-reverse; */
+}
+/* 
+.comingsoon{
+    letter-spacing: 5px;
+} */
+
+/* @keyframes comingsoonComponent {
+    0%{letter-spacing: 2px;}
+    100%{letter-spacing: 10px;}
+} */
+
+@keyframes moveLoader {
+    0%{transform: translateY(0);}  
+    100%{transform: translateY(-50px);}
+} 
+
+@keyframes moveleft {
+    0%{transform: translateY(0) rotate(-30deg);}  
+    100%{transform: translateY(-50px) rotate(-90deg);}
+}
+
+@keyframes moveright {
+    0%{transform: translateY(0) rotate(30deg);}  
+    100%{transform: translateY(-50px) rotate(90deg);}
+}
+

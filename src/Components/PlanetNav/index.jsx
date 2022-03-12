@@ -40,7 +40,7 @@ const planets = [
   },
 ];
 
-const PlanetNav = ({ transitionAnimation, setIsLoading, bgVideo }) => {
+const PlanetNav = ({ transitionAnimation, setIsLoading }) => {
   const [explore, setExplore] = useState(false);
   const [showBack, setShowBack] = useAnimatedRenderer(explore);
   const [hoveredPlanet, setHoveredPlanet] = useState(null);
@@ -115,14 +115,6 @@ const PlanetNav = ({ transitionAnimation, setIsLoading, bgVideo }) => {
       <div style={{overflow:'hidden'}}>
         <img style={{width:'100%',height:'100vh' ,minWidth:'1000px'}} className={`nebulaimg ${explore ? 'rotatebg':''}`} src='../../Images/nebulabgextracted.png' alt="not found"/>
       </div>
-      {/* <video
-        className="animate__animated animated__fadeIn"
-        onCanPlayThrough={() => setIsLoading(false)}
-        autoPlay
-        muted
-        loop
-        src={bgVideo}
-      /> */}
       <div className={`header ${explore ? "headerRemove" : ""}`}>
         PECFEST'22
       </div>

@@ -4,6 +4,8 @@ import { Container } from "react-bootstrap";
 import LoginFlipCard from "../../Components/LoginFlipCard/LoginFlipCard";
 import BackButton from "../../Components/BackButton/BackButton";
 import { useNavigate } from "react-router-dom";
+import Navbar from "Components/Navbar";
+import ComingSoon from "Components/ComingSoon/ComingSoon";
 
 function RegisterLogin({isRegister = false}) {
   const navigate = useNavigate();
@@ -18,8 +20,10 @@ function RegisterLogin({isRegister = false}) {
         style={{ backgroundImage: "url('../../Images/login_register_bg.jpg')" }}
         className={`vw-100 vh-100 ${styles.bg_img}`}
       >
-        <BackButton classes={styles.back_button} clickHandler={clickHandler}/>
-        <LoginFlipCard isRegister={isRegister}/>
+        <Navbar/>
+        <ComingSoon/>
+        {/* <BackButton classes={styles.back_button} clickHandler={clickHandler}/>
+        <LoginFlipCard isRegister={isRegister}/> */}
       </div>
     </Container>
   );

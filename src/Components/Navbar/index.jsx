@@ -181,7 +181,7 @@ const Navbar = () => {
         >
           <div className="d-flex flex-column overflow-auto justify-content-start">
             <div className="d-flex justify-content-between align-items-center px-3 pt-4 pb-0 text-white">
-              <h4 className="display-6 fw-bold">PECFEST</h4>
+              <h4 onClick={()=>navigate("/")} className="display-6 fw-bold">PECFEST</h4>
               <FontAwesomeIcon
                 className="cursor-pointer"
                 icon={faXmark}

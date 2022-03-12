@@ -4,6 +4,7 @@ import {Container} from 'react-bootstrap';
 import Button from '../../Components/Utilities/Button';
 import styles from '../../Pages/Competitions/Competitions.module.css'
 import Navbar from 'Components/Navbar';
+import ComingSoon from 'Components/ComingSoon/ComingSoon';
 
 function Competitions() {
 
@@ -19,7 +20,8 @@ function Competitions() {
 
   return <div className={`${styles.compContainer}`} style={{height:"100vh" , background:"#9a484b"}}>
      <Navbar />
-    <Container fluid className="m-0 p-0 h-100" >
+     <ComingSoon/>
+    {/* <Container fluid className="m-0 p-0 h-100" >
         <div id="stars"></div>
         <div id="stars2"></div>
         <div id="stars3"></div>
@@ -37,7 +39,7 @@ function Competitions() {
             return <Competition competition={competition}/>
         })
         }
-    </Container>
+    </Container> */}
   </div>;
 }
 

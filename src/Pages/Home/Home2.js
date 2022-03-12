@@ -8,7 +8,6 @@ import "./Home2.css";
 import AboutPecfest from "../../Components/AboutPecfest/AboutPecfest";
 import Navbar from "../../Components/Navbar";
 import Loading from "../../Components/Loading";
-import bgVideo from "../../Images/spacebgvid1.mp4";
 import FullPageCarousel from "Components/FullPageCarousel";
 import Sponsors from "Components/Sponsors";
 import PlanetNav from "Components/PlanetNav";
@@ -56,7 +55,6 @@ function Home2() {
           <PlanetNav
             transitionAnimation={transitionAnimation}
             setIsLoading={setIsLoading}
-            bgVideo={bgVideo}
           />
         )}
         {(currentPage === "aboutUs" || transitionAnimation === "aboutUs") && (
