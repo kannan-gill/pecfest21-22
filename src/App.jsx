@@ -15,8 +15,6 @@ import TeamEventRegistration from "./Pages/TeamEventRegistration/TeamEventRegist
 import Admin from "./Pages/Admin/Admin";
 import Team from './Pages/Team/Team';
 import Schedule from 'Pages/Schedule/Schedule';
-import LoadingDumb from 'Components/Loading/LoadingDumb'
-import ComingSoon from 'Components/ComingSoon/ComingSoon'
 
 function App() {
   const publicRoutes = [
