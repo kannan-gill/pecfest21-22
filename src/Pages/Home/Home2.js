@@ -44,8 +44,9 @@ function Home2({ initialPage }) {
     setTransitionAnimation(prevPage);
     setCurrentPage(nextPage);
     setTimeout(() => {
+      console.log('reset animation');
       setTransitionAnimation("");
-    }, 800);
+    }, 900);
   };
 
   return (
@@ -58,7 +59,7 @@ function Home2({ initialPage }) {
       )}
       {(currentPage === "aboutUs" || transitionAnimation === "aboutUs") && (
         <div
-          className={`animate__animated animate__fast overflow-hidden bg-dark h-100 position-absolute top-0 start-0 w-100 ${
+          className={`animate__animated animate__fast overflow-hidden h-100 position-absolute top-0 start-0 w-100 ${
             transitionAnimation === "landing" && "animate__slideInUp"
           } ${transitionAnimation === "aboutUs" && "animate__slideOutDown"}
         `}
@@ -69,8 +70,9 @@ function Home2({ initialPage }) {
 
       {/* Up Arrow */}
       {currentPage !== "landing" && (
-        <div className="prev-page animate__animated animate__fadeInUp">
-          {/* <FontAwesomeIcon
+        <div className="zi-top prev-page start-50 top-0 mt-5  translate-middle ">
+          <div className="w-100 h-100 animate__animated animate__fadeInUp">
+            {/* <FontAwesomeIcon
             onClick={() => {
               setNextPage("landing", "aboutUs");
             }}
@@ -79,21 +81,23 @@ function Home2({ initialPage }) {
             size="4x"
             color="white"
           /> */}
-          <div
-            onClick={() => {
-              setNextPage("landing", "aboutUs");
-            }}
-            className="h-100 w-100 d-flex align-items-center justify-content-center animate__animated animate__infinite animate__pulse cursor-pointer"
-          >
-            <UpArrow />
+            <div
+              onClick={() => {
+                setNextPage("landing", "aboutUs");
+              }}
+              className="h-100 w-100 d-flex align-items-center justify-content-center animate__animated animate__infinite animate__pulse cursor-pointer"
+            >
+              <UpArrow />
+            </div>
           </div>
         </div>
       )}
 
       {/* Down Arrow */}
       {currentPage !== "aboutUs" && (
-        <div className="next-page animate__animated animate__fadeInDown">
-          {/* <FontAwesomeIcon
+        <div className="zi-top next-page start-50 bottom-0 translate-middle ">
+          <div className="next-page animate__animated animate__fadeInDown">
+            {/* <FontAwesomeIcon
             onClick={() => {
               setNextPage("aboutUs", "landing");
             }}
@@ -102,13 +106,14 @@ function Home2({ initialPage }) {
             size="4x"
             color="white"
           /> */}
-          <div
-            onClick={() => {
-              setNextPage("aboutUs", "landing");
-            }}
-            className="h-100 w-100 d-flex align-items-center justify-content-center animate__animated animate__infinite animate__pulse cursor-pointer"
-          >
-            <DownArrow />
+            <div
+              onClick={() => {
+                setNextPage("aboutUs", "landing");
+              }}
+              className="h-100 w-100 d-flex align-items-center justify-content-center animate__animated animate__infinite animate__pulse cursor-pointer"
+            >
+              <DownArrow />
+            </div>
           </div>
         </div>
       )}

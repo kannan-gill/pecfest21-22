@@ -6,7 +6,7 @@ import BackImg from "../../Images/back-img.png";
 import nebulaBg from "../../Images/nebulabgextracted.png";
 import useAnimatedRenderer from "hooks/useAnimatedRenderer";
 import ExpandingCircle from "Components/ExpandingCircle";
-import StarsBg from '../StarsBg'
+import StarsBg from "../StarsBg";
 import { width } from "@mui/system";
 
 const planets = [
@@ -109,8 +109,8 @@ const PlanetNav = ({ transitionAnimation }) => {
   return (
     <div
       className={`zi-top landing nebula-bg container-fluid vh-100 animate__fast overflow-hidden animate__animated animated__fadeIn ${
-        transitionAnimation === "aboutUs" && "animate__slideInDown"
-      } ${transitionAnimation === "landing" && "animate__slideOutUp"}`}
+        transitionAnimation === "aboutUs" && "animate__fadeInDown"
+      } ${transitionAnimation === "landing" && "animate__fadeOutUp"}`}
       onMouseMove={handleMouse}
     >
       {/* <div className="nebula-bg" style={{ overflow: "hidden" }}>
@@ -130,7 +130,7 @@ const PlanetNav = ({ transitionAnimation }) => {
         </div>
       )}
       {!explore && (
-        <div className="col-12 h-100 d-flex d-md-none flex-column justify-content-center animate__animated animate__fadeIn">
+        <div className="position-relative zi-top col-12 h-100 d-flex d-md-none flex-column justify-content-center animate__animated animate__fadeIn">
           <div className="d-flex flex-column align-items-end justify-content-center mx-auto header text-white">
             <span>PECFEST</span>
             <span className="mt-1">2021-22</span>
@@ -190,25 +190,27 @@ const PlanetNav = ({ transitionAnimation }) => {
       <div className="cursor"></div>
 
       {!explore && (
-        <div
-          className="d-none d-md-flex explore zi-top cursor-pointer animate__animated animate__fadeInUp"
-          onClick={handleClick}
-        >
-          <span className="left-arrow">
+        <div className="d-none d-md-flex explore start-50 translate-middle zi-top cursor-pointer ">
+          <div
+            className="d-flex flex-row align-items-center animate__animated animate__fadeInUp"
+            onClick={handleClick}
+          >
+            <span className="left-arrow">
+              <FontAwesomeIcon
+                icon={faAnglesRight}
+                className="m-0 p-0 animate__animated animate__infinite animate__headShake"
+                size="2x"
+                color="white"
+              />
+            </span>
+            <span className="px-3">Explore</span>
             <FontAwesomeIcon
               icon={faAnglesRight}
               className="m-0 p-0 animate__animated animate__infinite animate__headShake"
               size="2x"
               color="white"
             />
-          </span>
-          <span className="px-3">Explore</span>
-          <FontAwesomeIcon
-            icon={faAnglesRight}
-            className="m-0 p-0 animate__animated animate__infinite animate__headShake"
-            size="2x"
-            color="white"
-          />
+          </div>
         </div>
       )}
     </div>

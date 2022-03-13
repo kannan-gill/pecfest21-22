@@ -201,7 +201,6 @@
     color:white;
     height:100px;
     width: 100px;
-    margin:auto;
     text-align: center;
     /* border-radius: 100%;
     border-color: white;
@@ -209,7 +208,6 @@
     border-width: 2px; */
     position: absolute;
     bottom:20%;
-    left:45%;
     /* animation: explorebubble 1.5s infinite; */
 }
 
@@ -223,15 +221,12 @@
     color:white;
     height:100px;
     width: 100px;
-    margin:auto;
     text-align: center;
     /* border-radius: 100%;
     border-color: white;
     border-style: solid;
     border-width: 2px; */
     position: absolute;
-    bottom:2%;
-    left:45%;
     /* animation: explorebubble 1.5s infinite; */
 }
 
@@ -242,8 +237,6 @@
     height:100px;
     width: 100px;
     position: absolute;
-    top:2%;
-    left:45%;
 }
 
 .explore .left-arrow {
