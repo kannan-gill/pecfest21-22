@@ -56,3 +56,7 @@ code {
 .vh-75 {
   height: 75vh;
 }
+
+.main_font{
+  font-family: 'Audiowide', 'Serif';
+}

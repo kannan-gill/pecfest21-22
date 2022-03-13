@@ -65,7 +65,7 @@ function Home2({ initialPage }) {
       {/* Up Arrow */}
       {currentPage !== "landing" && (
         <div className="prev-page animate__animated animate__fadeInUp">
-          {/* TODO: get a better icon for tis */}
+          {/* TODO: get a better icon for this */}
           <FontAwesomeIcon
             onClick={() => {
               setNextPage("landing", "aboutUs");
