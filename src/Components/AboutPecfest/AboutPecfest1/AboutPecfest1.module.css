@@ -1,0 +1,27 @@
+.spacecraft {
+  transform: translateX(-50%);
+  width: 20%;
+}
+
+.bars-container {
+  padding-right: 0.52%;
+}
+
+.content-container {
+  padding-top: 9em;
+  padding-bottom: 2%;
+}
+
+.text-container {
+  width: 60%;
+  font-family: "audiowide";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 23px;
+  line-height: 28px;
+  text-align: justify;
+}
+
+.img-container {
+  width: 60%;
+}

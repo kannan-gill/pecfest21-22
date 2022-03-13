@@ -6,6 +6,7 @@ import BackButton from "../../Components/BackButton/BackButton";
 import { useNavigate } from "react-router-dom";
 import Navbar from "Components/Navbar";
 import ComingSoon from "Pages/ComingSoon/ComingSoon";
+import StarsBg from "Components/StarsBg";
 
 function RegisterLogin({ isRegister = false, setIsNavbarVisible }) {
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ function RegisterLogin({ isRegister = false, setIsNavbarVisible }) {
       fluid
       className="p-0 m-0 h-100 animate__animated animate__fadeIn"
     >
+      <StarsBg />
       <div
         style={{ backgroundImage: "url('../../Images/login_register_bg.jpg')" }}
         className={`vw-100 vh-100 ${styles.bg_img}`}

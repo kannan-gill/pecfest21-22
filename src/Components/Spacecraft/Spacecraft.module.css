@@ -1,0 +1,8 @@
+.spacecraft {
+  background-image: url("../../Images/spacecraft.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 0;
+  padding-top: 177.78%;
+}

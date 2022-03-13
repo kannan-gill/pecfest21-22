@@ -8,13 +8,18 @@ import Loading from "../../Components/Loading";
 import FullPageCarousel from "Components/FullPageCarousel";
 import Sponsors from "Components/Sponsors";
 import PlanetNav from "Components/PlanetNav";
+import UpArrow from "Components/UpArrow";
+import DownArrow from "Components/DownArrow";
 
-const pageList = [<AboutPecfest />, <Sponsors />];
+const pageList = [
+  ...AboutPecfest(),
+  // <Sponsors />
+];
 
 function Home2({ initialPage }) {
   const [currentPage, setCurrentPage] = useState(initialPage);
   const [transitionAnimation, setTransitionAnimation] = useState("");
-  
+
   useEffect(() => {
     setCurrentPage(initialPage);
   }, [initialPage]);
@@ -65,8 +70,7 @@ function Home2({ initialPage }) {
       {/* Up Arrow */}
       {currentPage !== "landing" && (
         <div className="prev-page animate__animated animate__fadeInUp">
-          {/* TODO: get a better icon for tis */}
-          <FontAwesomeIcon
+          {/* <FontAwesomeIcon
             onClick={() => {
               setNextPage("landing", "aboutUs");
             }}
@@ -74,15 +78,22 @@ function Home2({ initialPage }) {
             className="m-0 p-4 animate__animated animate__infinite animate__pulse cursor-pointer"
             size="4x"
             color="white"
-          />
+          /> */}
+          <div
+            onClick={() => {
+              setNextPage("landing", "aboutUs");
+            }}
+            className="h-100 w-100 d-flex align-items-center justify-content-center animate__animated animate__infinite animate__pulse cursor-pointer"
+          >
+            <UpArrow />
+          </div>
         </div>
       )}
 
       {/* Down Arrow */}
       {currentPage !== "aboutUs" && (
         <div className="next-page animate__animated animate__fadeInDown">
-          {/* TODO: get a better icon for tis */}
-          <FontAwesomeIcon
+          {/* <FontAwesomeIcon
             onClick={() => {
               setNextPage("aboutUs", "landing");
             }}
@@ -90,7 +101,15 @@ function Home2({ initialPage }) {
             className="m-0 p-4 animate__animated animate__infinite animate__pulse cursor-pointer"
             size="4x"
             color="white"
-          />
+          /> */}
+          <div
+            onClick={() => {
+              setNextPage("aboutUs", "landing");
+            }}
+            className="h-100 w-100 d-flex align-items-center justify-content-center animate__animated animate__infinite animate__pulse cursor-pointer"
+          >
+            <DownArrow />
+          </div>
         </div>
       )}
     </div>
