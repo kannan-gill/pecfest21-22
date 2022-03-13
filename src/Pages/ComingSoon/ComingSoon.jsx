@@ -5,6 +5,7 @@ import Countdown from "react-countdown";
 import { faAnglesLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
+import StarsBg from '../../Components/StarsBg'
 import Navbar from "Components/Navbar";
 
 function ComingSoon() {
@@ -14,9 +15,7 @@ function ComingSoon() {
   };
   return (
     <div className="nebula-bg animate__animated animate__fadeIn vh-100">
-      <div id="stars"></div>
-      <div id="stars2"></div>
-      <div id="stars3"></div>
+      <StarsBg />
       <div
         className="d-flex position-absolute top-0 start-0 vw-100 flex-columnm flex-row align-items-center vh-100 zi-top"
         style={{
