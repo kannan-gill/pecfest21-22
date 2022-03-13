@@ -7,7 +7,7 @@ import Navbar from "../../Components/Navbar";
 import Loading from "../../Components/Loading";
 import FullPageCarousel from "Components/FullPageCarousel";
 import Sponsors from "Components/Sponsors";
-import PlanetNav from "Components/PlanetNav";
+import PlanetNav from "Components/PlanetNav"; 
 
 const pageList = [<AboutPecfest />, <Sponsors />];
 

@@ -20,6 +20,8 @@ import {
 import styles from "./Navbar.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import pecfest_logo from "../../Images/pecfest_logo.png";
+
 const routes = [
   {
     type: "divider",
@@ -131,7 +133,7 @@ const Navbar = () => {
   };
   const DividerElement = (route) => {
     return (
-      <div className="position-relative mt-3">
+      <div className="position-relative mt-3 ms-2">
         .
         <span
           className={`position-absolute start-0 bottom-0 translate-middle zi-2 ps-5 pt-0 pe-2 ${styles.nav_item_heading}`}
@@ -149,7 +151,7 @@ const Navbar = () => {
     <>
       {/* Login button */}
       <div className="position-absolute top-0 end-0 zi-top ">
-        <Button
+        {/* <Button
           onClick={() => {
             navigate("/login");
           }}
@@ -161,7 +163,7 @@ const Navbar = () => {
         >
           <FontAwesomeIcon icon={faRocket} className="me-2" size="1x" />
           Login
-        </Button>
+        </Button> */}
       </div>
       <div className="position-absolute top-0 start-0 text-white zi-top animate__animated animate__fadeIn">
         <FontAwesomeIcon
@@ -187,9 +189,12 @@ const Navbar = () => {
         >
           <div className="d-flex flex-column overflow-none justify-content-start  ">
             <div className="d-flex justify-content-between align-items-center px-3 pt-4 pb-0 text-white">
-              <h4 onClick={() => navigate("/")} className="display-6 fw-bold">
-                PECFEST
-              </h4>
+              <img
+                src={pecfest_logo}
+                className={`${styles.pecfest_logo} cursor-pointer`}
+                alt="pecfest logo"
+                onClick={() => navigate("/")}
+              />
               <FontAwesomeIcon
                 className="cursor-pointer"
                 icon={faXmark}
