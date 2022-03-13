@@ -189,12 +189,15 @@ const Navbar = () => {
         >
           <div className="d-flex flex-column overflow-none justify-content-start  ">
             <div className="d-flex justify-content-between align-items-center px-3 pt-4 pb-0 text-white">
-              <img
-                src={pecfest_logo}
-                className={`${styles.pecfest_logo} cursor-pointer`}
-                alt="pecfest logo"
-                onClick={() => navigate("/")}
-              />
+              <div className="d-flex flex-row">
+                <img
+                  src={pecfest_logo}
+                  className={`${styles.pecfest_logo} main_font cursor-pointer`}
+                  alt="pecfest logo"
+                  onClick={() => navigate("/")}
+                />
+                <h4 className="main_font ms-2">PECFEST</h4>
+              </div>
               <FontAwesomeIcon
                 className="cursor-pointer"
                 icon={faXmark}

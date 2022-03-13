@@ -23,16 +23,16 @@ function App() {
   const [isNavBarVisible, setIsNavbarVisible] = useState(true);
   const publicRoutes = [
     { path: "/", component: <Home2 initialPage="landing" /> },
-    {
-      path: "/login",
-      component: <RegisterLogin setIsNavbarVisible={setIsNavbarVisible} />,
-    },
-    {
-      path: "/register",
-      component: (
-        <RegisterLogin isRegister setIsNavbarVisible={setIsNavbarVisible} />
-      ),
-    },
+    // {
+    //   path: "/login",
+    //   component: <RegisterLogin setIsNavbarVisible={setIsNavbarVisible} />,
+    // },
+    // {
+    //   path: "/register",
+    //   component: (
+    //     <RegisterLogin isRegister setIsNavbarVisible={setIsNavbarVisible} />
+    //   ),
+    // },
     // { path: "/campusTour", component: <LandingPage /> },
     { path: "/competitions", component: <ComingSoon /> },
     { path: "/schedule", component: <ComingSoon /> },
