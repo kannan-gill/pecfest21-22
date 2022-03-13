@@ -45,7 +45,7 @@ function Home2({ initialPage }) {
     setCurrentPage(nextPage);
     setTimeout(() => {
       setTransitionAnimation("");
-    }, 800);
+    }, 1000);
   };
 
   return (

@@ -23,5 +23,19 @@
 }
 
 .img-container {
-  width: 60%;
+  width: 50%;
+  z-index: 1;
+}
+
+.odometer{
+  font-size: 30px;
+  font-family: "audiowide";
+  width:15%;
+  text-align: center;
+}
+
+@media screen and (max-width:1200px) {
+  .odometer{
+    visibility: hidden;
+  }
 }
