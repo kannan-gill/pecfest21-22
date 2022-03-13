@@ -6,6 +6,7 @@ import BackImg from "../../Images/back-img.png";
 import nebulaBg from "../../Images/nebulabgextracted.png";
 import useAnimatedRenderer from "hooks/useAnimatedRenderer";
 import ExpandingCircle from "Components/ExpandingCircle";
+import StarsBg from '../StarsBg'
 import { width } from "@mui/system";
 
 const planets = [
@@ -119,9 +120,7 @@ const PlanetNav = ({ transitionAnimation }) => {
         PECFEST'22
       </div>
 
-      <div id="stars"></div>
-      <div id="stars2"></div>
-      <div id="stars3"></div>
+      <StarsBg />
 
       {/* Back Button */}
       {showBack && (

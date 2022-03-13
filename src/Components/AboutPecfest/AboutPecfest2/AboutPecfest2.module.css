@@ -1,0 +1,8 @@
+.spacecraft {
+  transform: translateX(-50%);
+  width: 20%;
+}
+
+.bars-container {
+  padding-left: 0.52%;
+}

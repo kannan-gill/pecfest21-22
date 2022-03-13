@@ -1,10 +1,11 @@
 import React from 'react'
 import './AboutPecfest.module.css'
+import AboutPecfest1 from './AboutPecfest1'
+import AboutPecfest2 from './AboutPecfest2'
 
-function AboutPecfest() {
-  return (
-    <div className='AboutPecfest text-white'>AboutPecfest</div>
-  )
-}
+const AboutPecfest = () => [
+  <AboutPecfest1 />,
+  <AboutPecfest2 />
+]
 
 export default AboutPecfest
