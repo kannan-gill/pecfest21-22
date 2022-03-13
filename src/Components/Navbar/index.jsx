@@ -220,7 +220,7 @@ const Navbar = () => {
         </div>
         {isNavOpen && (
           <div
-            className="position-absolute zi-top top-0 end-0 d-sm-none d-md-flex col-md-6 col-lg-9 col-xl-9 vw-75 h-100"
+            className="position-absolute zi-top top-0 end-0 d-none d-md-flex col-md-6 col-lg-9 col-xl-9 vw-75 h-100"
             onClick={handleRightSideClick}
           />
         )}

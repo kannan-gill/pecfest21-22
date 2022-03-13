@@ -107,17 +107,35 @@ const PlanetNav = ({ transitionAnimation }) => {
   };
   return (
     <div
-      className={`landing vh-100 animate__fast overflow-hidden animate__animated animated__fadeIn ${
+      className={`zi-top landing nebula-bg container-fluid vh-100 animate__fast overflow-hidden animate__animated animated__fadeIn ${
         transitionAnimation === "aboutUs" && "animate__slideInDown"
       } ${transitionAnimation === "landing" && "animate__slideOutUp"}`}
       onMouseMove={handleMouse}
     >
-      <div style={{overflow:'hidden'}}>
-        <img style={{width:'100%',height:'100vh' ,minWidth:'1000px'}} className={`nebulaimg ${explore ? 'rotatebg':''}`} src={nebulaBg} alt="not found"/>
-      </div>
-      <div className={`header ${explore ? "headerRemove" : ""}`}>
-        PECFEST'22
-      </div>
+      {/* <div className="nebula-bg" style={{ overflow: "hidden" }}>
+        <img
+          style={{ width: "100%", height: "100vh", minWidth: "1000px" }}
+          className={`nebulaimg ${explore ? "rotatebg" : ""}`}
+          src={nebulaBg}
+          alt="not found"
+        /> 
+      </div> */}
+      {!explore && (
+        <div className="position-relative zi-top col-8 offset-2 h-100 d-none d-md-flex d-flex flex-column justify-content-center pb-5 animate__animated animate__fadeIn">
+          <div className="d-flex flex-column align-items-end justify-content-center mx-auto mb-5">
+            <span className="header">PECFEST</span>
+            <span className="text-white main_font display-1">2021-22</span>
+          </div>
+        </div>
+      )}
+      {!explore && (
+        <div className="col-12 h-100 d-flex d-md-none flex-column justify-content-center animate__animated animate__fadeIn">
+          <div className="d-flex flex-column align-items-end justify-content-center mx-auto header text-white">
+            <span>PECFEST</span>
+            <span className="mt-1">2021-22</span>
+          </div>
+        </div>
+      )}
 
       <div id="stars"></div>
       <div id="stars2"></div>
@@ -126,7 +144,7 @@ const PlanetNav = ({ transitionAnimation }) => {
       {/* Back Button */}
       {showBack && (
         <div
-          className={`position-absolute bottom-0 start-0 ps-3 mb-n1 cursor-pointer animate__animated ${
+          className={`d-none d-md-flex position-absolute bottom-0 start-0 ps-3 mb-n1 cursor-pointer animate__animated ${
             explore ? "animate__bounceInUp" : "animate__bounceOutDown"
           } `}
           onClick={() => setExplore(false)}
@@ -134,7 +152,7 @@ const PlanetNav = ({ transitionAnimation }) => {
           <img src={BackImg} alt="Back" width="100px" />
         </div>
       )}
-      
+
       {explore && pageExitX && pageExitY && (
         <ExpandingCircle
           initX={pageExitX}
@@ -162,7 +180,7 @@ const PlanetNav = ({ transitionAnimation }) => {
           } ${hoveredPlanet === ind + 1 && "larger-planet"} `}
         >
           {explore ? (
-            <h3 className="position-absolute top-50 start-50 translate-middle">
+            <h3 className="d-none d-md-flex position-absolute top-50 start-50 translate-middle">
               {planet.text}
             </h3>
           ) : (
@@ -174,7 +192,7 @@ const PlanetNav = ({ transitionAnimation }) => {
 
       {!explore && (
         <div
-          className="explore cursor-pointer animate__animated animate__fadeInUp"
+          className="d-none d-md-flex explore zi-top cursor-pointer animate__animated animate__fadeInUp"
           onClick={handleClick}
         >
           <span className="left-arrow">

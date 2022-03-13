@@ -2,7 +2,7 @@
 
 
 .landing{
-    background: black;
+    /* background: black; */
     width: 100%;
     overflow-x: hidden;
     min-height: 500px;
@@ -160,14 +160,11 @@
     transition: all 0.5s ease-in-out;
     /* font-family: 'Russo One', sans-serif; */
     font-family: 'Audiowide', cursive;
-    width: 100%;
     font-size: 13vw;
-    margin: auto;
-    text-align: center;
-    position: fixed;
     z-index: 100;
     font-weight:700;
     color: white;
+    line-height: 1;
     /* background-color: white;
     background-image: linear-gradient(white, #f5d5e0);
     background-size: 100%;
@@ -176,8 +173,6 @@
     -webkit-text-fill-color: transparent; 
     -moz-text-fill-color: transparent; */
     text-shadow: 2px 2px 2px black;
-    top:10%;
-    margin: auto;
     /* letter-spacing: 5px; */
     /* text-shadow: 5px 5px 5px #000; */
     /* text-shadow: 1px 1px 1px #919191,
