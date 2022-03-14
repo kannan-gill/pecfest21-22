@@ -17,7 +17,6 @@ import Team from "./Pages/Team/Team";
 import Schedule from "Pages/Schedule/Schedule";
 import ComingSoon from "Pages/ComingSoon/ComingSoon";
 import Navbar from "Components/Navbar";
-import Brochure from "Pages/Brochure/Brochure";
 
 function App() {
   const [isNavBarVisible, setIsNavbarVisible] = useState(true);
@@ -36,7 +35,6 @@ function App() {
     // { path: "/campusTour", component: <LandingPage /> },
     { path: "/competitions", component: <ComingSoon /> },
     { path: "/schedule", component: <ComingSoon /> },
-    // { path: "/developers", component: <Developers /> },
     { path: "/contactUs", component: <ComingSoon /> },
     { path: "/admin", component: <Admin /> },
     { path: "/teamregister", component: <ComingSoon /> },
@@ -44,7 +42,6 @@ function App() {
     { path: "/aboutUs", component: <Home2 initialPage="aboutUs" /> },
     { path: "/sponsors", component: <ComingSoon /> },
     { path: "/merchandise", component: <ComingSoon /> },
-    { path: "/brochure", component: <Brochure/> },
     { path: "/developer", component: <ComingSoon /> },
     { path: "/contact", component: <ComingSoon /> },
     { path: "/events", component: <ComingSoon /> },

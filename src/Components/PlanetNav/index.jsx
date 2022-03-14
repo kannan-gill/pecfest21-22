@@ -11,8 +11,8 @@ import { width } from "@mui/system";
 
 const planets = [
   {
-    route: "/brochure",
-    text: "Brochure",
+    route: "/sponsors",
+    text: "Sponsors",
     speed: "2",
     color: "#fc9d15",
   },
@@ -113,8 +113,13 @@ const PlanetNav = ({ transitionAnimation }) => {
       } ${transitionAnimation === "landing" && "animate__slideOutUp"}`}
       onMouseMove={handleMouse}
     >
-      <div style={{overflow:'hidden'}}>
-        <img style={{width:'100%',height:'100vh' ,minWidth:'1000px'}} className={`nebulaimg ${explore ? 'rotatebg':''}`} src={nebulaBg} alt="not found"/>
+      <div style={{ overflow: "hidden" }}>
+        <img
+          style={{ width: "100%", height: "100vh", minWidth: "1000px" }}
+          className={`nebulaimg ${explore ? "rotatebg" : ""}`}
+          src={nebulaBg}
+          alt="not found"
+        />
       </div>
       <div className={`header ${explore ? "headerRemove" : ""}`}>
         PECFEST'22
@@ -133,7 +138,7 @@ const PlanetNav = ({ transitionAnimation }) => {
           <img src={BackImg} alt="Back" width="100px" />
         </div>
       )}
-      
+
       {explore && pageExitX && pageExitY && (
         <ExpandingCircle
           initX={pageExitX}
@@ -170,6 +175,8 @@ const PlanetNav = ({ transitionAnimation }) => {
         </div>
       ))}
       <div className="cursor"></div>
+
+     
 
       {!explore && (
         <div
