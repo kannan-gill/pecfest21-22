@@ -13,11 +13,12 @@ import ContactUs from "./Pages/ContactUS/ContactUs";
 import Developers from "./Pages/Developers/Developers";
 import Admin from "./Pages/Admin/Admin";
 import CompetitionDetails from "./Pages/CompetitionDetails/CompetitionDetails";
+import ImgOverlayCard from "./Components/Utilities/ImgOverlayCard";
 
 function App() {
   // TODO: update these routes
   const publicRoutes = [
-    { path: "/", component: <CompetitionDetails /> },
+    { path: "/", component: <ImgOverlayCard /> },
     { path: "/login", component: <RegisterLogin /> },
     { path: "/register", component: <RegisterLogin isRegister="true"/> },
   ];
@@ -37,11 +38,11 @@ function App() {
       <BrowserRouter>
         <Routes>
           {/* <Route path="/" element={<Home2 />} /> */}
-          <Route path="/campusTour" element={<LandingPage />} />
+          {/* <Route path="/campusTour" element={<LandingPage />} />
           <Route path="/competitions" element={<Competitions />} />
           <Route path="/developers" element={<Developers />} />
           <Route path="/contactUs" element={<ContactUs />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin" element={<Admin />} /> */}
           <Route path="/teamregister" element={<TeamEventRegistration />} />
           {publicRoutes.map((route) => publicRouteComponent(route))}
           {privateRoutes.map((route) => privateRouteComponent(route))}
