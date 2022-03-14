@@ -7,7 +7,7 @@ import styles from './AboutPecfest1.module.css'
 
 const AboutPecfest1 = () => {
   return (
-    <div className="text-white w-100 h-100 overflow-hidden position-relative">
+    <div className="text-white w-100 h-100 overflow-hidden position-relative animate__animated ">
       <StarsBg />
       <div
         className={`w-100 h-100 ${styles['content-container']} d-flex flex-column align-items-center justify-content-between`}>
