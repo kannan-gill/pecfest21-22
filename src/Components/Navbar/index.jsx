@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import {
   faBars,
   faBook,
@@ -16,6 +17,7 @@ import {
   faShirt,
   faUserGroup,
   faXmark,
+  faDownload,
 } from "@fortawesome/free-solid-svg-icons";
 import styles from "./Navbar.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -50,11 +52,6 @@ const routes = [
   {
     type: "divider",
     text: "offerings",
-  },
-  {
-    route: "/brochure",
-    text: "Brochure",
-    icon: faBook,
   },
   {
     route: "/schedule",
@@ -147,16 +144,52 @@ const Navbar = () => {
     );
   };
 
+  const downloadBrochure = () => {
+    const storage = getStorage();
+    getDownloadURL(ref(storage, "Marketing Brochure.pdf"))
+      .then((url) => {
+        const xhr = new XMLHttpRequest();
+        xhr.responseType = "blob";
+        xhr.onload = (event) => {
+          const blob = xhr.response;
+          saveBlob(blob, "Brochure.pdf");
+        };
+        xhr.open("GET", url);
+        xhr.send();
+
+        navigate(-1);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const saveBlob = (blob, fileName) => {
+    let a = document.createElement("a");
+    a.href = window.URL.createObjectURL(blob);
+    a.download = fileName;
+    a.dispatchEvent(new MouseEvent("click"));
+  };
+
   return (
     <>
-      {/* Login button */}
+      {/* Login button and Brochure button*/}
       <div className="position-absolute top-0 end-0 zi-top ">
+        <Button
+          onClick={() => {
+            downloadBrochure();
+          }}
+          className={`fw-bold my-4 mx-2 ${styles.brochure}`}
+        >
+          <FontAwesomeIcon icon={faDownload} className="me-2" size="1x" />
+          Brochure
+        </Button>
         {/* <Button
           onClick={() => {
             navigate("/login");
           }}
           variant="warning"
-          className="fw-bold px-3 m-4"
+          className="fw-bold px-3 my-4 mx-2"
           style={{
             borderRadius: "5em",
           }}
@@ -165,6 +198,7 @@ const Navbar = () => {
           Login
         </Button> */}
       </div>
+
       <div className="position-absolute top-0 start-0 text-white zi-top animate__animated animate__fadeIn">
         <FontAwesomeIcon
           icon={faBars}

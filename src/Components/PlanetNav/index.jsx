@@ -11,17 +11,18 @@ import { width } from "@mui/system";
 
 const planets = [
   {
-    route: "/brochure",
-    text: "Brochure",
-    speed: "2",
-    color: "#fc9d15",
-  },
-  {
     route: "/events",
     text: "Events",
     speed: "-2",
     color: "#07202a",
   },
+  {
+    route: "/sponsors",
+    text: "Sponsors",
+    speed: "2",
+    color: "#fc9d15",
+  },
+
   {
     route: "/competitions",
     text: "Competitions",
@@ -29,16 +30,16 @@ const planets = [
     color: "#9a484b",
   },
   {
-    route: "/merchandise",
-    text: "Merchandise",
-    speed: "-1",
-    color: "#a941ce",
-  },
-  {
     route: "/schedule",
     text: "Schedule",
     speed: "3",
     color: "#fb6d62",
+  },
+  {
+    route: "/merchandise",
+    text: "Merchandise",
+    speed: "-1",
+    color: "#a941ce",
   },
 ];
 
@@ -196,9 +197,32 @@ const PlanetNav = ({ transitionAnimation }) => {
               }
             }}
             data-speed={planet.speed}
-            className={`flex-grow-1 img${ind + 1} planet-img ${
+            className={`d-none d-md-flex flex-grow-1 img${ind + 1} planet-img ${
               explore ? "alignCenter mt-0 cursor-pointer " : ""
             } ${hoveredPlanet === ind + 1 && "larger-planet"} `}
+          >
+            {explore ? (
+              <h3 className="d-none d-md-flex ">{planet.text}</h3>
+            ) : (
+              <></>
+            )}
+          </div>
+        ))}
+        {planets.map((planet, ind) => (
+          <div
+            onMouseEnter={() => {
+              setHoveredPlanet(ind + 1);
+            }}
+            onMouseLeave={() => {
+              setHoveredPlanet(null);
+            }}
+            onClick={(e) => {
+              if (explore) {
+                setPage(e, planet, ind);
+              }
+            }}
+            data-speed={planet.speed}
+            className={`d-flex d-md-none flex-grow-1 img${ind + 1} planet-img `}
           >
             {explore ? (
               <h3 className="d-none d-md-flex ">{planet.text}</h3>

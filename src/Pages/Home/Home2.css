@@ -45,26 +45,26 @@
     border-radius: 10%;
 } */
 .img1 {
-  background: url("../../Images/Untitled.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  margin-top: -2%;
-  /* filter: brightness(80%); */
-  transition: all 0.8s ease-in-out;
-  height: 200px;
-}
-
-.img2 {
   background: url("../../Images/Untitled2.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
-  margin-top: 20vh;
+  margin-top: 0vh;
+  /* filter: brightness(80%); */
+  transition: all 0.8s ease-in-out;
+  height: 100%;
+}
+
+.img2 {
+  background: url("../../Images/Untitled.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-top: -40vh;
   /* filter: brightness(80%); */
   z-index: 200;
   transition: top 0.8s ease-in-out;
-  height: 200px;
+  height: 100%;
 }
 
 .img3 {
@@ -73,34 +73,34 @@
   background-repeat: no-repeat;
   background-size: contain;
   /* position: absolute; */
-  margin-top: 45vh;
+  margin-top: 15vh;
   /* filter: brightness(80%); */
 
   transition: top 0.8s ease-in-out;
-  height: 200px;
+  height: 100%;
 }
 
 .img4 {
-  background: url("../../Images/Untitled4.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  /* position: absolute; */
-  margin-top: 35vh;
-  /* filter: brightness(80%); */
-  transition: top 0.8s ease-in-out;
-  height: 200px;
-}
-
-.img5 {
   background: url("../../Images/Untitled5.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
-  margin-top: 3vh;
+  /* position: absolute; */
+  margin-top: -25vh;
   /* filter: brightness(80%); */
   transition: top 0.8s ease-in-out;
-  height: 200px;
+  height: 100%;
+}
+
+.img5 {
+  background: url("../../Images/Untitled4.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-top: 20vh;
+  /* filter: brightness(80%); */
+  transition: top 0.8s ease-in-out;
+  height: 100%;
 }
 
 /* .cursor{
@@ -263,7 +263,6 @@
 
 .alignCenter {
   /* animation: alignPlanets 1s forwards; */
-  margin-top: 40vh !important;
   text-align: center;
   display: flex;
 }
