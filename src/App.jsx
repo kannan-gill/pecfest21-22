@@ -22,6 +22,11 @@ import ExternalLink from "Components/ExternalLink/ExternalLink";
 
 function App() {
   const [isNavBarVisible, setIsNavbarVisible] = useState(true);
+
+  const externalUrlLinks = {
+    merchandise : "https://pecfestmemories.co.in"
+  }
+
   const publicRoutes = [
     { path: "/", component: <Home2 initialPage="landing" /> },
     // {
@@ -43,7 +48,7 @@ function App() {
     { path: "/team", component: <ComingSoon /> },
     { path: "/aboutUs", component: <Home2 initialPage="aboutUs" /> },
     { path: "/sponsors", component: <ComingSoon /> },
-    { path: "/merchandise", component: <ExternalLink url="https://google.com/" /> },
+    { path: "/merchandise", component: <ExternalLink url= {externalUrlLinks.merchandise} /> },
     { path: "/developer", component: <ComingSoon /> },
     { path: "/contact", component: <ComingSoon /> },
     { path: "/events", component: <ComingSoon /> },
