@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import {
   faBars,
   faBook,
@@ -16,10 +17,13 @@ import {
   faShirt,
   faUserGroup,
   faXmark,
+  faDownload,
 } from "@fortawesome/free-solid-svg-icons";
 import styles from "./Navbar.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import pecfest_logo from "../../Images/pecfest_logo.png";
+
 const routes = [
   {
     type: "divider",
@@ -48,11 +52,6 @@ const routes = [
   {
     type: "divider",
     text: "offerings",
-  },
-  {
-    route: "/brochure",
-    text: "Brochure",
-    icon: faBook,
   },
   {
     route: "/schedule",
@@ -132,7 +131,7 @@ const Navbar = () => {
   };
   const DividerElement = (route) => {
     return (
-      <div className="position-relative mt-3">
+      <div className="position-relative mt-3 ms-2">
         .
         <span
           className={`position-absolute start-0 bottom-0 translate-middle zi-2 ps-5 pt-0 pe-2 ${styles.nav_item_heading}`}
@@ -146,24 +145,61 @@ const Navbar = () => {
     );
   };
 
+  const downloadBrochure = () => {
+    const storage = getStorage();
+    getDownloadURL(ref(storage, "Marketing Brochure.pdf"))
+      .then((url) => {
+        const xhr = new XMLHttpRequest();
+        xhr.responseType = "blob";
+        xhr.onload = (event) => {
+          const blob = xhr.response;
+          saveBlob(blob, "Brochure.pdf");
+        };
+        xhr.open("GET", url);
+        xhr.send();
+
+        navigate(-1);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const saveBlob = (blob, fileName) => {
+    let a = document.createElement("a");
+    a.href = window.URL.createObjectURL(blob);
+    a.download = fileName;
+    a.dispatchEvent(new MouseEvent("click"));
+  };
+
   return (
     <>
-      {/* Login button */}
+      {/* Login button and Brochure button*/}
       <div className="position-absolute top-0 end-0 zi-top ">
         <Button
+          onClick={() => {
+            downloadBrochure();
+          }}
+          className={`fw-bold my-4 mx-2 ${styles.brochure}`}
+        >
+          <FontAwesomeIcon icon={faDownload} className="me-2" size="1x" />
+          Brochure
+        </Button>
+        {/* <Button
           onClick={() => {
             navigate("/login");
           }}
           variant="warning"
-          className="fw-bold px-3 m-4"
+          className="fw-bold px-3 my-4 mx-2"
           style={{
             borderRadius: "5em",
           }}
         >
           <FontAwesomeIcon icon={faRocket} className="me-2" size="1x" />
           Login
-        </Button>
+        </Button> */}
       </div>
+
       <div className="position-absolute top-0 start-0 text-white zi-top animate__animated animate__fadeIn">
         <FontAwesomeIcon
           icon={faBars}
@@ -188,9 +224,15 @@ const Navbar = () => {
         >
           <div className="d-flex flex-column overflow-none justify-content-start  ">
             <div className="d-flex justify-content-between align-items-center px-3 pt-4 pb-0 text-white">
-              <h4 onClick={() => navigate("/")} className="display-6 fw-bold">
-                PECFEST
-              </h4>
+              <div className="d-flex flex-row">
+                <img
+                  src={pecfest_logo}
+                  className={`${styles.pecfest_logo} main_font cursor-pointer`}
+                  alt="pecfest logo"
+                  onClick={() => navigate("/")}
+                />
+                <h4 className="main_font ms-2">PECFEST</h4>
+              </div>
               <FontAwesomeIcon
                 className="cursor-pointer"
                 icon={faXmark}
@@ -213,7 +255,7 @@ const Navbar = () => {
         </div>
         {isNavOpen && (
           <div
-            className="position-absolute zi-top top-0 end-0 d-sm-none d-md-flex col-md-6 col-lg-9 col-xl-9 vw-75 h-100"
+            className="position-absolute zi-top top-0 end-0 d-none d-md-flex col-md-6 col-lg-9 col-xl-9 vw-75 h-100"
             onClick={handleRightSideClick}
           />
         )}

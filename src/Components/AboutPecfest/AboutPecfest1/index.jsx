@@ -14,7 +14,7 @@ const AboutPecfest1 = () => {
     setov(odometerValues);
   }, []);
   return (
-    <div className="text-white w-100 h-100 overflow-hidden position-relative">
+    <div className="text-white w-100 h-100 overflow-hidden position-relative animate__animated ">
       <StarsBg />
       <div
         className={`w-100 h-100 ${styles["content-container"]} d-flex flex-column align-items-center justify-content-between`}

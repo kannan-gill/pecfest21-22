@@ -10,6 +10,7 @@
 .nav_item {
   color: rgb(163, 161, 161);
   transition: all 0.3s;
+  font-family: "Audiowide", "serif";
 }
 .nav_item:hover {
   background-color: #343a40;
@@ -23,8 +24,30 @@
   margin-left: 1.2em;
   margin-top: 1.5em;
   z-index: 2;
+  font-family: "Audiowide", "serif";
 }
 .nav_item_line {
   color: rgb(105, 104, 104);
   z-index: 1;
+}
+
+.pecfest_logo {
+  width: 2.2em;
+}
+
+.brochure, .brochure:focus {
+  border-radius: 5em;
+  background: transparent;
+  border: 1px solid #FFCA2C;
+  color: #FFCA2C;
+  box-shadow: none;
+  outline: none;
+}
+
+.brochure:hover, .brochure:active {
+  background: transparent;
+  color: #FFCA2C;
+  border: 1px solid #FFCA2C;
+  box-shadow: 1px 1px 5px 1px #FFCA2C !important;  
+  outline: none !important;
 }

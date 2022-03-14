@@ -6,12 +6,16 @@ const useAnimatedRenderer = (
 ) => {
   const [conditionalRender, setConditionalRenderer] = useState(initialValue);
   const [visibilityRenderer, setVisibilityRenderer] = useState(initialValue);
+  const [timeoutRef, setTimeoutRef] = useState(null);
   useEffect(() => {
-    setTimeout(
-      () => {
-        setVisibilityRenderer(conditionalRender);
-      },
-      conditionalRender ? onTimeout : offTimeout
+    clearTimeout(timeoutRef);
+    setTimeoutRef(
+      setTimeout(
+        () => {
+          setVisibilityRenderer(conditionalRender);
+        },
+        conditionalRender ? onTimeout : offTimeout
+      )
     );
   }, [conditionalRender, onTimeout, offTimeout]);
   return [visibilityRenderer, setConditionalRenderer];
