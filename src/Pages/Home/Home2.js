@@ -1,71 +1,119 @@
-import React,{useState,useEffect} from 'react'
-import './Home2.css'
+import React, { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
+import "./Home2.css";
+import AboutPecfest from "../../Components/AboutPecfest/AboutPecfest";
+import Navbar from "../../Components/Navbar";
+import Loading from "../../Components/Loading";
+import FullPageCarousel from "Components/FullPageCarousel";
+import Sponsors from "Components/Sponsors";
+import PlanetNav from "Components/PlanetNav";
+import UpArrow from "Components/UpArrow";
+import DownArrow from "Components/DownArrow";
 
-function Home2() {
+const pageList = [
+  ...AboutPecfest(),
+  // <Sponsors />
+];
 
-    const [explore,setexplore] = useState(false);
+function Home2({ initialPage }) {
+  const [currentPage, setCurrentPage] = useState(initialPage);
+  const [transitionAnimation, setTransitionAnimation] = useState("");
 
-    function handleClick(){
-        setexplore(true);
+  useEffect(() => {
+    setCurrentPage(initialPage);
+  }, [initialPage]);
+  const scrollHandler = (scrollEvent) => {
+    console.log(scrollEvent.deltaY);
+
+    if (
+      transitionAnimation === "" &&
+      scrollEvent.deltaY > 10 &&
+      currentPage === "landing"
+    ) {
+      setNextPage("aboutUs", "landing");
+    } else if (
+      transitionAnimation === "" &&
+      scrollEvent.deltaY < 0 &&
+      currentPage === "aboutUs"
+    ) {
+      setNextPage("landing", "aboutUs");
     }
-
-    useEffect(()=>{
-        window.addEventListener('mousemove',handleMouse);
-
-        function handleMouse(e){
-
-            var cursor = document.querySelector(".cursor");
-            cursor.style.left = e.pageX + 'px';
-            cursor.style.top = e.pageY + 'px';
-
-            document.querySelectorAll("img").forEach(element=>{
-                const speed = element.getAttribute('data-speed');
-                const x = (window.innerWidth - e.pageX*speed)/250;
-                const y = (window.innerHeight - e.pageY*speed)/250;
-                element.style.transform = `translate(${x}px) translateY(${y}px)`
-            })
-        }
-
-        return ()=>{
-            window.removeEventListener('mousemove',handleMouse);
-            }
-    },[])
-
-    useEffect(()=>{
-        if(explore){
-            var header = document.querySelector(".header");
-            header.classList.add("headerRemove");
-            var planet1 = document.querySelector(".img1");
-            var planet2 = document.querySelector(".img2");
-            var planet3 = document.querySelector(".img3");
-            var planet4 = document.querySelector(".img4");
-            var planet5 = document.querySelector(".img5");
-            planet1.classList.add("alignCenter");
-            planet2.classList.add("alignCenter");
-            planet3.classList.add("alignCenter");
-            planet4.classList.add("alignCenter");
-            planet5.classList.add("alignCenter");
-        }
-    },[explore])
-
+  };
+  const setNextPage = (nextPage, prevPage) => {
+    setTransitionAnimation(prevPage);
+    setCurrentPage(nextPage);
+    setTimeout(() => {
+      setTransitionAnimation("");
+    }, 800);
+  };
 
   return (
-    <div>
-        <section className='landing'>
-                <video autoPlay muted loop>
-                    <source src="../../Images/spacebgvid1.mp4" type="video/mp4"/>
-                </video>
-                <div className='header'>PECFEST'21</div>
-                <img data-speed="2" className='img1' src='../../Images/Untitled.png'/>
-                <img data-speed="-2" className='img2' src='../../Images/Untitled2.png'/>
-                <img data-speed="1" className='img3' src='../../Images/Untitled3.png'/>
-                <img data-speed="-1" className='img4' src='../../Images/Untitled4.png'/>
-                <img data-speed="3" className='img5' src='../../Images/Untitled5.png'/>
-                <div className='cursor'><img className='rocket' src='../../Images/rocket.png' alt='cant be disp'/></div>
-                { !explore && <div className='explore' onClick={handleClick}>Explore</div>}
-        </section>
+    <div
+      className="vh-100 w-100 animate__animated animate__fadeIn animate__slow overflow-hidden"
+      onWheel={scrollHandler}
+    >
+      {(currentPage === "landing" || transitionAnimation === "landing") && (
+        <PlanetNav transitionAnimation={transitionAnimation} />
+      )}
+      {(currentPage === "aboutUs" || transitionAnimation === "aboutUs") && (
+        <div
+          className={`animate__animated animate__fast overflow-hidden bg-dark h-100 position-absolute top-0 start-0 w-100 ${
+            transitionAnimation === "landing" && "animate__slideInUp"
+          } ${transitionAnimation === "aboutUs" && "animate__slideOutDown"}
+        `}
+        >
+          <FullPageCarousel pageList={pageList} />
+        </div>
+      )}
+
+      {/* Up Arrow */}
+      {currentPage !== "landing" && (
+        <div className="prev-page animate__animated animate__fadeInUp">
+          {/* <FontAwesomeIcon
+            onClick={() => {
+              setNextPage("landing", "aboutUs");
+            }}
+            icon={faAngleUp}
+            className="m-0 p-4 animate__animated animate__infinite animate__pulse cursor-pointer"
+            size="4x"
+            color="white"
+          /> */}
+          <div
+            onClick={() => {
+              setNextPage("landing", "aboutUs");
+            }}
+            className="h-100 w-100 d-flex align-items-center justify-content-center animate__animated animate__infinite animate__pulse cursor-pointer"
+          >
+            <UpArrow />
+          </div>
+        </div>
+      )}
+
+      {/* Down Arrow */}
+      {currentPage !== "aboutUs" && (
+        <div className="next-page animate__animated animate__fadeInDown">
+          {/* <FontAwesomeIcon
+            onClick={() => {
+              setNextPage("aboutUs", "landing");
+            }}
+            icon={faAngleDown}
+            className="m-0 p-4 animate__animated animate__infinite animate__pulse cursor-pointer"
+            size="4x"
+            color="white"
+          /> */}
+          <div
+            onClick={() => {
+              setNextPage("aboutUs", "landing");
+            }}
+            className="h-100 w-100 d-flex align-items-center justify-content-center animate__animated animate__infinite animate__pulse cursor-pointer"
+          >
+            <DownArrow />
+          </div>
+        </div>
+      )}
     </div>
-  )
+  );
 }
 
-export default Home2
+export default Home2;

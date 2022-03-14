@@ -1,17 +1,22 @@
 import React from "react";
-import { MDBBtn, MDBIcon } from "mdb-react-ui-kit";
+import styles from "./Utilities.module.css";
 
-function Button({ btnClasses, iconClasses, clickHandler, icon, text, type }) {
+function Button({children, type, onClickFunc = (e) => {} }) {
+
+  const clickHandler = (e) => {
+    onClickFunc(e);
+  } 
+
   return (
-    <MDBBtn className={btnClasses} rounded="true" type={type}>
-      <MDBIcon
-        className={`${iconClasses} me-2`}
-        fab
-        icon={icon}
+    <div className={styles.buttonGroup}>
+      <button
+        type={type}
         onClick={clickHandler}
-      />
-      {text}
-    </MDBBtn>
+        className={`${styles.color} ${styles.btn}`}
+      >
+        {children}
+      </button>
+    </div>
   );
 }
 

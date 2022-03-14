@@ -1,50 +1,73 @@
+import React, { useState } from "react";
 import "./App.css";
-// import Navbar from "./Components/Navbar/Navbar";
+// import Button from "./Components/Utilities/Button";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import EventList from "./Pages/Events/EventList";
 // import Home from "./Pages/Home/Home";
 import PrivateRoutes from "./Components/PrivateRoutes";
+import RegisterLogin from "./Pages/RegisterLogin/RegisterLogin";
+import Home2 from "./Pages/Home/Home2";
 import LandingPage from "./Pages/CampusTour/LandingPage";
 import Competitions from "./Pages/Competitions/Competitions";
 import TeamEventRegistration from "./Pages/TeamEventRegistration/TeamEventRegistration";
-import ContactUs from "./Pages/ContactUS/ContactUs";
-import Developers from "./Pages/Developers/Developers";
+// import ContactUs from "./Pages/ContactUS/ContactUs";
+// import Developers from "./Pages/Developers/Developers";
 import Admin from "./Pages/Admin/Admin";
-import Register from "./Pages/Registration/Register";
-import Login from "./Pages/Login/Login";
-import Home2 from "./Pages/Home/Home2"
+import Team from "./Pages/Team/Team";
+import Schedule from "Pages/Schedule/Schedule";
+import ComingSoon from "Pages/ComingSoon/ComingSoon";
+import Navbar from "Components/Navbar";
 
 function App() {
-  // TODO: update these routes
-  const publicRoutes = [{ path: "/", component: <Login /> }];
-  const privateRoutes = [{ path: "/events", component: <EventList /> }];
+  const [isNavBarVisible, setIsNavbarVisible] = useState(true);
+  const publicRoutes = [
+    { path: "/", component: <Home2 initialPage="landing" /> },
+    // {
+    //   path: "/login",
+    //   component: <RegisterLogin setIsNavbarVisible={setIsNavbarVisible} />,
+    // },
+    // {
+    //   path: "/register",
+    //   component: (
+    //     <RegisterLogin isRegister setIsNavbarVisible={setIsNavbarVisible} />
+    //   ),
+    // },
+    // { path: "/campusTour", component: <LandingPage /> },
+    { path: "/competitions", component: <ComingSoon /> },
+    { path: "/schedule", component: <ComingSoon /> },
+    { path: "/contactUs", component: <ComingSoon /> },
+    { path: "/admin", component: <Admin /> },
+    { path: "/teamregister", component: <ComingSoon /> },
+    { path: "/team", component: <ComingSoon /> },
+    { path: "/aboutUs", component: <Home2 initialPage="aboutUs" /> },
+    { path: "/sponsors", component: <ComingSoon /> },
+    { path: "/merchandise", component: <ComingSoon /> },
+    { path: "/developer", component: <ComingSoon /> },
+    { path: "/contact", component: <ComingSoon /> },
+    { path: "/events", component: <ComingSoon /> },
+  ];
+  const privateRoutes = [
+    // add events to this
+  ];
 
   const privateRouteComponent = (route) => (
     <Route
       path={route.path}
-      element={<PrivateRoutes>{route.component}</PrivateRoutes>}
+      element={
+        <PrivateRoutes setIsNavbarVisible={setIsNavbarVisible}>
+          {route.component}
+        </PrivateRoutes>
+      }
     />
   );
   const publicRouteComponent = (route) => (
-    <Route
-      path={route.path}
-      element={route.component}
-    />
+    <Route path={route.path} element={route.component} />
   );
   return (
-    <div>
-      {/* <Navbar /> */}
+    <div className="overflow-hidden vh-100 bg-dark">
       <BrowserRouter>
+        {isNavBarVisible && <Navbar />}
         <Routes>
-          {/* <Route path="/" element={<Home />} /> */}
-           {/* <Route path="/campusTour" element={<LandingPage />} />
-          <Route path="/competitions" element={<Competitions />} />
-          <Route path="/developers" element={<Developers />} />
-          <Route path="/contactUs" element={<ContactUs />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/teamregister" element={<TeamEventRegistration />} /> */}
           {publicRoutes.map((route) => publicRouteComponent(route))}
           {privateRoutes.map((route) => privateRouteComponent(route))}
         </Routes>
