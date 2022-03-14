@@ -17,9 +17,16 @@ import Team from "./Pages/Team/Team";
 import Schedule from "Pages/Schedule/Schedule";
 import ComingSoon from "Pages/ComingSoon/ComingSoon";
 import Navbar from "Components/Navbar";
+import { Link } from "react-router-dom";
+import ExternalLink from "Components/ExternalLink/ExternalLink";
 
 function App() {
   const [isNavBarVisible, setIsNavbarVisible] = useState(true);
+
+  const externalUrlLinks = {
+    merchandise : "https://pecfestmemories.co.in"
+  }
+
   const publicRoutes = [
     { path: "/", component: <Home2 initialPage="landing" /> },
     // {
@@ -41,7 +48,7 @@ function App() {
     { path: "/team", component: <ComingSoon /> },
     { path: "/aboutUs", component: <Home2 initialPage="aboutUs" /> },
     { path: "/sponsors", component: <ComingSoon /> },
-    { path: "/merchandise", component: <ComingSoon /> },
+    { path: "/merchandise", component: <ExternalLink url= {externalUrlLinks.merchandise} /> },
     { path: "/developer", component: <ComingSoon /> },
     { path: "/contact", component: <ComingSoon /> },
     { path: "/events", component: <ComingSoon /> },
