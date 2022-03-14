@@ -143,7 +143,7 @@
 .header-large {
   opacity: 1;
   transition: all 0.5s ease-in-out;
-  margin-top: 30vh;
+  margin-top: 25vh;
   /* font-family: 'Russo One', sans-serif; */
   font-family: "Audiowide", cursive;
   font-size: 13vw;
@@ -196,7 +196,7 @@
     border-style: solid;
     border-width: 2px; */
   position: absolute;
-  bottom: 10%;
+  bottom: 8vh;
   /* animation: explorebubble 1.5s infinite; */
 }
 
