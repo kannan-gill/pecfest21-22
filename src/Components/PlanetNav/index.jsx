@@ -108,9 +108,11 @@ const PlanetNav = ({ transitionAnimation }) => {
   };
   return (
     <div
-      className={`zi-top landing nebula-bg container-fluid vh-100 animate__fast overflow-hidden animate__animated animated__fadeIn ${
+      className={`zi-top landing container-fluid vh-100 animate__fast overflow-hidden animate__animated animated__fadeIn ${
         transitionAnimation === "aboutUs" && "animate__fadeInDown"
-      } ${transitionAnimation === "landing" && "animate__fadeOutUp"}`}
+      } ${transitionAnimation === "landing" && "animate__fadeOutUp"} ${
+        explore ? "rotatebg" : "nebula-bg"
+      }`}
       onMouseMove={handleMouse}
     >
       {/* <div className="nebula-bg" style={{ overflow: "hidden" }}>
@@ -121,29 +123,46 @@ const PlanetNav = ({ transitionAnimation }) => {
           alt="not found"
         /> 
       </div> */}
-      {!explore && (
-        <div className="position-relative zi-top col-8 offset-2 h-100 d-none d-md-flex d-flex flex-column justify-content-center pb-5 animate__animated animate__fadeIn">
-          <div className="d-flex flex-column align-items-end justify-content-center mx-auto mb-5">
-            <span className="header">PECFEST</span>
-            <span className="text-white main_font display-1">2021-22</span>
+      {
+        <div
+          className={`position-relative zi-top col-8 offset-2  ${
+            explore ? "h-auto" : "h-100"
+          } d-none d-md-flex d-flex flex-column justify-content-start pb-5 animate__animated animate__fadeIn`}
+        >
+          <div
+            className={`d-flex flex-column align-items-end mx-auto mb-5 ${
+              explore ? "h-auto" : "h-100"
+            }`}
+          >
+            <span
+              className={`header-large ${
+                explore ? "header-small mt-5 pt-5" : ""
+              }`}
+            >
+              PECFEST
+            </span>
+            {!explore && (
+              <span className="text-white mb-auto main_font display-1 header-subscript">
+                2021-22
+              </span>
+            )}
           </div>
         </div>
-      )}
-      {!explore && (
-        <div className="position-relative zi-top col-12 h-100 d-flex d-md-none flex-column justify-content-center animate__animated animate__fadeIn">
-          <div className="d-flex flex-column align-items-end justify-content-center mx-auto header text-white">
-            <span>PECFEST</span>
-            <span className="mt-1">2021-22</span>
-          </div>
+      }
+
+      <div className="position-relative zi-top col-12 h-100 d-flex d-md-none flex-column justify-content-start animate__animated animate__fadeIn">
+        <div className="d-flex flex-column align-items-center justify-content-start mx-auto header-large text-white">
+          <span>PECFEST</span>
+          <span className="mt-1">21-22</span>
         </div>
-      )}
+      </div>
 
       <StarsBg />
 
       {/* Back Button */}
       {showBack && (
         <div
-          className={`d-none d-md-flex position-absolute bottom-0 start-0 ps-3 mb-n1 cursor-pointer animate__animated ${
+          className={`zi-top d-none d-md-flex position-absolute bottom-0 start-0 ps-3 mb-n1 cursor-pointer animate__animated ${
             explore ? "animate__bounceInUp" : "animate__bounceOutDown"
           } `}
           onClick={() => setExplore(false)}
@@ -160,33 +179,35 @@ const PlanetNav = ({ transitionAnimation }) => {
           text={planetIndex.text}
         />
       )}
-      {planets.map((planet, ind) => (
-        <div
-          onMouseEnter={() => {
-            setHoveredPlanet(ind + 1);
-          }}
-          onMouseLeave={() => {
-            setHoveredPlanet(null);
-          }}
-          onClick={(e) => {
-            if (explore) {
-              setPage(e, planet, ind);
-            }
-          }}
-          data-speed={planet.speed}
-          className={`img${ind + 1} planet-img ${
-            explore ? "alignCenter cursor-pointer " : ""
-          } ${hoveredPlanet === ind + 1 && "larger-planet"} `}
-        >
-          {explore ? (
-            <h3 className="d-none d-md-flex position-absolute top-50 start-50 translate-middle">
-              {planet.text}
-            </h3>
-          ) : (
-            <></>
-          )}
-        </div>
-      ))}
+      <div
+        className={`d-flex flex-row position-absolute top-0 start-0 vw-100 vh-100 `}
+      >
+        {planets.map((planet, ind) => (
+          <div
+            onMouseEnter={() => {
+              setHoveredPlanet(ind + 1);
+            }}
+            onMouseLeave={() => {
+              setHoveredPlanet(null);
+            }}
+            onClick={(e) => {
+              if (explore) {
+                setPage(e, planet, ind);
+              }
+            }}
+            data-speed={planet.speed}
+            className={`flex-grow-1 img${ind + 1} planet-img ${
+              explore ? "alignCenter mt-0 cursor-pointer " : ""
+            } ${hoveredPlanet === ind + 1 && "larger-planet"} `}
+          >
+            {explore ? (
+              <h3 className="d-none d-md-flex ">{planet.text}</h3>
+            ) : (
+              <></>
+            )}
+          </div>
+        ))}
+      </div>
       <div className="cursor"></div>
 
       {!explore && (

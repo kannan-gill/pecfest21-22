@@ -16,7 +16,7 @@ const ExpandingCircle = ({ initX, initY, color, text }) => {
   }, []);
   return (
     <div className={`position-relative ${styles.container}`}>
-      <div className={`text-white position-fixed zi-1 top-50 start-50 translate-middle header animate__animated animate__fadeIn animate__slow ${styles.largeHeading}`}>
+      <div className={`text-white position-fixed zi-1 top-50 start-50 translate-middle header-large animate__animated animate__fadeIn animate__slow ${styles.largeHeading}`}>
         {text}
       </div>
       <div

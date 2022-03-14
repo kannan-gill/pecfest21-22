@@ -42,4 +42,5 @@
   background-repeat: no-repeat  !important;
   background-size: cover  !important;
   background-position: center center  !important;
+  transition: all 0.3s !important;
 }
