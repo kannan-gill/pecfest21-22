@@ -23,8 +23,8 @@
 }
 
 .img-container {
-  width: 50%;
-  z-index: 1;
+  width: 40%;
+  z-index: 0;
 }
 
 .odometer{

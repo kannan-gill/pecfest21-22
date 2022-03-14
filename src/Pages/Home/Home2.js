@@ -58,7 +58,7 @@ function Home2({ initialPage }) {
       )}
       {(currentPage === "aboutUs" || transitionAnimation === "aboutUs") && (
         <div
-          className={`animate__animated animate__fast overflow-hidden bg-dark h-100 position-absolute top-0 start-0 w-100 ${
+          className={`animate__animated animate__fast overflow-hidden aboutusbg bg-black h-100 position-absolute top-0 start-0 w-100 ${
             transitionAnimation === "landing" && "animate__slideInUp"
           } ${transitionAnimation === "aboutUs" && "animate__slideOutDown"}
         `}

@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react'
 import StarsBg from '../../StarsBg'
 import BottomBars from '../../BottomBars'
 import Spacecraft from '../../Spacecraft'
-import AboutusImg from '../../../Images/aboutusImg.png'
+import AboutusImg from '../../../Images/aboutusnoglow-removebg-preview.png'
 import styles from './AboutPecfest1.module.css'
 import Odometer from 'react-odometerjs'
 import 'odometer/themes/odometer-theme-train-station.css'
@@ -34,7 +34,7 @@ const AboutPecfest1 = () => {
                     format="d"
                     duration={ 1000 }
                     value={ odometerValue[0] }
-          />
+          />+
           </div>
       </div>
       <div style={{right:"20%",top:"40%"}} className={`position-absolute right-50 ${styles['odometer']}`}>
@@ -44,7 +44,7 @@ const AboutPecfest1 = () => {
                     format="d"
                     duration={ 400 }
                     value={ odometerValue[1] }
-          />
+          />+
         </div>
         
       </div>
@@ -55,7 +55,7 @@ const AboutPecfest1 = () => {
                     format="d"
                     duration={ 800 }
                     value={ odometerValue[2] }
-          />
+          />+
           </div>
       </div>
       <div style={{right:"10%",top:"60%"}} className={` position-absolute ${styles['odometer']}`}>
@@ -65,7 +65,7 @@ const AboutPecfest1 = () => {
                     format="d"
                     duration={ 200 }
                     value={ odometerValue[3] }
-          />
+          />+
           </div>
       </div>
 

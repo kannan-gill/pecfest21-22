@@ -155,6 +155,10 @@
     margin-left: 5%;
 }
 
+.aboutusbg{
+    background-image: linear-gradient(black,#7f8c8d);
+}
+
 .header{
     opacity: 1;
     transition: all 0.5s ease-in-out;
