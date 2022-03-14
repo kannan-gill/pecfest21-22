@@ -157,8 +157,6 @@ const Navbar = () => {
         };
         xhr.open("GET", url);
         xhr.send();
-
-        navigate(-1);
       })
       .catch((error) => {
         console.log(error);
