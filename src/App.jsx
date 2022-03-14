@@ -45,7 +45,7 @@ function App() {
     { path: "/merchandise", component: <ComingSoon /> },
     { path: "/brochure", component: <ComingSoon /> },
     { path: "/developer", component: <ComingSoon /> },
-    { path: "/contact", component: <ComingSoon /> },
+    { path: "/contact", component: <ComingSoon /> },  
     { path: "/events", component: <ComingSoon /> },
   ];
   const privateRoutes = [

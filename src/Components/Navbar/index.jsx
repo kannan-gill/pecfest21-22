@@ -113,6 +113,7 @@ const Navbar = () => {
       <div
         onClick={() => {
           navigate(route.route);
+          setIsNavOpen(false);
         }}
         className={`cursor-pointer px-3 my-1 py-2 ${styles.nav_item} ${
           location.pathname === route.route && styles.nav_item_active
