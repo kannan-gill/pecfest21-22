@@ -133,8 +133,8 @@
   margin-left: 5%;
 }
 
-.aboutusbg{
-    background-image: linear-gradient(to bottom, #000, #222);
+.aboutUsBg{
+    background-image: linear-gradient(to bottom, #000, #333);
 }
 
 .header-subscript{
@@ -250,7 +250,7 @@
   -ms-transform: rotate(30deg) scale(2.2);
   -o-transform: rotate(30deg) scale(2.2);
   transform: rotate(30deg) scale(2.2);
-  background-image: url(../../Images/nebulabgextracted.png) !important;
+  background-image: url(../../Images/nebulabgextracted-edited.png) !important;
   background-repeat: no-repeat;
   background-size: cover;
 }

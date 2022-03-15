@@ -71,7 +71,7 @@ function App() {
     <Route path={route.path} element={route.component} />
   );
   return (
-    <div className="overflow-hidden vh-100 bg-dark">
+    <div className="overflow-hidden vh-100 bg-black">
       <BrowserRouter>
         {isNavBarVisible && <Navbar />}
         <Routes>

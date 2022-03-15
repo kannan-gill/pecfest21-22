@@ -38,9 +38,9 @@
 }
 
 .nebula-bg{
-  background-image: url(./Images/nebulabgextracted.png) !important;
+  background-image: url(./Images/nebulabgextracted-edited.png) !important;
   background-repeat: no-repeat  !important;
   background-size: cover  !important;
-  background-position: center center  !important;
+  background-position: center bottom  !important;
   transition: all 0.3s !important;
 }

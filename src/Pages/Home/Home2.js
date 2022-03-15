@@ -43,6 +43,13 @@ function Home2({ initialPage }) {
     }
   };
   const setNextPage = (nextPage, prevPage) => {
+    if(nextPage === 'aboutUs'){
+      navigate("/aboutUs");
+    }
+    else{
+      navigate("/");
+    }
+    
     setTransitionAnimation(prevPage);
     setCurrentPage(nextPage);
     setTimeout(() => {
@@ -61,7 +68,7 @@ function Home2({ initialPage }) {
       )}
       {(currentPage === "aboutUs" || transitionAnimation === "aboutUs") && (
         <div
-          className={`animate__animated animate__fast overflow-hidden h-100 position-absolute top-0 start-0 w-100 ${
+          className={`animate__animated animate__fast overflow-hidden h-100 position-absolute top-0 start-0 w-100 aboutUsBg ${
             transitionAnimation === "landing" && "animate__slideInUp"
           } ${transitionAnimation === "aboutUs" && "animate__slideOutDown"}
         `}
@@ -112,7 +119,6 @@ function Home2({ initialPage }) {
           <div
             onClick={() => {
               setNextPage("aboutUs", "landing");
-              navigate("/aboutUs");
             }}
             className="h-100 w-100 d-flex align-items-center justify-content-center animate__animated animate__infinite animate__pulse cursor-pointer"
           >
