@@ -50,7 +50,7 @@ function App() {
     { path: "/sponsors", component: <ComingSoon /> },
     { path: "/merchandise", component: <ExternalLink url= {externalUrlLinks.merchandise} /> },
     { path: "/developer", component: <ComingSoon /> },
-    { path: "/contact", component: <ComingSoon /> },
+    { path: "/contact", component: <ComingSoon /> },  
     { path: "/events", component: <ComingSoon /> },
   ];
   const privateRoutes = [

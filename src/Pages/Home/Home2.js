@@ -10,6 +10,7 @@ import Sponsors from "Components/Sponsors";
 import PlanetNav from "Components/PlanetNav";
 import UpArrow from "Components/UpArrow";
 import DownArrow from "Components/DownArrow";
+import { useNavigate } from "react-router-dom";
 
 const pageList = [
   ...AboutPecfest(),
@@ -19,6 +20,7 @@ const pageList = [
 function Home2({ initialPage }) {
   const [currentPage, setCurrentPage] = useState(initialPage);
   const [transitionAnimation, setTransitionAnimation] = useState("");
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     setCurrentPage(initialPage);
@@ -46,7 +48,7 @@ function Home2({ initialPage }) {
     setTimeout(() => {
       console.log('reset animation');
       setTransitionAnimation("");
-    }, 900);
+    }, 1000);
   };
 
   return (
@@ -81,13 +83,14 @@ function Home2({ initialPage }) {
             size="4x"
             color="white"
           /> */}
-            <div
-              onClick={() => {
-                setNextPage("landing", "aboutUs");
-              }}
-              className="h-100 w-100 d-flex align-items-center justify-content-center animate__animated animate__infinite animate__pulse cursor-pointer"
-            >
-              <UpArrow />
+          <div
+            onClick={() => {
+              setNextPage("landing", "aboutUs");
+              navigate("/");
+            }}
+            className="h-100 w-100 d-flex align-items-center justify-content-center animate__animated animate__infinite animate__pulse cursor-pointer"
+          >
+            <UpArrow />
             </div>
           </div>
         </div>
@@ -106,13 +109,14 @@ function Home2({ initialPage }) {
             size="4x"
             color="white"
           /> */}
-            <div
-              onClick={() => {
-                setNextPage("aboutUs", "landing");
-              }}
-              className="h-100 w-100 d-flex align-items-center justify-content-center animate__animated animate__infinite animate__pulse cursor-pointer"
-            >
-              <DownArrow />
+          <div
+            onClick={() => {
+              setNextPage("aboutUs", "landing");
+              navigate("/aboutUs");
+            }}
+            className="h-100 w-100 d-flex align-items-center justify-content-center animate__animated animate__infinite animate__pulse cursor-pointer"
+          >
+            <DownArrow />
             </div>
           </div>
         </div>
