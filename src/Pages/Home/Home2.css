@@ -205,17 +205,17 @@
   justify-content: center;
   align-items: center;
   font-size: 1.4em;
-  font-weight: 600;
+  /* font-weight: 600; */
   letter-spacing: 5px;
   color: white;
-  height: 100px;
   width: 100px;
   text-align: center;
   /* border-radius: 100%;
     border-color: white;
     border-style: solid;
     border-width: 2px; */
-  position: absolute;
+  position: fixed;
+  bottom:1em;
   /* animation: explorebubble 1.5s infinite; */
 }
 
