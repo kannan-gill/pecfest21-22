@@ -20,7 +20,7 @@ const AboutPecfest2 = () => {
           <span className={`${styles.main_text} `}>
             Relish the centenary celebrations as we commemorate{" "}
             <span className="text-warning ">100 glorious years</span> of PEC at
-            pecfest 21-22.
+            pecfest <span className="d-inline-block">21-22.</span>
           </span>
           <span className={`${styles.registration_button} p-2 mt-5 mt-md-3`}>
             Registrations opening soon

@@ -17,15 +17,15 @@ const AboutPecfest1 = () => {
     <div className="text-white w-100 h-100 overflow-hidden position-relative animate__animated ">
       <StarsBg />
       <div
-        className={`w-100 h-100 ${styles["content-container"]} d-flex flex-column align-items-center justify-content-between`}
+        className={`w-100 h-100  ${styles["content-container"]} d-flex flex-column align-items-center justify-content-between`}
       >
-        <div className={styles["text-container"]}>
-          The biggest fest of North India, PECFest, is right around the corner!
-          Come, experience the thrill and get ready to immerse yourself in this
-          endless universe of fun and frolic. So fuel up, fire up your
-          spaceships and start the countdown. Come and join us here at PECFest
-          and let yourself loose in our Cosmic Escapade. See you there!
-        </div>
+        <div className={`d-flex flex-grow-1 flex-column ${styles["text-container"]} justify-content-center`}>
+          <div className="d-none d-md-flex flex-column pb-5">
+              “Take a rocket from your pocket and Zip-Zap-Zoom with us on a two day Cosmic Escapade.”
+          </div>
+          Punjab Engineering College presents to you "PECFest 2021-22: A Cosmic Escapade". A mesmerising unforgettable experience jam-packed with thrill and adventure.
+          Every year, an army of adrenaline pumped and full of life students put their hearts and souls into this enigma that resonates and soars above the entire nation.
+          </div>
         <img
           src={AboutusImg}
           alt="About Us"
