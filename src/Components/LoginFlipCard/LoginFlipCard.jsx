@@ -4,8 +4,9 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import styles from "./LoginFlipCard.module.css";
 import { useNavigate  } from "react-router-dom";
+import LoginWrapper from "Components/Login/LoginWrapper";
 
-const LoginFlipCard = ({ isRegister = false }) => {
+const LoginFlipCard = ({ isRegister = false, redirect }) => {
   const [toggleFlip, setToggleFlip] = useState(isRegister);
   const navigate = useNavigate ();
 
@@ -30,13 +31,13 @@ const LoginFlipCard = ({ isRegister = false }) => {
           <Col
             className={`mh-100 overflow-auto d-flex flex-column justify-content-center h-auto p-0 me-lg-5 z-index-2 rounded position-absolute ${styles.bgColorCard} ${styles.loginCardFace} ${styles.loginCardFaceFront} ${styles.top_50} ${styles.card}`}
           >
-            <Login onFlip={LoginFlipHandler}/>
+            <LoginWrapper redirect={redirect} onFlip={LoginFlipHandler}/>
           </Col>
         
           <Col
             className={`mh-100 d-flex flex-column justify-content-center h-auto overflow-auto p-0 me-lg-5 z-index-2 rounded position-absolute ${styles.bgColorCard} ${styles.loginCardFace} ${styles.loginCardFaceBack} ${styles.top_50}  ${styles.card}`}
           >
-            <Register onFlip={RegisterFlipHandler}/>
+            <Register redirect={redirect} onFlip={RegisterFlipHandler}/>
           </Col>
 
       </Row>
