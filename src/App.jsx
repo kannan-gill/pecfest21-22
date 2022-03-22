@@ -19,6 +19,7 @@ import ComingSoon from "Pages/ComingSoon/ComingSoon";
 import Navbar from "Components/Navbar";
 import { Link } from "react-router-dom";
 import ExternalLink from "Components/ExternalLink/ExternalLink";
+import PageNotFound from "Pages/PageNotFound/PageNotFound";
 
 function App() {
   const [isNavBarVisible, setIsNavbarVisible] = useState(true);
@@ -49,7 +50,7 @@ function App() {
     { path: "/aboutUs", component: <Home2 initialPage="aboutUs" /> },
     { path: "/sponsors", component: <ComingSoon /> },
     { path: "/merchandise", component: <ExternalLink url= {externalUrlLinks.merchandise} /> },
-    { path: "/developer", component: <ComingSoon /> },
+    { path: "/developer", component: <PageNotFound /> },
     { path: "/contact", component: <ComingSoon /> },  
     { path: "/events", component: <ComingSoon /> },
   ];
