@@ -3,11 +3,13 @@ import React, { useState, useEffect } from "react";
 import {} from "../../config";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import RegisterLogin from "../../Pages/RegisterLogin/RegisterLogin";
+import { useLocation } from "react-router-dom";
 
 const PrivateRoutes = ({ children, setIsNavbarVisible }) => {
   console.log('received', setIsNavbarVisible);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const location = useLocation();
   useEffect(() => {
     const auth = getAuth();
     const cleanUp = onAuthStateChanged(auth, (userRes) => {
@@ -29,7 +31,7 @@ const PrivateRoutes = ({ children, setIsNavbarVisible }) => {
         (user ? (
           children
         ) : (
-          <RegisterLogin setIsNavbarVisible={setIsNavbarVisible} />
+          <RegisterLogin redirect={location?.pathname} setIsNavbarVisible={setIsNavbarVisible} />
         ))}
     </>
   );
