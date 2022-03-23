@@ -5,19 +5,20 @@ const ExternalLink = ({url}) => {
 
     
     const navigate = useNavigate();
-    console.log(useLocation());
+
+    let callRefLink = React.createRef();
     
+    function handleClick(e){
+      callRefLink.current.click();
+    }
 
     useEffect(() => {
-        window.open(url, "_blank");
-    }, []);
-
-    useEffect(() => {
+        handleClick();
         navigate(-1);
     }, []);
 
   return (
-    <> </>
+    <a href={url} ref={callRefLink} onClick={handleClick} target="_blank"> </a>
   )
 }
 
