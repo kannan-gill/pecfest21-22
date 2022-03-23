@@ -19,6 +19,7 @@ import ComingSoon from "Pages/ComingSoon/ComingSoon";
 import Navbar from "Components/Navbar";
 import { Link } from "react-router-dom";
 import ExternalLink from "Components/ExternalLink/ExternalLink";
+import PageNotFound from "Pages/PageNotFound/PageNotFound";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -54,7 +55,9 @@ function App() {
       component: <ExternalLink url={externalUrlLinks.merchandise} />,
     },
     { path: "/developer", component: <ComingSoon /> },
-    { path: "/contact", component: <ComingSoon /> },
+    { path: "/contact", component: <ComingSoon /> },  
+    { path: "/events", component: <ComingSoon /> },
+    { path: "*", component: <PageNotFound isNavbarVisible={setIsNavbarVisible}/> },
   ];
   const privateRoutes = [
     // add events to this
@@ -74,8 +77,9 @@ function App() {
   const publicRouteComponent = (route) => (
     <Route path={route.path} element={route.component} />
   );
+
   return (
-    <div className="overflow-hidden vh-100 bg-black">
+    <div className="overflow-auto vh-100 bg-black">
       <ToastContainer theme="light" />
       <BrowserRouter>
         {isNavBarVisible && <Navbar />}
