@@ -19,13 +19,14 @@ import ComingSoon from "Pages/ComingSoon/ComingSoon";
 import Navbar from "Components/Navbar";
 import { Link } from "react-router-dom";
 import ExternalLink from "Components/ExternalLink/ExternalLink";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";  
 import "react-toastify/dist/ReactToastify.css";
+import Sponsors from "Pages/Sponsors/Sponsors";
 
 function App() {
   const [isNavBarVisible, setIsNavbarVisible] = useState(true);
 
-  const externalUrlLinks = {
+  const externalUrlLinks = {  
     merchandise: "https://pecfestmemories.co.in",
   };
 
@@ -41,14 +42,14 @@ function App() {
         <RegisterLogin isRegister setIsNavbarVisible={setIsNavbarVisible} />
       ),
     },
-    { path: "/competitions", component: <ComingSoon /> },
-    { path: "/schedule", component: <ComingSoon /> },
+    { path: "/competitions", component: <ComingSoon /> }, //#9a484b
+    { path: "/schedule", component: <ComingSoon /> }, //#fb6d62
     { path: "/contactUs", component: <ComingSoon /> },
     { path: "/admin", component: <Admin /> },
     { path: "/teamregister", component: <ComingSoon /> },
     { path: "/team", component: <ComingSoon /> },
     { path: "/aboutUs", component: <Home2 initialPage="aboutUs" /> },
-    { path: "/sponsors", component: <ComingSoon /> },
+    { path: "/sponsors", component: <Sponsors color="#fc9d15"/> },
     {
       path: "/merchandise",
       component: <ExternalLink url={externalUrlLinks.merchandise} />,
@@ -58,7 +59,7 @@ function App() {
   ];
   const privateRoutes = [
     // add events to this
-    { path: "/events", component: <ComingSoon /> },
+    { path: "/events", component: <ComingSoon /> }, //#07202a
   ];
 
   const privateRouteComponent = (route) => (
