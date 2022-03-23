@@ -107,9 +107,10 @@ const Navbar = () => {
     }
   }, [isNavOpen]);
 
-  const NavElement = (route) => {
+  const NavElement = (route, ind) => {
     return (
       <div
+        key={ind}
         onClick={() => {
           navigate(route.route);
           setIsNavOpen(false);
@@ -129,9 +130,9 @@ const Navbar = () => {
       </div>
     );
   };
-  const DividerElement = (route) => {
+  const DividerElement = (route, ind) => {
     return (
-      <div className="position-relative mt-3 ms-2">
+      <div key={ind} className="position-relative mt-3 ms-2">
         .
         <span
           className={`position-absolute start-0 bottom-0 translate-middle zi-2 ps-5 pt-0 pe-2 ${styles.nav_item_heading}`}
@@ -246,8 +247,8 @@ const Navbar = () => {
               event.stopPropagation();
             }}
           >
-            {routes.map((route) =>
-              route.type ? DividerElement(route) : NavElement(route)
+            {routes.map((route, ind) =>
+              route.type ? DividerElement(route, ind) : NavElement(route, ind)
             )}
           </div>
         </div>

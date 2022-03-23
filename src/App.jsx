@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 // import Button from "./Components/Utilities/Button";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import EventList from "./Pages/Events/EventList";
+import EventList from "./Pages/Events/EventsList/EventList";
 // import Home from "./Pages/Home/Home";
 import PrivateRoutes from "./Components/PrivateRoutes";
 import RegisterLogin from "./Pages/RegisterLogin/RegisterLogin";
@@ -40,7 +40,7 @@ function App() {
     //   ),
     // },
     // { path: "/campusTour", component: <LandingPage /> },
-    { path: "/competitions", component: <ComingSoon /> },
+    { path: "/competitions", component: <Competitions /> },
     { path: "/schedule", component: <ComingSoon /> },
     { path: "/contactUs", component: <ComingSoon /> },
     { path: "/admin", component: <Admin /> },
@@ -51,7 +51,7 @@ function App() {
     { path: "/merchandise", component: <ExternalLink url= {externalUrlLinks.merchandise} /> },
     { path: "/developer", component: <ComingSoon /> },
     { path: "/contact", component: <ComingSoon /> },  
-    { path: "/events", component: <ComingSoon /> },
+    { path: "/events", component: <EventList /> },
   ];
   const privateRoutes = [
     // add events to this
