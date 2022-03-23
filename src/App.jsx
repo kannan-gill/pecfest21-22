@@ -21,6 +21,7 @@ import { Link } from "react-router-dom";
 import ExternalLink from "Components/ExternalLink/ExternalLink";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import TechCulturalSelector from "Pages/Events/TechSelector/TechSelector";
 
 function App() {
   const [isNavBarVisible, setIsNavbarVisible] = useState(true);
@@ -58,7 +59,9 @@ function App() {
   ];
   const privateRoutes = [
     // add events to this
-    { path: "/events", component: <EventList /> },
+    { path: "/events", component: <TechCulturalSelector /> },
+    { path: "/tech-events", component: <EventList isTechnical /> },
+    { path: "/cultural-events", component: <EventList isTechnical={false} /> },
   ];
 
   const privateRouteComponent = (route) => (

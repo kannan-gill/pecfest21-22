@@ -29,9 +29,12 @@ function Login({ onFlip, setOpenForgotPasswordUI, redirect = null }) {
         const user = userCredential.user;
         setLoading(false);
         // toast.info("Signed in succesfully");
+       
         if (redirect) {
+          console.log('redirect1 ', redirect);
           navigate(redirect);
         } else {
+          console.log('redirect 2', redirect);
           navigate("/");
         }
 

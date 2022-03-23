@@ -57,3 +57,11 @@
 .transition-smooth{
   transition:all 0.3s !important;
 }
+.border-none{
+  border:none !important
+}
+@media screen and (min-width:700px) {
+  .w-md-75{
+    width: 75% !important;
+  }
+}

@@ -180,7 +180,7 @@ const Navbar = () => {
       if (userRes) {
         setUser(userRes);
         setLoadingUser(false);
-        navigate("/");
+        // navigate("/");
       } else {
         setLoadingUser(false);
         setUser(null);

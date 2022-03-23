@@ -14,8 +14,8 @@ function Event({ event }) {
 
   return (
     <div className="col-12 col-md-6 col-lg-4 col-xl-3 p-3 animate__animated animate__fadeIn">
-      <div className="card w-100">
-        <div className={`${styles.card_wrapper}`}>
+      <div className="card border-none w-100">
+        <div className={`${styles.card_wrapper} border-none`}>
           <img className="card-img-top" src={event.img} alt="Card" />
         </div>
 

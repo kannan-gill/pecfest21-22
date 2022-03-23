@@ -1,33 +1,16 @@
 import useOutsideClickHandler from "hooks/useOutsideClickHandler";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form, FormControl, InputGroup } from "react-bootstrap";
 import styles from "./Filters.module.scss";
 
-
-const filtersArray = [
-  {
-    text: "Filter1",
-    value: true,
-  },
-  {
-    text: "Filter2",
-    value: true,
-  },
-  {
-    text: "Filter3",
-    value: true,
-  },
-  {
-    text: "Filter4",
-    value: true,
-  },
-];
-const Filters = ({searchEvent, setSearchEvent}) => {
+const Filters = ({ searchEvent, setSearchEvent, filtersArray, setTags }) => {
   const [showFilter, setShowFilter] = useState(false);
   const [componentLoaded, setComponentLoaded] = useState(false);
   const [filters, setFilters] = useState(filtersArray);
-
-  const {ref} = useOutsideClickHandler(setShowFilter);
+  useEffect(() => {
+    setFilters(filtersArray);
+  }, [filtersArray]);
+  const { ref } = useOutsideClickHandler(setShowFilter);
   const filterChangeHandler = (index) => {
     setFilters((prevVal) => {
       const val = [...prevVal];
@@ -39,9 +22,16 @@ const Filters = ({searchEvent, setSearchEvent}) => {
       return val;
     });
   };
+  useEffect(() => {
+    setTags(
+      filters
+        .filter((filter) => filter.value === true)
+        .map((filter) => filter.text)
+    );
+  }, [filters]);
 
   return (
-    <span className="text-white mt-4 mb-1 mx-auto px-4 col-12 col-md-6 offset-3 offset-xl-0 col-xl-4 text-center h-auto ">
+    <span className="text-white mt-4 mb-1 px-5 col-12 col-md-4 offset-md-8 h-auto ">
       <div className="d-block d-xl-flex flex-row justify-content-end position-relative">
         <InputGroup className="mb-3 w-100 position-relative">
           <FormControl
@@ -49,7 +39,7 @@ const Filters = ({searchEvent, setSearchEvent}) => {
             aria-label="Search Event"
             aria-describedby="basic-addon2"
             value={searchEvent}
-            onChange={(event)=>{
+            onChange={(event) => {
               console.log(event.target.value);
               setSearchEvent(event.target.value);
             }}
@@ -67,7 +57,8 @@ const Filters = ({searchEvent, setSearchEvent}) => {
           </Button>
 
           {componentLoaded && (
-            <div ref={ref}
+            <div
+              ref={ref}
               className={`position-absolute zi-top ${
                 showFilter ? " animate__fadeIn" : "animate__fadeOut"
               } top-100 end-0 mt-2 text-dark bg-white animate__animated animate__faster ${
