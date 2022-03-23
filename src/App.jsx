@@ -20,27 +20,28 @@ import Navbar from "Components/Navbar";
 import { Link } from "react-router-dom";
 import ExternalLink from "Components/ExternalLink/ExternalLink";
 import PageNotFound from "Pages/PageNotFound/PageNotFound";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [isNavBarVisible, setIsNavbarVisible] = useState(true);
 
   const externalUrlLinks = {
-    merchandise : "https://pecfestmemories.co.in"
-  }
+    merchandise: "https://pecfestmemories.co.in",
+  };
 
   const publicRoutes = [
     { path: "/", component: <Home2 initialPage="landing" /> },
-    // {
-    //   path: "/login",
-    //   component: <RegisterLogin setIsNavbarVisible={setIsNavbarVisible} />,
-    // },
-    // {
-    //   path: "/register",
-    //   component: (
-    //     <RegisterLogin isRegister setIsNavbarVisible={setIsNavbarVisible} />
-    //   ),
-    // },
-    // { path: "/campusTour", component: <LandingPage /> },
+    {
+      path: "/login",
+      component: <RegisterLogin setIsNavbarVisible={setIsNavbarVisible} />,
+    },
+    {
+      path: "/register",
+      component: (
+        <RegisterLogin isRegister setIsNavbarVisible={setIsNavbarVisible} />
+      ),
+    },
     { path: "/competitions", component: <ComingSoon /> },
     { path: "/schedule", component: <ComingSoon /> },
     { path: "/contactUs", component: <ComingSoon /> },
@@ -49,7 +50,10 @@ function App() {
     { path: "/team", component: <ComingSoon /> },
     { path: "/aboutUs", component: <Home2 initialPage="aboutUs" /> },
     { path: "/sponsors", component: <ComingSoon /> },
-    { path: "/merchandise", component: <ExternalLink url= {externalUrlLinks.merchandise} /> },
+    {
+      path: "/merchandise",
+      component: <ExternalLink url={externalUrlLinks.merchandise} />,
+    },
     { path: "/developer", component: <ComingSoon /> },
     { path: "/contact", component: <ComingSoon /> },  
     { path: "/events", component: <ComingSoon /> },
@@ -57,6 +61,7 @@ function App() {
   ];
   const privateRoutes = [
     // add events to this
+    { path: "/events", component: <ComingSoon /> },
   ];
 
   const privateRouteComponent = (route) => (
@@ -75,6 +80,7 @@ function App() {
 
   return (
     <div className="overflow-auto vh-100 bg-black">
+      <ToastContainer theme="light" />
       <BrowserRouter>
         {isNavBarVisible && <Navbar />}
         <Routes>
