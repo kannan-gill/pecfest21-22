@@ -50,9 +50,10 @@ function App() {
     { path: "/aboutUs", component: <Home2 initialPage="aboutUs" /> },
     { path: "/sponsors", component: <ComingSoon /> },
     { path: "/merchandise", component: <ExternalLink url= {externalUrlLinks.merchandise} /> },
-    { path: "/developer", component: <PageNotFound /> },
+    { path: "/developer", component: <ComingSoon /> },
     { path: "/contact", component: <ComingSoon /> },  
     { path: "/events", component: <ComingSoon /> },
+    { path: "*", component: <PageNotFound isNavbarVisible={setIsNavbarVisible}/> },
   ];
   const privateRoutes = [
     // add events to this
@@ -71,8 +72,9 @@ function App() {
   const publicRouteComponent = (route) => (
     <Route path={route.path} element={route.component} />
   );
+
   return (
-    <div className="overflow-hidden vh-100 bg-black">
+    <div className="overflow-auto vh-100 bg-black">
       <BrowserRouter>
         {isNavBarVisible && <Navbar />}
         <Routes>
