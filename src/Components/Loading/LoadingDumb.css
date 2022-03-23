@@ -24,7 +24,6 @@
 }
 
 .comingsoon{
-    min-width: 300px;
     letter-spacing: 5px;
     /* animation: comingsoonComponent 8s infinite alternate-reverse; */
 }

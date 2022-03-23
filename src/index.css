@@ -57,6 +57,10 @@ code {
   height: 75vh;
 }
 
+.w-40{
+  width: 40%;
+}
+
 .main_font{
   font-family: 'Audiowide', 'Serif';
 }

@@ -3,19 +3,13 @@ import { faAnglesRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 import BackImg from "../../Images/back-img.png";
-import nebulaBg from "../../Images/nebulabgextracted.png";
+import nebulaBg from "../../Images/nebulabgextracted-edited.png";
 import useAnimatedRenderer from "hooks/useAnimatedRenderer";
 import ExpandingCircle from "Components/ExpandingCircle";
-import StarsBg from '../StarsBg'
+import StarsBg from "../StarsBg";
 import { width } from "@mui/system";
 
 const planets = [
-  {
-    route: "/sponsors",
-    text: "Sponsors",
-    speed: "2",
-    color: "#fc9d15",
-  },
   {
     route: "/events",
     text: "Events",
@@ -23,22 +17,29 @@ const planets = [
     color: "#07202a",
   },
   {
+    route: "/sponsors",
+    text: "Sponsors",
+    speed: "2",
+    color: "#fc9d15",
+  },
+
+  {
     route: "/competitions",
     text: "Competitions",
     speed: "1",
     color: "#9a484b",
   },
   {
-    route: "/merchandise",
-    text: "Merchandise",
-    speed: "-1",
-    color: "#a941ce",
-  },
-  {
     route: "/schedule",
     text: "Schedule",
     speed: "3",
     color: "#fb6d62",
+  },
+  {
+    route: "/merchandise",
+    text: "Merchandise",
+    speed: "-1",
+    color: "#a941ce",
   },
 ];
 
@@ -108,21 +109,53 @@ const PlanetNav = ({ transitionAnimation }) => {
   };
   return (
     <div
-      className={`landing vh-100 animate__fast overflow-hidden animate__animated animated__fadeIn ${
-        transitionAnimation === "aboutUs" && "animate__slideInDown"
-      } ${transitionAnimation === "landing" && "animate__slideOutUp"}`}
+      className={`zi-top landing container-fluid vh-100 animate__fast overflow-hidden animate__animated animated__fadeIn ${
+        transitionAnimation === "aboutUs" && "animate__fadeInDown"
+      } ${transitionAnimation === "landing" && "animate__fadeOutUp"} ${
+        explore ? "rotatebg" : "nebula-bg"
+      }`}
       onMouseMove={handleMouse}
     >
-      <div style={{ overflow: "hidden" }}>
+      {/* <div className="nebula-bg" style={{ overflow: "hidden" }}>
         <img
           style={{ width: "100%", height: "100vh", minWidth: "1000px" }}
           className={`nebulaimg ${explore ? "rotatebg" : ""}`}
           src={nebulaBg}
           alt="not found"
-        />
-      </div>
-      <div className={`header ${explore ? "headerRemove" : ""}`}>
-        PECFEST'22
+        /> 
+      </div> */}
+      {
+        <div
+          className={`position-relative zi-top col-8 offset-2  ${
+            explore ? "h-auto" : "h-100"
+          } d-none d-md-flex d-flex flex-column justify-content-start pb-5 animate__animated animate__fadeIn`}
+        >
+          <div
+            className={`d-flex flex-column align-items-end mx-auto mb-5 ${
+              explore ? "h-auto" : "h-100"
+            }`}
+          >
+            <span
+              className={`header-large ${
+                explore ? "header-small mt-5 pt-5" : ""
+              }`}
+            >
+              PECFEST
+            </span>
+            {!explore && (
+              <span className="text-white mb-auto main_font display-1 header-subscript">
+                2021-22
+              </span>
+            )}
+          </div>
+        </div>
+      }
+
+      <div className="position-relative zi-top col-12 h-100 d-flex d-md-none flex-column justify-content-start animate__animated animate__fadeIn">
+        <div className="d-flex flex-column align-items-center justify-content-start mx-auto header-large text-white">
+          <span>PECFEST</span>
+          <span className="mt-1">21-22</span>
+        </div>
       </div>
 
       <StarsBg />
@@ -130,7 +163,7 @@ const PlanetNav = ({ transitionAnimation }) => {
       {/* Back Button */}
       {showBack && (
         <div
-          className={`position-absolute bottom-0 start-0 ps-3 mb-n1 cursor-pointer animate__animated ${
+          className={`zi-top d-none d-md-flex position-absolute bottom-0 start-0 ps-3 mb-n1 cursor-pointer animate__animated ${
             explore ? "animate__bounceInUp" : "animate__bounceOutDown"
           } `}
           onClick={() => setExplore(false)}
@@ -147,57 +180,82 @@ const PlanetNav = ({ transitionAnimation }) => {
           text={planetIndex.text}
         />
       )}
-      {planets.map((planet, ind) => (
-        <div
-          onMouseEnter={() => {
-            setHoveredPlanet(ind + 1);
-          }}
-          onMouseLeave={() => {
-            setHoveredPlanet(null);
-          }}
-          onClick={(e) => {
-            if (explore) {
-              setPage(e, planet, ind);
-            }
-          }}
-          data-speed={planet.speed}
-          className={`img${ind + 1} planet-img ${
-            explore ? "alignCenter cursor-pointer " : ""
-          } ${hoveredPlanet === ind + 1 && "larger-planet"} `}
-        >
-          {explore ? (
-            <h3 className="position-absolute top-50 start-50 translate-middle">
-              {planet.text}
-            </h3>
-          ) : (
-            <></>
-          )}
-        </div>
-      ))}
+      <div
+        className={`d-flex flex-row position-absolute top-0 start-0 vw-100 vh-100 `}
+      >
+        {planets.map((planet, ind) => (
+          <div
+            onMouseEnter={() => {
+              setHoveredPlanet(ind + 1);
+            }}
+            onMouseLeave={() => {
+              setHoveredPlanet(null);
+            }}
+            onClick={(e) => {
+              if (explore) {
+                setPage(e, planet, ind);
+              }
+            }}
+            data-speed={planet.speed}
+            className={`d-none d-md-flex flex-grow-1 img${ind + 1} planet-img ${
+              explore ? "alignCenter mt-0 cursor-pointer " : ""
+            } ${hoveredPlanet === ind + 1 && "larger-planet"} `}
+          >
+            {explore ? (
+              <h3 className="d-none d-md-flex ">{planet.text}</h3>
+            ) : (
+              <></>
+            )}
+          </div>
+        ))}
+        {planets.map((planet, ind) => (
+          <div
+            onMouseEnter={() => {
+              setHoveredPlanet(ind + 1);
+            }}
+            onMouseLeave={() => {
+              setHoveredPlanet(null);
+            }}
+            onClick={(e) => {
+              if (explore) {
+                setPage(e, planet, ind);
+              }
+            }}
+            data-speed={planet.speed}
+            className={`d-flex d-md-none flex-grow-1 img${ind + 1} planet-img `}
+          >
+            {explore ? (
+              <h3 className="d-none d-md-flex ">{planet.text}</h3>
+            ) : (
+              <></>
+            )}
+          </div>
+        ))}
+      </div>
       <div className="cursor"></div>
 
-     
-
       {!explore && (
-        <div
-          className="explore cursor-pointer animate__animated animate__fadeInUp"
-          onClick={handleClick}
-        >
-          <span className="left-arrow">
+        <div className="d-none d-md-flex explore start-50 translate-middle zi-top cursor-pointer ">
+          <div
+            className="d-flex flex-row align-items-center animate__animated animate__fadeInUp"
+            onClick={handleClick}
+          >
+            <span className="left-arrow">
+              <FontAwesomeIcon
+                icon={faAnglesRight}
+                className="m-0 p-0 animate__animated animate__infinite animate__headShake"
+                size="2x"
+                color="white"
+              />
+            </span>
+            <span className="px-3">Explore</span>
             <FontAwesomeIcon
               icon={faAnglesRight}
               className="m-0 p-0 animate__animated animate__infinite animate__headShake"
               size="2x"
               color="white"
             />
-          </span>
-          <span className="px-3">Explore</span>
-          <FontAwesomeIcon
-            icon={faAnglesRight}
-            className="m-0 p-0 animate__animated animate__infinite animate__headShake"
-            size="2x"
-            color="white"
-          />
+          </div>
         </div>
       )}
     </div>

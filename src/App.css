@@ -38,8 +38,12 @@
 }
 
 .nebula-bg{
-  background-image: url(./Images/nebulabgextracted.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
+  background-image: url(./Images/nebulabgextracted-edited.png) !important;
+  background-repeat: no-repeat  !important;
+  background-size: cover  !important;
+  background-position: center bottom  !important;
+  transition: all 0.3s !important;
+}
+.transition-smooth{
+  transition:all 0.3s !important;
 }

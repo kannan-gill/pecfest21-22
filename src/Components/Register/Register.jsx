@@ -43,7 +43,7 @@ const initialValidStates = {
   isPasswordValid: true,
 };
 
-function Register({ onFlip }) {
+function Register({ onFlip, redirect }) {
   const navigate = useNavigate();
   const [user, editUser] = useState(initialStateUser);
 
@@ -257,12 +257,11 @@ function Register({ onFlip }) {
           />
 
           <SelectInput
-            value={user.gender}
+            val={user.gender}
             changeFunc={changeHandler}
             name="gender"
             icon="transgender-alt"
             label="gender"
-            val={user.gender}
             disabledOption="Gender"
             options={["Male", "Female", "Other"]}
             isValid={checkValidStates.isGenderValid}
@@ -300,7 +299,7 @@ function Register({ onFlip }) {
             type="password"
             name="password"
             val={user.password}
-            password="true"
+            password
             icon="key"
             placeholder="Password"
             changeFunc={changeHandler}
@@ -308,10 +307,10 @@ function Register({ onFlip }) {
           />
         </div>
         <div className="d-flex flex-row justify-content-center mt-2 mb-4">
-          <Button className="mx-3" type="button" onClickFunc={onFlipBtnClick}>
+          <Button type="button" onClickFunc={onFlipBtnClick}>
             BACK
           </Button>
-          <Button className="mx-3" type="submit" >
+          <Button type="submit" >
             SIGN UP
           </Button>
         </div>
