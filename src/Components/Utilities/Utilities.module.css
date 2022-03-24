@@ -13,7 +13,9 @@
 
 /* Button Start*/
 .btn{
-    width: 100px;
+    width: auto;
+    padding-left: 1em;
+    padding-right: 1em;
     font-size: 16px;
     font-weight: 600;
     color: #fff;
@@ -23,12 +25,22 @@
     text-align:center;
     border: none;
     background-size: 300% 100%;
-
     border-radius: 5px;
     -moz-transition: all .4s ease-in-out;
     -o-transition: all .4s ease-in-out;
     -webkit-transition: all .4s ease-in-out;
     transition: all .4s ease-in-out;
+}
+.btn:disabled,
+.btn[disabled]{
+  /* border: 1px solid #999999 !important; */
+  cursor: auto;
+  color: #d3d3d3  !important;
+}
+
+.btn:disabled,
+.btn[disabled]:hover{
+    background-position: 0% 0;
 }
 
 .btn:hover{

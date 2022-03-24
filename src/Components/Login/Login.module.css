@@ -31,3 +31,6 @@ border: 3px solid rgb(182, 182, 182);
 .color_fadeblue{
   color:#abb999
 }
+.remember_me{
+  user-select:none;
+}
