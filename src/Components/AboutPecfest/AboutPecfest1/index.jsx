@@ -13,24 +13,56 @@ const AboutPecfest1 = () => {
     var odometerValues = [50000, 8000, 43000, 1400];
     setov(odometerValues);
   }, []);
+
+  useEffect(() => {
+    const divHeight = document.getElementById("mainText").clientHeight;
+    document
+      .getElementById("mainText")
+      .animate(
+        [
+          { transform: `translateY(${divHeight}px)` },
+          { transform: "translateY(0px)" },
+          { transform: `translateY(-${divHeight}px)` },
+
+        ],
+        {
+          duration: 20000,
+          iterations: Infinity,
+        }
+      );
+  }, []);
+
   return (
-    <div className="text-white w-100 h-100 overflow-hidden position-relative animate__animated ">
+    <div className="text-white w-100 h-100 overflow-hidden position-relative animate__animated d-flex flex-column">
       <StarsBg />
       <div
-        className={`w-100 h-100  ${styles["content-container"]} d-flex flex-column align-items-center justify-content-between`}
+        className={`w-100 h-100  ${styles["content-container"]} d-flex flex-grow-1 flex-column align-items-center justify-content-start`}
       >
-        <div className={`d-flex flex-grow-1 flex-column ${styles["text-container"]} justify-content-center`}>
-          <div className="d-none d-md-flex flex-column pb-5">
-              “Take a rocket from your pocket and Zip-Zap-Zoom with us on a two day Cosmic Escapade.”
+        <div className="h-50 d-flex flex-column align-items-center justify-content-end overflow-hidden">
+          <div
+            className={`d-flex flex-column ${styles["text-container"]} justify-content-start `}
+          >
+            <div id="mainText">
+              <div className="d-none d-md-flex flex-column pb-5">
+                “Take a rocket from your pocket and Zip-Zap-Zoom with us on a
+                two day Cosmic Escapade.”
+              </div>
+              Punjab Engineering College presents to you "PECFest 2021-22: A
+              Cosmic Escapade". A mesmerising unforgettable experience
+              jam-packed with thrill and adventure. Every year, an army of
+              adrenaline pumped and full of life students put their hearts and
+              souls into this enigma that resonates and soars above the entire
+              nation.
+            </div>
           </div>
-          Punjab Engineering College presents to you "PECFest 2021-22: A Cosmic Escapade". A mesmerising unforgettable experience jam-packed with thrill and adventure.
-          Every year, an army of adrenaline pumped and full of life students put their hearts and souls into this enigma that resonates and soars above the entire nation.
-          </div>
-        <img
-          src={AboutusImg}
-          alt="About Us"
-          className={styles["img-container"]}
-        />
+        </div>
+        <div className="h-50 d-flex flex-column justify-content-end align-items-center">
+          <img
+            src={AboutusImg}
+            alt="About Us"
+            className={styles["img-container"]}
+          />
+        </div>
       </div>
 
       {/* <div
@@ -76,7 +108,7 @@ const AboutPecfest1 = () => {
         <BottomBars />
       </div>
       <div
-        className={`position-absolute bottom-0 start-100 ${styles.spacecraft}`}
+        className={`position-absolute d-none d-sm-flex bottom-0 start-100 ${styles.spacecraft}`}
       >
         <Spacecraft />
       </div>

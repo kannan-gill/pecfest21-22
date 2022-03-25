@@ -9,7 +9,7 @@
 
 .content-container {
   padding-top: 8em;
-  padding-bottom: 2%;
+  padding-bottom: 6%;
 }
 
 .text-container {
@@ -23,7 +23,8 @@
 }
 
 .img-container {
-  width: 40%;
+  /* width: 40%; */
+  height: 75%;
   z-index: 0;
 }
 
