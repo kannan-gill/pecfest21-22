@@ -1,20 +1,44 @@
 .heading{
-  text-shadow: 3px 3px 3px black;
+  text-shadow: 4px 4px 4px black;
   letter-spacing: 5px;
 }
 
 .card{
-  background-color: rgba(0,0,0,0.5);
+  background-color: #e4e2e2; 
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width:13em;
+  height: 13em;
+  transition: all 0.5s;
+}
+
+.card:hover {
+  transform: scale(1.1);
 }
 
 .sponsor_name{
   font-family: "cursive";
   font-size: 1.1em;
-  font-weight: 600;
+  font-weight: 600;  
+
 }
 
 .sponsor_desc{
-  font-size: 0.9em;
+  font-size: 0.8em;
+  color: #8f5f35;
+  font-weight: 600;
+}
+
+.cardLine{
+  height: 1px;
+  background-color: #8f5f35;
+}
+
+.headingLine{
+  height: 2px;
+  background-color: #f5f5f557;
+}
+
+.main_container{
+  margin-top: 5em;
 }

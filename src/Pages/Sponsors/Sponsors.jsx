@@ -1,112 +1,69 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Sponsors.module.css";
 import BackgroundImage from "Components/BackgroundImage/BackgroundImage";
-import Untitled from "../../Images/Untitled.png";
+import SponsorCard from "./SponsorCard";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { getList, updateDoc } from "../../services";
 
 const Sponsors = ({ color }) => {
+  const [sponsors, setSponsors] = useState([]);
+  const storage = getStorage();
+
+  useEffect(() => {
+    getList("sponsors")
+      .then((res) => {
+        res.forEach((sponsor) => {
+          if (sponsor["url"] === undefined) {
+            getDownloadURL(
+              ref(storage, `Sponsors/${sponsor["imageName"]}`)
+            ).then((url) => {
+              setSponsors((prev) => [...prev, { ...sponsor, url }]);
+              const sponsorId = sponsor.id;
+              const { id, ...sponsorWithoutId } = sponsor;
+              updateDoc("sponsors", sponsorId, {
+                ...sponsorWithoutId,
+                url,
+              });
+            });
+          } else {
+            setSponsors((prev) => [...prev, { ...sponsor }]);
+          }
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <BackgroundImage color={color}>
-      <div className="vh-100 d-flex flex-column align-items-center">
+      <div className={`flex-grow-1 d-flex flex-column align-items-center overflow-auto ${styles.main_container}`}>
         <h1
-          className={`text-white text-center main_font text-uppercase mt-5 pt-4 pt-md-2 ${styles.heading}`}
+          className={`text-white text-center main_font text-uppercase animate__animated animate__fadeIn ${styles.heading}`}
         >
           Our Sponsors
         </h1>
-        <div className="mb-4" style={{height:"2px" ,width: "50%", backgroundColor: "whitesmoke"}}></div>
+        <div
+          className={`mb-4 w-50 ${styles.headingLine}`}
+        >
+          &nbsp;
+        </div>
+        <div className="text-white text-italic w-75 mb-4 text-center font-italic animate__animated animate__fadeIn">
+          In recent years PECFEST has had the honor to have facilitated a number
+          of sponsors which gave an exceptionally engaging experience to our
+          students as well as the brand.
+        </div>
         <div className="d-flex flex-row w-75 flex-wrap justify-content-center">
-          <div
-            className={`d-flex flex-column justify-content-start align-items-center p-3 me-4 mb-4 ${styles.card}`}
-          >
-            <img src={Untitled} alt="sponsor_image" style={{ height: "8em" }} />
-            <div
-              className={`text-white text-center text-center ${styles.sponsor_name}`}
-            >
-              TATA Motors
-            </div>
-            <hr className="w-75 text-white" style={{ margin: "10px" }}></hr>
-            <div
-              className={`text-uppercase text-white text-center text-center ${styles.sponsor_desc}`}
-            >
-              Marketing Sponsors
-            </div>
-          </div>
-          <div
-            className={`d-flex flex-column justify-content-start align-items-center p-3 me-4 mb-4 ${styles.card}`}
-          >
-            <img src={Untitled} alt="sponsor_image" style={{ height: "8em" }} />
-            <div
-              className={`text-white text-center text-center ${styles.sponsor_name}`}
-            >
-              TATA Motors
-            </div>
-            <hr className="w-75 text-white" style={{ margin: "10px" }}></hr>
-            <div
-              className={`text-uppercase text-white text-center text-center ${styles.sponsor_desc}`}
-            >
-              Marketing Sponsors
-            </div>
-          </div> <div
-            className={`d-flex flex-column justify-content-start align-items-center p-3 me-4 mb-4 ${styles.card}`}
-          >
-            <img src={Untitled} alt="sponsor_image" style={{ height: "8em" }} />
-            <div
-              className={`text-white text-center text-center ${styles.sponsor_name}`}
-            >
-              TATA Motors
-            </div>
-            <hr className="w-75 text-white" style={{ margin: "10px" }}></hr>
-            <div
-              className={`text-uppercase text-white text-center text-center ${styles.sponsor_desc}`}
-            >
-              Marketing Sponsors
-            </div>
-          </div> <div
-            className={`d-flex flex-column justify-content-start align-items-center p-3 me-4 mb-4 ${styles.card}`}
-          >
-            <img src={Untitled} alt="sponsor_image" style={{ height: "8em" }} />
-            <div
-              className={`text-white text-center text-center ${styles.sponsor_name}`}
-            >
-              TATA Motors
-            </div>
-            <hr className="w-75 text-white" style={{ margin: "10px" }}></hr>
-            <div
-              className={`text-uppercase text-white text-center text-center ${styles.sponsor_desc}`}
-            >
-              Marketing Sponsors
-            </div>
-          </div> <div
-            className={`d-flex flex-column justify-content-start align-items-center p-3 me-4 mb-4 ${styles.card}`}
-          >
-            <img src={Untitled} alt="sponsor_image" style={{ height: "8em" }} />
-            <div
-              className={`text-white text-center text-center ${styles.sponsor_name}`}
-            >
-              TATA Motors
-            </div>
-            <hr className="w-75 text-white" style={{ margin: "10px" }}></hr>
-            <div
-              className={`text-uppercase text-white text-center text-center ${styles.sponsor_desc}`}
-            >
-              Marketing Sponsors
-            </div>
-          </div> <div
-            className={`d-flex flex-column justify-content-start align-items-center p-3 me-4 mb-4 ${styles.card}`}
-          >
-            <img src={Untitled} alt="sponsor_image" style={{ height: "8em" }} />
-            <div
-              className={`text-white text-center text-center ${styles.sponsor_name}`}
-            >
-              TATA Motors
-            </div>
-            <hr className="w-75 text-white" style={{ margin: "10px" }}></hr>
-            <div
-              className={`text-uppercase text-white text-center text-center ${styles.sponsor_desc}`}
-            >
-              Marketing Sponsors
-            </div>
-          </div>
-          
+          {sponsors.map((sponsor) => {
+            return (
+              <SponsorCard
+                key={sponsor.id}
+                image={sponsor.url}
+                name={sponsor.name}
+                desc={sponsor.type}
+              />
+            );
+          })}
         </div>
       </div>
     </BackgroundImage>

@@ -45,7 +45,7 @@ function RegisterLogin({
       {!user && (
         <Container
           fluid
-          className="p-0 m-0 vh-100 animate__animated animate__fadeIn"
+          className="p-0 m-0 vh-100 animate__animated animate__fadeIn overflow-hidden"
         >
           <div
             style={{
