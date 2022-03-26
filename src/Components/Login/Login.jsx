@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import {} from "../../config";
-import { Form, Spinner } from "react-bootstrap";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../config";
+import { Spinner } from "react-bootstrap";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import SimpleInput from "../Utilities/SimpleInput";
 import styles from "./Login.module.css";
 import Button from "../Utilities/Button";
 import { toast } from "react-toastify";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const initialLoginState = { email: "", password: "", rememberMe: false };
 
 function Login({ onFlip, setOpenForgotPasswordUI, redirect = null }) {
@@ -20,7 +20,6 @@ function Login({ onFlip, setOpenForgotPasswordUI, redirect = null }) {
     e.preventDefault();
     console.log(email, password, rememberMe);
     setLoading(true);
-    const auth = getAuth();
 
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -116,7 +115,7 @@ function Login({ onFlip, setOpenForgotPasswordUI, redirect = null }) {
             Dont Have an account yet!{" "}
             <span
               onClick={signUpHandler}
-              className={`${styles.color_fadeblue} fw-bold text-decoration-underline`}
+              className={`${styles.color_fadeblue} fw-bold text-decoration-underline cursor-pointer`}
             >
               SIGN UP
             </span>
