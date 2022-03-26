@@ -23,9 +23,9 @@ const AboutPecfest1 = () => {
       >
         <div className="h-50 d-flex flex-column align-items-center justify-content-center overflow-hidden">
           <div
-            className={`d-flex flex-column ${styles["text-container"]} justify-content-start `}
+            className={`d-flex flex-column ${styles["text-container"]} justify-content-center `}
           >
-            <div id="mainText">
+            <div>
               <div className="flex-column pb-4" style={{color: "#E7D7AC"}}>
                 “Take a rocket from your pocket and Zip-Zap-Zoom with us on a
                 two day Cosmic Escapade.”

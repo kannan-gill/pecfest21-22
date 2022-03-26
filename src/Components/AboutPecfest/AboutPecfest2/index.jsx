@@ -37,7 +37,6 @@ const AboutPecfest2 = () => {
           className={`${styles.imgPlanet} d-none d-md-flex flex-row align-items-center justify-content-end h-100`}
         >
           <img
-            id="rotatingHand"
             src={chandigarhHand}
             alt="Open Hand Monument"
             className={styles.chandigarhHand}
