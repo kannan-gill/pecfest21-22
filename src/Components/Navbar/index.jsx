@@ -23,7 +23,8 @@ import styles from "./Navbar.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Spinner } from "react-bootstrap";
 import pecfest_logo from "../../Images/pecfest_logo.png";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "../../config";
 
 const routes = [
   {
@@ -173,7 +174,6 @@ const Navbar = () => {
   const [loadingUser, setLoadingUser] = useState(true);
   const [loadingLogoutUser, setLoadingLogoutUser] = useState(false);
   const [user, setUser] = useState(null);
-  const auth = getAuth();
   useEffect(() => {
     const cleanUp = onAuthStateChanged(auth, (userRes) => {
       if (userRes) {
