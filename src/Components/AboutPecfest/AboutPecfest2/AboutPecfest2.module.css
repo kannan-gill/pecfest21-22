@@ -9,7 +9,7 @@
 
 .content-container {
   padding-top: 4em;
-  padding-bottom: 9%;
+  padding-bottom: 8%;
   padding-left: 15%;
 }
 
@@ -45,26 +45,52 @@
 
 .chandigarhHand {
   width: 30%;
+  margin-top: 10%;
+  margin-right: -4px;
 }
 
 .registration_button {
   color: #f78e20;
   border: 1px solid #f78e20;
-  border-radius: 5px;
+  border-radius: 10px;
   font-family: "Audiowide";
   font-size: 20px;
   width: fit-content;
   text-align: center;
-  /* text-transform: uppercase; */
+  transition: all 0.3s;
+}
+
+.registration_button:hover{
+  color: #000;
+  background-color: #f78e20;
 }
 
 .text_container{
   width: 70%;
 }
 
+.pfDates{
+  width: 20em;
+}
+
 @media (max-width: 767px) {
+  .content-container{
+  padding: 0 10%;
+  }
+
   .text_container{
     width:100%;
-    margin-right: 15%;
+  }
+
+  .main_text{
+    font-size: 16px;
+  }
+
+  .registration_button{
+    font-size: 12px;
+  }
+
+  .pfDates{
+    width: 15em;
   }
 }

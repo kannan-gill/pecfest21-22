@@ -16,7 +16,6 @@
   width: 65%;
   font-family: "audiowide";
   font-style: normal;
-  font-weight: 400;
   font-size: 23px;
   line-height: 28px;
   text-align: center;
@@ -24,7 +23,7 @@
 
 .img-container {
   /* width: 40%; */
-  height: 75%;
+  height: 85%;
   z-index: 0;
 }
 

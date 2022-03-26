@@ -22,18 +22,18 @@ const AboutPecfest1 = () => {
         [
           { transform: `translateY(${divHeight}px)` },
           { transform: "translateY(0px)" },
-          { transform: `translateY(-${divHeight}px)` },
+          { transform: `translateY(-${divHeight-60}px)` },
 
         ],
         {
-          duration: 20000,
+          duration: 18000,
           iterations: Infinity,
         }
       );
   }, []);
 
   return (
-    <div className="text-white w-100 h-100 overflow-hidden position-relative animate__animated d-flex flex-column">
+    <div className="text-white w-100 h-100 overflow-hidden position-relative animate__animated">
       <StarsBg />
       <div
         className={`w-100 h-100  ${styles["content-container"]} d-flex flex-grow-1 flex-column align-items-center justify-content-start`}
@@ -43,7 +43,7 @@ const AboutPecfest1 = () => {
             className={`d-flex flex-column ${styles["text-container"]} justify-content-start `}
           >
             <div id="mainText">
-              <div className="d-none d-md-flex flex-column pb-5">
+              <div className="d-none d-md-flex flex-column pb-5" style={{color: "#E7D7AC"}}>
                 “Take a rocket from your pocket and Zip-Zap-Zoom with us on a
                 two day Cosmic Escapade.”
               </div>
