@@ -6,7 +6,8 @@ import ErrorTooltip from "./ErrorTooltip";
 const errorMessages = {
   gender: "Please select a gender",
   degree: "Please select a degree",
-  year: "Please select a year"
+  year: "Please select a year",
+  query: "Please select a query type"
 }
 
 function SelectInput({ label, disabledOption, options, icon, changeFunc, name, isValid, val }) {
