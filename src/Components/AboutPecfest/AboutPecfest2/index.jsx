@@ -13,22 +13,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const AboutPecfest2 = () => {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    document
-      .getElementById("rotatingHand")
-      .animate(
-        [
-          { transform: "rotateX(90deg)" },
-          { transform: "rotateX(0)" },
-          { transform: "rotateX(-90deg)" },
-        ],
-        {
-          duration: 3000,
-          iterations: Infinity,
-        }
-      );
-  }, []);
-
   return (
     <div className="text-white w-100 h-100 overflow-hidden position-relative">
       <StarsBg />
@@ -44,18 +28,10 @@ const AboutPecfest2 = () => {
             <span className="text-warning ">100 glorious years</span> of PEC at
             pecfest <span className="d-inline-block">21-22.</span>
           </span>
-          <Button
-            variant="light"
-            className="px-4 py-2 mt-4 text-uppercase fw-bold"
-            onClick={() => navigate("/register")}
-          >
+          <button type="button" onClick={() => navigate("/register")} className={`${styles.registration_button} cursor-pointer py-2 px-4 mt-4`}>
             Register now
             <FontAwesomeIcon  className="px-2" icon={faAngleDoubleRight}></FontAwesomeIcon>
-          </Button>
-          {/* <span onClick={() => navigate("/register")} className={`${styles.registration_button} cursor-pointer py-2 px-4 mt-4`}>
-            Register now
-            <FontAwesomeIcon  className="px-2" icon={faAngleDoubleRight}></FontAwesomeIcon>
-          </span> */}
+          </button>
         </div>
         <div
           className={`${styles.imgPlanet} d-none d-md-flex flex-row align-items-center justify-content-end h-100`}

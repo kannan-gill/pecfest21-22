@@ -8,22 +8,20 @@
 }
 
 .content-container {
-  padding-top: 8em;
+  padding-top: 8em; 
   padding-bottom: 6%;
 }
 
 .text-container {
-  width: 65%;
+  width: 75%;
   font-family: "audiowide";
   font-style: normal;
-  font-size: 23px;
-  line-height: 28px;
+  font-size: 18px;
   text-align: center;
 }
 
 .img-container {
-  /* width: 40%; */
-  height: 85%;
+  height: 90%;
   z-index: 0;
 }
 
@@ -34,8 +32,18 @@
   text-align: center;
 }
 
-@media screen and (max-width:1200px) {
-  .odometer{
-    visibility: hidden;
+@media screen and (max-width:800px) {
+  .text-container{
+    font-size: 15px;
+  }
+  .img-container{
+    height: 80%;
+  }
+}
+
+
+@media screen and (max-width:600px) {
+  .text-container{
+    font-size: 10px;
   }
 }

@@ -14,23 +14,6 @@ const AboutPecfest1 = () => {
     setov(odometerValues);
   }, []);
 
-  useEffect(() => {
-    const divHeight = document.getElementById("mainText").clientHeight;
-    document
-      .getElementById("mainText")
-      .animate(
-        [
-          { transform: `translateY(${divHeight}px)` },
-          { transform: "translateY(0px)" },
-          { transform: `translateY(-${divHeight-60}px)` },
-
-        ],
-        {
-          duration: 18000,
-          iterations: Infinity,
-        }
-      );
-  }, []);
 
   return (
     <div className="text-white w-100 h-100 overflow-hidden position-relative animate__animated">
@@ -38,12 +21,12 @@ const AboutPecfest1 = () => {
       <div
         className={`w-100 h-100  ${styles["content-container"]} d-flex flex-grow-1 flex-column align-items-center justify-content-start`}
       >
-        <div className="h-50 d-flex flex-column align-items-center justify-content-end overflow-hidden">
+        <div className="h-50 d-flex flex-column align-items-center justify-content-center overflow-hidden">
           <div
             className={`d-flex flex-column ${styles["text-container"]} justify-content-start `}
           >
             <div id="mainText">
-              <div className="d-none d-md-flex flex-column pb-5" style={{color: "#E7D7AC"}}>
+              <div className="flex-column pb-4" style={{color: "#E7D7AC"}}>
                 “Take a rocket from your pocket and Zip-Zap-Zoom with us on a
                 two day Cosmic Escapade.”
               </div>

@@ -5,7 +5,7 @@ import AboutPecfest2 from './AboutPecfest2'
 
 const AboutPecfest = () => [
   <AboutPecfest1 />,
-  // <AboutPecfest2 />
+  <AboutPecfest2 />
 ]
 
 export default AboutPecfest

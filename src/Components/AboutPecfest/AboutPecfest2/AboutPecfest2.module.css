@@ -28,14 +28,6 @@
 .imgPlanet {
   max-width: 25%;
   width: 25%;
-  /* position: absolute;
-  right:0;
-  top:50%;
-  transform: translate(0, -50%);
-  display: flex;
-  flex-direction: row;
-  height:100%;
-  justify-content: end; */
 }
 
 .aboutUsPlanet {
@@ -47,6 +39,7 @@
   width: 30%;
   margin-top: 10%;
   margin-right: -4px;
+  animation: rotatingAnimation 4s linear infinite;
 }
 
 .registration_button {
@@ -93,4 +86,11 @@
   .pfDates{
     width: 15em;
   }
+}
+
+
+@keyframes rotatingAnimation {
+  0% {transform: rotateX(90deg);}
+  50% {transform: rotateX(0deg);}
+  100% {transform: rotateX(-90deg);}
 }
