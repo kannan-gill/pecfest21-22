@@ -1,0 +1,24 @@
+.formbg{
+    background-image: url("../../Images/canvacardbg.png");
+    height: 400px;
+    background-size: cover;
+    border-radius: 5%;
+}
+
+.formitem{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top:20px;
+}
+
+.simpleinput{
+    margin:auto !important;
+}
+
+.underline{
+    width: 10%;
+    margin: auto;
+    color:red;
+    opacity: 0.5;
+}

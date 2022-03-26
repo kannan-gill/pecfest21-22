@@ -15,6 +15,11 @@ function Team() {
     useEffect(()=>{
         getList('team').then(data=>{
             data.sort(function(a,b){return a.rank - b.rank})
+            
+            data.forEach(team=>{
+                team.members.sort((a,b) => (a.position < b.position) ? 1 : ((b.position < a.position) ? -1 : 0))
+            })
+            console.log(data)
             setMembersData(data);
         });
     },[])
@@ -29,7 +34,7 @@ function Team() {
   return (
     <div className={`${styles.committeeBackground}`}>
         <StarsBg/>
-        <Container fluid className='w-100 h-100'>
+        <Container fluid className='w-100 h-100 overflow-auto'>
             <Row className={`d-flex justify-content-center ${styles.pageheader}`}>TEAM</Row>
                 {membersData.map(item=>{
                     return <PecfestTeams key={item.name} teamname={item.name} teamMembers = {item.members}/>

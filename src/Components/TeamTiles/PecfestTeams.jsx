@@ -14,7 +14,7 @@ function PecfestTeams(props) {
         <Row className="d-flex justify-content-center align-items-center">
 
           {props.teamMembers.map((member,index)=>{
-            return  <Col key={member.name} lg={3} sm={6}><TeamMemberCard member={member.name} position={member.position} imageSource={member.imagepath} index={index} memberNumber={12768979873}/></Col>
+            return  <Col key={member.name} lg={3} sm={6}><TeamMemberCard member={member} index={index}/></Col>
           })}
         </Row>
             

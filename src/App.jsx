@@ -10,6 +10,7 @@ import Home2 from "./Pages/Home/Home2";
 import LandingPage from "./Pages/CampusTour/LandingPage";
 import Competitions from "./Pages/Competitions/Competitions";
 import TeamEventRegistration from "./Pages/TeamEventRegistration/TeamEventRegistration";
+import Developers from './Pages/Developers/Developers'
 // import ContactUs from "./Pages/ContactUS/ContactUs";
 // import Developers from "./Pages/Developers/Developers";
 import Admin from "./Pages/Admin/Admin";
@@ -21,6 +22,7 @@ import { Link } from "react-router-dom";
 import ExternalLink from "Components/ExternalLink/ExternalLink";
 import PageNotFound from "Pages/PageNotFound/PageNotFound";
 import { ToastContainer } from "react-toastify";
+import ContactUs from "Pages/ContactUS/ContactUs";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
@@ -44,7 +46,6 @@ function App() {
     },
     { path: "/competitions", component: <ComingSoon /> },
     { path: "/schedule", component: <ComingSoon /> },
-    { path: "/contactUs", component: <ComingSoon /> },
     { path: "/admin", component: <Admin /> },
     { path: "/teamregister", component: <ComingSoon /> },
     { path: "/team", component: <Team /> },
@@ -54,8 +55,8 @@ function App() {
       path: "/merchandise",
       component: <ExternalLink url={externalUrlLinks.merchandise} />,
     },
-    { path: "/developer", component: <ComingSoon /> },
-    { path: "/contact", component: <ComingSoon /> },  
+    { path: "/developer", component: <Developers /> },
+    { path: "/contact", component: <ContactUs /> },  
     { path: "/events", component: <ComingSoon /> },
     { path: "*", component: <PageNotFound isNavbarVisible={setIsNavbarVisible}/> },
   ];
