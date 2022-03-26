@@ -3,14 +3,14 @@ import styles from "./Sponsors.module.css";
 import BackgroundImage from "Components/BackgroundImage/BackgroundImage";
 import SponsorCard from "./SponsorCard";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import { getList, updateDoc } from "../../services";
+import { getSortedList, updateDoc } from "../../services";
 
 const Sponsors = ({ color }) => {
   const [sponsors, setSponsors] = useState([]);
   const storage = getStorage();
 
   useEffect(() => {
-    getList("sponsors")
+    getSortedList("sponsors", {"field": "rank", "order": "desc"})
       .then((res) => {
         res.forEach((sponsor) => {
           if (sponsor["url"] === undefined) {

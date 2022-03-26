@@ -7,11 +7,32 @@ import {
   onSnapshot,
   setDoc,
   addDoc,
+  query,
+  orderBy,
 } from "firebase/firestore";
 
 export const getList = async (collectionParam) => {
   const resCollection = collection(firestore, collectionParam);
   const resSnap = await getDocs(resCollection);
+
+  const resList = resSnap.docs.map((doc) => {
+    return {
+      ...doc.data(),
+      id: doc.id,
+    };
+  });
+
+  return resList;
+};
+
+export const getSortedList = async (collectionParam, filter) => {
+  const resCollection = collection(firestore, collectionParam);
+  const resSnap = await getDocs(
+    query(
+      resCollection,
+      orderBy(filter.field, filter.order)
+    )
+  );
 
   const resList = resSnap.docs.map((doc) => {
     return {
@@ -72,5 +93,3 @@ export const updateDoc = async (collectionParam, docIdParam, body) => {
 
 export const createDoc = async (collectionParam, body) =>
   await addDoc(collection(firestore, collectionParam), body);
-
-
