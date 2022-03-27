@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "./Sponsors.module.css";
 
-const SponsorCard = ({ image, name, desc }) => {
+const SponsorCard = ({ image, name, desc,index }) => {
   return (
     <div
-      className={`d-flex flex-column justify-content-end py-3 align-items-center me-4 mb-4 zi-top animate__animated animate__fadeIn ${styles.card}`}
+      className={`d-flex flex-column justify-content-end py-3 align-items-center me-4 mb-4 zi-top animate__animated animate__fadeIn ${styles.card} ${index%2==0 ? styles.rightrotate : styles.leftrotate}`}
     >
       <div className="h-50 d-flex flex-row justify-content-center m-auto">
         <img
@@ -17,7 +17,7 @@ const SponsorCard = ({ image, name, desc }) => {
         {name}
       </div>
       <div
-          className={`m-2 w-75 ${styles.cardLine}`}
+          className={`m-2 w-50 ${styles.cardLine}`}
         ></div>
       <div
         className={`text-uppercase text-center ${styles.sponsor_desc}`}
