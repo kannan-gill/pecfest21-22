@@ -18,7 +18,6 @@ import Team from "./Pages/Team/Team";
 import Schedule from "Pages/Schedule/Schedule";
 import ComingSoon from "Pages/ComingSoon/ComingSoon";
 import Navbar from "Components/Navbar";
-import { Link } from "react-router-dom";
 import ExternalLink from "Components/ExternalLink/ExternalLink";
 import PageNotFound from "Pages/PageNotFound/PageNotFound";
 import { ToastContainer } from "react-toastify";

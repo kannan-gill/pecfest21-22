@@ -7,7 +7,6 @@ const errorMessages = {
   gender: "Please select a gender",
   degree: "Please select a degree",
   year: "Please select a year",
-  query: "Please select a query type"
 }
 
 function SelectInput({ label, disabledOption, options, icon, changeFunc, name, isValid, val }) {
@@ -37,7 +36,7 @@ function SelectInput({ label, disabledOption, options, icon, changeFunc, name, i
       </Form.Select>
 
       {!isValid ? (
-        <ErrorTooltip title={errorMessages[name]} />
+        <ErrorTooltip title={errorMessages[name]} classes="bg-white" />
       ) : null}
 
     </InputGroup>

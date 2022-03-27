@@ -54,7 +54,7 @@ const SimpleInput = ({
       />
 
       {!isValid ? (
-          <ErrorTooltip title={errorMessages[name]} />
+          <ErrorTooltip title={errorMessages[name]} classes="bg-white" />
         ) : null}
 
       {password && focus && (

@@ -1,24 +1,29 @@
-.formbg{
-    background-image: url("../../Images/canvacardbg.png");
-    height: 400px;
-    background-size: cover;
-    border-radius: 5%;
+.main_container{
+  margin-top: 4em;
+  overflow-x: hidden;
 }
 
-.formitem{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top:20px;
+.heading{
+  letter-spacing: 12px;
+  font-size: 8em;
+  color: #454545;
+  margin-top: -10px;
 }
 
-.simpleinput{
-    margin:auto !important;
+.headingTop{
+  font-size: 0.4em;
+  letter-spacing: 0px;
 }
 
-.underline{
-    width: 10%;
-    margin: auto;
-    color:red;
-    opacity: 0.5;
+@media screen and (max-width: 768px){
+  .heading{
+    font-size: 6em;
+  }  
 }
+
+@media screen and (max-width: 600px){
+  .heading{
+    font-size: 3em;
+  }  
+}
+
