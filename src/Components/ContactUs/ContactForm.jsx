@@ -53,7 +53,6 @@ function ContactForm() {
       )
       .then((result) => {
         setSendingForm(false);
-        setSendingForm(false);
         toast.success("Feedback sent successfully!", { autoClose: 2000 });
         setqueryobject(initialState);
       })
@@ -147,57 +146,6 @@ function ContactForm() {
             </>
           )}
         </Button>
-        {/* <div className={`${styles.formitem}`}>
-              <SimpleInput
-                type="text"
-                icon="user"
-                placeholder="Name"
-                name="name"
-                val={queryobject.name}
-                changeFunc={changeHandler}
-              />
-            </div>
-            <div className={`${styles.formitem}`}>
-              <SimpleInput
-                type="email"
-                icon="at"
-                placeholder="Email"
-                name="email"
-                val={queryobject.email}
-                changeFunc={changeHandler}
-              />
-            </div>
-            <div className={`${styles.formitem}`}>
-              <SelectInput
-                val={queryobject.query}
-                changeFunc={changeHandler}
-                name="query"
-                icon="question"
-                label="Query Type"
-                disabledOption="Query Type"
-                options={[
-                  "General Feedback",
-                  "Registration Query",
-                  "Competition Query",
-                  "Website Bug",
-                  "Other Query",
-                ]}
-                isValid={validQueryType}
-              />
-            </div>
-            <div className={`${styles.formitem}`}>
-              <SimpleInput
-                type="text"
-                icon="pen"
-                placeholder="Message"
-                name="message"
-                val={queryobject.message}
-                changeFunc={changeHandler}
-              />
-            </div> */}
-        {/* <div>
-              <Button type="submit">SUBMIT!</Button>
-            </div> */}
       </form>
     </div>
   );
