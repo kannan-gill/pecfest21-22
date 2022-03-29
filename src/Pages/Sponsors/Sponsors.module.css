@@ -51,6 +51,7 @@ background-image: linear-gradient(315deg, #fff000 0%, #ed008c 74%);
 .outerdiv{
   background-color: #fff000;
 background-image: linear-gradient(315deg, #fff000 0%, #ed008c 74%);
+overflow: hidden;
 }
 
 .rightrotate{
@@ -62,10 +63,10 @@ background-image: linear-gradient(315deg, #fff000 0%, #ed008c 74%);
 }
 
 .leftrotate{
-  transform:translateY(50px) rotate(-3deg) ;
+  transform:translateY(30px) rotate(-3deg) ;
 
 }
 
 .leftrotate:hover{
-  transform: translateY(50px) scale(1.1);
+  transform: translateY(30px) scale(1.1);
 }

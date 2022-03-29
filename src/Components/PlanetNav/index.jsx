@@ -20,7 +20,7 @@ const planets = [
     route: "/sponsors",
     text: "Sponsors",
     speed: "2",
-    color: "#C98244",
+    color: "rgb(237, 0, 140)",
   },
 
   {
