@@ -37,7 +37,7 @@ const Sponsors = ({ color }) => {
   }, []);
 
   return (
-    <div style={{height:"100vh", background:"#FFC55C"}}>
+    <div style={{height:"100vh"}} className={`${styles.outerdiv}`}>
       <StarsBg/>
         <div className={`flex-grow-1 d-flex flex-column align-items-center overflow-auto ${styles.main_container}`}>
         <h1
@@ -51,7 +51,7 @@ const Sponsors = ({ color }) => {
         >
           &nbsp;
         </div>
-        <div style={{fontFamily:"Audiowide"}} className="text-black w-75 mb-4 text-center animate__animated animate__fadeIn">
+        <div style={{fontFamily:"Audiowide"}} className="text-white w-75 mb-4 text-center animate__animated animate__fadeIn">
           Thank you to our sponsors
         </div>
         
