@@ -35,7 +35,7 @@ function Team() {
   return (
     <div className={`${styles.committeeBackground}`}>
         <StarsBg/>
-        <Container fluid className='w-100 h-100 overflow-auto'>
+        <Container fluid className={`w-100 h-100 overflow-auto ${styles.main_container}`}>
             <Row className={`d-flex justify-content-center ${styles.pageheader}`}>DEVELOPERS</Row>
                 <Row>{membersData.map((item,index)=>{
                     return <Col><TeamMemberCard key={item.name} member={item} index={index}/></Col> 

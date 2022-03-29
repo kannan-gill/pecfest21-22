@@ -34,8 +34,8 @@ function Team() {
   return (
     <div className={`${styles.committeeBackground}`}>
         <StarsBg/>
-        <Container fluid className='w-100 h-100 overflow-auto'>
-            <Row className={`d-flex justify-content-center ${styles.pageheader}`}>TEAM</Row>
+        <Container fluid className={`w-100 h-100 overflow-auto ${styles.main_container}`}>
+            <Row className={`d-flex justify-content-center ${styles.pageheader} `}>TEAM</Row>
                 {membersData.map(item=>{
                     return <PecfestTeams key={item.name} teamname={item.name} teamMembers = {item.members}/>
                 })}

@@ -1,36 +1,40 @@
-.committeeBackground{
-    /* background:url(../../Images/1845.jpg); */
-    height: 100vh;
-    overflow: hidden;
+.main_container {
+  margin-top: 4em;
+  overflow-x: hidden;
 }
 
-.image{
-    border-color: white;
-    border-style: solid;
-    border-width: 2px;
-    height:120px;
-    width:120px;
+.committeeBackground {
+  /* background:url(../../Images/1845.jpg); */
+  height: 100vh;
+  overflow: hidden;
 }
 
-.pageheader{
-    color:white !important;
-    font-family: 'Audiowide', cursive;
-    font-size: 45px;
-    font-weight: 700;
-    letter-spacing: 5px;
-    text-shadow: 5px 5px 5px #000;
-    margin:20px auto;
-    padding: 10px 10px;
+.image {
+  border-color: white;
+  border-style: solid;
+  border-width: 2px;
+  height: 120px;
+  width: 120px;
 }
 
-.committeetitles{
-    font-family: 'Audiowide', cursive;
-    font-size: 40px;
-    padding: 20px 10px;
+.pageheader {
+  color: white !important;
+  font-family: "Audiowide", cursive;
+  font-size: 45px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  text-shadow: 5px 5px 5px #000;
+  margin: 20px auto;
+  padding: 10px 10px;
 }
 
-.separatingline{
-    width:80%;
-    margin:30px auto;
+.committeetitles {
+  font-family: "Audiowide", cursive;
+  font-size: 40px;
+  padding: 20px 10px;
+}
 
+.separatingline {
+  width: 80%;
+  margin: 30px auto;
 }
