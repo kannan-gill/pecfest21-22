@@ -112,6 +112,7 @@ const Navbar = () => {
   const NavElement = (route) => {
     return (
       <div
+        key={route.route}
         onClick={() => {
           navigate(route.route);
           setIsNavOpen(false);
@@ -133,8 +134,8 @@ const Navbar = () => {
   };
   const DividerElement = (route) => {
     return (
-      <div className="position-relative mt-3 ms-2">
-        .
+      <div className="position-relative mt-3 ms-2" key={`divider-${route.text}`} >
+        &nbsp;
         <span
           className={`position-absolute start-0 bottom-0 translate-middle zi-2 ps-5 pt-0 pe-2 ${styles.nav_item_heading}`}
         >

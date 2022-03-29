@@ -5,10 +5,10 @@ import DatePickerInput from "../Utilities/DatePickerInput";
 import { Spinner } from "react-bootstrap";
 
 // this page opens only if
-import { sendEmailVerification, createUserWithEmailAndPassword, signOut } from "firebase/auth";
+import { sendEmailVerification, createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config";
 import { useNavigate } from "react-router-dom";
-import styles from "./Register.module.css";
+// import styles from "./Register.module.css";
 import { toast } from "react-toastify";
 import Button from "../Utilities/Button";
 import { createDoc } from "services";
