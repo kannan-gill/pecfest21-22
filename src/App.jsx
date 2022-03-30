@@ -21,6 +21,7 @@ import ExternalLink from "Components/ExternalLink/ExternalLink";
 import PageNotFound from "Pages/PageNotFound/PageNotFound";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AuthProvider from "./context/AuthContext";
 
 function App() {
   const [isNavBarVisible, setIsNavbarVisible] = useState(true);
@@ -54,9 +55,9 @@ function App() {
       component: <ExternalLink url={externalUrlLinks.merchandise} />,
     },
     { path: "/developer", component: <ComingSoon /> },
-    { path: "/contact", component: <ComingSoon /> },  
+    { path: "/contact", component: <ComingSoon /> },
     { path: "/events", component: <ComingSoon /> },
-    { path: "*", component: <PageNotFound isNavbarVisible={setIsNavbarVisible}/> },
+    { path: "*", component: <PageNotFound isNavbarVisible={setIsNavbarVisible} /> },
   ];
   const privateRoutes = [
     // add events to this
@@ -81,13 +82,15 @@ function App() {
   return (
     <div className="overflow-auto vh-100 bg-black">
       <ToastContainer theme="light" />
-      <BrowserRouter>
-        {isNavBarVisible && <Navbar />}
-        <Routes>
-          {publicRoutes.map((route) => publicRouteComponent(route))}
-          {privateRoutes.map((route) => privateRouteComponent(route))}
-        </Routes>
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          {isNavBarVisible && <Navbar />}
+          <Routes>
+            {publicRoutes.map((route) => publicRouteComponent(route))}
+            {privateRoutes.map((route) => privateRouteComponent(route))}
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
     </div>
   );
 }
