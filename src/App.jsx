@@ -22,10 +22,12 @@ import ExternalLink from "Components/ExternalLink/ExternalLink";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import TechCulturalSelector from "Pages/Events/TechSelector/TechSelector";
+import EventDetails from "Pages/EventCardDetails/EventDetails";
 
 function App() {
   const [isNavBarVisible, setIsNavbarVisible] = useState(true);
-
+  const [alwaysOpen, setAlwaysOpen] = useState(false);
+ 
   const externalUrlLinks = {
     merchandise: "https://pecfestmemories.co.in",
   };
@@ -56,12 +58,14 @@ function App() {
     },
     { path: "/developer", component: <ComingSoon /> },
     { path: "/contact", component: <ComingSoon /> },
+    { path: "/events", component: <TechCulturalSelector /> },
+    { path: "/tech-events", component: <EventList isTechnical /> },
+    { path: "/cultural-events", component: <EventList isTechnical={false}/> },
   ];
   const privateRoutes = [
     // add events to this
-    { path: "/events", component: <TechCulturalSelector /> },
-    { path: "/tech-events", component: <EventList isTechnical /> },
-    { path: "/cultural-events", component: <EventList isTechnical={false} /> },
+    { path: "/tech-events/:eventId", component: <EventDetails setAlwaysOpen={setAlwaysOpen} /> },
+    { path: "/cultural-events/:eventId", component: <EventDetails setAlwaysOpen={setAlwaysOpen} /> }
   ];
 
   const privateRouteComponent = (route) => (
@@ -81,7 +85,7 @@ function App() {
     <div className="overflow-hidden vh-100 bg-black">
       <ToastContainer theme="light" />
       <BrowserRouter>
-        {isNavBarVisible && <Navbar />}
+        {isNavBarVisible && <Navbar alwaysOpenOnLarge={alwaysOpen}/>}
         <Routes>
           {publicRoutes.map((route) => publicRouteComponent(route))}
           {privateRoutes.map((route) => privateRouteComponent(route))}

@@ -91,13 +91,18 @@ const routes = [
   },
 ];
 
-const Navbar = () => {
-  const [isNavOpen, setIsNavOpen] = useState(false);
+const Navbar = ({ alwaysOpenOnLarge }) => {
+  const [isNavOpen, setIsNavOpen] = useState(alwaysOpenOnLarge);
+  useEffect(() => {
+    setIsNavOpen(alwaysOpenOnLarge);
+  }, [alwaysOpenOnLarge]);
   const location = useLocation();
   const navigate = useNavigate();
   const handleRightSideClick = (e) => {
-    e.stopPropagation();
-    setIsNavOpen(false);
+    if (!alwaysOpenOnLarge) {
+      e.stopPropagation();
+      setIsNavOpen(false);
+    }
   };
   const [closeNavAnimation, setCloseNavAnimation] = useState(false);
   useEffect(() => {
@@ -192,11 +197,11 @@ const Navbar = () => {
     setLoadingLogoutUser(true);
     signOut(auth)
       .then(() => {
-        if(location.pathname !== "/"){
+        if (location.pathname !== "/") {
           navigate("/");
           return;
         }
-        
+
         // Sign-out successful.
         setTimeout(() => {
           setLoadingLogoutUser(false);
@@ -303,13 +308,23 @@ const Navbar = () => {
                     />
                     <h4 className="main_font ms-2">PECFEST</h4>
                   </div>
+                  {!alwaysOpenOnLarge && (
+                    <FontAwesomeIcon
+                      className="cursor-pointer"
+                      icon={faXmark}
+                      color="white"
+                      size="2x"
+                      onClick={() => setIsNavOpen(false)}
+                    />
+                    
+                  )}
                   <FontAwesomeIcon
-                    className="cursor-pointer"
-                    icon={faXmark}
-                    color="white"
-                    size="2x"
-                    onClick={() => setIsNavOpen(false)}
-                  />
+                      className="cursor-pointer d-block d-md-none"
+                      icon={faXmark}
+                      color="white"
+                      size="2x"
+                      onClick={() => setIsNavOpen(false)}
+                    />
                 </div>
               </div>
               <div
@@ -319,11 +334,13 @@ const Navbar = () => {
                 }}
               >
                 {routes.map((route, ind) =>
-                  route.type ? DividerElement(route, ind) : NavElement(route, ind)
+                  route.type
+                    ? DividerElement(route, ind)
+                    : NavElement(route, ind)
                 )}
               </div>
             </div>
-            {isNavOpen && (
+            {!alwaysOpenOnLarge && isNavOpen && (
               <div
                 className="position-absolute zi-top top-0 end-0 d-none d-md-flex col-md-6 col-lg-9 col-xl-9 vw-75 h-100"
                 onClick={handleRightSideClick}

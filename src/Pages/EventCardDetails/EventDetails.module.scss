@@ -1,0 +1,19 @@
+.custom_font{
+    font-family: 'Russo One', sans-serif;
+    letter-spacing: 3px;
+}
+.event_tile{
+    min-height: 50vh;
+    // background-image: url("https://picsum.photos/1920/1080?random");
+    h1{
+        font-size: 5em !important;
+    }
+    p{
+        color:rgb(179, 179, 179)
+        
+    }
+}
+
+.overlay{
+    background: linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.9));
+}

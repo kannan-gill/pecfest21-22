@@ -65,3 +65,6 @@
     width: 75% !important;
   }
 }
+.h-0{
+  height: 0 !important;
+}

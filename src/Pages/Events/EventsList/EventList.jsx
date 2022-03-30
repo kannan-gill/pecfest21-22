@@ -16,6 +16,7 @@ const EventList = ({ isTechnical }) => {
   const getEventList = async () => {
     getListRealTime("events", (eventsList) => {
       seteventDetails(eventsList);
+      console.log(eventsList);
       const filtersArray = eventsList.map((event) => event.tags);
       // @ts-ignore
       const uniqueFiltersArray = [...new Set(filtersArray.flat())];
@@ -36,7 +37,7 @@ const EventList = ({ isTechnical }) => {
   }, [tags]);
 
   return (
-    <div className="vh-100 d-flex flex-column animate__animated animate__fadeIn"  style={{ background: "#07202a" }}>
+    <div className="vh-100 d-flex flex-column animate__animated animate__fadeIn"  style={!isTechnical ? { background: "linear-gradient(black, #371629)" } : { background: "linear-gradient(black, #07202a)" }}>
       <StarsBg />
       <div className={`${styles.pageTitle}`}>
         {isTechnical ? "TECH" : "CULTURAL"} EVENTS
@@ -74,7 +75,7 @@ const EventList = ({ isTechnical }) => {
               return true;
             })
             .map((event, ind) => {
-              return <Event key={ind} event={event} />;
+              return <Event key={ind} event={event} isTechnical={isTechnical} />;
             })}
         </div>
       </div>

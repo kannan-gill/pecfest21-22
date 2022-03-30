@@ -1,10 +1,14 @@
+import { style } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import EventList from "../EventsList/EventList";
 import styles from "./TechSelector.module.scss";
+const technicalImageUrl= "https://cdn.searchenginejournal.com/wp-content/uploads/2019/11/why-technical-seo-and-on-site-seo-is-rarely-enough-5dcfef7155db8.png";
+const culturalImageUrl= "https://www.worldatlas.com/r/w1300-q80/upload/e7/2e/50/shutterstock-1913349307.jpg";
 const TechCulturalSelector = () => {
   const [openTechnical, setOpenTechnical] = useState(false);
   const [openCultural, setOpenCultural] = useState(false);
+  const [isHoveredOnTechnical, setHoveredOnTechnical] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     if (openTechnical || openCultural) {
@@ -25,6 +29,12 @@ const TechCulturalSelector = () => {
         style={{ background: "#07202a" }}
       >
         <div
+          onMouseOver={() => {
+            setHoveredOnTechnical(true);
+          }}
+          onMouseLeave={() => {
+            setHoveredOnTechnical(false);
+          }}
           onClick={() => {
             console.log("opened");
             setOpenTechnical(true);
@@ -46,7 +56,7 @@ const TechCulturalSelector = () => {
             Technical
           </h1>
           <img
-            src="https://picsum.photos/1920/1080"
+            src={technicalImageUrl}
             className={`${styles.culturalImage} vh-100 vw-100`}
           />
         </div>
@@ -59,6 +69,8 @@ const TechCulturalSelector = () => {
           className={`${styles.image} ${
             !(openTechnical || openCultural) && styles.technical
           } ${openCultural && styles.open_page}
+          ${openTechnical && styles.close_page}
+          ${isHoveredOnTechnical && styles.technical_small}
             cursor-pointer bg-image `}
         >
           <h1
@@ -74,7 +86,7 @@ const TechCulturalSelector = () => {
             Cultural
           </h1>
           <img
-            src="https://picsum.photos/1920/1080?random"
+            src={culturalImageUrl}
             className={`${styles.technicalImage} vh-100 vw-100  `}
           />
         </div>
@@ -103,7 +115,7 @@ const TechCulturalSelector = () => {
           )}
 
           <img
-            src="https://picsum.photos/1920/1080"
+            src={technicalImageUrl}
             className={`${styles.culturalImage} ${styles.shade} h-100 vw-100`}
           />
         </div>
@@ -128,7 +140,7 @@ const TechCulturalSelector = () => {
             </h1>
           )}
           <img
-            src="https://picsum.photos/1920/1080?random"
+            src={culturalImageUrl}
             className={`${styles.technicalImage}  ${styles.shade} vw-100 h-100`}
           />
         </div>

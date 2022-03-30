@@ -2,7 +2,9 @@ import useOutsideClickHandler from "hooks/useOutsideClickHandler";
 import React, { useEffect, useState } from "react";
 import { Button, Form, FormControl, InputGroup } from "react-bootstrap";
 import styles from "./Filters.module.scss";
-
+import Tag from "../Tag/Tag";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 const Filters = ({ searchEvent, setSearchEvent, filtersArray, setTags }) => {
   const [showFilter, setShowFilter] = useState(false);
   const [componentLoaded, setComponentLoaded] = useState(false);
@@ -23,6 +25,7 @@ const Filters = ({ searchEvent, setSearchEvent, filtersArray, setTags }) => {
     });
   };
   useEffect(() => {
+    console.log("filters", filters);
     setTags(
       filters
         .filter((filter) => filter.value === true)
@@ -31,58 +34,33 @@ const Filters = ({ searchEvent, setSearchEvent, filtersArray, setTags }) => {
   }, [filters]);
 
   return (
-    <span className="text-white mt-4 mb-1 px-5 col-12 col-md-4 offset-md-8 h-auto ">
-      <div className="d-block d-xl-flex flex-row justify-content-end position-relative">
-        <InputGroup className="mb-3 w-100 position-relative">
-          <FormControl
-            placeholder="Search Event"
-            aria-label="Search Event"
-            aria-describedby="basic-addon2"
-            value={searchEvent}
-            onChange={(event) => {
-              console.log(event.target.value);
-              setSearchEvent(event.target.value);
-            }}
-          />
-          <Button
-            variant={`${showFilter ? "warning" : "outline-secondary"}`}
-            id="button-addon2"
-            className={`${styles.no_focus} `}
-            onClick={() => {
-              setShowFilter((prevState) => !prevState);
-              setComponentLoaded(true);
-            }}
-          >
-            Filters
-          </Button>
-
-          {componentLoaded && (
-            <div
-              ref={ref}
-              className={`position-absolute zi-top ${
-                showFilter ? " animate__fadeIn" : "animate__fadeOut"
-              } top-100 end-0 mt-2 text-dark bg-white animate__animated animate__faster ${
-                styles.filters_container
-              }`}
-            >
-              <div className="p-2">Categories</div>
-              <hr className="m-0 p-0" />
-              <Form className="p-2 text-start">
-                {filters.map((filter, index) => (
-                  <Form.Check
-                    type="checkbox"
-                    className={`${styles.checkbox} mt-1`}
-                    label={filter.text}
-                    id={`filter-${index}`}
-                    checked={filter.value}
-                    name={filter.text}
-                    onChange={() => filterChangeHandler(index)}
-                  />
-                ))}
-              </Form>
-            </div>
-          )}
-        </InputGroup>
+    <span className="text-white mt-4 mb-1 px-5 col-12 h-auto ">
+      <div className="d-flex mb-2 flex-row align-items-center flex-wrap position-relative">
+        <div className={`d-none d-lg-block w-25 me-3 position-relative`}>
+          <input placeholder="Event Name" type="text" onChange={(e)=>{
+            setSearchEvent(e?.target?.value)
+          }} className={`py-1 px-2 ps-3 bg-transparent w-100 ${styles.input}`} />
+          <FontAwesomeIcon  icon={faMagnifyingGlass}
+          color="white"
+          size="1x"
+          className="position-absolute end-0 top-50 translate-middle-y me-3" />
+        </div>
+        <div className={`d-block d-lg-none w-100 mb-3 position-relative`}>
+          <input placeholder="Event Name" type="text" onChange={(e)=>{
+            setSearchEvent(e?.target?.value)
+          }} className={`py-1 px-2 ps-3 bg-transparent w-100 ${styles.input}`} />
+          <FontAwesomeIcon  icon={faMagnifyingGlass}
+          color="white"
+          size="1x"
+          className="position-absolute end-0 top-50 translate-middle-y me-3" />
+        </div>
+        {filters.map((filter, index) => {
+          return (<Tag
+            key={index}
+            tag={filter?.text}
+            onChange={() => filterChangeHandler(index)}
+          />)
+        })}
       </div>
     </span>
   );

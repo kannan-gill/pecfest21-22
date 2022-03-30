@@ -1,20 +1,84 @@
 .card_wrapper {
   position: relative;
-  padding-bottom: 70%;
+  padding-bottom: 130%;
+  border-radius: 5em;
 }
 .card_wrapper img {
   position: absolute;
   object-fit: cover;
   width: 100%;
   height: 100%;
+  filter: brightness(60%);
 }
+
 .card_body_color{
-    background-color: rgba(0, 0, 0, 0.637);
+    align-self: stretch;
+    background-color: rgba(0, 0, 0, 0.705);
     & h5{
         font-family: 'Russo One', sans-serif;
     }
-    & div{
-      background-color: #07202a !important;
-      border-color: rgba(255, 255, 255, 0.719);
-    }
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.border_curved{
+  border-radius: 1em;
+  // background-color: black;
+}
+.border_curved_top{
+  border-top-left-radius: 1em;
+  border-top-right-radius: 1em;
+}
+.card_hover{
+  margin-bottom: 8em !important;
+}
+.card_hover:hover .card_body_color{
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.705);
+}
+.card_hover:hover .description_overlay{
+  opacity: 1;
+
+}
+.description_overlay{
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.705);
+  transition: opacity 0.3s;
+  border-radius: 1em;
+  opacity: 0;
+}
+.button{
+  border-radius: 5em;
+  
+}
+.tech_colors{
+  background-color: #1f7799;
+  border: 1px solid #1f7799;
+  &:active,&:hover,&:focus{
+    background-color: #175770 !important;
+    border: 1px solid #175770 !important;
+    box-shadow: none;
+    outline: none;
+  }
+}
+.description_container{
+  margin-top: -3em !important;
+  height: 8em !important;
+}
+.cultural_colors{
+  background-color: #7e0f21;
+  border: 1px solid #7e0f21;
+  &:active,&:hover,&:focus{
+    background-color: #580b18 !important;
+    border: 1px solid #580b18 !important;
+    box-shadow: none;
+    outline: none;
+  }
+}
+.techincal_text{
+  color:#175770 !important;
+  background-color: rgb(212, 212, 212);
+}
+.cultural_text{
+  color:#580b18 !important;
+  background-color: rgb(212, 212, 212);
 }
