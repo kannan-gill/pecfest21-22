@@ -3,7 +3,6 @@ import SimpleInput from "../Utilities/SimpleInput";
 import SelectInput from "../Utilities/SelectInput";
 import DatePickerInput from "../Utilities/DatePickerInput";
 import { Spinner } from "react-bootstrap";
-
 // this page opens only if
 import { sendEmailVerification, createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config";
@@ -11,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 // import styles from "./Register.module.css";
 import { toast } from "react-toastify";
 import Button from "../Utilities/Button";
-import { createDoc } from "services";
+import { createDoc, getDocById, updateDoc } from "services";
 
 const isDigit = (phoneNum) => {
   return /^\d{10}$/.test(phoneNum);
@@ -45,6 +44,15 @@ const initialValidStates = {
   isPasswordValid: true,
 };
 
+// generate random alpha numeric string of length 5 and check if it is unique
+const generatePecfestId = (pecfestIdList) => {
+  let pecfestId = "";
+  do {
+    pecfestId = `PECFEST-${Math.random().toString(36).substring(2, 7).toUpperCase()}`;
+  } while (pecfestIdList.includes(pecfestId));
+  return pecfestId;
+}
+
 function Register({ onFlip, redirect }) {
   const navigate = useNavigate();
   const [user, setUser] = useState(initialStateUser);
@@ -60,14 +68,19 @@ function Register({ onFlip, redirect }) {
 
   const registerUser = () => {
     setLoading(true);
-    createUserWithEmailAndPassword(auth, user.email, user.password)
-      .then((userCredential) => {
-        const userData = user;
+    Promise.all([
+      getDocById("users", "pecfestIdList"),
+      createUserWithEmailAndPassword(auth, user.email, user.password)
+    ])
+      .then(([{value: pecfestIdList}, userCredential]) => {
+        const pecfestId = generatePecfestId(pecfestIdList);
+        const userData = { ...user };
         delete userData.password;
-        createDoc("users", user);
+        userData.pecfestId = pecfestId;
+        createDoc("users", userData);
+        updateDoc("users", "pecfestIdList", {value: [...pecfestIdList, pecfestId]});
         sendEmailVerification(auth.currentUser, { url: window.location.origin })
           .then(() => {
-            setLoading(false);
             navigate("/");
           })
           .catch((error) => {

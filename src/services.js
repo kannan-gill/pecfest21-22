@@ -66,9 +66,8 @@ export const getDocByIdRealTime = async (
   return cleanup;
 };
 
-export const updateDoc = async (collectionParam, docIdParam, body) => {
+export const updateDoc = async (collectionParam, docIdParam, body) => 
   await setDoc(doc(firestore, collectionParam, docIdParam), body);
-};
 
 export const createDoc = async (collectionParam, body) =>
   await addDoc(collection(firestore, collectionParam), body);
