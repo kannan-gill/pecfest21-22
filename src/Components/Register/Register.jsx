@@ -69,7 +69,7 @@ function Register({ onFlip, redirect }) {
   const registerUser = () => {
     setLoading(true);
     Promise.all([
-      getDocById("users", "pecfestIdList"),
+      getDocById("stats", "pecfestIdList"),
       createUserWithEmailAndPassword(auth, user.email, user.password)
     ])
       .then(([{value: pecfestIdList}, userCredential]) => {
@@ -78,7 +78,7 @@ function Register({ onFlip, redirect }) {
         delete userData.password;
         userData.pecfestId = pecfestId;
         createDoc("users", userData);
-        updateDoc("users", "pecfestIdList", {value: [...pecfestIdList, pecfestId]});
+        updateDoc("stats", "pecfestIdList", {value: [...pecfestIdList, pecfestId]});
         sendEmailVerification(auth.currentUser, { url: window.location.origin })
           .then(() => {
             navigate("/");
