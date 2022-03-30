@@ -7,7 +7,7 @@ const EventDetailsTile = ({
   buttonColor,
   buttonHandler,
   title,
-  children,
+  children = null,
 }) => {
   return (
     <div
@@ -19,8 +19,8 @@ const EventDetailsTile = ({
       <div
         className={`w-100 h-100 text-white d-flex flex-column px-4 justify-content-center ${styles.overlay}`}
       >
-        <h2>{title}</h2>
-        <div className={styles.grey_color}>{children}</div>
+        <h2 className=" main_font">{title}</h2>
+        <div className={`${styles.grey_color} main_font`}>{children}</div>
         <div>
           <Button
             onClick={() => buttonHandler()}
