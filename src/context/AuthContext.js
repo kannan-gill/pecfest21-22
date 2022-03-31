@@ -2,6 +2,7 @@ import { useState, useEffect, createContext } from "react";
 import { auth } from "../config";
 import { getUserByEmail } from "../services";
 import { onAuthStateChanged } from "firebase/auth";
+import React from "react";
 
 export const AuthContext = createContext(null);
 
@@ -31,7 +32,7 @@ const { Provider } = AuthContext;
 const AuthProvider = (props) => {
   const [user, setUser] = useAuthHandler();
 
-  return <Provider value={{ user, setUser }}>{props.children}</Provider>;
+  return <Provider value={user}>{props.children}</Provider>;
 };
 
 export default AuthProvider;

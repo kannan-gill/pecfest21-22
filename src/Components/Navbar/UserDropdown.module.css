@@ -1,0 +1,42 @@
+.copy_icon, .copy_icon:focus, .copy_icon:active {
+  background-color: #343A40;
+  border: none !important;
+  box-shadow: none !important;
+  color: white;
+  transition: all 0.3s;
+}
+
+.copy_icon:hover{
+  transform: scale(1.3);
+  background-color: #343A40;
+  border: none;
+  box-shadow: none;
+  outline: none;
+  color: white;
+}
+
+.dropDown, .dropDown:focus, .dropDown:hover, .dropDown:active {
+  border-radius:50%;
+  color: black !important;
+  background-color: #FEC007 !important;
+  outline: none;
+  box-shadow: none !important;
+}
+
+.dropDown::after {
+  display: none !important; 
+}
+
+.dropdownMenu{
+  width: max-content;
+}
+
+.dropdownItem{
+  /* width: 16em; */
+  color: #FEC007 !important;
+}
+
+.dropdownItem:active{
+  background-color: #000 !important;
+  color: #FEC007 !important;
+}

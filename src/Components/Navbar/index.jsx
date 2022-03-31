@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import {
@@ -25,6 +25,7 @@ import { Button, Spinner } from "react-bootstrap";
 import pecfest_logo from "../../Images/pecfest_logo.png";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../config";
+import UserDropdown from "./UserDropdown";
 
 const routes = [
   {
@@ -134,7 +135,10 @@ const Navbar = () => {
   };
   const DividerElement = (route) => {
     return (
-      <div className="position-relative mt-3 ms-2" key={`divider-${route.text}`} >
+      <div
+        className="position-relative mt-3 ms-2"
+        key={`divider-${route.text}`}
+      >
         &nbsp;
         <span
           className={`position-absolute start-0 bottom-0 translate-middle zi-2 ps-5 pt-0 pe-2 ${styles.nav_item_heading}`}
@@ -192,11 +196,11 @@ const Navbar = () => {
     setLoadingLogoutUser(true);
     signOut(auth)
       .then(() => {
-        if(location.pathname !== "/"){
+        if (location.pathname !== "/") {
           navigate("/");
           return;
         }
-        
+
         // Sign-out successful.
         setTimeout(() => {
           setLoadingLogoutUser(false);
@@ -214,58 +218,59 @@ const Navbar = () => {
       {!loadingUser && (
         <>
           <div className="position-absolute top-0 end-0 zi-top animate__animated animate__fadeIn animate__fast">
-            <Button
-              onClick={() => {
-                downloadBrochure();
-              }}
-              className={`fw-bold my-4 mx-2 transition-smooth ${styles.brochure}`}
-            >
-              <FontAwesomeIcon icon={faDownload} className="me-2" size="1x" />
-              Brochure
-            </Button>
-            {
+            <div className="d-flex flex-row align-items-center">
               <Button
-                className={`animate__animated fw-bold px-3 my-4 mx-2`}
                 onClick={() => {
-                  if (user) {
-                    signOutHandler();
-                  } else {
-                    navigate("/login");
-                  }
+                  downloadBrochure();
                 }}
-                variant="warning"
-                style={{
-                  borderRadius: "5em",
-                }}
+                className={`fw-bold my-4 mx-2 transition-smooth ${styles.brochure}`}
               >
-                {loadingLogoutUser ? (
+                <FontAwesomeIcon icon={faDownload} className="me-2" size="1x" />
+                Brochure
+              </Button>
+              {loadingLogoutUser ? (
+                <Button
+                  className={`animate__animated fw-bold px-3 my-4 mx-2`}
+                  onClick={() => {
+                    if (user) {
+                      signOutHandler();
+                    } else {
+                      navigate("/login");
+                    }
+                  }}
+                  variant="warning"
+                  style={{
+                    borderRadius: "5em",
+                  }}
+                >
                   <Spinner
                     animation="border"
                     variant="dark"
                     size="sm"
                     className="mx-4"
                   />
-                ) : user ? (
-                  <>
-                    <FontAwesomeIcon
-                      icon={faRocket}
-                      className="me-2"
-                      size="1x"
-                    />
-                    Logout
-                  </>
-                ) : (
-                  <>
-                    <FontAwesomeIcon
-                      icon={faRocket}
-                      className="me-2"
-                      size="1x"
-                    />
-                    Login
-                  </>
-                )}
-              </Button>
-            }
+                </Button>
+              ) : user ? <UserDropdown user={user} signOutHandler={signOutHandler}/>
+                : (
+                <Button
+                  className={`animate__animated fw-bold px-3 my-4 mx-2`}
+                  onClick={() => {
+                    if (user) {
+                      signOutHandler();
+                    } else {
+                      navigate("/login");
+                    }
+                  }}
+                  variant="warning"
+                  style={{
+                    borderRadius: "5em",
+                  }}
+                >
+                  <FontAwesomeIcon icon={faRocket} className="me-2" size="1x" />
+                  Login
+                </Button>
+              )}
+            </div>
           </div>
 
           <div className="position-absolute top-0 start-0 text-white zi-top animate__animated animate__fadeIn">
