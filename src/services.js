@@ -7,6 +7,8 @@ import {
   onSnapshot,
   setDoc,
   addDoc,
+  query,
+  where,
 } from "firebase/firestore";
 
 export const getList = async (collectionParam) => {
@@ -66,11 +68,26 @@ export const getDocByIdRealTime = async (
   return cleanup;
 };
 
-export const updateDoc = async (collectionParam, docIdParam, body) => {
+export const updateDoc = async (collectionParam, docIdParam, body) =>
   await setDoc(doc(firestore, collectionParam, docIdParam), body);
-};
 
 export const createDoc = async (collectionParam, body) =>
   await addDoc(collection(firestore, collectionParam), body);
 
+export const getUserByEmail = async (emailParam) => {
+  const queryRef = query(collection(firestore, "users"), where("email", "==", emailParam));
 
+  const querySnapshot = await getDocs(queryRef);
+  const data = querySnapshot.map((doc) => {
+    return {
+      ...doc.data(),
+      id: doc.id,
+    };
+  });
+
+  if (data.length > 0) {
+    return data[0];
+  } else {
+    throw Error("No such user exists");
+  }
+};

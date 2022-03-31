@@ -2,26 +2,26 @@ import React, { useState } from "react";
 import "./App.css";
 // import Button from "./Components/Utilities/Button";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import EventList from "./Pages/Events/EventList";
+// import EventList from "./Pages/Events/EventList";
 // import Home from "./Pages/Home/Home";
 import PrivateRoutes from "./Components/PrivateRoutes";
 import RegisterLogin from "./Pages/RegisterLogin/RegisterLogin";
 import Home2 from "./Pages/Home/Home2";
-import LandingPage from "./Pages/CampusTour/LandingPage";
-import Competitions from "./Pages/Competitions/Competitions";
-import TeamEventRegistration from "./Pages/TeamEventRegistration/TeamEventRegistration";
+// import LandingPage from "./Pages/CampusTour/LandingPage";
+// import Competitions from "./Pages/Competitions/Competitions";
+// import TeamEventRegistration from "./Pages/TeamEventRegistration/TeamEventRegistration";
 // import ContactUs from "./Pages/ContactUS/ContactUs";
 // import Developers from "./Pages/Developers/Developers";
 import Admin from "./Pages/Admin/Admin";
-import Team from "./Pages/Team/Team";
-import Schedule from "Pages/Schedule/Schedule";
+// import Team from "./Pages/Team/Team";
+// import Schedule from "Pages/Schedule/Schedule";
 import ComingSoon from "Pages/ComingSoon/ComingSoon";
 import Navbar from "Components/Navbar";
-import { Link } from "react-router-dom";
 import ExternalLink from "Components/ExternalLink/ExternalLink";
 import PageNotFound from "Pages/PageNotFound/PageNotFound";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AuthProvider from "./context/AuthContext";
 
 function App() {
   const [isNavBarVisible, setIsNavbarVisible] = useState(true);
@@ -55,9 +55,9 @@ function App() {
       component: <ExternalLink url={externalUrlLinks.merchandise} />,
     },
     { path: "/developer", component: <ComingSoon /> },
-    { path: "/contact", component: <ComingSoon /> },  
+    { path: "/contact", component: <ComingSoon /> },
     { path: "/events", component: <ComingSoon /> },
-    { path: "*", component: <PageNotFound isNavbarVisible={setIsNavbarVisible}/> },
+    { path: "*", component: <PageNotFound isNavbarVisible={setIsNavbarVisible} /> },
   ];
   const privateRoutes = [
     // add events to this
@@ -72,22 +72,25 @@ function App() {
           {route.component}
         </PrivateRoutes>
       }
+      key={route.path}
     />
   );
   const publicRouteComponent = (route) => (
-    <Route path={route.path} element={route.component} />
+    <Route path={route.path} element={route.component} key={route.path} />
   );
 
   return (
     <div className="overflow-auto vh-100 bg-black">
       <ToastContainer theme="light" />
-      <BrowserRouter>
-        {isNavBarVisible && <Navbar />}
-        <Routes>
-          {publicRoutes.map((route) => publicRouteComponent(route))}
-          {privateRoutes.map((route) => privateRouteComponent(route))}
-        </Routes>
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          {isNavBarVisible && <Navbar />}
+          <Routes>
+            {publicRoutes.map((route) => publicRouteComponent(route))}
+            {privateRoutes.map((route) => privateRouteComponent(route))}
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
     </div>
   );
 }

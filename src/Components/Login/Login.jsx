@@ -25,7 +25,7 @@ function Login({ onFlip, setOpenForgotPasswordUI, redirect = null }) {
       .then((userCredential) => {
         // Signed in
 
-        const user = userCredential.user;
+        // const user = userCredential.user;
         setLoading(false);
         // toast.info("Signed in succesfully");
         if (redirect) {
