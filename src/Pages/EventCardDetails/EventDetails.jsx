@@ -1,4 +1,4 @@
-import { faTelevision } from "@fortawesome/free-solid-svg-icons";
+import { faCirclePlus, faTelevision } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Event from "Components/EventCard/Event";
 import EventDetailsTile from "Components/EventDetailsTile/EventDetailsTile";
@@ -6,14 +6,13 @@ import Filters from "Components/Filters/Filters";
 import StarsBg from "Components/StarsBg";
 import Tag from "Components/Tag/Tag";
 import React, { useEffect, useState } from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Form, Modal } from "react-bootstrap";
 import { useLocation, useParams } from "react-router-dom";
 import { getDocByIdRealTime } from "services";
 import ModalVideo from "react-modal-video";
-import EventRegister from "../../Components/EventRegister/EventRegister";
 import styles from "./EventDetails.module.scss";
-import ReactDOM from "react-dom";
 import "react-modal-video/scss/modal-video.scss";
+import EventRegistration from "Components/EventRegistration/index";
 const EventDetails = ({ setAlwaysOpen }) => {
   const location = useLocation();
   const urlParams = useParams();
@@ -40,6 +39,13 @@ const EventDetails = ({ setAlwaysOpen }) => {
     };
     return cleanUp;
   });
+  const [isRegistereOpen, setRegisterOpen] = useState(false);
+  const registerHandler = () => {
+    if(eventDetails.isTeamEvent){
+      setRegisterOpen(true);
+    }
+    
+  }
   return (
     <>
       {eventDetails && (
@@ -104,10 +110,13 @@ const EventDetails = ({ setAlwaysOpen }) => {
                   </div>
                 </div>
                 <div className="mt-3 d-flex flex-row flex-wrap">
-                  <div className="col-12 col-xl-6 px-2 mb-3">
+                  <div className="col-12 col-xl-8 px-2 mb-3">
                     <EventDetailsTile
                       buttonColor="warning"
-                      buttonHandler={() => {}}
+                      buttonHandler={() => {
+                        const url = eventDetails?.rulebookUrl;
+                        if (url) window.open(url, "_blank");
+                      }}
                       buttonText="Know More"
                       background="https://picsum.photos/1366/768?random"
                       title="Event Details"
@@ -118,15 +127,29 @@ const EventDetails = ({ setAlwaysOpen }) => {
                       <br />
                     </EventDetailsTile>
                   </div>
-                  <div className="col-12 col-xl-6 px-2 mb-3">
+                  <div className="col-12 col-xl-4 px-2 mb-3">
                     <EventDetailsTile
                       buttonColor="warning"
-                      buttonHandler={() => {}}
+                      buttonHandler={() => {
+                        registerHandler();
+                      }}
                       buttonText="Register"
                       background="https://picsum.photos/1600/900?random"
                       title="Register Now"
                     ></EventDetailsTile>
                   </div>
+                  <Modal
+                    centered
+                    show={isRegistereOpen}
+                    className={styles.bg_brown}
+                    onHide={() => setRegisterOpen(false)}
+                  >
+                    <Modal.Body
+                      className={`px-5 py-3 d-flex flex-column justify-content-center text-white border-muted main_font`}
+                    >
+                      <EventRegistration />
+                    </Modal.Body>
+                  </Modal>
                 </div>
               </div>
             </div>

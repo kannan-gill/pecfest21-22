@@ -7,6 +7,8 @@ const EventDetailsTile = ({
   buttonColor,
   buttonHandler,
   title,
+  buttonDisabled = false,
+  align = "start",
   children = null,
 }) => {
   return (
@@ -17,16 +19,20 @@ const EventDetailsTile = ({
       }}
     >
       <div
-        className={`w-100 h-100 text-white d-flex flex-column px-4 justify-content-center ${styles.overlay}`}
+        className={`w-100 h-100 text-white d-flex flex-column py-4 px-4 align-items-${align} justify-content-center ${styles.overlay}`}
       >
         <h2 className=" main_font">{title}</h2>
-        <div className={`${styles.grey_color} main_font`}>{children}</div>
+        <div className={`${styles.grey_color} main_font overflow-auto`}>{children}</div>
         <div>
           <Button
-            onClick={() => buttonHandler()}
+            onClick={() => {
+              if(!buttonDisabled)
+                buttonHandler();
+            }}
             variant={buttonColor}
             size="sm"
-            className={`fw-bold px-3 py-2 mt-3 ${styles.button}`}
+            disabled={buttonDisabled}
+            className={`fw-bold px-3 py-2 mt-3 mb-2 ${styles.button}`}
           >
             {buttonText}
           </Button>

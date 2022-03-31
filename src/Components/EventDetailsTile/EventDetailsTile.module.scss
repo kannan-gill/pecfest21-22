@@ -1,9 +1,10 @@
 .tile{
     // min-height: 30vh;
-    aspect-ratio: 2 / 1;
+    // aspect-ratio: 2 / 1;
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
+    height: 40vh;
 }
 .overlay{
     background-color: rgba(0, 0, 0, 0.692);
