@@ -1,5 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Dropdown, Button, Modal, Spinner } from "react-bootstrap";
+import {
+  Dropdown,
+  Button,
+  Modal,
+  Spinner,
+  OverlayTrigger,
+  Tooltip,
+} from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCopy,
@@ -19,6 +26,7 @@ const UserDropdown = ({ user, signOutHandler }) => {
   const authContext = useContext(AuthContext);
   const [modalShow, setModalShow] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(false);
 
   const auth = getAuth();
 
@@ -36,6 +44,20 @@ const UserDropdown = ({ user, signOutHandler }) => {
         toast.error(errorMessage);
       });
   };
+
+  const copyButton = (
+    <Button
+      className={styles.copy_icon}
+      onClick={() => {
+        setShowTooltip(true);
+        navigator.clipboard.writeText(authContext["pecfestId"]);
+        setTimeout(() => setShowTooltip(false), 1000);
+      }}
+
+    >
+      <FontAwesomeIcon icon={faCopy} />
+    </Button>
+  );
 
   return (
     <>
@@ -64,16 +86,16 @@ const UserDropdown = ({ user, signOutHandler }) => {
                 <div className="pe-4 fst-italic">
                   {authContext["pecfestId"]}
                 </div>
-                <Button
-                  className={styles.copy_icon}
-                  onClick={() =>
-                    navigator.clipboard.writeText(
-                      authContext["pecfestId"]
-                    )
-                  }
-                >
-                  <FontAwesomeIcon icon={faCopy} />
-                </Button>
+                {showTooltip ? (
+                  <OverlayTrigger
+                    placement="bottom"
+                    overlay={<Tooltip>Copied!</Tooltip>}
+                  >
+                    {copyButton}
+                  </OverlayTrigger>
+                ) : (
+                  copyButton
+                )}
               </div>
             </div>
             <hr className="p-0 m-2 w-75 m-auto my-1"></hr>
