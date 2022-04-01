@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import StarsBg from "../../StarsBg";
 import BottomBars from "../../BottomBars";
 import Spacecraft from "../../Spacecraft";
@@ -6,7 +6,6 @@ import AboutUsPlanet from "../../../Images/aboutUsPlanet.png";
 import chandigarhHand from "../../../Images/chandigarhHand.png";
 import styles from "./AboutPecfest2.module.css";
 import { useNavigate } from "react-router-dom";
-import { Button } from "react-bootstrap";
 import { faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
