@@ -23,7 +23,8 @@ import styles from "./Navbar.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Spinner } from "react-bootstrap";
 import pecfest_logo from "../../Images/pecfest_logo.png";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "../../config";
 
 const routes = [
   {
@@ -111,6 +112,7 @@ const Navbar = () => {
   const NavElement = (route) => {
     return (
       <div
+        key={route.route}
         onClick={() => {
           navigate(route.route);
           setIsNavOpen(false);
@@ -132,8 +134,8 @@ const Navbar = () => {
   };
   const DividerElement = (route) => {
     return (
-      <div className="position-relative mt-3 ms-2">
-        .
+      <div className="position-relative mt-3 ms-2" key={`divider-${route.text}`} >
+        &nbsp;
         <span
           className={`position-absolute start-0 bottom-0 translate-middle zi-2 ps-5 pt-0 pe-2 ${styles.nav_item_heading}`}
         >
@@ -173,7 +175,6 @@ const Navbar = () => {
   const [loadingUser, setLoadingUser] = useState(true);
   const [loadingLogoutUser, setLoadingLogoutUser] = useState(false);
   const [user, setUser] = useState(null);
-  const auth = getAuth();
   useEffect(() => {
     const cleanUp = onAuthStateChanged(auth, (userRes) => {
       if (userRes) {

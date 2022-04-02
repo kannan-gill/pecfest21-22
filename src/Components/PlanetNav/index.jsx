@@ -3,11 +3,9 @@ import { faAnglesRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 import BackImg from "../../Images/back-img.png";
-import nebulaBg from "../../Images/nebulabgextracted-edited.png";
 import useAnimatedRenderer from "hooks/useAnimatedRenderer";
 import ExpandingCircle from "Components/ExpandingCircle";
 import StarsBg from "../StarsBg";
-import { width } from "@mui/system";
 
 const planets = [
   {
@@ -185,6 +183,7 @@ const PlanetNav = ({ transitionAnimation }) => {
       >
         {planets.map((planet, ind) => (
           <div
+            key={planet.route}
             onMouseEnter={() => {
               setHoveredPlanet(ind + 1);
             }}
@@ -210,6 +209,7 @@ const PlanetNav = ({ transitionAnimation }) => {
         ))}
         {planets.map((planet, ind) => (
           <div
+            key={planet.route}
             onMouseEnter={() => {
               setHoveredPlanet(ind + 1);
             }}
