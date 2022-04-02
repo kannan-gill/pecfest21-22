@@ -1,15 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   Dropdown,
   Button,
-  Modal,
-  Spinner,
-  OverlayTrigger,
-  Tooltip,
 } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCopy,
   faUser,
   faRightFromBracket,
   faCircleExclamation,
@@ -20,13 +15,13 @@ import { sendEmailVerification, getAuth } from "firebase/auth";
 import { AuthContext } from "../../context/AuthContext";
 import styles from "./UserDropdown.module.css";
 import ModalCard from "Components/ModalCard/ModalCard";
+import PecfestId from "./PecfestId";
 
 const UserDropdown = ({ user, signOutHandler }) => {
   const navigate = useNavigate();
   const authContext = useContext(AuthContext);
   const [modalShow, setModalShow] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [showTooltip, setShowTooltip] = useState(false);
 
   const auth = getAuth();
 
@@ -45,19 +40,7 @@ const UserDropdown = ({ user, signOutHandler }) => {
       });
   };
 
-  const copyButton = (
-    <Button
-      className={styles.copy_icon}
-      onClick={() => {
-        setShowTooltip(true);
-        navigator.clipboard.writeText(authContext["pecfestId"]);
-        setTimeout(() => setShowTooltip(false), 1000);
-      }}
-
-    >
-      <FontAwesomeIcon icon={faCopy} />
-    </Button>
-  );
+ 
 
   return (
     <>
@@ -83,19 +66,7 @@ const UserDropdown = ({ user, signOutHandler }) => {
             >
               <h6>Hi, {authContext["name"]}!</h6>
               <div className="d-flex flex-row justify-content-between align-items-center w-100 pe-1 pb-1">
-                <div className="pe-4 fst-italic">
-                  {authContext["pecfestId"]}
-                </div>
-                {showTooltip ? (
-                  <OverlayTrigger
-                    placement="bottom"
-                    overlay={<Tooltip>Copied!</Tooltip>}
-                  >
-                    {copyButton}
-                  </OverlayTrigger>
-                ) : (
-                  copyButton
-                )}
+                <PecfestId color="white" iconColor="#343a40"/>
               </div>
             </div>
             <hr className="p-0 m-2 w-75 m-auto my-1"></hr>

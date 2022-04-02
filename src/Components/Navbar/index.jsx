@@ -1,14 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import {
   faBars,
-  faBook,
   faCalendar,
   faDesktop,
   faDollar,
   faDrum,
-  faDrumstickBite,
   faHouse,
   faInfoCircle,
   faLightbulb,
@@ -26,6 +24,7 @@ import pecfest_logo from "../../Images/pecfest_logo.png";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../config";
 import UserDropdown from "./UserDropdown";
+import PecfestId from "./PecfestId";
 
 const routes = [
   {
@@ -97,6 +96,7 @@ const Navbar = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+
   const handleRightSideClick = (e) => {
     e.stopPropagation();
     setIsNavOpen(false);
@@ -250,8 +250,9 @@ const Navbar = () => {
                     className="mx-4"
                   />
                 </Button>
-              ) : user ? <UserDropdown user={user} signOutHandler={signOutHandler}/>
-                : (
+              ) : user ? (
+                <UserDropdown user={user} signOutHandler={signOutHandler} />
+              ) : (
                 <Button
                   className={`animate__animated fw-bold px-3 my-4 mx-2`}
                   onClick={() => {
@@ -299,14 +300,19 @@ const Navbar = () => {
             >
               <div className="d-flex flex-column overflow-none justify-content-start  ">
                 <div className="d-flex justify-content-between align-items-center px-3 pt-4 pb-0 text-white">
-                  <div className="d-flex flex-row">
-                    <img
-                      src={pecfest_logo}
-                      className={`${styles.pecfest_logo} main_font cursor-pointer`}
-                      alt="pecfest logo"
-                      onClick={() => navigate("/")}
-                    />
-                    <h4 className="main_font ms-2">PECFEST</h4>
+                  <div>
+                    <div className="d-flex flex-row justify-content-center align-items-center">
+                      <img
+                        src={pecfest_logo}
+                        className={`${styles.pecfest_logo} main_font cursor-pointer`}
+                        alt="pecfest logo"
+                        onClick={() => navigate("/")}
+                      />
+                      <div className="d-flex flex-column ms-2">
+                        <h4 className="main_font mb-0 pb-0">PECFEST</h4>
+                        {user && <div className="d-flex flex-row align-items-center"><PecfestId color="#fec007" iconColor="#0f1113"/></div>}
+                      </div>
+                    </div>
                   </div>
                   <FontAwesomeIcon
                     className="cursor-pointer"
