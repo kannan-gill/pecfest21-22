@@ -5,7 +5,7 @@ import React from "react";
 import styles from "./ContactUs.module.css";
 
 
-const ContactUs1 = () => {
+const ContactUs = () => {
   return (
     <div className="vh-100 vw-100 d-flex flex-column">
       <StarsBg />
@@ -33,4 +33,4 @@ const ContactUs1 = () => {
   );
 };
 
-export default ContactUs1;
+export default ContactUs;

@@ -78,7 +78,7 @@ export const getUserByEmail = async (emailParam) => {
   const queryRef = query(collection(firestore, "users"), where("email", "==", emailParam));
 
   const querySnapshot = await getDocs(queryRef);
-  const data = querySnapshot.map((doc) => {
+  const data = querySnapshot.docs.map((doc) => {
     return {
       ...doc.data(),
       id: doc.id,

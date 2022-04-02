@@ -8,7 +8,7 @@ import StarsBg from '../../Components/StarsBg/index';
 import { getList } from 'services';
 import TeamMemberCard from 'Components/TeamTiles/TeamMemberCard';
 
-function Team() {
+function Developers() {
 
     const [membersData, setMembersData] = useState([]);
 
@@ -49,4 +49,4 @@ function Team() {
   )
 }
 
-export default Team
+export default Developers
