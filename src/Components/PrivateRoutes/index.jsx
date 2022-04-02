@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 // being used to invoke the firebase config, DO NOT DELETE
 import {} from "../../config";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import RegisterLogin from "../../Pages/RegisterLogin/RegisterLogin";
 import { useLocation } from "react-router-dom";
+import { auth } from "../../config";
 
 const PrivateRoutes = ({ children, setIsNavbarVisible }) => {
   console.log('received', setIsNavbarVisible);
@@ -11,7 +12,6 @@ const PrivateRoutes = ({ children, setIsNavbarVisible }) => {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
   useEffect(() => {
-    const auth = getAuth();
     const cleanUp = onAuthStateChanged(auth, (userRes) => {
       if (userRes) {
         setUser(userRes);

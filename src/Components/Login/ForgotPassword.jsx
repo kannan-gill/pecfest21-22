@@ -1,7 +1,8 @@
 import Button from "../Utilities/Button";
 import { Button as BootstrapButton } from "react-bootstrap";
 import SimpleInput from "Components/Utilities/SimpleInput";
-import { getAuth, sendPasswordResetEmail } from "firebase/auth";
+import { sendPasswordResetEmail } from "firebase/auth";
+import { auth } from "../../config";
 import React, { useState } from "react";
 import { Spinner } from "react-bootstrap";
 import { toast } from "react-toastify";
@@ -14,7 +15,6 @@ const ForgotPassword = ({ setOpenForgotPasswordUI }) => {
   const forgotPasswordHandler = () => {
     setIsMailSent(false);
     setSendMailLoader(true);
-    const auth = getAuth();
     sendPasswordResetEmail(auth, email)
       .then(() => {
         setIsMailSent(true);
