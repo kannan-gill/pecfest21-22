@@ -144,7 +144,7 @@ const PlanetNav = ({ transitionAnimation }) => {
             </span>
             {!explore && (
               <span className="text-white mb-auto main_font display-5 header-subscript">
-                15-17 April 2022
+                16-18 April 2022
               </span>
             )}
           </div>
@@ -154,7 +154,7 @@ const PlanetNav = ({ transitionAnimation }) => {
       <div className="position-relative zi-top col-12 h-100 d-flex d-md-none flex-column justify-content-start animate__animated animate__fadeIn">
         <div className="d-flex flex-column align-items-center justify-content-start mx-auto header-large text-white">
           <span>PECFEST</span>
-          <span style={{fontSize:"5vw"}} className="mt-1">15-17 April 2022</span>
+          <span style={{fontSize:"5vw"}} className="mt-1">16-18 April 2022</span>
         </div>
       </div>
 

@@ -18,8 +18,7 @@
 .sponsor_name{
   font-family: "Audiowide";
   font-size: 1.1em;
-  font-weight: 600;  
-
+  letter-spacing: 1px;
 }
 
 .sponsor_desc{

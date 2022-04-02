@@ -7,13 +7,13 @@ const SponsorCard = ({ image, name, desc,index }) => {
       className={`d-flex flex-column justify-content-end py-3 align-items-center me-4 mb-4 animate__animated animate__fadeIn ${styles.card} ${index%2==0 ? styles.rightrotate : styles.leftrotate}`}
     >
       <div className="h-50 d-flex flex-row justify-content-center m-auto">
-        <img
+        <img style={{height:"120px",width:"140px"}}
           src={image}
           alt="sponsor_image"
-          className="align-self-center h-100"
+          className="align-self-center"
         />
       </div>
-      <div className={`text-dark text-center ${styles.sponsor_name}`}>
+      <div className={`text-dark text-center w-100 ${styles.sponsor_name}`}>
         {name}
       </div>
       <div
