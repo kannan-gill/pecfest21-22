@@ -23,7 +23,8 @@ import styles from "./Navbar.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Spinner } from "react-bootstrap";
 import pecfest_logo from "../../Images/pecfest_logo.png";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "../../config";
 
 const routes = [
   {
@@ -120,7 +121,11 @@ const Navbar = ({ alwaysOpenOnLarge }) => {
         }}
         className={`cursor-pointer px-3 my-1 py-2 ${styles.nav_item} ${
           location.pathname === route.route ||
-          (location.pathname.includes("events") &&
+          (location.pathname.includes("competitions") &&
+            route.route === "/competitions" &&
+            styles.nav_item_active) ||
+          location.pathname.includes("workshops") ||
+          (location.pathname.includes("megashows") &&
             route.route === "/events" &&
             styles.nav_item_active)
         } ${location.pathname === route.route && "py-2 my-1"}`}
@@ -138,8 +143,11 @@ const Navbar = ({ alwaysOpenOnLarge }) => {
   };
   const DividerElement = (route, ind) => {
     return (
-      <div key={ind} className="position-relative mt-3 ms-2">
-        .
+      <div
+        className="position-relative mt-3 ms-2"
+        key={`divider-${route.text}`}
+      >
+        &nbsp;
         <span
           className={`position-absolute start-0 bottom-0 translate-middle zi-2 ps-5 pt-0 pe-2 ${styles.nav_item_heading}`}
         >
@@ -174,13 +182,15 @@ const Navbar = ({ alwaysOpenOnLarge }) => {
                 onClick={() => setIsNavOpen(false)}
               />
             )}
-            {alwaysOpenOnLarge && <FontAwesomeIcon
-              className="cursor-pointer d-block d-md-none"
-              icon={faXmark}
-              color="white"
-              size="2x"
-              onClick={() => setIsNavOpen(false)}
-            />}
+            {alwaysOpenOnLarge && (
+              <FontAwesomeIcon
+                className="cursor-pointer d-block d-md-none"
+                icon={faXmark}
+                color="white"
+                size="2x"
+                onClick={() => setIsNavOpen(false)}
+              />
+            )}
           </div>
         </div>
         <div
@@ -223,7 +233,6 @@ const Navbar = ({ alwaysOpenOnLarge }) => {
   const [loadingUser, setLoadingUser] = useState(true);
   const [loadingLogoutUser, setLoadingLogoutUser] = useState(false);
   const [user, setUser] = useState(null);
-  const auth = getAuth();
   useEffect(() => {
     const cleanUp = onAuthStateChanged(auth, (userRes) => {
       if (userRes) {
@@ -324,7 +333,7 @@ const Navbar = ({ alwaysOpenOnLarge }) => {
               size="2x"
               className="p-4 cursor-pointer"
               onClick={() => {
-                console.log('clicked');
+                console.log("clicked");
                 setIsNavOpen(true);
               }}
             />
@@ -352,7 +361,9 @@ const Navbar = ({ alwaysOpenOnLarge }) => {
             )}
 
             <div
-              className={`position-absolute top-0 ${alwaysOpenOnLarge && 'd-flex d-md-none'} flex-column start-0 zi-top h-100 ${
+              className={`position-absolute top-0 ${
+                alwaysOpenOnLarge && "d-flex d-md-none"
+              } flex-column start-0 zi-top h-100 ${
                 styles.nav_item_container
               } col-sm-12 col-md-6 col-lg-3 col-xl-3 animate__animated animate__faster ${
                 !closeNavAnimation && "invisible"

@@ -5,32 +5,74 @@ import EventDetailsTile from "Components/EventDetailsTile/EventDetailsTile";
 import Filters from "Components/Filters/Filters";
 import StarsBg from "Components/StarsBg";
 import Tag from "Components/Tag/Tag";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { useLocation, useParams } from "react-router-dom";
-import { getDocByIdRealTime } from "services";
+import { getDocByIdRealTime, updateDoc } from "services";
 import ModalVideo from "react-modal-video";
 import styles from "./EventDetails.module.scss";
 import "react-modal-video/scss/modal-video.scss";
 import EventRegistration from "Components/EventRegistration/index";
+import { AuthContext } from "context/AuthContext";
+import { toast } from "react-toastify";
 const EventDetails = ({ setAlwaysOpen }) => {
   const location = useLocation();
   const urlParams = useParams();
-  const [isTechnical] = useState(
-    location.pathname?.split("/")[1] === "tech-events"
-  );
+  const [alreadyRegistered, setAlreadyRegistered] = useState(null);
+  const [eventsCleanup, setEventsCleanUp] = useState(null);
+  const userDets = useContext(AuthContext);
+  // console.log(
+  //   "user",
+  //   userDets?.registeredEvents,
+  //   userDets?.registeredCompetitions
+  // );
   const [eventDetails, seteventDetails] = useState(null);
   const [isVideoOpen, setVideoOpen] = useState(false);
+  const [prelimLink, setPrelimLink] = useState("");
+  const [loader, setLoader] = useState(false);
+  const checkAlreadyRegistered = (event) => {
+    const eventDetails = event;
+    if (!eventDetails) {
+      return;
+    }
+    const eventList = userDets["registeredEvents"];
+
+    if (eventList) {
+      // if includes
+      setAlreadyRegistered(
+        eventList.some((event) => {
+          console.log("events", event);
+          if (event.eventId === eventDetails.id) {
+            setPrelimLink(event.prelimLink);
+          }
+          return event.eventId === eventDetails.id;
+        })
+      );
+    } else {
+      console.log("reached here");
+      setAlreadyRegistered(false);
+    }
+  };
   const getEventDetails = async () => {
-    console.log(urlParams);
-    getDocByIdRealTime("events", urlParams.eventId, (event) => {
+    if (eventsCleanup) {
+      eventsCleanup();
+    }
+    const cleanUp = getDocByIdRealTime("events", urlParams.eventId, (event) => {
       seteventDetails(event);
-      console.log("event", event);
+      console.log("reached");
+      checkAlreadyRegistered(event);
     });
+    setEventsCleanUp(() => cleanUp);
   };
   useEffect(() => {
     getEventDetails();
-  }, []);
+    const cleanupFunction = () => {
+      if (eventsCleanup) {
+        eventsCleanup();
+      }
+    };
+    return cleanupFunction;
+  }, [userDets]);
 
   useEffect(() => {
     setAlwaysOpen(true);
@@ -40,12 +82,51 @@ const EventDetails = ({ setAlwaysOpen }) => {
     return cleanUp;
   });
   const [isRegistereOpen, setRegisterOpen] = useState(false);
-  const registerHandler = () => {
-    if(eventDetails.isTeamEvent){
-      setRegisterOpen(true);
+  const registerUserInEvent = async (teamId = "") => {
+    const key = "registeredEvents";
+    let eventsList = userDets[key];
+    let eventRegistered = eventDetails?.registeredUsers;
+    if (!eventsList) {
+      eventsList = [];
     }
-    
-  }
+    if (!eventRegistered) {
+      eventRegistered = [];
+    }
+    setLoader(true);
+    try {
+      const payloadData = {
+        ...userDets,
+        [key]: [
+          ...eventsList,
+          { eventId: eventDetails.id, prelimLink, teamId },
+        ],
+      };
+      await updateDoc("users", userDets.id, payloadData);
+      await updateDoc("events", eventDetails.id, {
+        ...eventDetails,
+        registeredUsers: [
+          ...eventRegistered,
+          { userId: teamId ? teamId : userDets.id, prelimLink },
+        ],
+      });
+
+      setRegisterOpen(false);
+      setLoader(false);
+    } catch (err) {
+      toast.error(err);
+      setLoader(false);
+    }
+  };
+  const registerHandler = () => {
+    if (alreadyRegistered) {
+      return;
+    }
+    if (eventDetails.isTeamEvent || eventDetails.hasPrelimEntry) {
+      setRegisterOpen(true);
+    } else {
+      registerUserInEvent();
+    }
+  };
   return (
     <>
       {eventDetails && (
@@ -67,8 +148,8 @@ const EventDetails = ({ setAlwaysOpen }) => {
                       className={` d-flex pt-5 flex-column px-5 pb-3 justify-content-end w-100 h-100 ${styles.overlay}`}
                     >
                       <div className="text-white">
-                        {eventDetails?.tags.map((tag) => (
-                          <Tag disabled tag={tag} />
+                        {eventDetails?.tags.map((tag, ind) => (
+                          <Tag key={`tag-${ind}`} disabled tag={tag} />
                         ))}
                         <h1 className="mb-2  main_font">
                           {eventDetails?.name}
@@ -110,7 +191,7 @@ const EventDetails = ({ setAlwaysOpen }) => {
                   </div>
                 </div>
                 <div className="mt-3 d-flex flex-row flex-wrap">
-                  <div className="col-12 col-xl-8 px-2 mb-3">
+                  <div className={`col-12 px-2 mb-3 ${eventDetails?.isRegistrationOpen && 'col-xl-8'}`}>
                     <EventDetailsTile
                       buttonColor="warning"
                       buttonHandler={() => {
@@ -127,17 +208,44 @@ const EventDetails = ({ setAlwaysOpen }) => {
                       <br />
                     </EventDetailsTile>
                   </div>
-                  <div className="col-12 col-xl-4 px-2 mb-3">
-                    <EventDetailsTile
-                      buttonColor="warning"
-                      buttonHandler={() => {
-                        registerHandler();
-                      }}
-                      buttonText="Register"
-                      background="https://picsum.photos/1600/900?random"
-                      title="Register Now"
-                    ></EventDetailsTile>
-                  </div>
+                  {eventDetails.isRegistrationOpen && (
+                    <div className="col-12 col-xl-4 px-2 mb-3">
+                      {!alreadyRegistered ? (
+                        <EventDetailsTile
+                          buttonColor="warning"
+                          buttonHandler={() => {
+                            registerHandler();
+                          }}
+                          buttonText="Register"
+                          background="https://picsum.photos/1600/900?random"
+                          title="Register Now"
+                        ></EventDetailsTile>
+                      ) : (
+                        <EventDetailsTile
+                          buttonColor="warning"
+                          buttonText=""
+                          background="https://picsum.photos/1600/900?random"
+                          title=""
+                        >
+                          <h3 className="text-white">Already Registered!</h3>
+                          {prelimLink && (
+                            <div className="w-100 d-flex flex-column">
+                              <p className="d-inline text-warning text-nowrap mb-0 mt-2">
+                                Prelim Link:
+                              </p>
+                              <a
+                                target="_blank"
+                                href={`//${prelimLink}`}
+                                className="text-white text-truncate"
+                              >
+                                {prelimLink}
+                              </a>
+                            </div>
+                          )}
+                        </EventDetailsTile>
+                      )}
+                    </div>
+                  )}
                   <Modal
                     centered
                     show={isRegistereOpen}
@@ -147,7 +255,14 @@ const EventDetails = ({ setAlwaysOpen }) => {
                     <Modal.Body
                       className={`px-5 py-3 d-flex flex-column justify-content-center text-white border-muted main_font`}
                     >
-                      <EventRegistration />
+                      <EventRegistration
+                        userDets={userDets}
+                        loader={loader}
+                        prelimLink={prelimLink}
+                        setPrelimLink={setPrelimLink}
+                        onRegister={registerUserInEvent}
+                        event={eventDetails}
+                      />
                     </Modal.Body>
                   </Modal>
                 </div>

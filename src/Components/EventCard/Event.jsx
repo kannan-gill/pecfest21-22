@@ -5,13 +5,22 @@ import { useNavigate } from "react-router-dom";
 import EventDetails from "../../Pages/EventCardDetails/EventDetails";
 import styles from "./EventCard.module.scss";
 
-function Event({ event, isTechnical = true }) {
+function Event({ event, isTechnical = true, isCompetition = true }) {
   const navigate = useNavigate();
   const openDetails = (id) => {
-    if (isTechnical) {
-      navigate(`/tech-events/${id}`);
-    } else {
-      navigate(`/cultural-events/${id}`);
+    if (isCompetition) {
+      if (isTechnical) {
+        navigate(`/tech-competitions/${id}`);
+      } else {
+        navigate(`/cultural-competitions/${id}`);
+      }
+    }
+   else {
+      if (isTechnical) {
+        navigate(`/workshops/${id}`);
+      } else {
+        navigate(`/megashows/${id}`);
+      }
     }
   };
   function handleRegisterTeam() {
@@ -53,7 +62,9 @@ function Event({ event, isTechnical = true }) {
               trimRight
               basedOn="letters"
             />
-            <div className={`w-100 h-100 zi-top position-absolute top-0 start-0`}>
+            <div
+              className={`w-100 h-100 zi-top position-absolute top-0 start-0`}
+            >
               <div className={`${styles.description_overlay} w-100 h-100 `} />
             </div>
           </div>

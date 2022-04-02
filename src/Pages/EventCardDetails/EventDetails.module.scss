@@ -20,30 +20,7 @@
   padding-top: 5.5em;
   background-color: #0f1113;
 }
-.modal_lg {
-  min-width: 90vw !important;
-  min-height: 90vh !important;
-  display: flex;
 
-  // background-color: red !important;
-  & > div {
-    flex-grow: 1;
-    position: relative;
-    background-color: #181824;
-    border: none !important;
-    color: wheat;
-    min-height: 100% !important;
-    div:nth-child(1) {
-      border: none !important;
-    }
-    div:nth-child(2) {
-      background-color: #242431;
-      background-image: url("");
-      background-size: cover;
-      background-repeat: no-repeat;
-    }
-  }
-}
 .close_button {
   color: wheat !important;
   margin-left: auto !important;

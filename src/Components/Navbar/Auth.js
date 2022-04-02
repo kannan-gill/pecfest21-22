@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import {} from "../../config";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "../../config";
 
 //navbar topics: pecfest logo, campus tour, contact us, developers, events, competitions, live stage page where streaming will be going on
 // in case someone cant find streaming from campus tour he can refer this.
 
 function Navbar() {
-  const auth = getAuth();
   const [loggedInStatus, setLoggedInStatus] = useState(false);
   const logoutUserHandler = () => {
     console.log("clicked");
@@ -20,7 +20,6 @@ function Navbar() {
   };
 
   useEffect(() => {
-    const auth = getAuth();
     const cleanUp = onAuthStateChanged(auth, (userRes) => {
       if (userRes) {
         setLoggedInStatus(true);

@@ -7,7 +7,8 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "Components/Navbar";
 import ComingSoon from "Pages/ComingSoon/ComingSoon";
 import StarsBg from "Components/StarsBg";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../config";
 
 function RegisterLogin({
   isRegister = false,
@@ -28,7 +29,6 @@ function RegisterLogin({
 
   const [user, setUser] = useState("placeholderUser");
   useEffect(() => {
-    const auth = getAuth();
     const cleanUp = onAuthStateChanged(auth, (userRes) => {
       if (userRes) {
         setUser(userRes);

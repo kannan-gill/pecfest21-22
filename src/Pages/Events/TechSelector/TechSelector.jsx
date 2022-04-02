@@ -3,9 +3,11 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import EventList from "../EventsList/EventList";
 import styles from "./TechSelector.module.scss";
-const technicalImageUrl= "https://cdn.searchenginejournal.com/wp-content/uploads/2019/11/why-technical-seo-and-on-site-seo-is-rarely-enough-5dcfef7155db8.png";
-const culturalImageUrl= "https://www.worldatlas.com/r/w1300-q80/upload/e7/2e/50/shutterstock-1913349307.jpg";
-const TechCulturalSelector = () => {
+const technicalImageUrl =
+  "https://cdn.searchenginejournal.com/wp-content/uploads/2019/11/why-technical-seo-and-on-site-seo-is-rarely-enough-5dcfef7155db8.png";
+const culturalImageUrl =
+  "https://www.worldatlas.com/r/w1300-q80/upload/e7/2e/50/shutterstock-1913349307.jpg";
+const TechCulturalSelector = ({ leftName = "Technical", rightName = "Cultural", leftRoute, rightRoute }) => {
   const [openTechnical, setOpenTechnical] = useState(false);
   const [openCultural, setOpenCultural] = useState(false);
   const [isHoveredOnTechnical, setHoveredOnTechnical] = useState(false);
@@ -15,10 +17,10 @@ const TechCulturalSelector = () => {
       setTimeout(() => {
         console.log(openTechnical, openCultural);
         if (openTechnical) {
-          navigate("/tech-events");
+          navigate(leftRoute);
           return;
         }
-        navigate("/cultural-events");
+        navigate(rightRoute);
       }, 700);
     }
   }, [openTechnical, openCultural]);
@@ -53,7 +55,7 @@ const TechCulturalSelector = () => {
               styles.header_large
             }`}
           >
-            Technical
+            {leftName}
           </h1>
           <img
             src={technicalImageUrl}
@@ -83,7 +85,7 @@ const TechCulturalSelector = () => {
               styles.header_large
             }`}
           >
-            Cultural
+            {rightName}
           </h1>
           <img
             src={culturalImageUrl}
@@ -110,7 +112,7 @@ const TechCulturalSelector = () => {
               }}
               className={`animate__animated zi-1 cursor-pointer text-white position-absolute top-50 mx-autor translate-middle-y ${styles.header_large}`}
             >
-              Technical
+              {leftName}
             </h1>
           )}
 
@@ -136,7 +138,7 @@ const TechCulturalSelector = () => {
               }}
               className={`zi-1 animate__animated animate__faster cursor-pointer text-white position-absolute top-50 end-0 mx-5 px-5 translate-middle-y ${styles.header_large}`}
             >
-              Cultural
+              {rightName}
             </h1>
           )}
           <img
