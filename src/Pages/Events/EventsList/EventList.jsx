@@ -94,9 +94,15 @@ const EventList = ({ isTechnical, isCompetition = true }) => {
               }
               return true;
             })
+            .sort((el1, el2) => el1.rankNo - el2.rankNo)
             .map((event, ind) => {
               return (
-                <Event key={ind} event={event} isTechnical={isTechnical} isCompetition={isCompetition} />
+                <Event
+                  key={ind}
+                  event={event}
+                  isTechnical={isTechnical}
+                  isCompetition={isCompetition}
+                />
               );
             })}
         </div>

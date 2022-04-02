@@ -15,9 +15,14 @@ import "react-modal-video/scss/modal-video.scss";
 import EventRegistration from "Components/EventRegistration/index";
 import { AuthContext } from "context/AuthContext";
 import { toast } from "react-toastify";
+import createDOMPurify from "dompurify";
+// import { JSDOM } from "jsdom";
+
 const EventDetails = ({ setAlwaysOpen }) => {
   const location = useLocation();
   const urlParams = useParams();
+  const window = document.window;
+  const DOMPurify = createDOMPurify(window);
   const [alreadyRegistered, setAlreadyRegistered] = useState(null);
   const [eventsCleanup, setEventsCleanUp] = useState(null);
   const userDets = useContext(AuthContext);
@@ -30,6 +35,7 @@ const EventDetails = ({ setAlwaysOpen }) => {
   const [isVideoOpen, setVideoOpen] = useState(false);
   const [prelimLink, setPrelimLink] = useState("");
   const [loader, setLoader] = useState(false);
+  const [registeredTeamId, setRegisteredTeamId] = useState("");
   const checkAlreadyRegistered = (event) => {
     const eventDetails = event;
     if (!eventDetails) {
@@ -44,6 +50,7 @@ const EventDetails = ({ setAlwaysOpen }) => {
           console.log("events", event);
           if (event.eventId === eventDetails.id) {
             setPrelimLink(event.prelimLink);
+            setRegisteredTeamId(event.teamId);
           }
           return event.eventId === eventDetails.id;
         })
@@ -119,6 +126,7 @@ const EventDetails = ({ setAlwaysOpen }) => {
   };
   const registerHandler = () => {
     if (alreadyRegistered) {
+      setRegisterOpen(true);
       return;
     }
     if (eventDetails.isTeamEvent || eventDetails.hasPrelimEntry) {
@@ -191,21 +199,26 @@ const EventDetails = ({ setAlwaysOpen }) => {
                   </div>
                 </div>
                 <div className="mt-3 d-flex flex-row flex-wrap">
-                  <div className={`col-12 px-2 mb-3 ${eventDetails?.isRegistrationOpen && 'col-xl-8'}`}>
+                  <div
+                    className={`col-12 px-2 mb-3 ${
+                      eventDetails?.isRegistrationOpen && "col-xl-8"
+                    }`}
+                  >
                     <EventDetailsTile
                       buttonColor="warning"
                       buttonHandler={() => {
                         const url = eventDetails?.rulebookUrl;
-                        if (url) window.open(url, "_blank");
+                        if (url) window.open(`//${url}`, "_blank");
                       }}
                       buttonText="Know More"
                       background="https://picsum.photos/1366/768?random"
                       title="Event Details"
                     >
-                      Some general description regarding time and venue
-                      <br />
-                      Is a child hence can be any dom element
-                      <br />
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: DOMPurify.sanitize(eventDetails.details),
+                        }}
+                      />
                     </EventDetailsTile>
                   </div>
                   {eventDetails.isRegistrationOpen && (
@@ -223,8 +236,11 @@ const EventDetails = ({ setAlwaysOpen }) => {
                       ) : (
                         <EventDetailsTile
                           buttonColor="warning"
-                          buttonText=""
+                          buttonText={eventDetails.isTeamEvent && `View Team`}
                           background="https://picsum.photos/1600/900?random"
+                          buttonHandler={() => {
+                            registerHandler();
+                          }}
                           title=""
                         >
                           <h3 className="text-white">Already Registered!</h3>
@@ -250,13 +266,16 @@ const EventDetails = ({ setAlwaysOpen }) => {
                     centered
                     show={isRegistereOpen}
                     className={styles.bg_brown}
+                    scrollable
                     onHide={() => setRegisterOpen(false)}
                   >
                     <Modal.Body
                       className={`px-5 py-3 d-flex flex-column justify-content-center text-white border-muted main_font`}
                     >
                       <EventRegistration
+                        registeredTeamId={registeredTeamId}
                         userDets={userDets}
+                        alreadyRegistered={alreadyRegistered}
                         loader={loader}
                         prelimLink={prelimLink}
                         setPrelimLink={setPrelimLink}

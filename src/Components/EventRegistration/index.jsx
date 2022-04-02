@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { Button, Form, Spinner } from "react-bootstrap";
 import { toast } from "react-toastify";
-import { createDoc, getUsersInPECIdArray, updateDoc } from "services";
+import { createDoc, getDocById, getUsersInPECIdArray, updateDoc } from "services";
 
 const EventRegistration = ({
   loader,
@@ -12,6 +12,8 @@ const EventRegistration = ({
   event,
   onRegister,
   userDets,
+  registeredTeamId = null,
+  alreadyRegistered = false,
 }) => {
   const addTeamMemberSlot = () => {
     if (teamMemberDetails.length < event.maxMembers) {
@@ -43,12 +45,23 @@ const EventRegistration = ({
   const [errorDetails, setErrorDetails] = useState(
     Array.from({ length: event.minMembers }).fill("")
   );
+ 
   useEffect(() => {
-    setTeamMemberDetails((prevDets) => {
-      const newArr = [...prevDets];
-      newArr[0] = userDets?.pecfestId;
-      return newArr;
-    });
+    if(!alreadyRegistered){
+      setTeamMemberDetails((prevDets) => {
+        const newArr = [...prevDets];
+        newArr[0] = userDets?.pecfestId;
+        return newArr;
+      });
+    }
+    else{
+      (async ()=>{
+        const teamData = await getDocById('event-teams', registeredTeamId);
+        console.log('teamData', teamData);
+        setTeamMemberDetails(teamData?.teamMembers);
+      })();
+    }
+   
   }, []);
   const validateUnique = () => {
     const teamSet = new Set();
@@ -109,8 +122,10 @@ const EventRegistration = ({
             toast.error("Something went wrong");
           }
         });
-        onRegister(teamDets.id);
-      } else {
+        if (!alreadyRegistered) {
+          onRegister(teamDets.id);
+        }
+      } else if (!alreadyRegistered) {
         onRegister();
       }
 
@@ -177,7 +192,7 @@ const EventRegistration = ({
             {teamMemberDetails.map((teamMember, ind) => (
               <Form.Group
                 key={`member-${ind}`}
-                className="mb-3"
+                className="mb-0 mt-2"
                 controlId="formBasicEmail"
               >
                 <Form.Label>
@@ -189,7 +204,7 @@ const EventRegistration = ({
                   </p>
                   <Form.Control
                     value={teamMember}
-                    disabled={ind === 0}
+                    disabled={ind === 0 || alreadyRegistered}
                     onChange={(e) => {
                       setTeamMemberDetails((prevDets) => {
                         const newArr = [...prevDets];
@@ -201,30 +216,32 @@ const EventRegistration = ({
                     className="bg-transparent border text-white pe-5"
                     placeholder="Enter pecfest id"
                   />
-                  {ind !== 0 && teamMemberDetails.length > event.minMembers && (
-                    <button
-                      type="button"
-                      className="position-absolute end-0 top-50 translate-middle-y me-2"
-                      onClick={() => {
-                        removeSlot(ind);
-                      }}
-                    >
-                      {" "}
-                      <FontAwesomeIcon
-                        icon={faXmark}
-                        color="yellow"
-                        className="fa-fw cursor-pointer ms-2"
-                      />
-                    </button>
-                  )}
+                  {!alreadyRegistered &&
+                    ind !== 0 &&
+                    teamMemberDetails.length > event.minMembers && (
+                      <button
+                        type="button"
+                        className="position-absolute end-0 top-50 translate-middle-y me-2"
+                        onClick={() => {
+                          removeSlot(ind);
+                        }}
+                      >
+                        {" "}
+                        <FontAwesomeIcon
+                          icon={faXmark}
+                          color="yellow"
+                          className="fa-fw cursor-pointer ms-2"
+                        />
+                      </button>
+                    )}
                 </div>
                 <Form.Label className="text-danger">
                   {errorDetails[ind]}
                 </Form.Label>
               </Form.Group>
             ))}
-            {teamMemberDetails.length < event.maxMembers && (
-              <div className="d-flex flex-row justify-content-center mt-4">
+            {!alreadyRegistered && teamMemberDetails.length < event.maxMembers && (
+              <div className="d-flex flex-row justify-content-center mt-0">
                 <button
                   type="button"
                   onClick={() => {
@@ -234,9 +251,8 @@ const EventRegistration = ({
                   {" "}
                   <FontAwesomeIcon
                     icon={faCirclePlus}
-                    color="yellow"
                     size="2x"
-                    className="fa-fw cursor-pointer"
+                    className="fa-fw cursor-pointer text-warning"
                   />
                 </button>
               </div>
@@ -249,6 +265,7 @@ const EventRegistration = ({
             <Form.Label className="text-warning">Prelims drive link</Form.Label>
             <div className="position-relative d-flex flex-row">
               <Form.Control
+                disabled={alreadyRegistered}
                 value={prelimLink}
                 onChange={(e) => setPrelimLink(e.target.value)}
                 type="text"
@@ -259,26 +276,29 @@ const EventRegistration = ({
             {/* <Form.Text className="text-muted">
           We'll never share your email with anyone else.
         </Form.Text> */}
-            <div className="d-flex flex-row justify-content-center mt-4 mb-0">
-              <Button
-                disabled={loader || (event.hasPrelimEntry && prelimLink === "")}
-                variant="warning"
-                onClick={() => {
-                  validateForm();
-                }}
-              >
-                {loader && (
-                  <Spinner
-                    animation="border"
-                    className="me-2"
-                    variant="dark"
-                    size="sm"
-                  />
-                )}
-                Register
-              </Button>
-            </div>
           </Form.Group>
+        )}
+
+        {!alreadyRegistered && (
+          <div className="d-flex flex-row justify-content-center mt-4 mb-0">
+            <Button
+              disabled={loader || (event.hasPrelimEntry && prelimLink === "")}
+              variant="warning"
+              onClick={() => {
+                validateForm();
+              }}
+            >
+              {loader && (
+                <Spinner
+                  animation="border"
+                  className="me-2"
+                  variant="dark"
+                  size="sm"
+                />
+              )}
+              Register
+            </Button>
+          </div>
         )}
       </Form>
     </>
