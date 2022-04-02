@@ -21,8 +21,8 @@ import createDOMPurify from "dompurify";
 const EventDetails = ({ setAlwaysOpen }) => {
   const location = useLocation();
   const urlParams = useParams();
-  const window = document.window;
-  const DOMPurify = createDOMPurify(window);
+  const windowDom = document.window;
+  const DOMPurify = createDOMPurify(windowDom);
   const [alreadyRegistered, setAlreadyRegistered] = useState(null);
   const [eventsCleanup, setEventsCleanUp] = useState(null);
   const userDets = useContext(AuthContext);
