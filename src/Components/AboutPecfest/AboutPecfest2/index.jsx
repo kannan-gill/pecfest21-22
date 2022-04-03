@@ -2,8 +2,6 @@ import React from "react";
 import StarsBg from "../../StarsBg";
 import BottomBars from "../../BottomBars";
 import Spacecraft from "../../Spacecraft";
-import AboutUsPlanet from "../../../Images/aboutUsPlanet.png";
-import chandigarhHand from "../../../Images/chandigarhHand.png";
 import styles from "./AboutPecfest2.module.css";
 import { useNavigate } from "react-router-dom";
 import { faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons";
@@ -21,7 +19,7 @@ const AboutPecfest2 = () => {
         <div
           className={`d-flex flex-column align-items-center ${styles.text_container}`}
         >
-          <img className={`m-4 ${styles.pfDates}`} src="../../Images/pfdates.png" alt="pecfest dates" />
+          <img className={`m-4 ${styles.pfDates}`} src="https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/images%2Fpfdates.png?alt=media&token=bafe6b1e-a6d4-4ec7-a7c2-927ddac85cff" alt="pecfest dates" />
           <span className={`${styles.main_text} `}>
             Relish the centenary celebrations as we commemorate{" "}
             <span className="text-warning ">100 glorious years</span> of PEC at
@@ -36,12 +34,12 @@ const AboutPecfest2 = () => {
           className={`${styles.imgPlanet} d-none d-md-flex flex-row align-items-center justify-content-end h-100`}
         >
           <img
-            src={chandigarhHand}
+            src="https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/images%2FchandigarhHand.png?alt=media&token=af281e8f-6e31-49a2-9496-aaaa6d6811ac"
             alt="Open Hand Monument"
             className={styles.chandigarhHand}
           />
           <img
-            src={AboutUsPlanet}
+            src="https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/images%2FaboutUsPlanet.png?alt=media&token=https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/images%2FaboutUsPlanet.png?alt=media&token=33ddaacd-f97c-4a08-b67b-0ec4e16ac1f6"
             alt="Rotating Planet"
             className={styles.aboutUsPlanet}
           />

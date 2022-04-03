@@ -2,11 +2,9 @@ import React from "react";
 import StarsBg from "../../StarsBg";
 import BottomBars from "../../BottomBars";
 import Spacecraft from "../../Spacecraft";
-import AboutusImg from "../../../Images/aboutusnoglow-removebg-preview.png";
 import styles from "./AboutPecfest1.module.css";
 
 const AboutPecfest1 = () => {
-
   return (
     <div className="text-white w-100 h-100 overflow-hidden position-relative animate__animated">
       <StarsBg />
@@ -18,7 +16,7 @@ const AboutPecfest1 = () => {
             className={`d-flex flex-column ${styles["text-container"]} justify-content-center `}
           >
             <div>
-              <div className="flex-column pb-4" style={{color: "#E7D7AC"}}>
+              <div className="flex-column pb-4" style={{ color: "#E7D7AC" }}>
                 “Take a rocket from your pocket and Zip-Zap-Zoom with us on a
                 two day Cosmic Escapade.”
               </div>
@@ -33,7 +31,7 @@ const AboutPecfest1 = () => {
         </div>
         <div className="h-50 d-flex flex-column justify-content-end align-items-center">
           <img
-            src={AboutusImg}
+            src="https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/images%2FaboutUsNoGlow.png?alt=media&token=https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/images%2F404.png?alt=media&token=https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/images%2FaboutUsNoGlow.png?alt=media&token=3b4f4e9e-a08a-44d2-bade-d00457103414"
             alt="About Us"
             className={styles["img-container"]}
           />

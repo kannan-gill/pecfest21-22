@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import StarsBg from "../../Components/StarsBg";
-import error404 from "../../Images/404.png";
 import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDoubleLeft } from "@fortawesome/free-solid-svg-icons";
@@ -26,14 +25,16 @@ const PageNotFound = ({ isNavbarVisible }) => {
       <StarsBg />
       <div className="d-flex flex-column justify-content-center align-items-center">
         <img
-          src={error404}
+          src="https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/images%2F404.png?alt=media&token=cfa13c30-f0e8-45d1-98b6-49100858ff5d"
           style={{ width: "20em" }}
           alt="Astronaut on planet"
         />
         <div className={`main_font mt-3 mb-1 display-6 ${styles.faded_yellow}`}>
           lost in space
         </div>
-        <div className={`h-6 main_font text-lowercase text-center ${styles.faded_yellow}`}>
+        <div
+          className={`h-6 main_font text-lowercase text-center ${styles.faded_yellow}`}
+        >
           You have reached the edge of the universe
         </div>
         <Button
