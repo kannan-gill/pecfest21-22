@@ -140,7 +140,9 @@ const EventDetails = ({ setAlwaysOpen }) => {
                   <div
                     className={`w-100 h-100  position-relative ${styles.event_tile}`}
                     style={{
-                      background: `url(${eventDetails?.backdrop})`,
+                      backgroundSize: 'cover',
+                      backgroundRepeat: 'no-repeat',
+                      backgroundImage: `url(${eventDetails?.backdrop})`,
                     }}
                   >
                     <div
