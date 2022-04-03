@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Modal, Spinner } from "react-bootstrap";
-import styles from "./ModalCard.module.css";  
+import styles from "./ModalCard.module.css";
 
 const ModalCard = ({
   title,
@@ -23,7 +23,7 @@ const ModalCard = ({
       <Modal.Header className={styles.no_border} closeVariant="white" closeButton>
         <Modal.Title className={`${styles.title} main_font`}>{title}</Modal.Title>
       </Modal.Header>
-      <Modal.Body className="main_font">{content}</Modal.Body>
+      <Modal.Body className="main_font" dangerouslySetInnerHTML={{ __html: content }} />
       <Modal.Footer className={styles.no_border}>
         <Button variant="secondary" className="main_font" onClick={() => setModalShow(false)}>
           Close

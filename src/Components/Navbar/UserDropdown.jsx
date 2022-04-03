@@ -1,7 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import {
   Dropdown,
-  Button,
 } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -10,49 +9,18 @@ import {
   faCircleExclamation,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import { sendEmailVerification, getAuth } from "firebase/auth";
 import { AuthContext } from "../../context/AuthContext";
+import { VerificationModalContext } from "../../context/VerificationModalContext";
 import styles from "./UserDropdown.module.css";
-import ModalCard from "Components/ModalCard/ModalCard";
 import PecfestId from "./PecfestId";
 
 const UserDropdown = ({ user, signOutHandler }) => {
   const navigate = useNavigate();
   const authContext = useContext(AuthContext);
-  const [modalShow, setModalShow] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const auth = getAuth();
-
-  const resetEmailHandler = () => {
-    setIsLoading(true);
-    sendEmailVerification(auth.currentUser, { url: window.location.origin })
-      .then((res) => {
-        setModalShow(false);
-        setIsLoading(false);
-        toast.success("Email sent successfully!", { autoClose: 2000 });
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        setIsLoading(false);
-        toast.error(errorMessage);
-      });
-  };
-
- 
+  const { openVerificationModal } = useContext(VerificationModalContext);
 
   return (
     <>
-      <ModalCard
-        title="Verify Account"
-        content="An email has been sent to your registered account. Please verify."
-        isLoading={isLoading}
-        buttonTitle="Resend Email"
-        buttonHandler={resetEmailHandler}
-        show={modalShow}
-        setModalShow={setModalShow}
-      />
 
       {authContext && (
         <Dropdown className="ps-1 pe-3 ">
@@ -75,7 +43,7 @@ const UserDropdown = ({ user, signOutHandler }) => {
                 className={`${styles.dropdownItem}`}
                 as="button"
                 onClick={() => {
-                  setModalShow(true);
+                  openVerificationModal();
                 }}
               >
                 <FontAwesomeIcon

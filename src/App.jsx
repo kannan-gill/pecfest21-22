@@ -22,6 +22,8 @@ import PageNotFound from "Pages/PageNotFound/PageNotFound";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AuthProvider from "./context/AuthContext";
+import VerificationModalProvider from "./context/VerificationModalContext";
+import VerifyEmail from "Pages/VerifyEmail";
 
 function App() {
   const [isNavBarVisible, setIsNavbarVisible] = useState(true);
@@ -57,6 +59,7 @@ function App() {
     { path: "/developer", component: <ComingSoon /> },
     { path: "/contact", component: <ComingSoon /> },
     { path: "/events", component: <ComingSoon /> },
+    { path: "/verifyEmail/:userId", component: <VerifyEmail /> },
     { path: "*", component: <PageNotFound isNavbarVisible={setIsNavbarVisible} /> },
   ];
   const privateRoutes = [
@@ -83,13 +86,15 @@ function App() {
     <div className="overflow-auto vh-100 bg-black">
       <ToastContainer theme="light" />
       <AuthProvider>
-        <BrowserRouter>
-          {isNavBarVisible && <Navbar />}
-          <Routes>
-            {publicRoutes.map((route) => publicRouteComponent(route))}
-            {privateRoutes.map((route) => privateRouteComponent(route))}
-          </Routes>
-        </BrowserRouter>
+        <VerificationModalProvider>
+          <BrowserRouter>
+            {isNavBarVisible && <Navbar />}
+            <Routes>
+              {publicRoutes.map((route) => publicRouteComponent(route))}
+              {privateRoutes.map((route) => privateRouteComponent(route))}
+            </Routes>
+          </BrowserRouter>
+        </VerificationModalProvider>
       </AuthProvider>
     </div>
   );

@@ -77,11 +77,18 @@ function Register({ onFlip, redirect }) {
         const userData = { ...user };
         delete userData.password;
         userData.pecfestId = pecfestId;
-        createDoc("users", userData);
         updateDoc("stats", "pecfestIdList", {value: [...pecfestIdList, pecfestId]});
-        sendEmailVerification(auth.currentUser, { url: window.location.origin })
-          .then(() => {
-            navigate("/");
+        createDoc("users", userData)
+          .then((createdUser) => {
+            sendEmailVerification(auth.currentUser, { url: `${window.location.origin}/verifyEmail/${createdUser.id}` })
+              .then(() => {
+                navigate("/");
+              })
+              .catch((error) => {
+                const errorMessage = error.message;
+                toast.error(errorMessage);
+                setLoading(false);
+              });
           })
           .catch((error) => {
             const errorMessage = error.message;
