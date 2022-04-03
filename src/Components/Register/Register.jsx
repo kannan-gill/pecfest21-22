@@ -71,13 +71,13 @@ function Register({ onFlip, redirect }) {
               })
               .catch((error) => {
                 const errorMessage = error.message;
-                toast.error(errorMessage);
+                toast.error("Unable to send verification email. Please try again later.", { autoClose: 2000 });
                 setLoading(false);
               });
           })
           .catch((error) => {
             const errorMessage = error.message;
-            toast.error(errorMessage);
+            toast.error("Unable to register!");
             setLoading(false);
           });
       })
