@@ -164,7 +164,7 @@ const Navbar = ({ alwaysOpenOnLarge }) => {
       <>
         <div className="d-flex flex-column overflow-none justify-content-start  ">
           <div className="d-flex justify-content-between align-items-center px-3 pt-4 pb-0 text-white">
-            <div className="d-flex flex-row">
+            <div className="d-flex flex-row align-items-center">
               <img
                 src={pecfest_logo}
                 className={`${styles.pecfest_logo} main_font cursor-pointer`}

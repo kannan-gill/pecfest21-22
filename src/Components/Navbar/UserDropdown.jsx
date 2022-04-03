@@ -23,7 +23,7 @@ const UserDropdown = ({ user, signOutHandler }) => {
     <>
 
       {authContext && (
-        <Dropdown className="ps-1 pe-3 ">
+        <Dropdown className="ps-1 pe-3 mt-2">
           <Dropdown.Toggle className={`${styles.dropDown}`}>
             <FontAwesomeIcon icon={faUser} />
           </Dropdown.Toggle>
@@ -38,7 +38,7 @@ const UserDropdown = ({ user, signOutHandler }) => {
               </div>
             </div>
             <hr className="p-0 m-2 w-75 m-auto my-1"></hr>
-            {!authContext["emailVerified"] && (
+            {!authContext?.emailVerified && (
               <Dropdown.Item
                 className={`${styles.dropdownItem}`}
                 as="button"

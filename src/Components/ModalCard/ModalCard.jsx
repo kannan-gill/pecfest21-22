@@ -9,7 +9,8 @@ const ModalCard = ({
   buttonTitle,
   buttonHandler,
   show,
-  setModalShow
+  setModalShow,
+  disabled = false
 }) => {
 
   return (
@@ -28,7 +29,7 @@ const ModalCard = ({
         <Button variant="secondary" className="main_font" onClick={() => setModalShow(false)}>
           Close
         </Button>
-        <Button variant="warning" className="main_font" onClick={buttonHandler}>
+        <Button variant="warning" className="main_font" onClick={buttonHandler} disabled={isLoading || disabled}>
           {isLoading ? (
             <Spinner
               animation="border"
