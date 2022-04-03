@@ -15,7 +15,8 @@ const useAuthHandler = () => {
       if (userRes) {
         // const userData = await getUserByEmail(userRes.email);
         cleanUpFuncInternal = getUserByEmailLive(userRes.email, (userData) => {
-          setUser({ ...userData, emailVerified: userRes.emailVerified });
+          const currentUser = auth.currentUser;
+          setUser({ ...userData, emailVerified: currentUser.emailVerified });
         });
       } else {
         setUser(null);

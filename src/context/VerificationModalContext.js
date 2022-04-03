@@ -15,7 +15,9 @@ const VerificationModalProvider = (props) => {
   const user = useContext(AuthContext);
 
   const openVerificationModal = () => {
-    setIsModalOpen(true);
+    if(!user.emailVerified) {
+      setIsModalOpen(true);
+    }
   };
 
   const closeVerificationModal = () => {
@@ -32,6 +34,12 @@ const VerificationModalProvider = (props) => {
     });
     return cleanUp;
   }, []);
+
+  useEffect(() => {
+    if(user.emailVerified) {
+      closeVerificationModal();
+    }
+  }, [user]);
 
   const auth = getAuth();
   

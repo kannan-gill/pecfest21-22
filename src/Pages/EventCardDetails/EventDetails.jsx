@@ -203,7 +203,7 @@ const EventDetails = ({ setAlwaysOpen }) => {
                         const url = eventDetails?.rulebookUrl;
                         if (url) window.open(`//${url}`, "_blank");
                       }}
-                      buttonText="Know More"
+                      buttonText="Rulebook"
                       background="https://picsum.photos/1366/768?random"
                       title="Event Details"
                     >

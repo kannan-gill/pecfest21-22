@@ -28,15 +28,18 @@ const PecfestId = ({color, iconColor}) => {
 
   return (
     <>
-    {authContext && <>
-      <div className="pe-2 fst-italic" style={{color: color}}>{authContext["pecfestId"]}</div>
-      {showTooltip ? (
-        <OverlayTrigger placement="bottom" overlay={<Tooltip>Copied!</Tooltip>}>
-          {copyButton}
-        </OverlayTrigger>
-      ) : (
-        copyButton
-      )}</>}
+      {(authContext && authContext.pecfestId) && 
+        <>
+          <div className="pe-2 fst-italic" style={{color: color}}>{authContext["pecfestId"]}</div>
+          {showTooltip ? (
+            <OverlayTrigger placement="bottom" overlay={<Tooltip>Copied!</Tooltip>}>
+              {copyButton}
+            </OverlayTrigger>
+          ) : (
+            copyButton
+          )}
+        </>
+      }
     </>
   );
 };
