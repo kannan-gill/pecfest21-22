@@ -26,7 +26,6 @@ function Home2({ initialPage }) {
     setCurrentPage(initialPage);
   }, [initialPage]);
   const scrollHandler = (scrollEvent) => {
-    console.log(scrollEvent.deltaY);
 
     if (
       transitionAnimation === "" &&
@@ -53,7 +52,6 @@ function Home2({ initialPage }) {
     setTransitionAnimation(prevPage);
     setCurrentPage(nextPage);
     setTimeout(() => {
-      console.log('reset animation');
       setTransitionAnimation("");
     }, 1000);
   };

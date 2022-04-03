@@ -7,7 +7,6 @@ import { useLocation } from "react-router-dom";
 import { auth } from "../../config";
 
 const PrivateRoutes = ({ children, setIsNavbarVisible }) => {
-  console.log('received', setIsNavbarVisible);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const location = useLocation();

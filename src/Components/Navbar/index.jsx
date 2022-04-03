@@ -92,13 +92,15 @@ const routes = [
   },
 ];
 
-const Navbar = () => {
+const Navbar = ({ alwaysOpenOnLarge }) => {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const handleRightSideClick = (e) => {
-    e.stopPropagation();
-    setIsNavOpen(false);
+    if (!alwaysOpenOnLarge) {
+      e.stopPropagation();
+      setIsNavOpen(false);
+    }
   };
   const [closeNavAnimation, setCloseNavAnimation] = useState(false);
   useEffect(() => {
@@ -109,16 +111,22 @@ const Navbar = () => {
     }
   }, [isNavOpen]);
 
-  const NavElement = (route) => {
+  const NavElement = (route, ind) => {
     return (
       <div
-        key={route.route}
+        key={ind}
         onClick={() => {
           navigate(route.route);
           setIsNavOpen(false);
         }}
         className={`cursor-pointer px-3 my-1 py-2 ${styles.nav_item} ${
-          location.pathname === route.route && styles.nav_item_active
+          (location.pathname === route.route ||
+            (location.pathname.includes("competitions") &&
+              route.route === "/competitions") ||
+            ((location.pathname.includes("workshops") ||
+              location.pathname.includes("megashows")) &&
+              route.route === "/events")) &&
+          styles.nav_item_active
         } ${location.pathname === route.route && "py-2 my-1"}`}
       >
         <FontAwesomeIcon
@@ -132,9 +140,12 @@ const Navbar = () => {
       </div>
     );
   };
-  const DividerElement = (route) => {
+  const DividerElement = (route, ind) => {
     return (
-      <div className="position-relative mt-3 ms-2" key={`divider-${route.text}`} >
+      <div
+        className="position-relative mt-3 ms-2"
+        key={`divider-${route.text}`}
+      >
         &nbsp;
         <span
           className={`position-absolute start-0 bottom-0 translate-middle zi-2 ps-5 pt-0 pe-2 ${styles.nav_item_heading}`}
@@ -147,7 +158,53 @@ const Navbar = () => {
       </div>
     );
   };
-
+  const CommonNavBarComponent = () => {
+    return (
+      <>
+        <div className="d-flex flex-column overflow-none justify-content-start  ">
+          <div className="d-flex justify-content-between align-items-center px-3 pt-4 pb-0 text-white">
+            <div className="d-flex flex-row">
+              <img
+                src={pecfest_logo}
+                className={`${styles.pecfest_logo} main_font cursor-pointer`}
+                alt="pecfest logo"
+                onClick={() => navigate("/")}
+              />
+              <h4 className="main_font ms-2">PECFEST</h4>
+            </div>
+            {!alwaysOpenOnLarge && (
+              <FontAwesomeIcon
+                className="cursor-pointer"
+                icon={faXmark}
+                color="white"
+                size="2x"
+                onClick={() => setIsNavOpen(false)}
+              />
+            )}
+            {alwaysOpenOnLarge && (
+              <FontAwesomeIcon
+                className="cursor-pointer d-block d-md-none"
+                icon={faXmark}
+                color="white"
+                size="2x"
+                onClick={() => setIsNavOpen(false)}
+              />
+            )}
+          </div>
+        </div>
+        <div
+          className="overflow-auto flex-grow-1 d-flex flex-column pe-3 mb-3"
+          onWheel={(event) => {
+            event.stopPropagation();
+          }}
+        >
+          {routes.map((route, ind) =>
+            route.type ? DividerElement(route, ind) : NavElement(route, ind)
+          )}
+        </div>
+      </>
+    );
+  };
   const downloadBrochure = () => {
     const storage = getStorage();
     getDownloadURL(ref(storage, "Marketing Brochure.pdf"))
@@ -180,7 +237,7 @@ const Navbar = () => {
       if (userRes) {
         setUser(userRes);
         setLoadingUser(false);
-        navigate("/");
+        // navigate("/");
       } else {
         setLoadingUser(false);
         setUser(null);
@@ -192,11 +249,11 @@ const Navbar = () => {
     setLoadingLogoutUser(true);
     signOut(auth)
       .then(() => {
-        if(location.pathname !== "/"){
+        if (location.pathname !== "/") {
           navigate("/");
           return;
         }
-        
+
         // Sign-out successful.
         setTimeout(() => {
           setLoadingLogoutUser(false);
@@ -274,7 +331,9 @@ const Navbar = () => {
               color="white"
               size="2x"
               className="p-4 cursor-pointer"
-              onClick={() => setIsNavOpen(true)}
+              onClick={() => {
+                setIsNavOpen(true);
+              }}
             />
           </div>
           <div
@@ -283,8 +342,26 @@ const Navbar = () => {
               event.stopPropagation();
             }}
           >
+            {alwaysOpenOnLarge && (
+              <div
+                className={`position-absolute top-0 d-none d-md-flex flex-column start-0 zi-top h-100 ${
+                  styles.nav_item_container
+                } col-sm-12 col-md-6 col-lg-3 col-xl-3 animate__animated animate__faster ${
+                  !alwaysOpenOnLarge && !closeNavAnimation && "invisible"
+                } ${
+                  isNavOpen || alwaysOpenOnLarge
+                    ? "animate__slideInLeft"
+                    : "animate__slideOutLeft"
+                }`}
+              >
+                <CommonNavBarComponent />
+              </div>
+            )}
+
             <div
-              className={`position-absolute top-0 d-flex flex-column start-0 zi-top h-100 ${
+              className={`position-absolute top-0 ${
+                alwaysOpenOnLarge && "d-flex d-md-none"
+              } flex-column start-0 zi-top h-100 ${
                 styles.nav_item_container
               } col-sm-12 col-md-6 col-lg-3 col-xl-3 animate__animated animate__faster ${
                 !closeNavAnimation && "invisible"
@@ -292,38 +369,9 @@ const Navbar = () => {
                 isNavOpen ? "animate__slideInLeft" : "animate__slideOutLeft"
               }`}
             >
-              <div className="d-flex flex-column overflow-none justify-content-start  ">
-                <div className="d-flex justify-content-between align-items-center px-3 pt-4 pb-0 text-white">
-                  <div className="d-flex flex-row">
-                    <img
-                      src={pecfest_logo}
-                      className={`${styles.pecfest_logo} main_font cursor-pointer`}
-                      alt="pecfest logo"
-                      onClick={() => navigate("/")}
-                    />
-                    <h4 className="main_font ms-2">PECFEST</h4>
-                  </div>
-                  <FontAwesomeIcon
-                    className="cursor-pointer"
-                    icon={faXmark}
-                    color="white"
-                    size="2x"
-                    onClick={() => setIsNavOpen(false)}
-                  />
-                </div>
-              </div>
-              <div
-                className="overflow-auto flex-grow-1 d-flex flex-column pe-3 mb-3"
-                onWheel={(event) => {
-                  event.stopPropagation();
-                }}
-              >
-                {routes.map((route) =>
-                  route.type ? DividerElement(route) : NavElement(route)
-                )}
-              </div>
+              <CommonNavBarComponent />
             </div>
-            {isNavOpen && (
+            {!alwaysOpenOnLarge && isNavOpen && (
               <div
                 className="position-absolute zi-top top-0 end-0 d-none d-md-flex col-md-6 col-lg-9 col-xl-9 vw-75 h-100"
                 onClick={handleRightSideClick}
