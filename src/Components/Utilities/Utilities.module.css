@@ -71,6 +71,16 @@
 
 }
 
+.btn.color.active {
+    background-image: linear-gradient(to right, #c25e00, #8dab80, yellow);
+    box-shadow: 0 4px 15px 0 rgb(59 69 74);
+
+}
+.btn.active:hover{
+  background-position: 60% 0;
+}
+
+
 .buttonGroup{
   text-align: center;
 }    

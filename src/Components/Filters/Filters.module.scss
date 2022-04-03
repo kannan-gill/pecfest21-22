@@ -1,0 +1,24 @@
+.filters_container{
+    border-radius: 5px;
+    border-top-left-radius: 5px !important;
+    border-bottom-left-radius: 5px !important;
+    min-width: 10em;
+}
+.checkbox{
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    width:100%;
+}
+.no_focus:focus{
+    outline: none;
+    box-shadow: none;
+}
+.input{
+    border-radius: 1em;
+    outline:none;
+    -webkit-appearance: none;
+    border: 1px solid white;
+    color: white;
+}

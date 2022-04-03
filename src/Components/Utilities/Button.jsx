@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Utilities.module.css";
 
-function Button({ children, type, disabled = false, onClickFunc = (e) => {} }) {
+function Button({ children, color = "", type, disabled = false, onClickFunc = (e) => {} }) {
   const clickHandler = (e) => {
     onClickFunc(e);
   };
@@ -12,7 +12,7 @@ function Button({ children, type, disabled = false, onClickFunc = (e) => {} }) {
         disabled={disabled}
         type={type}
         onClick={clickHandler}
-        className={`${styles.color} ${styles.btn}`}
+        className={`${styles[color]} ${styles.color} ${styles.btn}`}
       >
         {children}
       </button>
