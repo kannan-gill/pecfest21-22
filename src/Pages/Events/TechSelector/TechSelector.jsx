@@ -1,7 +1,6 @@
 import { style } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import EventList from "../EventsList/EventList";
 import styles from "./TechSelector.module.scss";
 const technicalImageUrl =
   "https://cdn.searchenginejournal.com/wp-content/uploads/2019/11/why-technical-seo-and-on-site-seo-is-rarely-enough-5dcfef7155db8.png";
@@ -15,7 +14,6 @@ const TechCulturalSelector = ({ leftName = "Technical", rightName = "Cultural", 
   useEffect(() => {
     if (openTechnical || openCultural) {
       setTimeout(() => {
-        console.log(openTechnical, openCultural);
         if (openTechnical) {
           navigate(leftRoute);
           return;
@@ -38,7 +36,6 @@ const TechCulturalSelector = ({ leftName = "Technical", rightName = "Cultural", 
             setHoveredOnTechnical(false);
           }}
           onClick={() => {
-            console.log("opened");
             setOpenTechnical(true);
           }}
           className={`${styles.image}  ${styles.cultural} ${
@@ -65,7 +62,6 @@ const TechCulturalSelector = ({ leftName = "Technical", rightName = "Cultural", 
 
         <div
           onClick={() => {
-            console.log("opened");
             setOpenCultural(true);
           }}
           className={`${styles.image} ${
@@ -124,7 +120,6 @@ const TechCulturalSelector = ({ leftName = "Technical", rightName = "Cultural", 
 
         <div
           onClick={() => {
-            console.log("opened");
             setOpenCultural(true);
           }}
           className={`cursor-pointer bg-image vh-50  position-absolute bottom-0 transition-smooth ${

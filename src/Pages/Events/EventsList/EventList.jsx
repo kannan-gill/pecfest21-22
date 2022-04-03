@@ -23,11 +23,9 @@ const EventList = ({ isTechnical, isCompetition = true }) => {
       isTechnical,
       (eventsList) => {
         seteventDetails(eventsList);
-        console.log(eventsList);
         const filtersArray = eventsList.map((event) => event.tags);
         // @ts-ignore
         const uniqueFiltersArray = [...new Set(filtersArray.flat())];
-        console.log(uniqueFiltersArray);
         setFiltersArray(
           uniqueFiltersArray.map((tag) => {
             return { text: tag, value: false };
@@ -46,10 +44,6 @@ const EventList = ({ isTechnical, isCompetition = true }) => {
     };
     return cleanupFunc;
   }, []);
-
-  useEffect(() => {
-    console.log("tags", tags);
-  }, [tags]);
 
   return (
     <div

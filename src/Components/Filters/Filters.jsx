@@ -1,22 +1,16 @@
-import useOutsideClickHandler from "hooks/useOutsideClickHandler";
 import React, { useEffect, useState } from "react";
-import { Button, Form, FormControl, InputGroup } from "react-bootstrap";
 import styles from "./Filters.module.scss";
 import Tag from "../Tag/Tag";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 const Filters = ({ searchEvent, setSearchEvent, filtersArray, setTags }) => {
-  const [showFilter, setShowFilter] = useState(false);
-  const [componentLoaded, setComponentLoaded] = useState(false);
   const [filters, setFilters] = useState(filtersArray);
   useEffect(() => {
     setFilters(filtersArray);
   }, [filtersArray]);
-  const { ref } = useOutsideClickHandler(setShowFilter);
   const filterChangeHandler = (index) => {
     setFilters((prevVal) => {
       const val = [...prevVal];
-      console.log(val);
       val[index] = {
         text: val[index].text,
         value: !val[index].value,
@@ -25,7 +19,6 @@ const Filters = ({ searchEvent, setSearchEvent, filtersArray, setTags }) => {
     });
   };
   useEffect(() => {
-    console.log("filters", filters);
     setTags(
       filters
         .filter((filter) => filter.value === true)

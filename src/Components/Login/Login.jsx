@@ -18,7 +18,6 @@ function Login({ onFlip, setOpenForgotPasswordUI, redirect = null }) {
   const navigate = useNavigate();
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(email, password, rememberMe);
     setLoading(true);
 
     signInWithEmailAndPassword(auth, email, password)
@@ -30,10 +29,8 @@ function Login({ onFlip, setOpenForgotPasswordUI, redirect = null }) {
         // toast.info("Signed in succesfully");
        
         if (redirect) {
-          console.log('redirect1 ', redirect);
           navigate(redirect);
         } else {
-          console.log('redirect 2', redirect);
           navigate("/");
         }
 

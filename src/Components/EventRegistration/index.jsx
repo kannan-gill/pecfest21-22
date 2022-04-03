@@ -57,7 +57,6 @@ const EventRegistration = ({
     else{
       (async ()=>{
         const teamData = await getDocById('event-teams', registeredTeamId);
-        console.log('teamData', teamData);
         setTeamMemberDetails(teamData?.teamMembers);
       })();
     }
@@ -129,7 +128,7 @@ const EventRegistration = ({
         onRegister();
       }
 
-      console.log("no form errors");
+      
     }
   };
   const validatePecId = (usersData) => {

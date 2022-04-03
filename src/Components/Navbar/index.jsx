@@ -120,14 +120,13 @@ const Navbar = ({ alwaysOpenOnLarge }) => {
           setIsNavOpen(false);
         }}
         className={`cursor-pointer px-3 my-1 py-2 ${styles.nav_item} ${
-          location.pathname === route.route ||
-          (location.pathname.includes("competitions") &&
-            route.route === "/competitions" &&
-            styles.nav_item_active) ||
-          location.pathname.includes("workshops") ||
-          (location.pathname.includes("megashows") &&
-            route.route === "/events" &&
-            styles.nav_item_active)
+          (location.pathname === route.route ||
+            (location.pathname.includes("competitions") &&
+              route.route === "/competitions") ||
+            ((location.pathname.includes("workshops") ||
+              location.pathname.includes("megashows")) &&
+              route.route === "/events")) &&
+          styles.nav_item_active
         } ${location.pathname === route.route && "py-2 my-1"}`}
       >
         <FontAwesomeIcon
@@ -333,7 +332,6 @@ const Navbar = ({ alwaysOpenOnLarge }) => {
               size="2x"
               className="p-4 cursor-pointer"
               onClick={() => {
-                console.log("clicked");
                 setIsNavOpen(true);
               }}
             />

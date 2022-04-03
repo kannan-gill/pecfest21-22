@@ -16,7 +16,6 @@ import EventRegistration from "Components/EventRegistration/index";
 import { AuthContext } from "context/AuthContext";
 import { toast } from "react-toastify";
 import createDOMPurify from "dompurify";
-// import { JSDOM } from "jsdom";
 
 const EventDetails = ({ setAlwaysOpen }) => {
   const location = useLocation();
@@ -26,11 +25,6 @@ const EventDetails = ({ setAlwaysOpen }) => {
   const [alreadyRegistered, setAlreadyRegistered] = useState(null);
   const [eventsCleanup, setEventsCleanUp] = useState(null);
   const userDets = useContext(AuthContext);
-  // console.log(
-  //   "user",
-  //   userDets?.registeredEvents,
-  //   userDets?.registeredCompetitions
-  // );
   const [eventDetails, seteventDetails] = useState(null);
   const [isVideoOpen, setVideoOpen] = useState(false);
   const [prelimLink, setPrelimLink] = useState("");
@@ -47,7 +41,6 @@ const EventDetails = ({ setAlwaysOpen }) => {
       // if includes
       setAlreadyRegistered(
         eventList.some((event) => {
-          console.log("events", event);
           if (event.eventId === eventDetails.id) {
             setPrelimLink(event.prelimLink);
             setRegisteredTeamId(event.teamId);
@@ -56,7 +49,6 @@ const EventDetails = ({ setAlwaysOpen }) => {
         })
       );
     } else {
-      console.log("reached here");
       setAlreadyRegistered(false);
     }
   };
@@ -66,7 +58,6 @@ const EventDetails = ({ setAlwaysOpen }) => {
     }
     const cleanUp = getDocByIdRealTime("events", urlParams.eventId, (event) => {
       seteventDetails(event);
-      console.log("reached");
       checkAlreadyRegistered(event);
     });
     setEventsCleanUp(() => cleanUp);

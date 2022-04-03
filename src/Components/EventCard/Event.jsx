@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import LinesEllipsis from "react-lines-ellipsis";
 import { useNavigate } from "react-router-dom";
-import EventDetails from "../../Pages/EventCardDetails/EventDetails";
 import styles from "./EventCard.module.scss";
 
 function Event({ event, isTechnical = true, isCompetition = true }) {
@@ -14,8 +13,7 @@ function Event({ event, isTechnical = true, isCompetition = true }) {
       } else {
         navigate(`/cultural-competitions/${id}`);
       }
-    }
-   else {
+    } else {
       if (isTechnical) {
         navigate(`/workshops/${id}`);
       } else {
@@ -23,13 +21,6 @@ function Event({ event, isTechnical = true, isCompetition = true }) {
       }
     }
   };
-  function handleRegisterTeam() {
-    // redirect to login page using auth then team register page, pass maxUsers, teamEvent to register page
-  }
-
-  function handleRegisterSelf() {
-    // redirect to login page using auth then register page, pass maxUsers, teamEvent to register page
-  }
 
   return (
     <div className="col-12 col-md-6 col-lg-4 col-xl-3 p-3 animate__animated animate__fadeIn">

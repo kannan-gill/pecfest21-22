@@ -48,7 +48,6 @@ const ForgotPassword = ({ setOpenForgotPasswordUI }) => {
             name="email"
             val={email}
             changeFunc={(e,value) => {
-              console.log(value);
               setEmail(value);
             }}
           />
