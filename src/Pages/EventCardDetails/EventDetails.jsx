@@ -24,7 +24,7 @@ const EventDetails = ({ setAlwaysOpen }) => {
   const DOMPurify = createDOMPurify(windowDom);
   const [alreadyRegistered, setAlreadyRegistered] = useState(null);
   const [eventsCleanup, setEventsCleanUp] = useState(null);
-  const userDets = useContext(AuthContext);
+  const { user: userDets } = useContext(AuthContext);
   const [eventDetails, seteventDetails] = useState(null);
   const [isVideoOpen, setVideoOpen] = useState(false);
   const [prelimLink, setPrelimLink] = useState("");
@@ -194,9 +194,8 @@ const EventDetails = ({ setAlwaysOpen }) => {
                 </div>
                 <div className="mt-3 d-flex flex-row flex-wrap">
                   <div
-                    className={`col-12 px-2 mb-3 ${
-                      eventDetails?.isRegistrationOpen && "col-xl-8"
-                    }`}
+                    className={`col-12 px-2 mb-3 ${eventDetails?.isRegistrationOpen && "col-xl-8"
+                      }`}
                   >
                     <EventDetailsTile
                       buttonColor="warning"

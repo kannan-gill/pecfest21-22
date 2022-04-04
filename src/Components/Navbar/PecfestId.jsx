@@ -1,20 +1,20 @@
-import React, {useState, useContext} from "react";
+import React, { useState, useContext } from "react";
 import { OverlayTrigger, Tooltip, Button } from "react-bootstrap";
-import styles from "./UserDropdown.module.css"; 
+import styles from "./UserDropdown.module.css";
 import { AuthContext } from "../../context/AuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCopy,
 } from "@fortawesome/free-solid-svg-icons";
 
-const PecfestId = ({color, iconColor}) => {
-  const authContext = useContext(AuthContext);
+const PecfestId = ({ color, iconColor }) => {
+  const { user: authContext } = useContext(AuthContext);
   const [showTooltip, setShowTooltip] = useState(false);
 
   const copyButton = (
     <Button
       className={styles.copy_icon}
-      style={{backgroundColor: iconColor, color: color}}
+      style={{ backgroundColor: iconColor, color: color }}
       onClick={() => {
         setShowTooltip(true);
         navigator.clipboard.writeText(authContext["pecfestId"]);
@@ -28,9 +28,9 @@ const PecfestId = ({color, iconColor}) => {
 
   return (
     <>
-      {(authContext && authContext.pecfestId) && 
+      {(authContext && authContext.pecfestId) &&
         <>
-          <div className="pe-2 fst-italic" style={{color: color}}>{authContext["pecfestId"]}</div>
+          <div className="pe-2 fst-italic" style={{ color: color }}>{authContext["pecfestId"]}</div>
           {showTooltip ? (
             <OverlayTrigger placement="bottom" overlay={<Tooltip>Copied!</Tooltip>}>
               {copyButton}

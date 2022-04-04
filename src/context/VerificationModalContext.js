@@ -18,7 +18,7 @@ const VerificationModalProvider = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [countdown, setCountdown] = useState(null);
   const [intervalRef, setIntervalRef] = useState(null);
-  const user = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   const openVerificationModal = () => {
     if (!user?.emailVerified) {
