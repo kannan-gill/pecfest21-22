@@ -6,7 +6,6 @@ import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 function TeamMemberCard({member , index, isDeveloper=false}) {
 
-  console.log(member.instagram === "");
   const lineColors = ["red", "green", "blue", "yellow"];
   const color = lineColors[index % 4];
 
