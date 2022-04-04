@@ -13,7 +13,7 @@ import Button from "../Utilities/Button";
 import { createDoc, getDocById, updateDoc } from "services";
 
 const isDigit = (phoneNum) => {
-  return /^\d{10}$/.test(phoneNum);
+  return /^\+?([0-9]{2})?[-. ]?([0-9]{10})$/.test(phoneNum);
 }
 
 const isValidEmailAddress = (email) => {
@@ -290,7 +290,7 @@ function Register({ onFlip, redirect }) {
             icon="graduation-cap"
             label="grad_year"
             disabledOption="Graduation Year"
-            options={["2022", "2023", "2024", "2025"]}
+            options={["2022", "2023", "2024", "2025", "Other"]}
             isValid={checkValidStates.isYearValid}
           />
           <SelectInput
@@ -300,7 +300,7 @@ function Register({ onFlip, redirect }) {
             icon="book"
             label="course"
             disabledOption="Course"
-            options={["BTech", "MTech", "PhD"]}
+            options={["BTech", "MTech", "PhD", "Other"]}
             isValid={checkValidStates.isDegreeValid}
           />
           <SimpleInput

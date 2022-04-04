@@ -20,9 +20,12 @@ const useAuthHandler = () => {
       if (userRes) {
         // const userData = await getUserByEmail(userRes.email);
         cleanUpFuncInternal = getUserByEmailLive(userRes.email, (userData) => {
-          const currentUser = auth.currentUser;
-          setUser({ ...userData, emailVerified: currentUser.emailVerified });
-          setIsLoading(false);
+          auth.currentUser.reload()
+          .then(() => {
+            const currentUser = auth.currentUser;
+            setUser({ ...userData, emailVerified: currentUser.emailVerified });
+            setIsLoading(false);
+          });
         });
       } else {
         setUser(null);
@@ -38,15 +41,30 @@ const useAuthHandler = () => {
     return cleanUpFunc;
   }, []);
 
-  return [user, isLoading];
+  const reloadUserObj = async () => {
+    if (user) {
+      await auth.currentUser.reload();
+      const currentUser = auth.currentUser;
+      setUser((prevUser) => ({
+        ...prevUser,
+        emailVerified: currentUser.emailVerified,
+      }));
+    }
+  };
+
+  return [user, isLoading, reloadUserObj];
 };
 
 const { Provider } = AuthContext;
 
 const AuthProvider = (props) => {
-  const [user, isLoading] = useAuthHandler();
+  const [user, isLoading, reloadUserObj] = useAuthHandler();
 
-  return <Provider value={{user, isLoading}}>{props.children}</Provider>;
+  return (
+    <Provider value={{ user, isLoading, reloadUserObj }}>
+      {props.children}
+    </Provider>
+  );
 };
 
 export default AuthProvider;
