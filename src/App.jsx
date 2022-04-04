@@ -1,25 +1,20 @@
 import React, { useState } from "react";
 import "./App.css";
-// import Button from "./Components/Utilities/Button";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import EventList from "./Pages/Events/EventsList/EventList";
-// import Home from "./Pages/Home/Home";
 import PrivateRoutes from "./Components/PrivateRoutes";
 import RegisterLogin from "./Pages/RegisterLogin/RegisterLogin";
 import Home2 from "./Pages/Home/Home2";
-// import LandingPage from "./Pages/CampusTour/LandingPage";
-// import Competitions from "./Pages/Competitions/Competitions";
-// import TeamEventRegistration from "./Pages/TeamEventRegistration/TeamEventRegistration";
-// import ContactUs from "./Pages/ContactUS/ContactUs";
-// import Developers from "./Pages/Developers/Developers";
+import TeamEventRegistration from "./Pages/TeamEventRegistration/TeamEventRegistration";
+import Developers from "Pages/Developers/Developers";
 import Admin from "./Pages/Admin/Admin";
-// import Team from "./Pages/Team/Team";
-// import Schedule from "Pages/Schedule/Schedule";
 import ComingSoon from "Pages/ComingSoon/ComingSoon";
 import Navbar from "Components/Navbar";
 import ExternalLink from "Components/ExternalLink/ExternalLink";
 import PageNotFound from "Pages/PageNotFound/PageNotFound";
 import { ToastContainer } from "react-toastify";
+import ContactUs from "Pages/ContactUS/ContactUs";
+import Team from "Pages/Team/Team";
 import "react-toastify/dist/ReactToastify.css";
 import TechCulturalSelector from "Pages/Events/TechSelector/TechSelector";
 import EventDetails from "Pages/EventCardDetails/EventDetails";
@@ -61,10 +56,9 @@ function App() {
       ),
     },
     { path: "/schedule", component: <ComingSoon /> },
-    { path: "/contactUs", component: <ComingSoon /> },
     { path: "/admin", component: <Admin /> },
     { path: "/teamregister", component: <ComingSoon /> },
-    { path: "/team", component: <ComingSoon /> },
+    { path: "/team", component: <Team /> },
     { path: "/aboutUs", component: <Home2 initialPage="aboutUs" /> },
     { path: "/sponsors", component: <ComingSoon /> },
     {

@@ -1,0 +1,29 @@
+.main_container{
+  margin-top: 5.5em;
+  overflow-x: hidden;
+}
+
+.heading{
+  letter-spacing: 12px;
+  font-size: 8em;
+  color: #454545;
+  margin-top: -10px;
+}
+
+.headingTop{
+  font-size: 0.4em;
+  letter-spacing: 0px;
+}
+
+@media screen and (max-width: 768px){
+  .heading{
+    font-size: 6em;
+  }  
+}
+
+@media screen and (max-width: 600px){
+  .heading{
+    font-size: 3em;
+  }  
+}
+

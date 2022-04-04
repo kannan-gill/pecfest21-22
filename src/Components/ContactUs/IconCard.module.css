@@ -1,0 +1,26 @@
+.icon{
+  border-radius: 50%;
+  border: 1px solid #FEC007;
+  font-size: 2em;
+  width: 1em;
+}
+
+.grey{
+  color: #8a8a8a !important;
+}
+
+.desc{
+  transition: all 0.3s;
+  overflow-wrap: anywhere;
+}
+
+.desc:hover{
+  transform: scale(1.1);
+}
+
+@media screen and (max-width: 600px){
+  .title, .desc{
+    text-align: center;
+  }
+}
+  
