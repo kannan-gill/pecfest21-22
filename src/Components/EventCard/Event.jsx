@@ -35,10 +35,12 @@ function Event({ event, isTechnical = true, isCompetition = true }) {
         >
           <img className="card-img-top" src={event.img} alt="Card" />
         </div>
+        <div className={`position-absolute bottom-0 text-white main_font w-100 px-2 ${styles.heading_container}`}>
+          <h5 className="fw-bold ps-2">{event.name}</h5>
+        </div>
         <div
           className={`${styles.description_container}  mx-0 w-100 pb-0 px-2 mt-0 py-0 mx-auto card-body position-absolute top-100 d-flex flex-column text-white`}
         >
-          <h5 className="fw-bold ps-2">{event.name}</h5>
           <div
             className={` zi-top h-100 fw-bold position-relative text-justify d-flex flex-column justify-content-center px-3  ${
               styles.border_curved

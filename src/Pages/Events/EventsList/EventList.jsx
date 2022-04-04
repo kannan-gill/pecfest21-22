@@ -57,7 +57,7 @@ const EventList = ({ isTechnical, isCompetition = true }) => {
       <StarsBg />
       <div className={`${styles.pageTitle}`}>
         {isCompetition && (isTechnical ? "TECHNICAL" : "CULTURAL")}
-        {!isCompetition && (isTechnical ? "WORKSHOPS" : "MEGASHOWS")}
+        {!isCompetition && (isTechnical ? "EVENTS" : "MEGASHOWS")}
       </div>
       <div className="px-5">
         <div className={`${styles.divider} w-100 w-md-75`} />
