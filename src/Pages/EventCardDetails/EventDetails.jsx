@@ -140,19 +140,20 @@ const EventDetails = ({ setAlwaysOpen }) => {
                   <div
                     className={`w-100 h-100  position-relative ${styles.event_tile}`}
                     style={{
+                      backgroundPosition: 'center center',
                       backgroundSize: 'cover',
                       backgroundRepeat: 'no-repeat',
                       backgroundImage: `url(${eventDetails?.backdrop})`,
                     }}
                   >
                     <div
-                      className={` d-flex pt-5 flex-column px-5 pb-3 justify-content-end w-100 h-100 ${styles.overlay}`}
+                      className={` d-flex pt-5 flex-column px-1 px-md-5 pb-3 justify-content-end w-100 h-100 ${styles.overlay}`}
                     >
                       <div className="text-white">
                         {eventDetails?.tags.map((tag, ind) => (
                           <Tag key={`tag-${ind}`} disabled tag={tag} />
                         ))}
-                        <h1 className="mb-2  main_font">
+                        <h1 className={`${styles.responsive_heading} mb-2  main_font`}>
                           {eventDetails?.name}
                         </h1>
                         <p className=" main_font">{eventDetails?.desc}</p>
@@ -203,7 +204,7 @@ const EventDetails = ({ setAlwaysOpen }) => {
                         const url = eventDetails?.rulebookUrl;
                         if (url) window.open(`//${url}`, "_blank");
                       }}
-                      buttonText="Rulebook"
+                      buttonText={eventDetails?.rulebookUrl && 'Rulebook'}
                       background="https://picsum.photos/1366/768?random"
                       title="Event Details"
                     >

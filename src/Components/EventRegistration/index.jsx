@@ -261,7 +261,7 @@ const EventRegistration = ({
 
         {event?.hasPrelimEntry && (
           <Form.Group className="mb-3 mt-2" controlId="formBasicEmail">
-            <Form.Label className="text-warning">Prelims drive link</Form.Label>
+            <Form.Label className="text-warning">Add public drive link for online prelims</Form.Label>
             <div className="position-relative d-flex flex-row">
               <Form.Control
                 disabled={alreadyRegistered}
