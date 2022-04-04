@@ -23,7 +23,7 @@ const UserDropdown = ({ user, signOutHandler }) => {
     <>
 
       {authContext && (
-        <Dropdown className="ps-1 pe-3 mt-2">
+        <Dropdown className="ps-1 pe-3">
           <Dropdown.Toggle className={`${styles.dropDown}`}>
             <FontAwesomeIcon icon={faUser} />
           </Dropdown.Toggle>
