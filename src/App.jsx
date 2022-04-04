@@ -51,8 +51,8 @@ function App() {
       path: "/competitions",
       component: (
         <TechCulturalSelector
-          technicalImageUrl="https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/Cultural_final.jpg?alt=media"
-          culturalImageUrl="https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/Technical_final.jpg?alt=media"
+          technicalImageUrl="https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/Technical_final.jpg?alt=media"
+          culturalImageUrl="https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/Cultural_final.jpg?alt=media"
           leftRoute="/tech-competitions"
           rightRoute="/cultural-competitions"
         />
