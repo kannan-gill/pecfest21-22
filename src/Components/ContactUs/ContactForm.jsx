@@ -63,7 +63,7 @@ function ContactForm() {
   };
 
   return (
-    <div className={`d-flex flex-column align-items-center justify-content-center zi-top ${styles.main_container}`}>
+    <div className={`d-flex flex-column align-items-center justify-content-center ${styles.main_container}`}>
       <form
         className={`w-100 d-flex flex-column align-items-center justify-content-center`}
         onSubmit={handleSubmit}
