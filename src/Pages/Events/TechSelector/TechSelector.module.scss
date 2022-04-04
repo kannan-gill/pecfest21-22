@@ -2,10 +2,9 @@
   position: absolute;
   left: 0;
   top: 0;
-
   overflow: hidden;
-  -webkit-clip-path: polygon(60% 0, 100% 0%, 100% 100%, 40% 100%);
-  clip-path: polygon(60% 0, 100% 0%, 100% 100%, 40% 100%);
+  -webkit-clip-path: polygon(60.25% 0, 100% 0%, 100% 100%, 40.25% 100%);
+  clip-path: polygon(60.25% 0, 100% 0%, 100% 100%, 40.25% 100%);
   transition: all 0.3s;
 }
 .open_page {
@@ -23,8 +22,11 @@
 
 .image {
   z-index: 10;
-  transition: clip-path 0.3s;
-  filter: brightness(80%);
+  transition: all 0.3s;
+  filter: brightness(40%);
+  img{
+    transition: all 0.3s;
+  }
 }
 
 .cultural {
@@ -37,9 +39,13 @@
   clip-path: polygon(0 0, 60% 0, 40% 100%, 0 100%);
   transition: all 0.3s;
 }
-.image:hover img {
-  transform: scale(1.05);
-  filter: brightness(20%);
+
+.image:hover  {
+  filter: brightness(80%);
+  img{
+    transform: scale(1.05);
+  }
+  
 }
 .image.technical:hover {
   -webkit-clip-path: polygon(55% 0, 100% 0%, 100% 100%, 35% 100%);
@@ -47,14 +53,18 @@
 }
 
 .image.cultural:hover {
-    -webkit-clip-path: polygon(0 0, 65% 0, 45% 100%, 0 100%);
-    clip-path: polygon(0 0, 65% 0, 45% 100%, 0 100%);
+    -webkit-clip-path: polygon(0 0, 64.75% 0, 44.75% 100%, 0 100%);
+    clip-path: polygon(0 0, 64.75% 0, 44.75% 100%, 0 100%);
   }
   
 
 .image.technical_small {
   -webkit-clip-path: polygon(65% 0, 100% 0%, 100% 100%, 45% 100%);
   clip-path: polygon(65% 0, 100% 0%, 100% 100%, 45% 100%);
+}
+.image.cultural_small {
+  -webkit-clip-path: polygon(0 0, 54.75% 0, 34.75% 100%, 0 100%);
+  clip-path: polygon(0 0, 54.75% 0, 34.75% 100%, 0 100%);
 }
 .culturalImage {
   transition: all 0.3s;

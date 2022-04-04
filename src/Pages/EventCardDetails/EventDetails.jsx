@@ -205,7 +205,7 @@ const EventDetails = ({ setAlwaysOpen }) => {
                         if (url) window.open(`//${url}`, "_blank");
                       }}
                       buttonText={eventDetails?.rulebookUrl && 'Rulebook'}
-                      background="https://picsum.photos/1366/768?random"
+                      background="https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/abstract5.png?alt=media"
                       title="Event Details"
                     >
                       <div
@@ -224,14 +224,14 @@ const EventDetails = ({ setAlwaysOpen }) => {
                             registerHandler();
                           }}
                           buttonText="Register"
-                          background="https://picsum.photos/1600/900?random"
+                          background="https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/abstract3.png?alt=media"
                           title="Register Now"
                         ></EventDetailsTile>
                       ) : (
                         <EventDetailsTile
                           buttonColor="warning"
                           buttonText={eventDetails.isTeamEvent && `View Team`}
-                          background="https://picsum.photos/1600/900?random"
+                          background="https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/abstract3.png?alt=media"
                           buttonHandler={() => {
                             registerHandler();
                           }}
