@@ -201,7 +201,7 @@ const EventDetails = ({ setAlwaysOpen }) => {
                       buttonColor="warning"
                       buttonHandler={() => {
                         const url = eventDetails?.rulebookUrl;
-                        if (url) window.open(`//${url}`, "_blank");
+                        if (url) window.open(`${url}`, "_blank");
                       }}
                       buttonText={eventDetails?.rulebookUrl && 'Rulebook'}
                       background="https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/abstract5.png?alt=media"
