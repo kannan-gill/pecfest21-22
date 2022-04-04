@@ -66,8 +66,8 @@ function App() {
       path: "/merchandise",
       component: <ExternalLink url={externalUrlLinks.merchandise} />,
     },
-    { path: "/developer", component: <ComingSoon /> },
-    { path: "/contact", component: <ComingSoon /> },
+    { path: "/developer", component: <Developers /> },
+    { path: "/contact", component: <ContactUs /> },
     {
       path: "/events",
       component: (
