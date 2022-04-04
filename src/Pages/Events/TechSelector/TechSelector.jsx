@@ -2,14 +2,19 @@ import { style } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./TechSelector.module.scss";
-const technicalImageUrl =
-  "https://cdn.searchenginejournal.com/wp-content/uploads/2019/11/why-technical-seo-and-on-site-seo-is-rarely-enough-5dcfef7155db8.png";
-const culturalImageUrl =
-  "https://www.worldatlas.com/r/w1300-q80/upload/e7/2e/50/shutterstock-1913349307.jpg";
-const TechCulturalSelector = ({ leftName = "Technical", rightName = "Cultural", leftRoute, rightRoute }) => {
+
+const TechCulturalSelector = ({
+  leftName = "Technical",
+  rightName = "Cultural",
+  leftRoute,
+  rightRoute,
+  technicalImageUrl,
+  culturalImageUrl,
+}) => {
   const [openTechnical, setOpenTechnical] = useState(false);
   const [openCultural, setOpenCultural] = useState(false);
   const [isHoveredOnTechnical, setHoveredOnTechnical] = useState(false);
+  const [isHoveredOnCultural, setHoveredOnCultural] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     if (openTechnical || openCultural) {
@@ -25,7 +30,7 @@ const TechCulturalSelector = ({ leftName = "Technical", rightName = "Cultural", 
   return (
     <>
       <div
-        className="d-none d-md-flex vh-100 zi-top"
+        className="d-none bg-warning d-md-flex vh-100 zi-top"
         style={{ background: "#07202a" }}
       >
         <div
@@ -38,8 +43,9 @@ const TechCulturalSelector = ({ leftName = "Technical", rightName = "Cultural", 
           onClick={() => {
             setOpenTechnical(true);
           }}
-          className={`${styles.image}  ${styles.cultural} ${
-            openTechnical && styles.open_page
+          className={`bg-dark ${styles.image}  ${styles.cultural} ${
+            openTechnical && styles.open_page}
+            ${isHoveredOnCultural && styles.cultural_small}
           } cursor-pointer`}
         >
           <h1
@@ -64,12 +70,18 @@ const TechCulturalSelector = ({ leftName = "Technical", rightName = "Cultural", 
           onClick={() => {
             setOpenCultural(true);
           }}
+          onMouseOver={() => {
+            setHoveredOnCultural(true);
+          }}
+          onMouseLeave={() => {
+            setHoveredOnCultural(false);
+          }}
           className={`${styles.image} ${
             !(openTechnical || openCultural) && styles.technical
           } ${openCultural && styles.open_page}
           ${openTechnical && styles.close_page}
           ${isHoveredOnTechnical && styles.technical_small}
-            cursor-pointer bg-image `}
+            cursor-pointer bg-image bg-dark `}
         >
           <h1
             onClick={() => {
@@ -90,14 +102,14 @@ const TechCulturalSelector = ({ leftName = "Technical", rightName = "Cultural", 
         </div>
       </div>
       <div
-        className="d-flex d-md-none vh-100 zi-top flex-column"
+        className="d-flex bg-warning d-md-none vh-100 zi-top flex-column"
         style={{ background: "#07202a" }}
       >
         <div
           onClick={() => {
             setOpenTechnical(true);
           }}
-          className={`cursor-pointer vh-50 position-relative transition-smooth d-flex flex-row justify-content-center ${
+          className={`cursor-pointer vh-50 mb-1 bg-white position-relative transition-smooth d-flex flex-row justify-content-center ${
             openTechnical && "vh-100 zi-1"
           }`}
         >
@@ -122,7 +134,7 @@ const TechCulturalSelector = ({ leftName = "Technical", rightName = "Cultural", 
           onClick={() => {
             setOpenCultural(true);
           }}
-          className={`cursor-pointer bg-image vh-50  position-absolute bottom-0 transition-smooth ${
+          className={`cursor-pointer bg-image vh-50 pt-1  position-absolute bottom-0 transition-smooth ${
             openCultural && "vh-100"
           }`}
         >
