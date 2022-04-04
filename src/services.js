@@ -26,6 +26,14 @@ export const getList = async (collectionParam) => {
   return resList;
 };
 
+export const registeredUsersInCompetition = async (collectionParam, filterKey1, filterParam1, filterKey2, filterParam2, filterkey3, filterParam3) => {
+  const resCollection = collection(firestore, collectionParam);
+  const resSnap = await getDocs(query(resCollection, where(filterKey1,'==',filterParam1), where(filterKey2,"==",filterParam2), where(filterkey3,"==",filterParam3)));
+
+    
+
+};
+
 export const getSortedList = async (collectionParam, filter) => {
   const resCollection = collection(firestore, collectionParam);
   const resSnap = await getDocs(
