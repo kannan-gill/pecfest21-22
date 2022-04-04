@@ -44,8 +44,8 @@ function Sponsors(){
         </div></center>
 
         <div className="d-flex flex-row w-100 flex-wrap justify-content-center">
-          {sponsor.sponsors.map((sponsorchild,index) => {
-            return (
+          {sponsor.sponsors.map((sponsorchild,index) => 
+            (
               <SponsorCard
                 key={sponsorchild.name}
                 image={sponsorchild.image}
@@ -53,8 +53,8 @@ function Sponsors(){
                 desc={sponsorchild.type}
                 index = {index}
               />
-            );
-          })}
+            )
+          )}
         </div>
           </div>
           : <></>

@@ -4,7 +4,7 @@
 }
 
 .card{
-  background-color: Seashell; 
+  background-color: white; 
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
   width:13em;
@@ -68,4 +68,9 @@ overflow: hidden;
 
 .leftrotate:hover{
   transform: translateY(30px) scale(1.1);
+}
+
+.image{
+  max-width: 140px;
+  max-height: 120px;
 }
