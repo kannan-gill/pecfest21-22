@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import StarsBg from "../../StarsBg";
 import BottomBars from "../../BottomBars";
 import Spacecraft from "../../Spacecraft";
@@ -6,23 +6,11 @@ import styles from "./AboutPecfest2.module.css";
 import { useNavigate } from "react-router-dom";
 import { faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../../../config";
+import { AuthContext } from "context/AuthContext";
 
 const AboutPecfest2 = () => {
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    const cleanUp = onAuthStateChanged(auth, (userRes) => {
-      if (userRes) {
-        setIsLoggedIn(true);
-      } else {
-        setIsLoggedIn(false);
-      }
-    });
-    return cleanUp;
-  }, []);
+  const {user} = useContext(AuthContext);
 
   return (
     <div className="text-white w-100 h-100 overflow-hidden position-relative">
@@ -39,7 +27,7 @@ const AboutPecfest2 = () => {
             <span className="text-warning ">100 glorious years</span> of PEC at
             pecfest <span className="d-inline-block">21-22.</span>
           </span>
-          {!isLoggedIn && <button
+          {!user && <button
             type="button"
             onClick={() => navigate("/register")}
             className={`${styles.registration_button} cursor-pointer py-2 px-4 mt-4`}

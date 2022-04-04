@@ -15,7 +15,7 @@ function TeamMemberCard({member , index, isDeveloper=false}) {
 
   return (
     <div
-      className={`m-4 ${styles.membertile} d-flex flex-column align-items-center`}
+      className={`m-4 ${styles.membertile} d-flex flex-column justify-content-center align-items-center`}
     >
       <Image
         className={`${styles.memberimage}`}
@@ -29,7 +29,7 @@ function TeamMemberCard({member , index, isDeveloper=false}) {
         className={`${styles.detailsSeparator}`}
         style={{ height: "3px", backgroundColor: color }}
       ></hr>
-      <div style={{ fontSize: "20px" }}>{member.position}</div>
+      <div className="text-center" style={{ fontSize: "20px" }}>{member.position}</div>
       <div className="d-flex flex-row justify-content-center align-items-center w-50 m-auto mt-3">
         {member.instagram!=="" && <a href={member.instagram} target="_blank">
           <Instagram className={`fa fa-lg me-3 ${styles.instagram}`} />
