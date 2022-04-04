@@ -162,7 +162,7 @@ const Navbar = ({ alwaysOpenOnLarge }) => {
   const CommonNavBarComponent = () => {
     return (
       <>
-        <div className="d-flex flex-column overflow-none justify-content-start  ">
+        <div className="d-flex flex-column overflow-none justify-content-start mb-2">
           <div className="d-flex justify-content-between align-items-center px-3 pt-4 pb-0 text-white">
             <div className="d-flex flex-row align-items-center">
               <img
@@ -386,7 +386,7 @@ const Navbar = ({ alwaysOpenOnLarge }) => {
             )}
 
             <div
-              className={`position-absolute top-0 ${
+              className={`position-absolute top-0 d-flex ${
                 alwaysOpenOnLarge && "d-flex d-md-none"
               } flex-column start-0 zi-top h-100 ${
                 styles.nav_item_container
