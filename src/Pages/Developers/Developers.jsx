@@ -34,9 +34,6 @@ function Developers() {
                     return <Col><TeamMemberCard key={item.name} member={item} index={index}/></Col> 
                 })}
                 </Row>
-                {/* {membersData.map(item=>{
-                    return <PecfestTeams key={item.name} teamname={item.name} teamMembers = {item.members}/>
-                })} */}
         </Container>
     </div>
   )
