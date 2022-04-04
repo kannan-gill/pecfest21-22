@@ -6,7 +6,7 @@ import ErrorTooltip from "./ErrorTooltip";
 const errorMessages = {
   gender: "Please select a gender",
   degree: "Please select a degree",
-  year: "Please select a year"
+  year: "Please select a year",
 }
 
 function SelectInput({ label, disabledOption, options, icon, changeFunc, name, isValid, val }) {
@@ -36,7 +36,7 @@ function SelectInput({ label, disabledOption, options, icon, changeFunc, name, i
       </Form.Select>
 
       {!isValid ? (
-        <ErrorTooltip title={errorMessages[name]} />
+        <ErrorTooltip title={errorMessages[name]} classes="bg-white" />
       ) : null}
 
     </InputGroup>

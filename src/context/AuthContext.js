@@ -1,7 +1,8 @@
 import { useState, useEffect, createContext } from "react";
 import { auth } from "../config";
-import { getUserByEmail } from "../services";
+import { getUserByEmail, getUserByEmailLive } from "../services";
 import { onAuthStateChanged } from "firebase/auth";
+import React from "react";
 
 export const AuthContext = createContext(null);
 
@@ -9,21 +10,28 @@ const useAuthHandler = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+    let cleanUpFuncInternal = null;
     const cleanUp = onAuthStateChanged(auth, async (userRes) => {
       if (userRes) {
-        const userData = await getUserByEmail(userRes.email);
-        setUser({ ...userData, emailVerified: userRes.emailVerified });
+        // const userData = await getUserByEmail(userRes.email);
+        cleanUpFuncInternal = getUserByEmailLive(userRes.email, (userData) => {
+          const currentUser = auth.currentUser;
+          setUser({ ...userData, emailVerified: currentUser.emailVerified });
+        });
       } else {
         setUser(null);
       }
     });
-    return cleanUp;
+    const cleanUpFunc = () => {
+      cleanUp();
+      if (cleanUpFuncInternal) {
+        cleanUpFuncInternal();
+      }
+    };
+    return cleanUpFunc;
   }, []);
 
-  return [
-    user,
-    setUser,
-  ];
+  return [user, setUser];
 };
 
 const { Provider } = AuthContext;
@@ -31,7 +39,7 @@ const { Provider } = AuthContext;
 const AuthProvider = (props) => {
   const [user, setUser] = useAuthHandler();
 
-  return <Provider value={{ user, setUser }}>{props.children}</Provider>;
+  return <Provider value={user}>{props.children}</Provider>;
 };
 
 export default AuthProvider;

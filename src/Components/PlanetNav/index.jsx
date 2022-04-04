@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { faAnglesRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
-import BackImg from "../../Images/back-img.png";
 import useAnimatedRenderer from "hooks/useAnimatedRenderer";
 import ExpandingCircle from "Components/ExpandingCircle";
 import StarsBg from "../StarsBg";
@@ -114,14 +113,6 @@ const PlanetNav = ({ transitionAnimation }) => {
       }`}
       onMouseMove={handleMouse}
     >
-      {/* <div className="nebula-bg" style={{ overflow: "hidden" }}>
-        <img
-          style={{ width: "100%", height: "100vh", minWidth: "1000px" }}
-          className={`nebulaimg ${explore ? "rotatebg" : ""}`}
-          src={nebulaBg}
-          alt="not found"
-        /> 
-      </div> */}
       {
         <div
           className={`position-relative zi-top col-8 offset-2  ${
@@ -166,7 +157,7 @@ const PlanetNav = ({ transitionAnimation }) => {
           } `}
           onClick={() => setExplore(false)}
         >
-          <img src={BackImg} alt="Back" width="100px" />
+          <img src="https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/images%2Fback-img.png?alt=media&token=8f799589-dcf8-42c0-8bce-f0dfe816b80a" alt="Back" width="100px" />
         </div>
       )}
 
