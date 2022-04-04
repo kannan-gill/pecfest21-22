@@ -3,12 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import {
   faBars,
-  faBook,
   faCalendar,
   faDesktop,
   faDollar,
   faDrum,
-  faDrumstickBite,
   faHouse,
   faInfoCircle,
   faLightbulb,
@@ -24,6 +22,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Spinner } from "react-bootstrap";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../config";
+import UserDropdown from "./UserDropdown";
+import PecfestId from "./PecfestId";
 
 const routes = [
   {
@@ -95,6 +95,7 @@ const Navbar = ({ alwaysOpenOnLarge }) => {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+
   const handleRightSideClick = (e) => {
     if (!alwaysOpenOnLarge) {
       e.stopPropagation();
@@ -162,14 +163,17 @@ const Navbar = ({ alwaysOpenOnLarge }) => {
       <>
         <div className="d-flex flex-column overflow-none justify-content-start  ">
           <div className="d-flex justify-content-between align-items-center px-3 pt-4 pb-0 text-white">
-            <div className="d-flex flex-row">
+            <div className="d-flex flex-row align-items-center">
               <img
                 src="https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/images%2Fpecfest_logo.png?alt=media&token=b5655fe0-3081-4796-8367-33927a9e6d77"
                 className={`${styles.pecfest_logo} main_font cursor-pointer`}
                 alt="pecfest logo"
                 onClick={() => navigate("/")}
               />
-              <h4 className="main_font ms-2">PECFEST</h4>
+              <div className="d-flex flex-column ms-2">
+                <h4 className="main_font mb-0 pb-0">PECFEST</h4>
+                {user && <div className="d-flex flex-row align-items-center"><PecfestId color="#fec007" iconColor="#0f1113"/></div>}
+              </div>
             </div>
             {!alwaysOpenOnLarge && (
               <FontAwesomeIcon
@@ -270,58 +274,60 @@ const Navbar = ({ alwaysOpenOnLarge }) => {
       {!loadingUser && (
         <>
           <div className="position-absolute top-0 end-0 zi-top animate__animated animate__fadeIn animate__fast">
-            <Button
-              onClick={() => {
-                downloadBrochure();
-              }}
-              className={`fw-bold my-4 mx-2 transition-smooth ${styles.brochure}`}
-            >
-              <FontAwesomeIcon icon={faDownload} className="me-2" size="1x" />
-              Brochure
-            </Button>
-            {
+            <div className="d-flex flex-row align-items-center">
               <Button
-                className={`animate__animated fw-bold px-3 my-4 mx-2`}
                 onClick={() => {
-                  if (user) {
-                    signOutHandler();
-                  } else {
-                    navigate("/login");
-                  }
+                  downloadBrochure();
                 }}
-                variant="warning"
-                style={{
-                  borderRadius: "5em",
-                }}
+                className={`fw-bold my-4 mx-2 transition-smooth ${styles.brochure}`}
               >
-                {loadingLogoutUser ? (
+                <FontAwesomeIcon icon={faDownload} className="me-2" size="1x" />
+                Brochure
+              </Button>
+              {loadingLogoutUser ? (
+                <Button
+                  className={`animate__animated fw-bold px-3 my-4 mx-2`}
+                  onClick={() => {
+                    if (user) {
+                      signOutHandler();
+                    } else {
+                      navigate("/login");
+                    }
+                  }}
+                  variant="warning"
+                  style={{
+                    borderRadius: "5em",
+                  }}
+                >
                   <Spinner
                     animation="border"
                     variant="dark"
                     size="sm"
                     className="mx-4"
                   />
-                ) : user ? (
-                  <>
-                    <FontAwesomeIcon
-                      icon={faRocket}
-                      className="me-2"
-                      size="1x"
-                    />
-                    Logout
-                  </>
-                ) : (
-                  <>
-                    <FontAwesomeIcon
-                      icon={faRocket}
-                      className="me-2"
-                      size="1x"
-                    />
-                    Login
-                  </>
-                )}
-              </Button>
-            }
+                </Button>
+              ) : user ? (
+                <UserDropdown user={user} signOutHandler={signOutHandler} />
+              ) : (
+                <Button
+                  className={`animate__animated fw-bold px-3 my-4 mx-2`}
+                  onClick={() => {
+                    if (user) {
+                      signOutHandler();
+                    } else {
+                      navigate("/login");
+                    }
+                  }}
+                  variant="warning"
+                  style={{
+                    borderRadius: "5em",
+                  }}
+                >
+                  <FontAwesomeIcon icon={faRocket} className="me-2" size="1x" />
+                  Login
+                </Button>
+              )}
+            </div>
           </div>
 
           <div className="position-absolute top-0 start-0 text-white zi-top animate__animated animate__fadeIn">

@@ -24,6 +24,8 @@ import "react-toastify/dist/ReactToastify.css";
 import TechCulturalSelector from "Pages/Events/TechSelector/TechSelector";
 import EventDetails from "Pages/EventCardDetails/EventDetails";
 import AuthProvider from "./context/AuthContext";
+import VerificationModalProvider from "./context/VerificationModalContext";
+import VerifyEmail from "Pages/VerifyEmail";
 
 function App() {
   const [isNavBarVisible, setIsNavbarVisible] = useState(true);
@@ -44,6 +46,10 @@ function App() {
       component: (
         <RegisterLogin isRegister setIsNavbarVisible={setIsNavbarVisible} />
       ),
+    },
+    {
+      path: "/verifyEmail/:userId",
+      component: <VerifyEmail />
     },
     {
       path: "/competitions",
@@ -135,13 +141,15 @@ function App() {
     <div className="overflow-auto vh-100 bg-black">
       <ToastContainer theme="light" />
       <AuthProvider>
-        <BrowserRouter>
-          {isNavBarVisible && <Navbar alwaysOpenOnLarge={alwaysOpen} />}
-          <Routes>
-            {publicRoutes.map((route) => publicRouteComponent(route))}
-            {privateRoutes.map((route) => privateRouteComponent(route))}
-          </Routes>
-        </BrowserRouter>
+        <VerificationModalProvider>
+          <BrowserRouter>
+            {isNavBarVisible && <Navbar alwaysOpenOnLarge={alwaysOpen} />}
+            <Routes>
+              {publicRoutes.map((route) => publicRouteComponent(route))}
+              {privateRoutes.map((route) => privateRouteComponent(route))}
+            </Routes>
+          </BrowserRouter>
+        </VerificationModalProvider>
       </AuthProvider>
     </div>
   );

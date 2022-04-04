@@ -2,6 +2,7 @@ import { useState, useEffect, createContext } from "react";
 import { auth } from "../config";
 import { getUserByEmail, getUserByEmailLive } from "../services";
 import { onAuthStateChanged } from "firebase/auth";
+import React from "react";
 
 export const AuthContext = createContext(null);
 
@@ -14,7 +15,8 @@ const useAuthHandler = () => {
       if (userRes) {
         // const userData = await getUserByEmail(userRes.email);
         cleanUpFuncInternal = getUserByEmailLive(userRes.email, (userData) => {
-          setUser({ ...userData, emailVerified: userRes.emailVerified });
+          const currentUser = auth.currentUser;
+          setUser({ ...userData, emailVerified: currentUser.emailVerified });
         });
       } else {
         setUser(null);
