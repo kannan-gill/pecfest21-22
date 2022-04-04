@@ -49,7 +49,8 @@ function RegisterLogin({
         >
           <div
             style={{
-              backgroundImage: "url('../../Images/login_register_bg.jpg')",
+              backgroundImage:
+                "url('https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/images%2Flogin_register_bg.jpg?alt=media&token=db5d9a10-5c7d-40a4-a571-e27910915c8f')",
             }}
             className={`vw-100 vh-100 ${styles.bg_img}`}
           >

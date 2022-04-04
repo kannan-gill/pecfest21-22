@@ -22,7 +22,6 @@ import {
 import styles from "./Navbar.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Spinner } from "react-bootstrap";
-import pecfest_logo from "../../Images/pecfest_logo.png";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../config";
 
@@ -165,7 +164,7 @@ const Navbar = ({ alwaysOpenOnLarge }) => {
           <div className="d-flex justify-content-between align-items-center px-3 pt-4 pb-0 text-white">
             <div className="d-flex flex-row">
               <img
-                src={pecfest_logo}
+                src="https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/images%2Fpecfest_logo.png?alt=media&token=b5655fe0-3081-4796-8367-33927a9e6d77"
                 className={`${styles.pecfest_logo} main_font cursor-pointer`}
                 alt="pecfest logo"
                 onClick={() => navigate("/")}
