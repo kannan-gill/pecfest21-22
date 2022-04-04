@@ -45,6 +45,16 @@ const EventList = ({ isTechnical, isCompetition = true }) => {
     return cleanupFunc;
   }, []);
 
+  const shouldHide = (event) => {
+    if (event.name.toLowerCase().indexOf(searchEvent.toLowerCase()) == -1) {
+      // Doesnt match
+      return false;
+    }
+    if (tags && !tags.every((tag) => event.tags.includes(tag))) {
+      return false;
+    }
+    return true;
+  };
   return (
     <div
       className="vh-100 d-flex flex-column animate__animated animate__fadeIn"
@@ -62,7 +72,8 @@ const EventList = ({ isTechnical, isCompetition = true }) => {
       <div className="px-5">
         <div className={`${styles.divider} w-100 w-md-75`} />
       </div>
-      <div className="w-md-75 w-100 mx-auto">
+      <div className="w-md-75 w-100 mx-auto container-fluid">
+        
         <div className="row">
           <Filters
             setTags={setTags}
@@ -75,28 +86,17 @@ const EventList = ({ isTechnical, isCompetition = true }) => {
       <div className="flex-grow-1 overflow-auto d-flex flex-row pb-5 mx-4">
         <div className="d-flex flex-row flex-wrap w-md-75 w-100 mx-auto">
           {eventDetails
-            .filter((event) => {
-              if (
-                event.name.toLowerCase().indexOf(searchEvent.toLowerCase()) ==
-                -1
-              ) {
-                // Doesnt match
-                return false;
-              }
-              if (tags && !tags.every((tag) => event.tags.includes(tag))) {
-                return false;
-              }
-              return true;
-            })
             .sort((el1, el2) => el1.rankNo - el2.rankNo)
             .map((event, ind) => {
               return (
-                <Event
-                  key={ind}
-                  event={event}
-                  isTechnical={isTechnical}
-                  isCompetition={isCompetition}
-                />
+                <div className={!shouldHide(event) ? "d-none invisible" : 'col-12 col-md-6 col-lg-4 col-xl-3 p-3 animate__animated animate__fadeIn'}>
+                  <Event
+                    key={ind}
+                    event={event}
+                    isTechnical={isTechnical}
+                    isCompetition={isCompetition}
+                  />
+                </div>
               );
             })}
         </div>
