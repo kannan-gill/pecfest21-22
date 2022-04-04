@@ -26,6 +26,7 @@ const useAuthHandler = () => {
         });
       } else {
         setUser(null);
+        setIsLoading(false);
       }
     });
     const cleanUpFunc = () => {
