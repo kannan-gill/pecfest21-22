@@ -1,0 +1,50 @@
+.custom_font {
+  font-family: "Russo One", sans-serif;
+  letter-spacing: 3px;
+}
+.event_tile {
+  min-height: 30vh;
+  // background-image: url("https://picsum.photos/1920/1080?random");
+  p {
+    color: rgb(179, 179, 179);
+  }
+}
+.responsive_heading{
+  word-break: break-word;
+  font-size: 5em;
+}
+@media screen and (max-width: 768px) {
+  .responsive_heading{
+      font-size:2em;
+  }
+}
+@media screen and (max-width: 992px) {
+  .responsive_heading{
+      font-size:3.5em;
+  }
+}
+.overlay {
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.9));
+}
+.container {
+  padding-top: 5.5em;
+  background-color: #0f1113;
+}
+
+.close_button {
+  color: wheat !important;
+  margin-left: auto !important;
+  position: absolute !important;
+  right: 0;
+}
+.overlay_content {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.199);
+}
+.bg_brown {
+  & > div > div {
+    background-color: #0f1113 !important;
+  }
+  min-height: 40vh;
+}

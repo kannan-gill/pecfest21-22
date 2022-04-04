@@ -44,7 +44,7 @@ const DatePickerInput = ({ label, icon, isValid, name, changeFunc, val}) => {
       />
 
       {!isValid ? (
-        <ErrorTooltip title={errorMessages[name]} />
+        <ErrorTooltip title={errorMessages[name]} classes="bg-white" />
       ) : null}
 
     </InputGroup>

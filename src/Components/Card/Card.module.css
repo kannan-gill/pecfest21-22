@@ -13,15 +13,20 @@
     margin: 10px;
 }
 
-.text{
+.positionstext{
     display: flex;
     justify-content: center;
     position: relative;
     z-index: 500;
-    font-family: 'Russo One', sans-serif;
+    font-family: 'Audiowide', sans-serif;
     color: white;
     text-shadow:5px 5px 5px #000;
-    letter-spacing: 3px;
+    letter-spacing: 2px;
+    width: 100%;
+    overflow: hidden;
+    margin: auto;
+    font-weight: 500;
+    text-transform: capitalize !important;
 }
 
 .opaquebg{
@@ -29,20 +34,21 @@
     height: 100%;
     position: absolute;
     z-index: 100;
-    background: black;
+    background: white;
     border-radius: 10%;
     opacity: 0.5;
-    /* background: url(../../Images/canvabg2.png); */
     background-size: cover;
     background-repeat: no-repeat;
 }
 
-.cardbg img{
-    width: 75%;
-    margin-left: 12.5%;
+.cardimage{
+    width: 250px;
+    height:250px;
+    object-fit: cover;
     border-radius: 100%;
     position: relative;
     z-index: 200;
-    margin-top: 5%;
+    margin-top: 10px;
     box-shadow: 5px 5px 5px #000;
 }
+

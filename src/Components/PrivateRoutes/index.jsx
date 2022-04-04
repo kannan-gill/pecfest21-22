@@ -1,36 +1,33 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 // being used to invoke the firebase config, DO NOT DELETE
-import {} from "../../config";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { } from "../../config";
 import RegisterLogin from "../../Pages/RegisterLogin/RegisterLogin";
+import { useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "context/AuthContext";
+import { VerificationModalContext } from "context/VerificationModalContext";
 
 const PrivateRoutes = ({ children, setIsNavbarVisible }) => {
-  console.log('received', setIsNavbarVisible);
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const { user, isLoading } = useContext(AuthContext);
+  const { openVerificationModal } = useContext(VerificationModalContext);
+  const location = useLocation();
+  const navigate = useNavigate();
   useEffect(() => {
-    const auth = getAuth();
-    const cleanUp = onAuthStateChanged(auth, (userRes) => {
-      if (userRes) {
-        setUser(userRes);
-        setLoading(false);
-      } else {
-        setUser(null);
-        setLoading(false);
-      }
-    });
-    return cleanUp;
-  }, []);
+    if (user && !user.emailVerified) {
+      const pathToRedirect = location?.pathname.split('/');
+      pathToRedirect.pop();
+      openVerificationModal();
+      navigate(pathToRedirect.join('/'));
+    }
+  }, [user]);
+
 
   return (
     <>
-      {/* TODO: Change to this login */}
-      {!loading &&
-        (user ? (
-          children
-        ) : (
-          <RegisterLogin setIsNavbarVisible={setIsNavbarVisible} />
-        ))}
+      {isLoading ? (<></>) : (user ? (
+        user.emailVerified && children
+      ) : (
+        <RegisterLogin redirect={location?.pathname} setIsNavbarVisible={setIsNavbarVisible} />
+      ))}
     </>
   );
 };

@@ -1,0 +1,76 @@
+.heading{
+  text-shadow: 4px 4px 4px black;
+  letter-spacing: 5px;
+}
+
+.card{
+  background-color: white; 
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
+  width:13em;
+  height: 13em;
+  transition: all 0.3s;
+  font-family: 'Audiowide';
+  margin: 50px 5px;
+}
+
+
+.sponsor_name{
+  font-family: "Audiowide";
+  font-size: 1.1em;
+  letter-spacing: 1px;
+}
+
+.sponsor_desc{
+  font-size: 0.8em;
+  color: rgba(237, 0, 140, 0.7);
+  font-weight: 600;
+}
+
+.cardLine{
+  height: 2.5px;
+  background-color: grey;
+  opacity: 0.8;
+}
+
+.headingLine{
+  height: 2px;
+  background-color: white;
+  opacity: 0.6;
+  margin-top: 10px;
+}
+
+.main_container{
+  padding-top: 3em;
+  background-color: #fff000;
+background-image: linear-gradient(315deg, #fff000 0%, #ed008c 74%);
+  height:100vh;
+}
+
+.outerdiv{
+  background-color: #fff000;
+background-image: linear-gradient(315deg, #fff000 0%, #ed008c 74%);
+overflow: hidden;
+}
+
+.rightrotate{
+  transform: rotate(3deg);
+}
+
+.rightrotate:hover{
+  transform: scale(1.1);
+}
+
+.leftrotate{
+  transform:translateY(30px) rotate(-3deg) ;
+
+}
+
+.leftrotate:hover{
+  transform: translateY(30px) scale(1.1);
+}
+
+.image{
+  max-width: 140px;
+  max-height: 120px;
+}

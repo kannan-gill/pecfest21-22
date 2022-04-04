@@ -1,29 +1,38 @@
-.committeeBackground{
-    /* background:url(../../Images/1845.jpg); */
-    background-repeat:"no-repeat";
-    background-size: "conver";
-
+.main_container {
+  margin-top: 5.5em;
+  overflow-x: hidden;
 }
 
-.image{
-    border-color: white;
-    border-style: solid;
-    border-width: 2px;
-    
+.container{
+  overflow-x: hidden;
 }
 
-.pageheader{
-    color:white !important;
-    font-family: 'Russo One', sans-serif;
-    font-size: 5vw;
-    font-weight: 700;
-    letter-spacing: 5px;
-    text-shadow: 5px 5px 5px #000;
-    
+.image {
+  border-color: white;
+  border-style: solid;
+  border-width: 2px;
+  height: 120px;
+  width: 120px;
 }
 
-.back_Button{
-    position: absolute;
-  top: 15px;
-  left: 15px;
+.pageheader {
+  color: white !important;
+  font-family: "Audiowide", cursive;
+  font-size: 45px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  text-shadow: 5px 5px 5px #000;
+  /* margin: 20px auto; */
+  /* padding: 10px 10px; */
+}
+
+.committeetitles {
+  font-family: "Audiowide", cursive;
+  font-size: 40px;
+  padding: 20px 10px;
+}
+
+.separatingline {
+  width: 80%;
+  margin: 30px auto;
 }

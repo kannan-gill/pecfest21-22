@@ -1,0 +1,100 @@
+.technical {
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+  -webkit-clip-path: polygon(60.25% 0, 100% 0%, 100% 100%, 40.25% 100%);
+  clip-path: polygon(60.25% 0, 100% 0%, 100% 100%, 40.25% 100%);
+  transition: all 0.3s;
+}
+.open_page {
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+  -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%) !important;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%) !important;
+}
+.close_page{
+    -webkit-clip-path: polygon(100% 0, 100% 0%, 100% 100%, 100% 100%)  !important;
+    clip-path: polygon(100% 0, 100% 0%, 100% 100%, 100% 100%) !important;
+}
+
+.image {
+  z-index: 10;
+  transition: all 0.3s;
+  filter: brightness(40%);
+  img{
+    transition: all 0.3s;
+  }
+}
+
+.cultural {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  overflow: hidden;
+  -webkit-clip-path: polygon(0 0, 60% 0, 40% 100%, 0 100%);
+  clip-path: polygon(0 0, 60% 0, 40% 100%, 0 100%);
+  transition: all 0.3s;
+}
+
+.image:hover  {
+  filter: brightness(80%);
+  img{
+    transform: scale(1.05);
+  }
+  
+}
+.image.technical:hover {
+  -webkit-clip-path: polygon(55% 0, 100% 0%, 100% 100%, 35% 100%);
+  clip-path: polygon(55% 0, 100% 0%, 100% 100%, 35% 100%);
+}
+
+.image.cultural:hover {
+    -webkit-clip-path: polygon(0 0, 64.75% 0, 44.75% 100%, 0 100%);
+    clip-path: polygon(0 0, 64.75% 0, 44.75% 100%, 0 100%);
+  }
+  
+
+.image.technical_small {
+  -webkit-clip-path: polygon(65% 0, 100% 0%, 100% 100%, 45% 100%);
+  clip-path: polygon(65% 0, 100% 0%, 100% 100%, 45% 100%);
+}
+.image.cultural_small {
+  -webkit-clip-path: polygon(0 0, 54.75% 0, 34.75% 100%, 0 100%);
+  clip-path: polygon(0 0, 54.75% 0, 34.75% 100%, 0 100%);
+}
+.culturalImage {
+  transition: all 0.3s;
+  object-fit: cover;
+}
+.technicalImage {
+  transition: all 0.3s;
+  object-fit: cover;
+}
+.header_large {
+  font-size: 8em;
+  /* font-family: 'Russo One', sans-serif; */
+  font-family: "Audiowide", cursive;
+  font-weight: 700;
+  color: white;
+
+  line-height: 1;
+}
+
+@media screen and (max-width: 1600px) {
+  .header_large {
+    font-size: 5em;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .header_large {
+    font-size: 3em;
+  }
+}
+
+.shade {
+  filter: brightness(60%);
+}

@@ -1,12 +1,11 @@
-import { letterSpacing } from "@mui/system";
 import React from "react";
 import { Button } from "react-bootstrap";
 import Countdown from "react-countdown";
 import { faAnglesLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
-import StarsBg from '../../Components/StarsBg'
-import Navbar from "Components/Navbar";
+import StarsBg from "../../Components/StarsBg";
+import styles from "./ComingSoon.module.css";
 
 function ComingSoon() {
   const navigate = useNavigate();
@@ -23,9 +22,9 @@ function ComingSoon() {
         }}
       >
         <div className="col-12 col-md-5 offset-md-1 d-flex flex-column h-100 align-items-center justify-content-center">
-          <img className="w-75" src="../../Images/pfdates.png" alt="none" />
+          <div className={styles.date_text}>16-18 April 2022</div>
           <h1
-            className="d-none d-md-flex comingsoon text-white h1"
+            className="d-none d-md-flex comingsoon text-white h1 text-center"
             style={{
               textShadow: "5px 5px 5px black",
               letterSpacing: "5px",
@@ -107,7 +106,7 @@ function ComingSoon() {
         <div className="d-none d-md-flex col-6 col-lg-4  h-100 flex-column justify-content-center align-items-start px-5">
           <img
             className="w-100"
-            src="../../Images/logo-final-red.png"
+            src="https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/images%2Flogo-final-red.png?alt=media&token=0d3a390f-a887-4ce9-8f02-e922bd5c62e8"
             alt="none"
           />
         </div>

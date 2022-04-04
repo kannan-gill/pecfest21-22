@@ -1,0 +1,47 @@
+.main_container{
+  background-color: #363636;
+  padding: 1em 2em;
+  border-radius: 15px;
+  margin-bottom: 1em;
+  z-index: 10;
+}
+
+.form_control, .form_control:focus{
+  background-color: transparent;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  color: rgb(180, 180, 180);
+  border-bottom: 1px solid white;
+  width: 20em;
+}
+
+.selectWidth{
+  width: 17em !important;
+}
+
+.color_grey{
+  color: #a5a5a5;
+}
+
+.tooltip{
+  background-color: transparent;
+  border: none;
+}
+
+@media screen and (max-width: 915px){
+  .main_container{
+    margin-bottom: 3em;
+    margin-top: 2em;
+  }
+}
+
+@media screen and (max-width: 415px){
+  .form_control, .form_control:focus{
+    width: 13em;
+  }
+  .selectWidth{
+    width: 8em !important;
+  }
+}
+  

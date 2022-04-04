@@ -1,7 +1,7 @@
 .loginCard {
-  transition: transform 1.3s;
+  transition: transform 0.5s;
   transform-style: preserve-3d;
-  cursor: pointer;
+  /* cursor: pointer; */
   /* position: relative; */
    border: none; 
 }

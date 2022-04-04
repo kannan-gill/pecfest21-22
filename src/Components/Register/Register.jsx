@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import SimpleInput from "../Utilities/SimpleInput";
 import SelectInput from "../Utilities/SelectInput";
 import DatePickerInput from "../Utilities/DatePickerInput";
-
+import { Spinner } from "react-bootstrap";
 // this page opens only if
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import {} from "../../config";
+import { sendEmailVerification, createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../config";
 import { useNavigate } from "react-router-dom";
-import styles from "./Register.module.css";
+// import styles from "./Register.module.css";
+import { toast } from "react-toastify";
 import Button from "../Utilities/Button";
+import { createDoc, getDocById, updateDoc } from "services";
 
 const isDigit = (phoneNum) => {
   return /^\d{10}$/.test(phoneNum);
@@ -28,7 +30,6 @@ const initialStateUser = {
   year: "",
   gender: "",
   password: "",
-  isVerified: false,
 };
 
 const initialValidStates = {
@@ -43,104 +44,114 @@ const initialValidStates = {
   isPasswordValid: true,
 };
 
-function Register({ onFlip }) {
+function Register({ onFlip, redirect }) {
   const navigate = useNavigate();
-  const [user, editUser] = useState(initialStateUser);
+  const [user, setUser] = useState(initialStateUser);
+  const [loading, setLoading] = useState(false);
 
   const [checkValidStates, setCheckValidStates] = useState(initialValidStates);
- 
 
-  const onFlipBtnClick = () => {  
+
+  const onFlipBtnClick = () => {
     onFlip();
-    editUser(initialStateUser);
     setCheckValidStates(initialValidStates);
   }
 
-  function appendUser() {
-    const auth = getAuth();
-
+  const registerUser = () => {
+    setLoading(true);
     createUserWithEmailAndPassword(auth, user.email, user.password)
       .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        console.log(user);
-        
-        navigate("/events");
-        // ...
+        const userData = { ...user };
+        delete userData.password;
+        createDoc("users", userData)
+          .then((createdUser) => {
+            sendEmailVerification(auth.currentUser, { url: `${window.location.origin}/verifyEmail/${createdUser.id}` })
+              .then(() => {
+                navigate("/");
+              })
+              .catch((error) => {
+                const errorMessage = error.message;
+                toast.error("Unable to send verification email. Please try again later.", { autoClose: 2000 });
+                setLoading(false);
+              });
+          })
+          .catch((error) => {
+            const errorMessage = error.message;
+            toast.error("Unable to register!");
+            setLoading(false);
+          });
       })
       .catch((error) => {
-        const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorMessage);
-        // ..
+        toast.error(errorMessage);
+        setLoading(false);
       });
-    // store this user in db and redirect to events page
   }
 
   const changeHandler = (name, value) => {
-    editUser({ ...user, [name]: value });
+    setUser({ ...user, [name]: value });
   };
-  
+
 
   const submitHandler = (e) => {
     e.preventDefault();
 
     let formIsValid = true;
 
-    for (var det in user) { 
+    for (var det in user) {
       if (det === "name") {
         if (user[det].length < 2 || user[det].length > 50) {
           setCheckValidStates((prevState) => {
             return { ...prevState, isNameValid: false };
           });
-          formIsValid = false;  
+          formIsValid = false;
         } else
           setCheckValidStates((prevState) => {
             return { ...prevState, isNameValid: true };
           });
-      }         
+      }
       else if (det === "college") {
         if (user[det].length === 0 || user[det].length > 50) {
           setCheckValidStates((prevState) => {
             return { ...prevState, isCollegeValid: false };
           });
-          formIsValid = false;  
+          formIsValid = false;
         } else
           setCheckValidStates((prevState) => {
             return { ...prevState, isCollegeValid: true };
           });
-      } 
-      
+      }
+
       else if (det === "email") {
         if (!isValidEmailAddress(user[det])) {
           setCheckValidStates((prevState) => {
             return { ...prevState, isEmailValid: false };
           });
-          formIsValid = false;  
+          formIsValid = false;
         } else
           setCheckValidStates((prevState) => {
             return { ...prevState, isEmailValid: true };
           });
-      } 
-      
+      }
+
       else if (det === "phone") {
         if (!isDigit(user[det])) {
           setCheckValidStates((prevState) => {
             return { ...prevState, isPhoneValid: false };
           });
-          formIsValid = false;  
+          formIsValid = false;
         } else
           setCheckValidStates((prevState) => {
             return { ...prevState, isPhoneValid: true };
           });
-      } 
-      
+      }
+
       else if (det === "password") {
         if (user[det].length < 8) {
           setCheckValidStates((prevState) => {
             return { ...prevState, isPasswordValid: false };
           });
-          formIsValid = false;  
+          formIsValid = false;
         } else
           setCheckValidStates((prevState) => {
             return { ...prevState, isPasswordValid: true };
@@ -152,7 +163,7 @@ function Register({ onFlip }) {
           setCheckValidStates((prevState) => {
             return { ...prevState, isDobValid: false };
           });
-          formIsValid = false;  
+          formIsValid = false;
         } else
           setCheckValidStates((prevState) => {
             return { ...prevState, isDobValid: true };
@@ -164,7 +175,7 @@ function Register({ onFlip }) {
           setCheckValidStates((prevState) => {
             return { ...prevState, isDegreeValid: false };
           });
-          formIsValid = false;  
+          formIsValid = false;
         } else
           setCheckValidStates((prevState) => {
             return { ...prevState, isDegreeValid: true };
@@ -176,7 +187,7 @@ function Register({ onFlip }) {
           setCheckValidStates((prevState) => {
             return { ...prevState, isYearValid: false };
           });
-          formIsValid = false;  
+          formIsValid = false;
         } else
           setCheckValidStates((prevState) => {
             return { ...prevState, isYearValid: true };
@@ -188,23 +199,20 @@ function Register({ onFlip }) {
           setCheckValidStates((prevState) => {
             return { ...prevState, isGenderValid: false };
           });
-          formIsValid = false;  
+          formIsValid = false;
         } else
           setCheckValidStates((prevState) => {
             return { ...prevState, isGenderValid: true };
           });
       }
-      
+
     }
 
-    if(!formIsValid){
-      console.log(user);
+    if (!formIsValid) {
       return false;
     }
-    editUser(initialStateUser);
     setCheckValidStates(initialValidStates);
-    console.log("not stopped");
-    // appendUser();
+    registerUser();
   };
 
   return (
@@ -227,7 +235,7 @@ function Register({ onFlip }) {
             val={user.name}
             changeFunc={changeHandler}
             isValid={checkValidStates.isNameValid}
-          />    
+          />
           <SimpleInput
             type="text"
             icon="at"
@@ -257,19 +265,18 @@ function Register({ onFlip }) {
           />
 
           <SelectInput
-            value={user.gender}
+            val={user.gender}
             changeFunc={changeHandler}
             name="gender"
             icon="transgender-alt"
             label="gender"
-            val={user.gender}
             disabledOption="Gender"
             options={["Male", "Female", "Other"]}
             isValid={checkValidStates.isGenderValid}
           />
-          <DatePickerInput 
-            label="dob" 
-            icon="calendar" 
+          <DatePickerInput
+            label="dob"
+            icon="calendar"
             name="dob"
             val={user.dob}
             changeFunc={changeHandler}
@@ -300,7 +307,7 @@ function Register({ onFlip }) {
             type="password"
             name="password"
             val={user.password}
-            password="true"
+            password
             icon="key"
             placeholder="Password"
             changeFunc={changeHandler}
@@ -308,11 +315,20 @@ function Register({ onFlip }) {
           />
         </div>
         <div className="d-flex flex-row justify-content-center mt-2 mb-4">
-          <Button className="mx-3" type="button" onClickFunc={onFlipBtnClick}>
+          <Button type="button" onClickFunc={onFlipBtnClick}>
             BACK
           </Button>
-          <Button className="mx-3" type="submit" >
-            SIGN UP
+          <Button disabled={loading} type="submit">
+            {loading ? (
+              <Spinner
+                className="mx-3"
+                variant="light"
+                size="sm"
+                animation="border"
+              />
+            ) : (
+              <>SIGN UP</>
+            )}
           </Button>
         </div>
       </form>

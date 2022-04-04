@@ -2,12 +2,9 @@ import React, { useEffect, useState } from "react";
 import { faAnglesRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
-import BackImg from "../../Images/back-img.png";
-import nebulaBg from "../../Images/nebulabgextracted-edited.png";
 import useAnimatedRenderer from "hooks/useAnimatedRenderer";
 import ExpandingCircle from "Components/ExpandingCircle";
 import StarsBg from "../StarsBg";
-import { width } from "@mui/system";
 
 const planets = [
   {
@@ -20,7 +17,7 @@ const planets = [
     route: "/sponsors",
     text: "Sponsors",
     speed: "2",
-    color: "#fc9d15",
+    color: "rgb(237, 0, 140)",
   },
 
   {
@@ -116,14 +113,6 @@ const PlanetNav = ({ transitionAnimation }) => {
       }`}
       onMouseMove={handleMouse}
     >
-      {/* <div className="nebula-bg" style={{ overflow: "hidden" }}>
-        <img
-          style={{ width: "100%", height: "100vh", minWidth: "1000px" }}
-          className={`nebulaimg ${explore ? "rotatebg" : ""}`}
-          src={nebulaBg}
-          alt="not found"
-        /> 
-      </div> */}
       {
         <div
           className={`position-relative zi-top col-8 offset-2  ${
@@ -143,8 +132,8 @@ const PlanetNav = ({ transitionAnimation }) => {
               PECFEST
             </span>
             {!explore && (
-              <span className="text-white mb-auto main_font display-1 header-subscript">
-                2021-22
+              <span className="text-white mb-auto main_font display-5 header-subscript">
+                16-18 April 2022
               </span>
             )}
           </div>
@@ -154,7 +143,7 @@ const PlanetNav = ({ transitionAnimation }) => {
       <div className="position-relative zi-top col-12 h-100 d-flex d-md-none flex-column justify-content-start animate__animated animate__fadeIn">
         <div className="d-flex flex-column align-items-center justify-content-start mx-auto header-large text-white">
           <span>PECFEST</span>
-          <span className="mt-1">21-22</span>
+          <span style={{fontSize:"5vw"}} className="mt-1">16-18 April 2022</span>
         </div>
       </div>
 
@@ -168,7 +157,7 @@ const PlanetNav = ({ transitionAnimation }) => {
           } `}
           onClick={() => setExplore(false)}
         >
-          <img src={BackImg} alt="Back" width="100px" />
+          <img src="https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/images%2Fback-img.png?alt=media&token=8f799589-dcf8-42c0-8bce-f0dfe816b80a" alt="Back" width="100px" />
         </div>
       )}
 
@@ -185,6 +174,7 @@ const PlanetNav = ({ transitionAnimation }) => {
       >
         {planets.map((planet, ind) => (
           <div
+            key={planet.route}
             onMouseEnter={() => {
               setHoveredPlanet(ind + 1);
             }}
@@ -210,6 +200,7 @@ const PlanetNav = ({ transitionAnimation }) => {
         ))}
         {planets.map((planet, ind) => (
           <div
+            key={planet.route}
             onMouseEnter={() => {
               setHoveredPlanet(ind + 1);
             }}

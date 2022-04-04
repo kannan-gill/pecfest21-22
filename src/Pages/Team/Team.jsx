@@ -1,74 +1,46 @@
-import React from 'react'
-import {Container,Row,Col} from 'react-bootstrap'
+import React,{useState,useEffect} from 'react'
+import {Container,Row} from 'react-bootstrap'
 import styles from './Team.module.css'
-import BackButton from '../../Components/BackButton/BackButton'
-import { useNavigate } from "react-router-dom";
-import Card from '../../Components/Card/Card';
+import PecfestTeams from 'Components/TeamTiles/PecfestTeams';
+import StarsBg from '../../Components/StarsBg/index';
+import { getList } from 'services';
+
 
 function Team() {
 
-    const navigate = useNavigate();
+    const [membersData, setMembersData] = useState([]);
 
-    function handleBack(e){
-        navigate('/');
-    }
+    useEffect(()=>{
+        getList('team').then(data=>{
+            data.sort(function(a,b){return a.rank - b.rank})
+            data.forEach(team=>{
+                team.members.sort((a,b) => (a.position < b.position) ? 1 : ((b.position < a.position) ? -1 : 0))
+            })
+            setMembersData(data);
+        });
+    },[])
+
 
   return (
-    <div className={`${styles.committeeBackground}`}>
-        <Container fluid className='w-100 h-100'>
-            <BackButton className={`${styles.back_Button}`} clickHandler={handleBack}/>
-            <Row className={`d-flex justify-content-center ${styles.pageheader}`}>TEAM</Row>
-            <Row className = "w-100">
-                <Col md={6}><Card/></Col>
-                <Col md={6}><Card/></Col>
-            </Row>
-            <Row className = "w-100">
-                <Col md={3}><Card/></Col>
-                <Col md={3}><Card/></Col>
-                <Col md={3}><Card/></Col>
-                <Col md={3}><Card/></Col>
-            </Row>
-            <Row className='d-flex justify-content-center p-2'>
-                <Col md={6} className='d-flex justify-content-center'><img className={`w-75 h-auto m-1 ${styles.image}`} src='../../Images/committee/3.png' alt='not-found'/></Col>
-                <Col md={6} className='d-flex justify-content-center'><img className={`w-75 h-auto m-1 ${styles.image}`} src='../../Images/committee/4.png' alt='not-found'/></Col>
-            </Row>
-            <Row className='d-flex justify-content-center p-2'>
-                <Col md={3}><img className={`w-100 h-auto m-1 ${styles.image}`} src='../../Images/committee/5.png' alt='not-found'/></Col>
-                <Col md={3}><img className={`w-100 h-auto m-1 ${styles.image}`} src='../../Images/committee/6.png' alt='not-found'/></Col>
-                <Col md={3}><img className={`w-100 h-auto m-1 ${styles.image}`} src='../../Images/committee/7.png' alt='not-found'/></Col>
-                <Col md={3}><img className={`w-100 h-auto m-1 ${styles.image}`} src='../../Images/committee/8.png' alt='not-found'/></Col>
-            </Row>
-            <Row className='d-flex justify-content-center p-2'>
-                <Col md={3}><img className={`w-100 h-auto m-1 ${styles.image}`} src='../../Images/committee/10.png' alt='not-found'/></Col>
-                <Col md={3}><img className={`w-100 h-auto m-1 ${styles.image}`} src='../../Images/committee/11.png' alt='not-found'/></Col>
-                <Col md={3}><img className={`w-100 h-auto m-1 ${styles.image}`} src='../../Images/committee/12.png' alt='not-found'/></Col>
-                <Col md={3}><img className={`w-100 h-auto m-1 ${styles.image}`} src='../../Images/committee/13.png' alt='not-found'/></Col>
-            </Row>
-            <Row className='d-flex justify-content-center p-2'>
-                <Col md={3}><img className={`w-100 h-auto m-1 ${styles.image}`} src='../../Images/committee/14.png' alt='not-found'/></Col>
-                <Col md={3}><img className={`w-100 h-auto m-1 ${styles.image}`} src='../../Images/committee/15.png' alt='not-found'/></Col>
-                <Col md={3}><img className={`w-100 h-auto m-1 ${styles.image}`} src='../../Images/committee/16.png' alt='not-found'/></Col>
-                <Col md={3}><img className={`w-100 h-auto m-1 ${styles.image}`} src='../../Images/committee/17.png' alt='not-found'/></Col>
-            </Row>
-            <Row className='d-flex justify-content-center p-2'>
-                <Col md={3}><img className={`w-100 h-auto m-1 ${styles.image}`} src='../../Images/committee/18.png' alt='not-found'/></Col>
-                <Col md={3}><img className={`w-100 h-auto m-1 ${styles.image}`} src='../../Images/committee/19.png' alt='not-found'/></Col>
-                <Col md={3}><img className={`w-100 h-auto m-1 ${styles.image}`} src='../../Images/committee/20.png' alt='not-found'/></Col>
-                <Col md={3}><img className={`w-100 h-auto m-1 ${styles.image}`} src='../../Images/committee/21.png' alt='not-found'/></Col>
-            </Row>
-            <Row className='d-flex justify-content-center p-2'>
-                <Col md={3}><img className={`w-100 h-auto m-1 ${styles.image}`} src='../../Images/committee/22.png' alt='not-found'/></Col>
-                <Col md={3}><img className={`w-100 h-auto m-1 ${styles.image}`} src='../../Images/committee/23.png' alt='not-found'/></Col>
-                <Col md={3}><img className={`w-100 h-auto m-1 ${styles.image}`} src='../../Images/committee/24.png' alt='not-found'/></Col>
-                <Col md={3}><img className={`w-100 h-auto m-1 ${styles.image}`} src='../../Images/committee/25.png' alt='not-found'/></Col>
-            </Row>
-            <Row className='d-flex justify-content-center p-2'>
-                <Col md={3}><img className={`w-100 h-auto m-1 ${styles.image}`} src='../../Images/committee/26.png' alt='not-found'/></Col>
-                <Col md={3}><img className={`w-100 h-auto m-1 ${styles.image}`} src='../../Images/committee/27.png' alt='not-found'/></Col>
-                <Col md={3}><img className={`w-100 h-auto m-1 ${styles.image}`} src='../../Images/committee/28.png' alt='not-found'/></Col>
-                <Col md={3}><img className={`w-100 h-auto m-1 ${styles.image}`} src='../../Images/committee/29.png' alt='not-found'/></Col>
-            </Row>
-        </Container>
+    <div className={`vw-100 vh-100 d-flex flex-column`}>
+      <StarsBg />
+      <Container
+        fluid
+        className={`d-flex flex-column overflow-hidden ${styles.main_container}`}
+      >
+        <div className={`d-flex flex-column flex-grow-1 ${styles.container}`}>
+          <Row className={`d-flex justify-content-center ${styles.pageheader}`}>
+            TEAM
+          </Row>
+          <Row className="d-flex flex-row justify-content-center">
+            {membersData.map((item, index) => {
+              return (
+                <PecfestTeams key={item.name} teamname={item.name} teamMembers = {item.members}/>
+              );
+            })}
+          </Row>
+        </div>
+      </Container>
     </div>
   )
 }

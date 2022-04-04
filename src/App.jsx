@@ -1,60 +1,124 @@
 import React, { useState } from "react";
 import "./App.css";
-// import Button from "./Components/Utilities/Button";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import EventList from "./Pages/Events/EventList";
-// import Home from "./Pages/Home/Home";
+import EventList from "./Pages/Events/EventsList/EventList";
 import PrivateRoutes from "./Components/PrivateRoutes";
 import RegisterLogin from "./Pages/RegisterLogin/RegisterLogin";
 import Home2 from "./Pages/Home/Home2";
-import LandingPage from "./Pages/CampusTour/LandingPage";
-import Competitions from "./Pages/Competitions/Competitions";
 import TeamEventRegistration from "./Pages/TeamEventRegistration/TeamEventRegistration";
-// import ContactUs from "./Pages/ContactUS/ContactUs";
-// import Developers from "./Pages/Developers/Developers";
+import Developers from "Pages/Developers/Developers";
 import Admin from "./Pages/Admin/Admin";
-import Team from "./Pages/Team/Team";
-import Schedule from "Pages/Schedule/Schedule";
 import ComingSoon from "Pages/ComingSoon/ComingSoon";
 import Navbar from "Components/Navbar";
-import { Link } from "react-router-dom";
 import ExternalLink from "Components/ExternalLink/ExternalLink";
+import PageNotFound from "Pages/PageNotFound/PageNotFound";
+import { ToastContainer } from "react-toastify";
+import ContactUs from "Pages/ContactUS/ContactUs";
+import Team from "Pages/Team/Team";
+import "react-toastify/dist/ReactToastify.css";
+import Sponsors from "Pages/Sponsors/Sponsors";
+import TechCulturalSelector from "Pages/Events/TechSelector/TechSelector";
+import EventDetails from "Pages/EventCardDetails/EventDetails";
+import AuthProvider from "./context/AuthContext";
+import VerificationModalProvider from "./context/VerificationModalContext";
+import VerifyEmail from "Pages/VerifyEmail";
 
 function App() {
   const [isNavBarVisible, setIsNavbarVisible] = useState(true);
+  const [alwaysOpen, setAlwaysOpen] = useState(false);
 
   const externalUrlLinks = {
-    merchandise : "https://pecfestmemories.co.in"
-  }
+    merchandise: "https://pecfestmemories.co.in",
+  };
 
   const publicRoutes = [
     { path: "/", component: <Home2 initialPage="landing" /> },
-    // {
-    //   path: "/login",
-    //   component: <RegisterLogin setIsNavbarVisible={setIsNavbarVisible} />,
-    // },
-    // {
-    //   path: "/register",
-    //   component: (
-    //     <RegisterLogin isRegister setIsNavbarVisible={setIsNavbarVisible} />
-    //   ),
-    // },
-    // { path: "/campusTour", component: <LandingPage /> },
-    { path: "/competitions", component: <ComingSoon /> },
+    {
+      path: "/login",
+      component: <RegisterLogin setIsNavbarVisible={setIsNavbarVisible} />,
+    },
+    {
+      path: "/register",
+      component: (
+        <RegisterLogin isRegister setIsNavbarVisible={setIsNavbarVisible} />
+      ),
+    },
+    {
+      path: "/verifyEmail/:userId",
+      component: <VerifyEmail />,
+    },
+    {
+      path: "/competitions",
+      component: (
+        <TechCulturalSelector
+          technicalImageUrl="https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/Technical_final.jpg?alt=media"
+          culturalImageUrl="https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/Cultural_final.jpg?alt=media"
+          leftRoute="/tech-competitions"
+          rightRoute="/cultural-competitions"
+        />
+      ),
+    },
     { path: "/schedule", component: <ComingSoon /> },
-    { path: "/contactUs", component: <ComingSoon /> },
     { path: "/admin", component: <Admin /> },
     { path: "/teamregister", component: <ComingSoon /> },
-    { path: "/team", component: <ComingSoon /> },
+    { path: "/team", component: <Team /> },
     { path: "/aboutUs", component: <Home2 initialPage="aboutUs" /> },
-    { path: "/sponsors", component: <ComingSoon /> },
-    { path: "/merchandise", component: <ExternalLink url= {externalUrlLinks.merchandise} /> },
-    { path: "/developer", component: <ComingSoon /> },
-    { path: "/contact", component: <ComingSoon /> },  
-    { path: "/events", component: <ComingSoon /> },
+    { path: "/sponsors", component: <Sponsors /> },
+    {
+      path: "/merchandise",
+      component: <ExternalLink url={externalUrlLinks.merchandise} />,
+    },
+    { path: "/developer", component: <Developers /> },
+    { path: "/contact", component: <ContactUs /> },
+    {
+      path: "/events",
+      component: (
+        <TechCulturalSelector
+          technicalImageUrl="https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/mega.jpg?alt=media"
+          culturalImageUrl="https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/pecTalk.jpg?alt=media"
+          leftName="Megashows"
+          leftRoute="/megashows"
+          rightRoute="/workshops"
+          rightName="Events"
+        />
+      ),
+    },
+    {
+      path: "/megashows",
+      component: <EventList isTechnical={false} isCompetition={false} />,
+    },
+    {
+      path: "/workshops",
+      component: <EventList isTechnical isCompetition={false} />,
+    },
+    { path: "/tech-competitions", component: <EventList isTechnical /> },
+    {
+      path: "/cultural-competitions",
+      component: <EventList isTechnical={false} />,
+    },
+    {
+      path: "*",
+      component: <PageNotFound isNavbarVisible={setIsNavbarVisible} />,
+    },
   ];
   const privateRoutes = [
     // add events to this
+    {
+      path: "/tech-competitions/:eventId",
+      component: <EventDetails setAlwaysOpen={setAlwaysOpen} />,
+    },
+    {
+      path: "/cultural-competitions/:eventId",
+      component: <EventDetails setAlwaysOpen={setAlwaysOpen} />,
+    },
+    {
+      path: "/workshops/:eventId",
+      component: <EventDetails setAlwaysOpen={setAlwaysOpen} />,
+    },
+    {
+      path: "/megashows/:eventId",
+      component: <EventDetails setAlwaysOpen={setAlwaysOpen} />,
+    },
   ];
 
   const privateRouteComponent = (route) => (
@@ -65,20 +129,27 @@ function App() {
           {route.component}
         </PrivateRoutes>
       }
+      key={route.path}
     />
   );
   const publicRouteComponent = (route) => (
-    <Route path={route.path} element={route.component} />
+    <Route path={route.path} element={route.component} key={route.path} />
   );
+
   return (
-    <div className="overflow-hidden vh-100 bg-black">
-      <BrowserRouter>
-        {isNavBarVisible && <Navbar />}
-        <Routes>
-          {publicRoutes.map((route) => publicRouteComponent(route))}
-          {privateRoutes.map((route) => privateRouteComponent(route))}
-        </Routes>
-      </BrowserRouter>
+    <div className="overflow-auto vh-100 bg-black">
+      <ToastContainer theme="light" />
+      <AuthProvider>
+        <VerificationModalProvider>
+          <BrowserRouter>
+            {isNavBarVisible && <Navbar alwaysOpenOnLarge={alwaysOpen} />}
+            <Routes>
+              {publicRoutes.map((route) => publicRouteComponent(route))}
+              {privateRoutes.map((route) => privateRouteComponent(route))}
+            </Routes>
+          </BrowserRouter>
+        </VerificationModalProvider>
+      </AuthProvider>
     </div>
   );
 }
