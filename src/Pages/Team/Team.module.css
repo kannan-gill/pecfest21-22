@@ -3,11 +3,8 @@
   overflow-x: hidden;
 }
 
-.committeeBackground {
-  height: 100vh;
-  overflow: hidden;
-  background-repeat: "no-repeat";
-  background-size: "conver";
+.container{
+  overflow-x: hidden;
 }
 
 .image {
@@ -25,8 +22,8 @@
   font-weight: 700;
   letter-spacing: 5px;
   text-shadow: 5px 5px 5px #000;
-  margin: 20px auto;
-  padding: 10px 10px;
+  /* margin: 20px auto; */
+  /* padding: 10px 10px; */
 }
 
 .committeetitles {
