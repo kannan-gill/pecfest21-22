@@ -10,9 +10,13 @@
     color:white;
 }
 
+
 .memberimage{
     height:200px;
     width:200px;
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
     border-color:white;
     border-style:solid;
     border-width:3px;
