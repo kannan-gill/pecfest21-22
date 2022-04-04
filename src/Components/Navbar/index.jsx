@@ -261,7 +261,6 @@ const Navbar = ({ alwaysOpenOnLarge }) => {
       .then(() => {
         if (location.pathname !== "/") {
           navigate("/");
-          return;
         }
 
         // Sign-out successful.

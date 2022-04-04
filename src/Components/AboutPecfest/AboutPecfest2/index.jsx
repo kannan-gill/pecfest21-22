@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import StarsBg from "../../StarsBg";
 import BottomBars from "../../BottomBars";
 import Spacecraft from "../../Spacecraft";
@@ -6,9 +6,23 @@ import styles from "./AboutPecfest2.module.css";
 import { useNavigate } from "react-router-dom";
 import { faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../../config";
 
 const AboutPecfest2 = () => {
   const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const cleanUp = onAuthStateChanged(auth, (userRes) => {
+      if (userRes) {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+    });
+    return cleanUp;
+  }, []);
 
   return (
     <div className="text-white w-100 h-100 overflow-hidden position-relative">
@@ -19,16 +33,23 @@ const AboutPecfest2 = () => {
         <div
           className={`d-flex flex-column align-items-center ${styles.text_container}`}
         >
-          <img className={`m-4 ${styles.pfDates}`} src="https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/images%2Fpfdates.png?alt=media&token=bafe6b1e-a6d4-4ec7-a7c2-927ddac85cff" alt="pecfest dates" />
+          <div className={styles.date_text}>16-18 April 2022</div>
           <span className={`${styles.main_text} `}>
             Relish the centenary celebrations as we commemorate{" "}
             <span className="text-warning ">100 glorious years</span> of PEC at
             pecfest <span className="d-inline-block">21-22.</span>
           </span>
-          <button type="button" onClick={() => navigate("/register")} className={`${styles.registration_button} cursor-pointer py-2 px-4 mt-4`}>
+          {!isLoggedIn && <button
+            type="button"
+            onClick={() => navigate("/register")}
+            className={`${styles.registration_button} cursor-pointer py-2 px-4 mt-4`}
+          >
             Register now
-            <FontAwesomeIcon  className="px-2" icon={faAngleDoubleRight}></FontAwesomeIcon>
-          </button>
+            <FontAwesomeIcon
+              className="px-2"
+              icon={faAngleDoubleRight}
+            ></FontAwesomeIcon>
+          </button>}
         </div>
         <div
           className={`${styles.imgPlanet} d-none d-md-flex flex-row align-items-center justify-content-end h-100`}
