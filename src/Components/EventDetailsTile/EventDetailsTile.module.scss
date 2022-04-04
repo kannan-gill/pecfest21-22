@@ -1,17 +1,54 @@
-.tile{
-    // min-height: 30vh;
-    // aspect-ratio: 2 / 1;
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    height: 40vh;
+.membertile{
+    font-family:Audiowide;
+    color:white;
+    z-index:0;
+    width: auto !important;
 }
-.overlay{
-    background-color: rgba(0, 0, 0, 0.692);
+
+.membertile a{  
+    color:white;
 }
-.grey_color{
-    color:rgb(179, 179, 179);
+
+.memberimage{
+    height:200px;
+    width:200px;
+    border-color:white;
+    border-style:solid;
+    border-width:3px;
+    object-fit: cover;
+    object-position: center top;
 }
-.button{
-    border-radius: 5em;
+
+.detailsSeparator{
+    width:40%;
+    margin:10px auto;
+    opacity:0.5;
+}
+
+.instagram:hover{
+    transition: all 0.1s ease-in;
+    transform: scale(1.4);
+    color:#CE2F85;
+}
+
+.linkedin:hover{
+    transition: all 0.1s ease-in;
+    transform: scale(1.4);
+    color:#0072b1;
+}
+
+.phone:hover{
+    transition: all 0.1s ease-in;
+    transform: scale(1.4);
+    color:red;
+}
+
+.tooltipdesign{
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: white;
+    border-radius: 10%;
+    padding: 1px;
+    font-size: 14px;
+    font-family: Audiowide;
 }

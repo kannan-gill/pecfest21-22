@@ -24,7 +24,7 @@ const EventDetails = ({ setAlwaysOpen }) => {
   const DOMPurify = createDOMPurify(windowDom);
   const [alreadyRegistered, setAlreadyRegistered] = useState(null);
   const [eventsCleanup, setEventsCleanUp] = useState(null);
-  const userDets = useContext(AuthContext);
+  const { user: userDets } = useContext(AuthContext);
   const [eventDetails, seteventDetails] = useState(null);
   const [isVideoOpen, setVideoOpen] = useState(false);
   const [prelimLink, setPrelimLink] = useState("");
@@ -194,9 +194,8 @@ const EventDetails = ({ setAlwaysOpen }) => {
                 </div>
                 <div className="mt-3 d-flex flex-row flex-wrap">
                   <div
-                    className={`col-12 px-2 mb-3 ${
-                      eventDetails?.isRegistrationOpen && "col-xl-8"
-                    }`}
+                    className={`col-12 px-2 mb-3 ${eventDetails?.isRegistrationOpen && "col-xl-8"
+                      }`}
                   >
                     <EventDetailsTile
                       buttonColor="warning"
@@ -205,7 +204,7 @@ const EventDetails = ({ setAlwaysOpen }) => {
                         if (url) window.open(`//${url}`, "_blank");
                       }}
                       buttonText={eventDetails?.rulebookUrl && 'Rulebook'}
-                      background="https://picsum.photos/1366/768?random"
+                      background="https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/abstract5.png?alt=media"
                       title="Event Details"
                     >
                       <div
@@ -224,14 +223,14 @@ const EventDetails = ({ setAlwaysOpen }) => {
                             registerHandler();
                           }}
                           buttonText="Register"
-                          background="https://picsum.photos/1600/900?random"
+                          background="https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/abstract3.png?alt=media"
                           title="Register Now"
                         ></EventDetailsTile>
                       ) : (
                         <EventDetailsTile
                           buttonColor="warning"
                           buttonText={eventDetails.isTeamEvent && `View Team`}
-                          background="https://picsum.photos/1600/900?random"
+                          background="https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/abstract3.png?alt=media"
                           buttonHandler={() => {
                             registerHandler();
                           }}

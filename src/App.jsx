@@ -27,7 +27,7 @@ function App() {
   const [isNavBarVisible, setIsNavbarVisible] = useState(true);
   const [alwaysOpen, setAlwaysOpen] = useState(false);
 
-  const externalUrlLinks = {  
+  const externalUrlLinks = {
     merchandise: "https://pecfestmemories.co.in",
   };
 
@@ -45,12 +45,14 @@ function App() {
     },
     {
       path: "/verifyEmail/:userId",
-      component: <VerifyEmail />
+      component: <VerifyEmail />,
     },
     {
       path: "/competitions",
       component: (
         <TechCulturalSelector
+          technicalImageUrl="https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/Cultural_final.jpg?alt=media"
+          culturalImageUrl="https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/Technical_final.jpg?alt=media"
           leftRoute="/tech-competitions"
           rightRoute="/cultural-competitions"
         />
@@ -61,7 +63,7 @@ function App() {
     { path: "/teamregister", component: <ComingSoon /> },
     { path: "/team", component: <Team /> },
     { path: "/aboutUs", component: <Home2 initialPage="aboutUs" /> },
-    { path: "/sponsors", component: <Sponsors/> },
+    { path: "/sponsors", component: <Sponsors /> },
     {
       path: "/merchandise",
       component: <ExternalLink url={externalUrlLinks.merchandise} />,
@@ -72,10 +74,12 @@ function App() {
       path: "/events",
       component: (
         <TechCulturalSelector
+          technicalImageUrl="https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/mega.jpg?alt=media"
+          culturalImageUrl="https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/pecTalk.jpg?alt=media"
           leftName="Megashows"
           leftRoute="/megashows"
           rightRoute="/workshops"
-          rightName="Workshops"
+          rightName="Events"
         />
       ),
     },
