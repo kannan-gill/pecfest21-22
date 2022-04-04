@@ -32,7 +32,7 @@ function TeamMemberCard({member , index, isDeveloper=false}) {
       ></hr>
       <div style={{ fontSize: "20px" }}>{member.position}</div>
       <div className="d-flex flex-row justify-content-center align-items-center w-50 m-auto mt-3">
-        {member.instagram!=="" && <a href={member.instagram}>
+        {member.instagram!=="" && <a href={member.instagram} target="_blank">
           <Instagram className={`fa fa-lg me-3 ${styles.instagram}`} />
         </a>}
 
@@ -49,7 +49,7 @@ function TeamMemberCard({member , index, isDeveloper=false}) {
             <Phone className={`fa fa-lg me-3 ${styles.phone}`} />
           </a>
         </OverlayTrigger>}
-        {member.linkedin!=="" && <a href={member.linkedin}>
+        {member.linkedin!=="" && <a href={member.linkedin} target="_blank">
           <Linkedin className={`fa fa-lg ${styles.linkedin}`} />
         </a>}
       </div>
