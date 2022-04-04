@@ -17,7 +17,7 @@ const planets = [
     route: "/sponsors",
     text: "Sponsors",
     speed: "2",
-    color: "#fc9d15",
+    color: "rgb(237, 0, 140)",
   },
 
   {
@@ -132,8 +132,8 @@ const PlanetNav = ({ transitionAnimation }) => {
               PECFEST
             </span>
             {!explore && (
-              <span className="text-white mb-auto main_font display-1 header-subscript">
-                2021-22
+              <span className="text-white mb-auto main_font display-5 header-subscript">
+                16-18 April 2022
               </span>
             )}
           </div>
@@ -143,7 +143,7 @@ const PlanetNav = ({ transitionAnimation }) => {
       <div className="position-relative zi-top col-12 h-100 d-flex d-md-none flex-column justify-content-start animate__animated animate__fadeIn">
         <div className="d-flex flex-column align-items-center justify-content-start mx-auto header-large text-white">
           <span>PECFEST</span>
-          <span className="mt-1">21-22</span>
+          <span style={{fontSize:"5vw"}} className="mt-1">16-18 April 2022</span>
         </div>
       </div>
 

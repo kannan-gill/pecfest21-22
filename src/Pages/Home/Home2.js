@@ -6,7 +6,6 @@ import AboutPecfest from "../../Components/AboutPecfest/AboutPecfest";
 import Navbar from "../../Components/Navbar";
 import Loading from "../../Components/Loading";
 import FullPageCarousel from "Components/FullPageCarousel";
-import Sponsors from "Components/Sponsors";
 import PlanetNav from "Components/PlanetNav";
 import UpArrow from "Components/UpArrow";
 import DownArrow from "Components/DownArrow";

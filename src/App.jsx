@@ -16,6 +16,7 @@ import { ToastContainer } from "react-toastify";
 import ContactUs from "Pages/ContactUS/ContactUs";
 import Team from "Pages/Team/Team";
 import "react-toastify/dist/ReactToastify.css";
+import Sponsors from "Pages/Sponsors/Sponsors";
 import TechCulturalSelector from "Pages/Events/TechSelector/TechSelector";
 import EventDetails from "Pages/EventCardDetails/EventDetails";
 import AuthProvider from "./context/AuthContext";
@@ -26,7 +27,7 @@ function App() {
   const [isNavBarVisible, setIsNavbarVisible] = useState(true);
   const [alwaysOpen, setAlwaysOpen] = useState(false);
 
-  const externalUrlLinks = {
+  const externalUrlLinks = {  
     merchandise: "https://pecfestmemories.co.in",
   };
 
@@ -60,7 +61,7 @@ function App() {
     { path: "/teamregister", component: <ComingSoon /> },
     { path: "/team", component: <Team /> },
     { path: "/aboutUs", component: <Home2 initialPage="aboutUs" /> },
-    { path: "/sponsors", component: <ComingSoon /> },
+    { path: "/sponsors", component: <Sponsors color="#C98244"/> },
     {
       path: "/merchandise",
       component: <ExternalLink url={externalUrlLinks.merchandise} />,
