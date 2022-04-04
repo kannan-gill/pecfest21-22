@@ -19,7 +19,6 @@ function Team() {
             data.forEach(team=>{
                 team.members.sort((a,b) => (a.position < b.position) ? 1 : ((b.position < a.position) ? -1 : 0))
             })
-            console.log(data)
             setMembersData(data);
         });
     },[])

@@ -12,9 +12,7 @@ function Sponsors(){
   useEffect(()=>{
     getList('sponsors').then(data=>{
         data.sort(function(a,b){return a.rank - b.rank})
-        console.log(data);
         data.forEach(team=>{
-          console.log(team)
           if(team.sponsors.length>0){
             team.sponsors.sort((a,b) => (a.rankWithin < b.rankWithin) ? 1 : ((b.rankWithin < a.rankWithin) ? -1 : 0))
           }

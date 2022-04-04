@@ -14,13 +14,6 @@ function Developers() {
 
     useEffect(()=>{
         getList('developers').then(data=>{
-            // data.sort(function(a,b){return a.rank - b.rank})
-            
-            // data.forEach(team=>{
-            //     team.members.sort((a,b) => (a.position < b.position) ? 1 : ((b.position < a.position) ? -1 : 0))
-            // })
-            // console.log(data)
-            // console.log(data);
             setMembersData(data[0].devs);
         });
     },[])

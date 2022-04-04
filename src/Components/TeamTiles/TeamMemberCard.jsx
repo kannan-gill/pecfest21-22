@@ -10,8 +10,6 @@ function TeamMemberCard(props) {
     const color = lineColors[props.index%4];
     var namelist = props.member.name.split(" ");
     var imagesource = "https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/POR%20Images%2F"+namelist[0]+"%20"+namelist[1]+"?alt=media";
-    console.log(namelist);
-    // const imagesource = "https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/Test%2F"+{props.member.name}+ Kannan%20Gill?alt=media"
 
   return (
     <div className={`m-4 ${styles.membertile}`}>

@@ -32,7 +32,6 @@ function ContactForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(queryobject);
     if (queryobject.query === "") {
       setValidQueryType(false);
       return;
