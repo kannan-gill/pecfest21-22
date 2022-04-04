@@ -95,6 +95,7 @@ const Navbar = ({ alwaysOpenOnLarge }) => {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleRightSideClick = (e) => {
     if (!alwaysOpenOnLarge) {
@@ -172,7 +173,11 @@ const Navbar = ({ alwaysOpenOnLarge }) => {
               />
               <div className="d-flex flex-column ms-2">
                 <h4 className="main_font mb-0 pb-0">PECFEST</h4>
-                {user && <div className="d-flex flex-row align-items-center"><PecfestId color="#fec007" iconColor="#0f1113"/></div>}
+                {user && (
+                  <div className="d-flex flex-row align-items-center">
+                    <PecfestId color="#fec007" iconColor="#0f1113" />
+                  </div>
+                )}
               </div>
             </div>
             {!alwaysOpenOnLarge && (
@@ -210,6 +215,7 @@ const Navbar = ({ alwaysOpenOnLarge }) => {
   };
   const downloadBrochure = () => {
     const storage = getStorage();
+    setIsLoading(true);
     getDownloadURL(ref(storage, "Marketing Brochure.pdf"))
       .then((url) => {
         const xhr = new XMLHttpRequest();
@@ -217,6 +223,7 @@ const Navbar = ({ alwaysOpenOnLarge }) => {
         xhr.onload = (event) => {
           const blob = xhr.response;
           saveBlob(blob, "Brochure.pdf");
+          setIsLoading(false);
         };
         xhr.open("GET", url);
         xhr.send();
@@ -281,8 +288,23 @@ const Navbar = ({ alwaysOpenOnLarge }) => {
                 }}
                 className={`fw-bold my-4 mx-2 transition-smooth ${styles.brochure}`}
               >
-                <FontAwesomeIcon icon={faDownload} className="me-2" size="1x" />
-                Brochure
+                {isLoading ? (
+                  <Spinner
+                    animation="border"
+                    variant="warning"
+                    size="sm"
+                    className="mx-4"
+                  />
+                ) : (
+                  <>
+                    <FontAwesomeIcon
+                      icon={faDownload}
+                      className="me-2"
+                      size="1x"
+                    />
+                    Brochure
+                  </>
+                )}
               </Button>
               {loadingLogoutUser ? (
                 <Button

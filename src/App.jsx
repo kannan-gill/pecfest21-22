@@ -61,7 +61,7 @@ function App() {
     { path: "/teamregister", component: <ComingSoon /> },
     { path: "/team", component: <Team /> },
     { path: "/aboutUs", component: <Home2 initialPage="aboutUs" /> },
-    { path: "/sponsors", component: <Sponsors color="#C98244"/> },
+    { path: "/sponsors", component: <Sponsors/> },
     {
       path: "/merchandise",
       component: <ExternalLink url={externalUrlLinks.merchandise} />,
