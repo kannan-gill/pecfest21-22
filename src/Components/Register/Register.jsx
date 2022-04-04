@@ -44,15 +44,6 @@ const initialValidStates = {
   isPasswordValid: true,
 };
 
-// generate random alpha numeric string of length 5 and check if it is unique
-const generatePecfestId = (pecfestIdList) => {
-  let pecfestId = "";
-  do {
-    pecfestId = `PECFEST-${Math.random().toString(36).substring(2, 7).toUpperCase()}`;
-  } while (pecfestIdList.includes(pecfestId));
-  return pecfestId;
-}
-
 function Register({ onFlip, redirect }) {
   const navigate = useNavigate();
   const [user, setUser] = useState(initialStateUser);
@@ -68,24 +59,25 @@ function Register({ onFlip, redirect }) {
 
   const registerUser = () => {
     setLoading(true);
-    Promise.all([
-      getDocById("stats", "pecfestIdList"),
-      createUserWithEmailAndPassword(auth, user.email, user.password)
-    ])
-      .then(([{value: pecfestIdList}, userCredential]) => {
-        const pecfestId = generatePecfestId(pecfestIdList);
+    createUserWithEmailAndPassword(auth, user.email, user.password)
+      .then((userCredential) => {
         const userData = { ...user };
         delete userData.password;
-        userData.pecfestId = pecfestId;
-        createDoc("users", userData);
-        updateDoc("stats", "pecfestIdList", {value: [...pecfestIdList, pecfestId]});
-        sendEmailVerification(auth.currentUser, { url: window.location.origin })
-          .then(() => {
-            navigate("/");
+        createDoc("users", userData)
+          .then((createdUser) => {
+            sendEmailVerification(auth.currentUser, { url: `${window.location.origin}/verifyEmail/${createdUser.id}` })
+              .then(() => {
+                navigate("/");
+              })
+              .catch((error) => {
+                const errorMessage = error.message;
+                toast.error("Unable to send verification email. Please try again later.", { autoClose: 2000 });
+                setLoading(false);
+              });
           })
           .catch((error) => {
             const errorMessage = error.message;
-            toast.error(errorMessage);
+            toast.error("Unable to register!");
             setLoading(false);
           });
       })

@@ -45,7 +45,7 @@
     border-radius: 10%;
 } */
 .img1 {
-  background: url("../../Images/Untitled2.png");
+  background: url("https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/images%2Fplanet1.png?alt=media&token=6da1d97c-0918-4ad2-a420-07d3ebb8a9ba");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -56,7 +56,7 @@
 }
 
 .img2 {
-  background: url("../../Images/Untitled.png");
+  background: url("https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/images%2Fplanet2.png?alt=media&token=c5f9e63b-141b-44d8-a8bf-d3b457ab0778");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -68,7 +68,7 @@
 }
 
 .img3 {
-  background: url("../../Images/Untitled3.png");
+  background: url("https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/images%2Fplanet3.png?alt=media&token=a8dd7f5b-0c69-45b3-a567-164825f0c267");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -81,7 +81,7 @@
 }
 
 .img4 {
-  background: url("../../Images/Untitled5.png");
+  background: url("https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/images%2Fplanet4.png?alt=media&token=2e085101-c742-4d2b-ac87-b570564d67b8");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -93,7 +93,7 @@
 }
 
 .img5 {
-  background: url("../../Images/Untitled4.png");
+  background: url("https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/images%2Fplanet5.png?alt=media&token=0fc78328-8ecc-4e3a-8dcf-742e20a61c19");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -133,11 +133,11 @@
   margin-left: 5%;
 }
 
-.aboutUsBg{
-    background-image: linear-gradient(to bottom, #000, #333);
+.aboutUsBg {
+  background-image: linear-gradient(to bottom, #000, #333);
 }
 
-.header-subscript{
+.header-subscript {
   margin-bottom: 30vh !important;
 }
 .header-large {
@@ -215,7 +215,7 @@
     border-style: solid;
     border-width: 2px; */
   position: fixed;
-  bottom:1em;
+  bottom: 1em;
   /* animation: explorebubble 1.5s infinite; */
 }
 
@@ -250,7 +250,7 @@
   -ms-transform: rotate(30deg) scale(2.2);
   -o-transform: rotate(30deg) scale(2.2);
   transform: rotate(30deg) scale(2.2);
-  background-image: url(../../Images/nebulabgextracted-edited.png) !important;
+  background-image: url(https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/images%2Fnebulabg.png?alt=media&token=3b6d0a33-ad55-437c-b679-10e5fdc4cf6b) !important;
   background-repeat: no-repeat;
   background-size: cover;
 }

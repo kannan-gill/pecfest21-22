@@ -9,7 +9,6 @@ import { auth } from "../../config";
 function Navbar() {
   const [loggedInStatus, setLoggedInStatus] = useState(false);
   const logoutUserHandler = () => {
-    console.log("clicked");
     signOut(auth)
       .then(() => {
         console.log("logged out");
