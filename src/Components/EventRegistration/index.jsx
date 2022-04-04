@@ -185,7 +185,7 @@ const EventRegistration = ({
   return (
     <>
       <h1 className=" mx-auto mb-4 mt-4">Registration</h1>
-      <Form className="">
+      <Form className="h-100">
         {event.isTeamEvent && (
           <>
             {teamMemberDetails.map((teamMember, ind) => (

@@ -263,7 +263,7 @@ const EventDetails = ({ setAlwaysOpen }) => {
                     onHide={() => setRegisterOpen(false)}
                   >
                     <Modal.Body
-                      className={`px-5 py-3 d-flex flex-column justify-content-center text-white border-muted main_font`}
+                      className={`px-5 py-3 text-white border-muted main_font`}
                     >
                       <EventRegistration
                         registeredTeamId={registeredTeamId}
