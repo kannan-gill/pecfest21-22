@@ -18,6 +18,7 @@ const VerificationModalProvider = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [countdown, setCountdown] = useState(null);
+  const [operation, setOperation] = useState(null);
   const { user, reloadUserObj } = useContext(AuthContext);
 
   const openVerificationModal = () => {
@@ -30,41 +31,25 @@ const VerificationModalProvider = (props) => {
     setIsModalOpen(false);
   };
 
-  const checkVerification = async (showError=true) => {
-    await reloadUserObj();
-    if (user?.emailVerified && !user.pecFestId) {
-      await generatePecfestId(user.id);
-      toast.success("Your PECFEST ID has been generated");
-      return true;
-    }
-    else if (!user?.emailVerified && showError) {
-      toast.error("Please verify your email first");
-    }
-    return false;
+  const checkVerification = (op) => {
+    setOperation(op);
+    reloadUserObj();
   };
 
-  useEffect(() => {
-    const cleanUp = onAuthStateChanged(auth, async (userRes) => {
-      if (userRes) {
-        if (!userRes.emailVerified) {
-          openVerificationModal();
-        }
-      }
-    });
-    return cleanUp;
-  }, []);
-
-  useEffect(() => {
-    if (user?.emailVerified) {
-      closeVerificationModal();
+  const pecfestIdGenerationHandler = async () => {
+    if (user?.emailVerified && !user.pecFestId) {
+      generatePecfestId(user.id).then(() => {
+        toast.success("Your PECFEST ID has been generated");
+        setOperation(null);
+      });
+    } else if (!user?.emailVerified) {
+      toast.error("Please verify your email first");
+      setOperation(null);
     }
-  }, [user]);
+  };
 
-  const auth = getAuth();
-
-  const resetEmailHandler = async () => {
-    if (!await checkVerification(false)) {
-      setIsLoading(true);
+  const sendEmailHandler = async () => {
+    if (!user?.emailVerified) {
       sendEmailVerification(auth.currentUser, {
         url: `${window.location.origin}/verifyEmail/${user.id}`,
       })
@@ -83,6 +68,7 @@ const VerificationModalProvider = (props) => {
             });
           }, 1000);
           setIsLoading(false);
+          setOperation(null);
           toast.success("Email sent successfully!", { autoClose: 2000 });
         })
         .catch((error) => {
@@ -99,9 +85,48 @@ const VerificationModalProvider = (props) => {
             });
           }, 1000);
           setIsLoading(false);
+          setOperation(null);
           toast.error("Try again in some time");
         });
     }
+    else {
+      generatePecfestId(user.id).then(() => {
+        toast.success("Your PECFEST ID has been generated");
+      });
+      setOperation(null);
+    }
+  };
+
+  useEffect(() => {
+    const cleanUp = onAuthStateChanged(auth, async (userRes) => {
+      if (userRes) {
+        if (!(user?.emailVerified && user.pecFestId)) {
+          openVerificationModal();
+        }
+      }
+    });
+    return cleanUp;
+  }, []);
+
+  useEffect(() => {
+    console.log("on user change", user);
+    if (user?.emailVerified && user.pecFestId) {
+      closeVerificationModal();
+    } else {
+      if (operation === "generate") {
+        pecfestIdGenerationHandler();
+      }
+      else if (operation === "sendEmail") {
+        sendEmailHandler();
+      }
+    }
+  }, [user]);
+
+  const auth = getAuth();
+
+  const resetEmailHandler = () => {
+    setIsLoading(true);
+    checkVerification("sendEmail");
   };
 
   return (
@@ -130,7 +155,7 @@ const VerificationModalProvider = (props) => {
                 <span
                   className="cursor-pointer"
                   style={{ color: "#FFCA2C" }}
-                  onClick={checkVerification}
+                  onClick={() => checkVerification("generate")}
                 >
                   Click here
                 </span>

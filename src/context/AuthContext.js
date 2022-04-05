@@ -23,12 +23,12 @@ const useAuthHandler = () => {
           auth.currentUser.reload()
           .then(() => {
             const currentUser = auth.currentUser;
-            setUser({ ...userData, emailVerified: currentUser.emailVerified });
+            setUser(() => { return { ...userData, emailVerified: currentUser.emailVerified }});
             setIsLoading(false);
           });
         });
       } else {
-        setUser(null);
+        setUser(() => null);
         setIsLoading(false);
       }
     });
@@ -45,10 +45,10 @@ const useAuthHandler = () => {
     if (user) {
       await auth.currentUser.reload();
       const currentUser = auth.currentUser;
-      setUser((prevUser) => ({
+      setUser((prevUser) => { return {
         ...prevUser,
         emailVerified: currentUser.emailVerified,
-      }));
+      }});
     }
   };
 
