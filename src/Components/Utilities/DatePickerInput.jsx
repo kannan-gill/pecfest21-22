@@ -41,6 +41,8 @@ const DatePickerInput = ({ label, icon, isValid, name, changeFunc, val}) => {
         placeholder="Date of Birth"
         aria-label={label}
         className={styles.no_box_shadow}
+        max= {new Date().toISOString().split("T")[0]}
+        min="1900-01-01"
       />
 
       {!isValid ? (
