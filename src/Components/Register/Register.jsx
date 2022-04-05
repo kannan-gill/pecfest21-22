@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 // import styles from "./Register.module.css";
 import { toast } from "react-toastify";
 import Button from "../Utilities/Button";
-import { createDoc, getDocById, updateDoc } from "services";
+import { createDoc, getUserByEmail } from "services";
 
 const isDigit = (phoneNum) => {
   return /^\+?([0-9]{2})?[-. ]?([0-9]{10})$/.test(phoneNum);
@@ -77,8 +77,24 @@ function Register({ onFlip, redirect }) {
           })
           .catch((error) => {
             const errorMessage = error.message;
-            toast.error("Unable to register!");
-            setLoading(false);
+            if (errorMessage.includes("Document already exists")) {
+              getUserByEmail(userData.email)
+                .then((returnedUser) => {
+                  sendEmailVerification(auth.currentUser, { url: `${window.location.origin}/verifyEmail/${returnedUser.id}` })
+                    .then(() => {
+                      navigate("/");
+                    })
+                    .catch((error) => {
+                      const errorMessage = error.message;
+                      toast.error("Unable to send verification email. Please try again later.", { autoClose: 2000 });
+                      setLoading(false);
+                    });
+                });
+            }
+            else {
+              toast.error("Unable to register!");
+              setLoading(false);
+            }
           });
       })
       .catch((error) => {

@@ -26,9 +26,7 @@ const VerificationModalProvider = (props) => {
   } = useContext(AuthContext);
 
   const openVerificationModal = () => {
-    if (!(user.emailVerified && user.pecfestId)) {
       setIsModalOpen(true);
-    }
   };
 
   const closeVerificationModal = () => {
@@ -104,14 +102,18 @@ const VerificationModalProvider = (props) => {
   useEffect(() => {
     const cleanUp = onAuthStateChanged(auth, async (userRes) => {
       if (userRes) {
-        const interval = setInterval(() => {
-          if (!isAuthLoading) {
-            if (!(user.emailVerified && user.pecFestId)) {
-              openVerificationModal();
+        if (!userRes?.emailVerified) {
+          openVerificationModal();
+        } else {
+          const interval = setInterval(() => {
+            if (!isAuthLoading) {
+              if (!user.pecFestId) {
+                openVerificationModal();
+              }
+              clearInterval(interval);
             }
-            clearInterval(interval);
-          }
-        }, 200);
+          }, 200);
+        }
       }
     });
     return cleanUp;
