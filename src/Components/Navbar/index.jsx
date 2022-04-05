@@ -214,23 +214,18 @@ const Navbar = ({ alwaysOpenOnLarge }) => {
     );
   };
   const downloadBrochure = () => {
-    const storage = getStorage();
     setIsLoading(true);
-    getDownloadURL(ref(storage, "Marketing Brochure.pdf"))
-      .then((url) => {
-        const xhr = new XMLHttpRequest();
-        xhr.responseType = "blob";
-        xhr.onload = (event) => {
-          const blob = xhr.response;
-          saveBlob(blob, "Brochure.pdf");
-          setIsLoading(false);
-        };
-        xhr.open("GET", url);
-        xhr.send();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    const url = "https://drive.google.com/uc?id=1BOCYxgIw7BGD0XILQ5QPSlAp00q00BM2";
+    const xhr = new XMLHttpRequest();
+    xhr.responseType = "blob";
+    xhr.onload = (event) => {
+      const blob = xhr.response;
+      saveBlob(blob, "Brochure.pdf");
+      setIsLoading(false);
+    };
+    xhr.open("GET", url);
+    xhr.send();
+  
   };
 
   const saveBlob = (blob, fileName) => {
@@ -283,7 +278,7 @@ const Navbar = ({ alwaysOpenOnLarge }) => {
             <div className="d-flex flex-row align-items-center">
               <Button
                 onClick={() => {
-                  downloadBrochure();
+                  window.open('https://drive.google.com/uc?id=1BOCYxgIw7BGD0XILQ5QPSlAp00q00BM2', "_blank")
                 }}
                 className={`fw-bold my-4 mx-2 transition-smooth ${styles.brochure}`}
               >
