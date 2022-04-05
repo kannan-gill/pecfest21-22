@@ -43,13 +43,13 @@
 .main_container{
   padding-top: 3em;
   background-color: #fff000;
-background-image: linear-gradient(315deg, #fff000 0%, #ed008c 74%);
+  background-image: linear-gradient(315deg,#5D2322,#1A0909 74%);
   height:100vh;
 }
 
 .outerdiv{
   background-color: #fff000;
-background-image: linear-gradient(315deg, #fff000 0%, #ed008c 74%);
+background-image: linear-gradient(315deg,#5D2322,#1A0909 74%);
 overflow: hidden;
 }
 

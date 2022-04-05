@@ -4,14 +4,10 @@ import { Instagram, Linkedin, Phone } from "react-bootstrap-icons";
 import styles from "./TeamMemberCard.module.css";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
-function TeamMemberCard({member , index, isDeveloper=false}) {
+function TeamMemberCard({member , index}) {
 
   const lineColors = ["red", "green", "blue", "yellow"];
   const color = lineColors[index % 4];
-
-  var namelist = member.name.split(" ");
-  var imagesource = "https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/POR%20Images%2F"+namelist[0]+"%20"+namelist[1]+"?alt=media";
-  
 
   return (
     <div
@@ -20,7 +16,7 @@ function TeamMemberCard({member , index, isDeveloper=false}) {
       <Image
         className={`${styles.memberimage}`}
         roundedCircle
-        src={isDeveloper ? member.image : imagesource}  
+        src={member.image}  
       ></Image>
       <div className="mt-3" style={{ fontSize: "25px" }}>
         {member.name}
