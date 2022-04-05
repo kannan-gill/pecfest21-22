@@ -28,7 +28,7 @@ function Developers() {
           <Row className="d-flex flex-row justify-content-center">
             {membersData.map((item, index) => {
               return (
-                <TeamMemberCard key={item.name} member={item} index={index} isDeveloper={true} />
+                <TeamMemberCard key={item.name} member={item} index={index} />
               );
             })}
           </Row>
