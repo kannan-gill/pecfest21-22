@@ -4,7 +4,10 @@ import SelectInput from "../Utilities/SelectInput";
 import DatePickerInput from "../Utilities/DatePickerInput";
 import { Spinner } from "react-bootstrap";
 // this page opens only if
-import { sendEmailVerification, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  sendEmailVerification,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 import { auth } from "../../config";
 import { useNavigate } from "react-router-dom";
 // import styles from "./Register.module.css";
@@ -14,11 +17,11 @@ import { createDoc, getUserByEmail } from "services";
 
 const isDigit = (phoneNum) => {
   return /^\+?([0-9]{2})?[-. ]?([0-9]{10})$/.test(phoneNum);
-}
+};
 
 const isValidEmailAddress = (email) => {
   return /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
-}
+};
 
 const initialStateUser = {
   name: "",
@@ -51,11 +54,27 @@ function Register({ onFlip, redirect }) {
 
   const [checkValidStates, setCheckValidStates] = useState(initialValidStates);
 
-
   const onFlipBtnClick = () => {
     onFlip();
     setCheckValidStates(initialValidStates);
-  }
+  };
+
+  const sendEmailVerificationHandler = (user) => {
+    sendEmailVerification(auth.currentUser, {
+      url: `${window.location.origin}/verifyEmail/${user.id}`,
+    })
+      .then(() => {
+        navigate("/");
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        toast.error(
+          "Unable to send verification email. Please try again later.",
+          { autoClose: 2000 }
+        );
+        setLoading(false);
+      });
+  };
 
   const registerUser = () => {
     setLoading(true);
@@ -65,33 +84,15 @@ function Register({ onFlip, redirect }) {
         delete userData.password;
         createDoc("users", userData)
           .then((createdUser) => {
-            sendEmailVerification(auth.currentUser, { url: `${window.location.origin}/verifyEmail/${createdUser.id}` })
-              .then(() => {
-                navigate("/");
-              })
-              .catch((error) => {
-                const errorMessage = error.message;
-                toast.error("Unable to send verification email. Please try again later.", { autoClose: 2000 });
-                setLoading(false);
-              });
+            sendEmailVerificationHandler(createdUser);
           })
           .catch((error) => {
             const errorMessage = error.message;
             if (errorMessage.includes("Document already exists")) {
-              getUserByEmail(userData.email)
-                .then((returnedUser) => {
-                  sendEmailVerification(auth.currentUser, { url: `${window.location.origin}/verifyEmail/${returnedUser.id}` })
-                    .then(() => {
-                      navigate("/");
-                    })
-                    .catch((error) => {
-                      const errorMessage = error.message;
-                      toast.error("Unable to send verification email. Please try again later.", { autoClose: 2000 });
-                      setLoading(false);
-                    });
-                });
-            }
-            else {
+              getUserByEmail(userData.email).then((returnedUser) => {
+                sendEmailVerificationHandler(returnedUser);
+              });
+            } else {
               toast.error("Unable to register!");
               setLoading(false);
             }
@@ -102,12 +103,11 @@ function Register({ onFlip, redirect }) {
         toast.error(errorMessage);
         setLoading(false);
       });
-  }
+  };
 
   const changeHandler = (name, value) => {
     setUser({ ...user, [name]: value });
   };
-
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -125,8 +125,7 @@ function Register({ onFlip, redirect }) {
           setCheckValidStates((prevState) => {
             return { ...prevState, isNameValid: true };
           });
-      }
-      else if (det === "college") {
+      } else if (det === "college") {
         if (user[det].length === 0 || user[det].length > 50) {
           setCheckValidStates((prevState) => {
             return { ...prevState, isCollegeValid: false };
@@ -136,9 +135,7 @@ function Register({ onFlip, redirect }) {
           setCheckValidStates((prevState) => {
             return { ...prevState, isCollegeValid: true };
           });
-      }
-
-      else if (det === "email") {
+      } else if (det === "email") {
         if (!isValidEmailAddress(user[det])) {
           setCheckValidStates((prevState) => {
             return { ...prevState, isEmailValid: false };
@@ -148,9 +145,7 @@ function Register({ onFlip, redirect }) {
           setCheckValidStates((prevState) => {
             return { ...prevState, isEmailValid: true };
           });
-      }
-
-      else if (det === "phone") {
+      } else if (det === "phone") {
         if (!isDigit(user[det])) {
           setCheckValidStates((prevState) => {
             return { ...prevState, isPhoneValid: false };
@@ -160,9 +155,7 @@ function Register({ onFlip, redirect }) {
           setCheckValidStates((prevState) => {
             return { ...prevState, isPhoneValid: true };
           });
-      }
-
-      else if (det === "password") {
+      } else if (det === "password") {
         if (user[det].length < 8) {
           setCheckValidStates((prevState) => {
             return { ...prevState, isPasswordValid: false };
@@ -172,9 +165,7 @@ function Register({ onFlip, redirect }) {
           setCheckValidStates((prevState) => {
             return { ...prevState, isPasswordValid: true };
           });
-      }
-
-      else if (det === "dob") {
+      } else if (det === "dob") {
         if (user[det].length === 0) {
           setCheckValidStates((prevState) => {
             return { ...prevState, isDobValid: false };
@@ -184,9 +175,7 @@ function Register({ onFlip, redirect }) {
           setCheckValidStates((prevState) => {
             return { ...prevState, isDobValid: true };
           });
-      }
-
-      else if (det === "degree") {
+      } else if (det === "degree") {
         if (user[det] === "") {
           setCheckValidStates((prevState) => {
             return { ...prevState, isDegreeValid: false };
@@ -196,9 +185,7 @@ function Register({ onFlip, redirect }) {
           setCheckValidStates((prevState) => {
             return { ...prevState, isDegreeValid: true };
           });
-      }
-
-      else if (det === "year") {
+      } else if (det === "year") {
         if (user[det] === "") {
           setCheckValidStates((prevState) => {
             return { ...prevState, isYearValid: false };
@@ -208,9 +195,7 @@ function Register({ onFlip, redirect }) {
           setCheckValidStates((prevState) => {
             return { ...prevState, isYearValid: true };
           });
-      }
-
-      else if (det === "gender") {
+      } else if (det === "gender") {
         if (user[det] === "") {
           setCheckValidStates((prevState) => {
             return { ...prevState, isGenderValid: false };
@@ -221,7 +206,6 @@ function Register({ onFlip, redirect }) {
             return { ...prevState, isGenderValid: true };
           });
       }
-
     }
 
     if (!formIsValid) {
@@ -239,10 +223,11 @@ function Register({ onFlip, redirect }) {
       >
         REGISTER
       </div>
-      <form onSubmit={submitHandler} className="h-auto mh-100 mt-3 overflow-auto">
-        <div
-          className={`w-100 d-flex flex-column align-items-center`}
-        >
+      <form
+        onSubmit={submitHandler}
+        className="h-auto mh-100 mt-3 overflow-auto"
+      >
+        <div className={`w-100 d-flex flex-column align-items-center`}>
           <SimpleInput
             type="text"
             icon="user"
