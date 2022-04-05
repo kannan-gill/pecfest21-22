@@ -19,7 +19,11 @@ const VerificationModalProvider = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [countdown, setCountdown] = useState(null);
   const [operation, setOperation] = useState(null);
-  const { user, reloadUserObj } = useContext(AuthContext);
+  const {
+    user,
+    reloadUserObj,
+    isLoading: isAuthLoading,
+  } = useContext(AuthContext);
 
   const openVerificationModal = () => {
     if (!(user.emailVerified && user.pecfestId)) {
@@ -41,6 +45,7 @@ const VerificationModalProvider = (props) => {
       generatePecfestId(user.id).then(() => {
         toast.success("Your PECFEST ID has been generated");
         setOperation(null);
+        closeVerificationModal();
       });
     } else if (!user?.emailVerified) {
       toast.error("Please verify your email first");
@@ -88,8 +93,7 @@ const VerificationModalProvider = (props) => {
           setOperation(null);
           toast.error("Try again in some time");
         });
-    }
-    else {
+    } else {
       generatePecfestId(user.id).then(() => {
         toast.success("Your PECFEST ID has been generated");
       });
@@ -100,23 +104,26 @@ const VerificationModalProvider = (props) => {
   useEffect(() => {
     const cleanUp = onAuthStateChanged(auth, async (userRes) => {
       if (userRes) {
-        if (!(user?.emailVerified && user.pecFestId)) {
-          openVerificationModal();
-        }
+        const interval = setInterval(() => {
+          if (!isAuthLoading) {
+            if (!(user.emailVerified && user.pecFestId)) {
+              openVerificationModal();
+            }
+            clearInterval(interval);
+          }
+        }, 200);
       }
     });
     return cleanUp;
   }, []);
 
   useEffect(() => {
-    console.log("on user change", user);
     if (user?.emailVerified && user.pecFestId) {
       closeVerificationModal();
     } else {
       if (operation === "generate") {
         pecfestIdGenerationHandler();
-      }
-      else if (operation === "sendEmail") {
+      } else if (operation === "sendEmail") {
         sendEmailHandler();
       }
     }
