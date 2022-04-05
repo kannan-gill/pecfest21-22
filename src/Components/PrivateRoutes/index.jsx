@@ -12,7 +12,7 @@ const PrivateRoutes = ({ children, setIsNavbarVisible }) => {
   const location = useLocation();
   const navigate = useNavigate();
   useEffect(() => {
-    if (user && !user.emailVerified) {
+    if (user && !(user.emailVerified && user.pecfestId)) {
       const pathToRedirect = location?.pathname.split('/');
       pathToRedirect.pop();
       openVerificationModal();
@@ -24,7 +24,7 @@ const PrivateRoutes = ({ children, setIsNavbarVisible }) => {
   return (
     <>
       {isLoading ? (<></>) : (user ? (
-        user.emailVerified && children
+        (user.emailVerified && user.pecfestId) && children
       ) : (
         <RegisterLogin redirect={location?.pathname} setIsNavbarVisible={setIsNavbarVisible} />
       ))}

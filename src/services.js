@@ -178,3 +178,40 @@ export const getUsersInPECIdArray = async (idArrayParam) => {
   });
   return data;
 };
+
+
+const generatePecfestIdUtil = (pecfestIdListParam) => {
+  let pecfestIdList = pecfestIdListParam;
+  if(!pecfestIdListParam)  pecfestIdList = [];
+  let pecfestId = "";
+  do {
+    pecfestId = `PECFEST-${Math.random().toString(36).substring(2, 7).toUpperCase()}`;
+  } while (pecfestIdList.includes(pecfestId));
+  return pecfestId;
+}
+
+export const generatePecfestId = (userId) => {
+  return Promise.all([
+    getDocById("stats", "pecfestIdList"),
+    getDocById("users", userId),
+  ])
+    .then(([{value: pecfestIdList}, user]) => {
+      if(!user.pecfestId) {
+        const pecfestId = generatePecfestIdUtil(pecfestIdList);
+        const userData = { ...user };
+        userData.pecfestId = pecfestId;
+        Promise.all([
+          updateDoc("stats", "pecfestIdList", {value: [...pecfestIdList, pecfestId]}),
+          updateDoc("users", userId, userData),
+        ])
+          .catch((error) => {
+            console.log(error);
+            throw error;
+          });
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      throw error;
+    });
+}
