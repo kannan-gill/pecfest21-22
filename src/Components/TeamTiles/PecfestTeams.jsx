@@ -8,7 +8,7 @@ function PecfestTeams(props) {
 
   return (
     <div>
-        <Row style={{fontSize:"30px",fontFamily:"Audiowide",color:'white'}} className='d-flex justify-content-center align-items-center pb-3'>
+        <Row style={{fontSize:"30px",fontFamily:"Audiowide",color:'white'}} className='d-flex justify-content-center align-items-center pb-3 text-center px-3'>
           {props.teamname}
         </Row>
         <Row className="d-flex flex-row justify-content-center align-items-center">

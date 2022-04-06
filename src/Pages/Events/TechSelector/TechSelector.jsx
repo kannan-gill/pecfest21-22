@@ -102,7 +102,7 @@ const TechCulturalSelector = ({
         </div>
       </div>
       <div
-        className="d-flex bg-warning d-md-none vh-100 zi-top flex-column"
+        className="d-flex bg-dark d-md-none vh-100 zi-top flex-column"
         style={{ background: "#07202a" }}
       >
         <div
