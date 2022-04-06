@@ -143,7 +143,7 @@ const EventDetails = ({ setAlwaysOpen }) => {
                       backgroundPosition: 'center center',
                       backgroundSize: 'cover',
                       backgroundRepeat: 'no-repeat',
-                      backgroundImage: `url(${eventDetails?.backdrop})`,
+                      backgroundImage: `url('${eventDetails?.backdrop}')`,
                     }}
                   >
                     <div
