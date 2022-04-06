@@ -18,8 +18,9 @@ const DatePickerInput = ({ label, icon, isValid, name, changeFunc, val }) => {
         <i className={`fas fa-${icon} ${styles.icon_size}`} />
       </InputGroup.Text>
       <FormControl
+        onFocus={(e) => e.target.type = "date"}
         onChange={changeHandler}
-        type="date"
+        type="text"
         value={val}
         placeholder="Date of Birth"
         aria-label={label}
