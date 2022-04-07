@@ -15,9 +15,9 @@ const PecfestId = ({ color, iconColor }) => {
       style={{ backgroundColor: iconColor, color: color }}
       onClick={() => {
         setShowTooltip(true);
-        // if (navigator.clipboard && window.isSecureContext) {
-        //   navigator.clipboard.writeText(authContext["pecfestId"]);
-        // } else {
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(authContext["pecfestId"]);
+        } else {
           var textArea = document.createElement("textarea");
           textArea.value = authContext["pecfestId"];
           textArea.style.position = "fixed"; 
@@ -26,7 +26,7 @@ const PecfestId = ({ color, iconColor }) => {
           textArea.select();
           document.execCommand("copy");
           document.body.removeChild(textArea);
-        // }
+        }
         setTimeout(() => setShowTooltip(false), 1000);
       }}
     >
