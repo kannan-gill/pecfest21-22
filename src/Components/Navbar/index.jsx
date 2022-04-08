@@ -162,7 +162,7 @@ const Navbar = ({ alwaysOpenOnLarge }) => {
   const CommonNavBarComponent = () => {
     return (
       <>
-        <div className="d-flex flex-column overflow-none justify-content-start  ">
+        <div className="d-flex flex-column overflow-none justify-content-start mb-2">
           <div className="d-flex justify-content-between align-items-center px-3 pt-4 pb-0 text-white">
             <div className="d-flex flex-row align-items-center">
               <img
@@ -214,23 +214,18 @@ const Navbar = ({ alwaysOpenOnLarge }) => {
     );
   };
   const downloadBrochure = () => {
-    const storage = getStorage();
     setIsLoading(true);
-    getDownloadURL(ref(storage, "Marketing Brochure.pdf"))
-      .then((url) => {
-        const xhr = new XMLHttpRequest();
-        xhr.responseType = "blob";
-        xhr.onload = (event) => {
-          const blob = xhr.response;
-          saveBlob(blob, "Brochure.pdf");
-          setIsLoading(false);
-        };
-        xhr.open("GET", url);
-        xhr.send();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    const url = "https://drive.google.com/uc?id=1BOCYxgIw7BGD0XILQ5QPSlAp00q00BM2";
+    const xhr = new XMLHttpRequest();
+    xhr.responseType = "blob";
+    xhr.onload = (event) => {
+      const blob = xhr.response;
+      saveBlob(blob, "Brochure.pdf");
+      setIsLoading(false);
+    };
+    xhr.open("GET", url);
+    xhr.send();
+  
   };
 
   const saveBlob = (blob, fileName) => {
@@ -261,7 +256,6 @@ const Navbar = ({ alwaysOpenOnLarge }) => {
       .then(() => {
         if (location.pathname !== "/") {
           navigate("/");
-          return;
         }
 
         // Sign-out successful.
@@ -284,7 +278,7 @@ const Navbar = ({ alwaysOpenOnLarge }) => {
             <div className="d-flex flex-row align-items-center">
               <Button
                 onClick={() => {
-                  downloadBrochure();
+                  window.open('https://drive.google.com/uc?id=1BOCYxgIw7BGD0XILQ5QPSlAp00q00BM2', "_blank")
                 }}
                 className={`fw-bold my-4 mx-2 transition-smooth ${styles.brochure}`}
               >
@@ -386,7 +380,7 @@ const Navbar = ({ alwaysOpenOnLarge }) => {
             )}
 
             <div
-              className={`position-absolute top-0 ${
+              className={`position-absolute top-0 d-flex ${
                 alwaysOpenOnLarge && "d-flex d-md-none"
               } flex-column start-0 zi-top h-100 ${
                 styles.nav_item_container
