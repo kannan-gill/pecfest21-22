@@ -3,12 +3,18 @@ import { getList, getListFiltered } from "services";
 import SimpleInput from "Components/Utilities/SimpleInput";
 import exportFromJSON from "export-from-json";
 import "./lazyAdmin.css";
+import { Modal, Button } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDownload } from "@fortawesome/free-solid-svg-icons";
+import StarsBg from "Components/StarsBg";
 
 function LazyAdmin() {
   const [competitionsData, setCompetitionsData] = useState([]);
   const [event, setEvent] = useState("");
   const [chosenComp, setChosenComp] = useState({});
   const [finalUserData, setFinalUserData] = useState([]);
+  const [showModal, setShowModal] = useState(true);
+  const [pass, setPass] = useState("");
 
   const columns = [
     chosenComp["isTeamEvent"] ? "Team No." : "S.No",
@@ -51,96 +57,8 @@ function LazyAdmin() {
     var data = finalUserData;
     var fileName = chosenComp.name + Date.now();
     var exportType = exportFromJSON.types.xls;
-    exportFromJSON({ data, fileName,extension: "xls", exportType});
+    exportFromJSON({ data, fileName, extension: "xls", exportType });
   }
-
-  // function handleEventSelection(comp) {
-  //   setFinalUserData([]);
-  //   setChosenComp(comp);
-  //   var registeredUserObjects = {};
-  //   var teamidList = [];
-  //   getList("users").then((data) => {
-  //     setUsersData(data);
-  //   });
-  //   chosenComp.hasOwnProperty("registeredUsers") &&
-  //     chosenComp.registeredUsers.map((user) => {
-  //       registeredUserObjects[`${user.userId}`] = user.prelimLink;
-  //       if (comp.isTeamEvent === true) {
-  //         teamidList.push(user.userId);
-  //       }
-  //     });
-
-  //   if (comp.isTeamEvent === true) {
-  //     var teamDocuments = [];
-  //     getList("event-teams").then((data) => {
-  //       seteventTeamsData(data);
-  //     });
-
-  //     var TeamsInThisEvent = eventTeamsData.filter((event) =>
-  //       teamidList.includes(event.id)
-  //     );
-  //     var teamsExpanded = [];
-  //     TeamsInThisEvent.forEach((member) => {
-  //       member.teamMembers.forEach((pecfestids) => {
-  //         teamsExpanded.push(pecfestids);
-  //       });
-  //     });
-
-  //     var allMembersAllTeams = usersData.filter((user) =>
-  //       teamsExpanded.includes(user.pecfestId)
-  //     );
-  //     allMembersAllTeams = allMembersAllTeams.map((participant) => {
-  //       participant.registeredEvents.map((event) => {
-  //         if (event.eventId === chosenComp.id) {
-  //           participant["prelimsLink"] = event.prelimLink;
-  //           participant["teamId"] = event.teamId;
-  //         }
-  //       });
-  //       return participant;
-  //     });
-
-  //     allMembersAllTeams.sort((a, b) =>
-  //       a.teamId
-  //         .toString()
-  //         .localeCompare(b.teamId.toString(), "en", { numeric: true })
-  //     );
-
-  //     var index = 0;
-  //     if (allMembersAllTeams.length > 0) {
-  //       allMembersAllTeams[0]["teamNumber"] = 0;
-  //       for (var i = 1; i < allMembersAllTeams.length; i++) {
-  //         if (
-  //           allMembersAllTeams[i].teamId === allMembersAllTeams[i - 1].teamId
-  //         ) {
-  //           allMembersAllTeams[i]["teamNumber"] = index;
-  //         } else {
-  //           index++;
-  //           allMembersAllTeams[i]["teamNumber"] = index;
-  //         }
-  //       }
-
-  //       allMembersAllTeams = allMembersAllTeams.map((allmembers) => {
-  //         delete allmembers.registeredEvents;
-  //         delete allmembers.teamId;
-  //         return allmembers;
-  //       });
-
-  //       setFinalUserData(allMembersAllTeams);
-  //     }
-  //   } else {
-  //     var filteredArray = usersData.filter((user) =>
-  //       Object.keys(registeredUserObjects).includes(user.id)
-  //     );
-  //     filteredArray = filteredArray.map((user, index) => {
-  //       user["prelimsLink"] = registeredUserObjects[user.id];
-  //       delete user.registeredEvents;
-  //       delete user.id;
-  //       return user;
-  //     });
-  //     filteredArray.length > 0 && setFinalUserData(filteredArray);
-  //     console.log(filteredArray);
-  //   }
-  // }
 
 
   const handleEventSelection = (comp) => {
@@ -203,9 +121,45 @@ function LazyAdmin() {
     }
   };
 
+  const verifyPassword = () => {
+    if (pass === "g9bcDvrN?UQf$3b+") {
+      setShowModal(false);
+    } else {
+      setPass("");
+      setShowModal(true);
+    }
+  };
+
   return (
     <div className="vh-100 vw-100 d-flex flex-column">
-      <div className="main_container h-100 d-flex flex-column overflow-hidden">
+      <StarsBg />
+
+      <Modal show={showModal} centered>
+        <Modal.Header>
+          <Modal.Title>Verify User</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="d-flex flex-column">
+          Enter password to authenticate:<br></br>
+          <input
+            className="mt-3"
+            type="password"
+            name="password"
+            value={pass}
+            onChange={(e) => setPass(e.target.value)}
+          />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="warning" className="w-25" onClick={verifyPassword}>
+            VERIFY
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <div
+        className={`main_container h-100 d-flex flex-column overflow-hidden ${
+          showModal && "d-none"
+        }`}
+      >
         <div className={`d-flex flex-column overflow-auto px-5 flex-grow-1 `}>
           <form>
             <div className="d-flex jusitfy-content-center">
@@ -248,7 +202,12 @@ function LazyAdmin() {
           </div>
           <div>
             <div className="d-flex justify-content-end mt-5 mb-2">
-              <button className="btn btn-danger my-3" onClick={ExportToExcel}>
+              <button
+                className="btn btn-danger my-3"
+                disabled={finalUserData.length === 0}
+                onClick={ExportToExcel}
+              >
+                <FontAwesomeIcon icon={faDownload} className="me-2" />
                 Export To Excel
               </button>
             </div>
