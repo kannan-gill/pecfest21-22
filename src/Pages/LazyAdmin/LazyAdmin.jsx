@@ -83,7 +83,7 @@ function LazyAdmin() {
               members.push(member);
               registeredUserObjects[index] = registeredUserObjects[team.id];
               delete registeredUserObjects[team.id];
-              userTeamId[member] = index;
+              userTeamId[member] = index+1;
             });
           });
           let finalUsers = [];
