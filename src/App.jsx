@@ -22,6 +22,7 @@ import EventDetails from "Pages/EventCardDetails/EventDetails";
 import AuthProvider from "./context/AuthContext";
 import VerificationModalProvider from "./context/VerificationModalContext";
 import VerifyEmail from "Pages/VerifyEmail";
+import LazyAdmin from "Pages/LazyAdmin/LazyAdmin";
 
 function App() {
   const [isNavBarVisible, setIsNavbarVisible] = useState(true);
@@ -86,6 +87,10 @@ function App() {
     {
       path: "/workshops",
       component: <EventList isTechnical isCompetition={false} />,
+    },
+    {
+      path: "/lazyAdmin",
+      component: <LazyAdmin/>,
     },
     { path: "/tech-competitions", component: <EventList isTechnical /> },
     {

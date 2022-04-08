@@ -1,0 +1,14 @@
+.lazyadminbg{
+    background: url(../../Images/lazyAdmin.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+}
+
+.customTable th{
+    background: rgba(0,0,0,0.5);
+}
+
+.customTable td{
+    background: rgba(0,0,0,0.5);
+}
