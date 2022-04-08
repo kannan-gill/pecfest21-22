@@ -24,7 +24,9 @@ const ModalCard = ({
       <Modal.Header className={styles.no_border} closeVariant="white" closeButton>
         <Modal.Title className={`${styles.title} main_font`}>{title}</Modal.Title>
       </Modal.Header>
-      <Modal.Body className="main_font" dangerouslySetInnerHTML={{ __html: content }} />
+      <Modal.Body className="main_font">
+        {content}
+      </Modal.Body>
       <Modal.Footer className={styles.no_border}>
         <Button variant="secondary" className="main_font" onClick={() => setModalShow(false)}>
           Close

@@ -76,8 +76,8 @@ function Home2({ initialPage }) {
 
       {/* Up Arrow */}
       {currentPage !== "landing" && (
-        <div className="zi-top prev-page start-50 top-0 mt-5  translate-middle ">
-          <div className="w-100 h-100 animate__animated animate__fadeInUp">
+        <div className="zi-top prev-page start-50 top-0 mt-5  translate-middle pt-5 pt-md-0 ">
+          <div className="w-100 h-100 animate__animated animate__fadeInUp mt-5 mt-md-0 ">
             {/* <FontAwesomeIcon
             onClick={() => {
               setNextPage("landing", "aboutUs");

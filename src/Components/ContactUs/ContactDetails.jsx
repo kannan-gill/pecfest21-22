@@ -52,7 +52,7 @@ const ContactDetails = () => {
         Follow us:
         <div className="d-flex flex-row justify-content-center justify-content-lg-start mt-2">
           {socialHandles.map((handle) => (
-            <a href={handle.href}>
+            <a href={handle.href} target="_blank">
               <i
                 className={`fa-brands fa-${handle.name} me-3 ${
                   styles[handle.name]

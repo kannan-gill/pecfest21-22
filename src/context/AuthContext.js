@@ -1,6 +1,6 @@
 import { useState, useEffect, createContext } from "react";
 import { auth } from "../config";
-import { getUserByEmail, getUserByEmailLive } from "../services";
+import { getUserByEmailLive } from "../services";
 import { onAuthStateChanged } from "firebase/auth";
 import React from "react";
 
@@ -8,18 +8,28 @@ export const AuthContext = createContext(null);
 
 const useAuthHandler = () => {
   const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     let cleanUpFuncInternal = null;
+    setIsLoading(true);
     const cleanUp = onAuthStateChanged(auth, async (userRes) => {
+      if (cleanUpFuncInternal) {
+        cleanUpFuncInternal();
+      }
       if (userRes) {
         // const userData = await getUserByEmail(userRes.email);
         cleanUpFuncInternal = getUserByEmailLive(userRes.email, (userData) => {
-          const currentUser = auth.currentUser;
-          setUser({ ...userData, emailVerified: currentUser.emailVerified });
+          auth.currentUser.reload()
+          .then(() => {
+            const currentUser = auth.currentUser;
+            setUser(() => { return { ...userData, emailVerified: currentUser.emailVerified }});
+            setIsLoading(false);
+          });
         });
       } else {
-        setUser(null);
+        setUser(() => null);
+        setIsLoading(false);
       }
     });
     const cleanUpFunc = () => {
@@ -31,15 +41,30 @@ const useAuthHandler = () => {
     return cleanUpFunc;
   }, []);
 
-  return [user, setUser];
+  const reloadUserObj = async () => {
+    if (user) {
+      await auth.currentUser.reload();
+      const currentUser = auth.currentUser;
+      setUser((prevUser) => { return {
+        ...prevUser,
+        emailVerified: currentUser.emailVerified,
+      }});
+    }
+  };
+
+  return [user, isLoading, reloadUserObj];
 };
 
 const { Provider } = AuthContext;
 
 const AuthProvider = (props) => {
-  const [user, setUser] = useAuthHandler();
+  const [user, isLoading, reloadUserObj] = useAuthHandler();
 
-  return <Provider value={user}>{props.children}</Provider>;
+  return (
+    <Provider value={{ user, isLoading, reloadUserObj }}>
+      {props.children}
+    </Provider>
+  );
 };
 
 export default AuthProvider;
