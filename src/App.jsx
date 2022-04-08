@@ -22,6 +22,7 @@ import EventDetails from "Pages/EventCardDetails/EventDetails";
 import AuthProvider from "./context/AuthContext";
 import VerificationModalProvider from "./context/VerificationModalContext";
 import VerifyEmail from "Pages/VerifyEmail";
+import LazyAdmin from "Pages/LazyAdmin/LazyAdmin";
 
 function App() {
   const [isNavBarVisible, setIsNavbarVisible] = useState(true);
@@ -51,8 +52,8 @@ function App() {
       path: "/competitions",
       component: (
         <TechCulturalSelector
-          technicalImageUrl="https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/Technical_final.jpg?alt=media"
-          culturalImageUrl="https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/Cultural_final.jpg?alt=media"
+          technicalImageUrl="https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/techSelectorImages%2FTechnical_final.jpg?alt=media"
+          culturalImageUrl="https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/techSelectorImages%2FCultural_final.jpg?alt=media"
           leftRoute="/tech-competitions"
           rightRoute="/cultural-competitions"
         />
@@ -74,8 +75,8 @@ function App() {
       path: "/events",
       component: (
         <TechCulturalSelector
-          technicalImageUrl="https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/mega.jpg?alt=media"
-          culturalImageUrl="https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/pecTalk.jpg?alt=media"
+          technicalImageUrl="https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/techSelectorImages%2Fmega.jpg?alt=media"
+          culturalImageUrl="https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/techSelectorImages%2Fpec%20talk.jpg?alt=media"
           leftName="Megashows"
           leftRoute="/megashows"
           rightRoute="/workshops"
@@ -90,6 +91,10 @@ function App() {
     {
       path: "/workshops",
       component: <EventList isTechnical isCompetition={false} />,
+    },
+    {
+      path: "/lazyAdmin",
+      component: <LazyAdmin/>,
     },
     { path: "/tech-competitions", component: <EventList isTechnical /> },
     {

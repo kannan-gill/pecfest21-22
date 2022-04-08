@@ -38,7 +38,7 @@ const UserDropdown = ({ user, signOutHandler }) => {
               </div>
             </div>
             <hr className="p-0 m-2 w-75 m-auto my-1"></hr>
-            {!authContext?.emailVerified && (
+            {!(authContext?.emailVerified && authContext?.pecfestId) && (
               <Dropdown.Item
                 className={`${styles.dropdownItem}`}
                 as="button"

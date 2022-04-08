@@ -1,0 +1,26 @@
+.main_container {
+  margin-top: 5.5em;
+  overflow: hidden;
+}
+
+
+.customTable th {
+  background: rgba(173, 136, 14, 0.5);
+}
+
+.customTable tr:nth-child(2n) {
+  background: rgba(150, 150, 150, 0.5);
+}
+
+.customTable tr:nth-child(2n + 1) {
+  background: rgba(231, 231, 231, 0.5);
+}
+
+.noUser {
+  position: absolute;
+  top: 5em;
+  left: 50%;
+  transform: translate(-50%, 0);
+  letter-spacing: 3px;
+  font-size: 1.2em;
+}

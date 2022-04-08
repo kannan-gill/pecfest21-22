@@ -8,6 +8,7 @@ import {
 } from "firebase/auth";
 import ModalCard from "Components/ModalCard/ModalCard";
 import { AuthContext } from "./AuthContext";
+import { generatePecfestId } from "services";
 
 export const VerificationModalContext = createContext(null);
 
@@ -17,47 +18,47 @@ const VerificationModalProvider = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [countdown, setCountdown] = useState(null);
-  const [intervalRef, setIntervalRef] = useState(null);
-  const { user } = useContext(AuthContext);
+  const [operation, setOperation] = useState(null);
+  const {
+    user,
+    reloadUserObj,
+    isLoading: isAuthLoading,
+  } = useContext(AuthContext);
 
   const openVerificationModal = () => {
-    if (!user?.emailVerified) {
       setIsModalOpen(true);
-    }
   };
 
   const closeVerificationModal = () => {
     setIsModalOpen(false);
   };
 
-  useEffect(() => {
-    const cleanUp = onAuthStateChanged(auth, async (userRes) => {
-      if (userRes) {
-        if (!userRes.emailVerified) {
-          openVerificationModal();
-        }
-      }
-    });
-    return cleanUp;
-  }, []);
+  const checkVerification = (op) => {
+    setOperation(op);
+    reloadUserObj();
+  };
 
-  useEffect(() => {
-    if (user?.emailVerified) {
-      closeVerificationModal();
-    }
-  }, [user]);
-
-  const auth = getAuth();
-
-  const resetEmailHandler = () => {
-    setIsLoading(true);
-    sendEmailVerification(auth.currentUser, {
-      url: `${window.location.origin}/verifyEmail/${user.id}`,
-    })
-      .then((res) => {
+  const pecfestIdGenerationHandler = async () => {
+    if (user?.emailVerified && !user.pecFestId) {
+      generatePecfestId(user.id).then(() => {
+        toast.success("Your PECFEST ID has been generated");
+        setOperation(null);
         closeVerificationModal();
-        setIntervalRef(
-          setInterval(() => {
+      });
+    } else if (!user?.emailVerified) {
+      toast.error("Please verify your email first");
+      setOperation(null);
+    }
+  };
+
+  const sendEmailHandler = async () => {
+    if (!user?.emailVerified) {
+      sendEmailVerification(auth.currentUser, {
+        url: `${window.location.origin}/verifyEmail/${user.id}`,
+      })
+        .then((res) => {
+          closeVerificationModal();
+          const intervalRef = setInterval(() => {
             setCountdown((prevCountdown) => {
               if (prevCountdown === null) {
                 return 60;
@@ -68,15 +69,73 @@ const VerificationModalProvider = (props) => {
                 return null;
               }
             });
-          }, 1000)
-        );
-        setIsLoading(false);
-        toast.success("Email sent successfully!", { autoClose: 2000 });
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        toast.error("Try again in some time");
+          }, 1000);
+          setIsLoading(false);
+          setOperation(null);
+          toast.success("Email sent successfully!", { autoClose: 2000 });
+        })
+        .catch((error) => {
+          const intervalRef = setInterval(() => {
+            setCountdown((prevCountdown) => {
+              if (prevCountdown === null) {
+                return 20;
+              } else if (prevCountdown > 1) {
+                return prevCountdown - 1;
+              } else {
+                clearInterval(intervalRef);
+                return null;
+              }
+            });
+          }, 1000);
+          setIsLoading(false);
+          setOperation(null);
+          toast.error("Try again in some time");
+        });
+    } else {
+      generatePecfestId(user.id).then(() => {
+        toast.success("Your PECFEST ID has been generated");
       });
+      setOperation(null);
+    }
+  };
+
+  useEffect(() => {
+    const cleanUp = onAuthStateChanged(auth, async (userRes) => {
+      if (userRes) {
+        if (!userRes?.emailVerified) {
+          openVerificationModal();
+        } else {
+          const interval = setInterval(() => {
+            if (!isAuthLoading) {
+              if (!user.pecFestId) {
+                openVerificationModal();
+              }
+              clearInterval(interval);
+            }
+          }, 200);
+        }
+      }
+    });
+    return cleanUp;
+  }, []);
+
+  useEffect(() => {
+    if (user?.emailVerified && user.pecFestId) {
+      closeVerificationModal();
+    } else {
+      if (operation === "generate") {
+        pecfestIdGenerationHandler();
+      } else if (operation === "sendEmail") {
+        sendEmailHandler();
+      }
+    }
+  }, [user]);
+
+  const auth = getAuth();
+
+  const resetEmailHandler = () => {
+    setIsLoading(true);
+    checkVerification("sendEmail");
   };
 
   return (
@@ -91,8 +150,28 @@ const VerificationModalProvider = (props) => {
 
       <ModalCard
         title="Verify Account"
-        content="An email has been sent to your registered email address.<br/><br/>
-        PLEASE VERIFY TO GENERATE YOUR PECFEST ID."
+        content={
+          <>
+            An email has been sent to your registered email address.
+            <br />
+            <br />
+            PLEASE VERIFY TO GENERATE YOUR PECFEST ID.
+            <br />
+            <br />
+            <small>
+              <i>
+                Already verified?&nbsp;
+                <span
+                  className="cursor-pointer"
+                  style={{ color: "#FFCA2C" }}
+                  onClick={() => checkVerification("generate")}
+                >
+                  Click here
+                </span>
+              </i>
+            </small>
+          </>
+        }
         isLoading={isLoading}
         buttonTitle={`Resend Email${
           countdown !== null ? ` (${countdown})` : ""

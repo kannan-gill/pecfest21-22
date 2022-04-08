@@ -26,6 +26,28 @@ export const getList = async (collectionParam) => {
   return resList;
 };
 
+export const getListFiltered = async (collectionParam, filterKey, filterValue) => {
+  const resCollection = collection(firestore, collectionParam);
+  const resSnap = await getDocs(query(resCollection, where (filterKey, 'in', filterValue)));
+
+  const resList = resSnap.docs.map((doc) => {
+    return {
+      ...doc.data(),
+      id: doc.id,
+    };
+  });
+
+  return resList;
+};
+
+export const registeredUsersInCompetition = async (collectionParam, filterKey1, filterParam1, filterKey2, filterParam2, filterkey3, filterParam3) => {
+  const resCollection = collection(firestore, collectionParam);
+  const resSnap = await getDocs(query(resCollection, where(filterKey1,'==',filterParam1), where(filterKey2,"==",filterParam2), where(filterkey3,"==",filterParam3)));
+
+    
+
+};
+
 export const getSortedList = async (collectionParam, filter) => {
   const resCollection = collection(firestore, collectionParam);
   const resSnap = await getDocs(
@@ -178,3 +200,40 @@ export const getUsersInPECIdArray = async (idArrayParam) => {
   });
   return data;
 };
+
+
+const generatePecfestIdUtil = (pecfestIdListParam) => {
+  let pecfestIdList = pecfestIdListParam;
+  if(!pecfestIdListParam)  pecfestIdList = [];
+  let pecfestId = "";
+  do {
+    pecfestId = `PECFEST-${Math.random().toString(36).substring(2, 7).toUpperCase()}`;
+  } while (pecfestIdList.includes(pecfestId));
+  return pecfestId;
+}
+
+export const generatePecfestId = (userId) => {
+  return Promise.all([
+    getDocById("stats", "pecfestIdList"),
+    getDocById("users", userId),
+  ])
+    .then(([{value: pecfestIdList}, user]) => {
+      if(!user.pecfestId) {
+        const pecfestId = generatePecfestIdUtil(pecfestIdList);
+        const userData = { ...user };
+        userData.pecfestId = pecfestId;
+        Promise.all([
+          updateDoc("stats", "pecfestIdList", {value: [...pecfestIdList, pecfestId]}),
+          updateDoc("users", userId, userData),
+        ])
+          .catch((error) => {
+            console.log(error);
+            throw error;
+          });
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      throw error;
+    });
+}

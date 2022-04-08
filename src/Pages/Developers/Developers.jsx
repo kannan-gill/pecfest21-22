@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import styles from "../Team/Team.module.css";
+import styles from "./Developers.module.css";
 import StarsBg from "../../Components/StarsBg/index";
 import { getList } from "services";
 import TeamMemberCard from "Components/TeamTiles/TeamMemberCard";
