@@ -47,34 +47,36 @@ const Filters = ({ searchEvent, setSearchEvent, filtersArray, setTags }) => {
             className="position-absolute end-0 top-50 translate-middle-y me-3"
           />
         </div>
-        <div
-          className={`d-flex  d-lg-none w-75 mb-3 position-relative`}
-        >
-          <input
-            placeholder="Event Name"
-            type="text"
-            onChange={(e) => {
-              setSearchEvent(e?.target?.value);
-            }}
-            className={`py-1 px-2 ps-3 w-100 bg-transparent ${styles.input}`}
-          />
-          <FontAwesomeIcon
-            icon={faMagnifyingGlass}
-            color="white"
-            size="1x"
-            className="position-absolute end-0 top-50 translate-middle-y me-3"
-          />
-        </div>
-        <div
-          className={`d-flex d-lg-none m-0 w-25 p-0 mb-3 ps-1 ${styles.hideButton}`}
-        >
-          <Tag
-            disabled
-            onChange={() => {
-              setIsFilterVisible((prevState) => !prevState);
-            }}
-            tag={isFiltersVisible ? "Hide Filters" : "Show Filters"}
-          />
+        <div className="w-100 d-flex d-lg-none flex-row">
+          <div
+            className={`d-flex  d-lg-none mb-3 flex-grow-1 position-relative`}
+          >
+            <input
+              placeholder="Event"
+              type="text"
+              onChange={(e) => {
+                setSearchEvent(e?.target?.value);
+              }}
+              className={`py-1 px-2 ps-3 w-100 bg-transparent ${styles.input}`}
+            />
+            <FontAwesomeIcon
+              icon={faMagnifyingGlass}
+              color="white"
+              size="1x"
+              className="position-absolute end-0 top-50 translate-middle-y me-3"
+            />
+          </div>
+          <div
+            className={`d-flex d-lg-none m-0 p-0 mb-3 ps-1 ${styles.hideButton}`}
+          >
+            <Tag
+              disabled
+              onChange={() => {
+                setIsFilterVisible((prevState) => !prevState);
+              }}
+              tag={isFiltersVisible ? "Hide Filters" : "Show Filters"}
+            />
+          </div>
         </div>
 
         {filters.map((filter, index) => {
