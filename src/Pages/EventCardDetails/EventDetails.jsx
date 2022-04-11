@@ -151,7 +151,7 @@ const EventDetails = ({ setAlwaysOpen }) => {
                     >
                       <div className="text-white">
                         {eventDetails?.tags.map((tag, ind) => (
-                          <Tag key={`tag-${ind}`} disabled tag={tag} />
+                          <Tag className="my-2" key={`tag-${ind}`} disabled tag={tag} />
                         ))}
                         <h1 className={`${styles.responsive_heading} mb-2  main_font`}>
                           {eventDetails?.name}
