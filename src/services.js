@@ -29,10 +29,7 @@ export const getList = async (collectionParam) => {
 export const getSortedList = async (collectionParam, filter) => {
   const resCollection = collection(firestore, collectionParam);
   const resSnap = await getDocs(
-    query(
-      resCollection,
-      orderBy(filter.field, filter.order)
-    )
+    query(resCollection, orderBy(filter.field, filter.order))
   );
 
   const resList = resSnap.docs.map((doc) => {
@@ -164,54 +161,67 @@ export const getUserByEmailLive = (emailParam, callbackFunction) => {
 };
 
 export const getUsersInPECIdArray = async (idArrayParam) => {
-  const queryRef = query(
-    collection(firestore, "users"),
-    where("pecfestId", "in", idArrayParam)
-  );
-
-  const querySnapshot = await getDocs(queryRef);
-  const data = querySnapshot.docs.map((doc) => {
-    return {
-      ...doc.data(),
-      id: doc.id,
-    };
+  const idArrayParamCopy = [...idArrayParam];
+  const batches = [];
+  while (idArrayParamCopy.length > 0) batches.push(idArrayParamCopy.splice(0, 10));
+  const promiseArrays = batches.map((idArray) => {
+    const queryRef = query(
+      collection(firestore, "users"),
+      where("pecfestId", "in", idArray)
+    );
+    return getDocs(queryRef);
   });
-  return data;
+  const response = [];
+  Promise.all(promiseArrays).then((querySnapshotArray) => {
+    querySnapshotArray.map((querySnapshot) => {
+      const data = querySnapshot.docs.map((doc) => {
+        return {
+          ...doc.data(),
+          id: doc.id,
+        };
+      });
+      response.push(data);
+    });
+  });
+  return response.flat();
 };
-
 
 const generatePecfestIdUtil = (pecfestIdListParam) => {
   let pecfestIdList = pecfestIdListParam;
-  if(!pecfestIdListParam)  pecfestIdList = [];
+  if (!pecfestIdListParam) pecfestIdList = [];
   let pecfestId = "";
   do {
-    pecfestId = `PECFEST-${Math.random().toString(36).substring(2, 7).toUpperCase()}`;
+    pecfestId = `PECFEST-${Math.random()
+      .toString(36)
+      .substring(2, 7)
+      .toUpperCase()}`;
   } while (pecfestIdList.includes(pecfestId));
   return pecfestId;
-}
+};
 
 export const generatePecfestId = (userId) => {
   return Promise.all([
     getDocById("stats", "pecfestIdList"),
     getDocById("users", userId),
   ])
-    .then(([{value: pecfestIdList}, user]) => {
-      if(!user.pecfestId) {
+    .then(([{ value: pecfestIdList }, user]) => {
+      if (!user.pecfestId) {
         const pecfestId = generatePecfestIdUtil(pecfestIdList);
         const userData = { ...user };
         userData.pecfestId = pecfestId;
         Promise.all([
-          updateDoc("stats", "pecfestIdList", {value: [...pecfestIdList, pecfestId]}),
+          updateDoc("stats", "pecfestIdList", {
+            value: [...pecfestIdList, pecfestId],
+          }),
           updateDoc("users", userId, userData),
-        ])
-          .catch((error) => {
-            console.log(error);
-            throw error;
-          });
+        ]).catch((error) => {
+          console.log(error);
+          throw error;
+        });
       }
     })
     .catch((error) => {
       console.log(error);
       throw error;
     });
-}
+};
