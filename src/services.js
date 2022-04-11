@@ -26,26 +26,54 @@ export const getList = async (collectionParam) => {
   return resList;
 };
 
-export const getListFiltered = async (collectionParam, filterKey, filterValue) => {
-  const resCollection = collection(firestore, collectionParam);
-  const resSnap = await getDocs(query(resCollection, where (filterKey, 'in', filterValue)));
-
-  const resList = resSnap.docs.map((doc) => {
-    return {
-      ...doc.data(),
-      id: doc.id,
-    };
+export const getListFiltered = async (
+  collectionParam,
+  filterKey,
+  filterValue
+) => {
+  const filterValueCopy = [ ...filterValue ];
+  const batches = [];
+  while (filterValueCopy.length > 0)
+    batches.push(filterValueCopy.splice(0, 10));
+  const promiseArrays = batches.map((idArray) => {
+    const queryRef = query(
+      collection(firestore, collectionParam),
+      where(filterKey, "in", idArray)
+    );
+    return getDocs(queryRef);
   });
-
-  return resList;
+  const response = [];
+  const querySnapshotArray = await Promise.all(promiseArrays);
+  querySnapshotArray.map((querySnapshot) => {
+    const data = querySnapshot.docs.map((doc) => {
+      return {
+        ...doc.data(),
+        id: doc.id,
+      };
+    });
+    response.push(data);
+  });
+  return response.flat();
 };
 
-export const registeredUsersInCompetition = async (collectionParam, filterKey1, filterParam1, filterKey2, filterParam2, filterkey3, filterParam3) => {
+export const registeredUsersInCompetition = async (
+  collectionParam,
+  filterKey1,
+  filterParam1,
+  filterKey2,
+  filterParam2,
+  filterkey3,
+  filterParam3
+) => {
   const resCollection = collection(firestore, collectionParam);
-  const resSnap = await getDocs(query(resCollection, where(filterKey1,'==',filterParam1), where(filterKey2,"==",filterParam2), where(filterkey3,"==",filterParam3)));
-
-    
-
+  const resSnap = await getDocs(
+    query(
+      resCollection,
+      where(filterKey1, "==", filterParam1),
+      where(filterKey2, "==", filterParam2),
+      where(filterkey3, "==", filterParam3)
+    )
+  );
 };
 
 export const getSortedList = async (collectionParam, filter) => {
@@ -185,7 +213,8 @@ export const getUserByEmailLive = (emailParam, callbackFunction) => {
 export const getUsersInPECIdArray = async (idArrayParam) => {
   const idArrayParamCopy = [...idArrayParam];
   const batches = [];
-  while (idArrayParamCopy.length > 0) batches.push(idArrayParamCopy.splice(0, 10));
+  while (idArrayParamCopy.length > 0)
+    batches.push(idArrayParamCopy.splice(0, 10));
   const promiseArrays = batches.map((idArray) => {
     const queryRef = query(
       collection(firestore, "users"),
@@ -194,16 +223,15 @@ export const getUsersInPECIdArray = async (idArrayParam) => {
     return getDocs(queryRef);
   });
   const response = [];
-  Promise.all(promiseArrays).then((querySnapshotArray) => {
-    querySnapshotArray.map((querySnapshot) => {
-      const data = querySnapshot.docs.map((doc) => {
-        return {
-          ...doc.data(),
-          id: doc.id,
-        };
-      });
-      response.push(data);
+  const querySnapshotArray = await Promise.all(promiseArrays);
+  querySnapshotArray.map((querySnapshot) => {
+    const data = querySnapshot.docs.map((doc) => {
+      return {
+        ...doc.data(),
+        id: doc.id,
+      };
     });
+    response.push(data);
   });
   return response.flat();
 };
