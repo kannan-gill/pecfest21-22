@@ -3,9 +3,7 @@ import { OverlayTrigger, Tooltip, Button } from "react-bootstrap";
 import styles from "./UserDropdown.module.css";
 import { AuthContext } from "../../context/AuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCopy,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCopy } from "@fortawesome/free-solid-svg-icons";
 
 const PecfestId = ({ color, iconColor }) => {
   const { user: authContext } = useContext(AuthContext);
@@ -17,10 +15,20 @@ const PecfestId = ({ color, iconColor }) => {
       style={{ backgroundColor: iconColor, color: color }}
       onClick={() => {
         setShowTooltip(true);
-        navigator.clipboard.writeText(authContext["pecfestId"]);
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(authContext["pecfestId"]);
+        } else {
+          var textArea = document.createElement("textarea");
+          textArea.value = authContext["pecfestId"];
+          textArea.style.position = "fixed"; 
+          document.body.appendChild(textArea);
+          textArea.focus();
+          textArea.select();
+          document.execCommand("copy");
+          document.body.removeChild(textArea);
+        }
         setTimeout(() => setShowTooltip(false), 1000);
       }}
-
     >
       <FontAwesomeIcon icon={faCopy} />
     </Button>
@@ -28,18 +36,23 @@ const PecfestId = ({ color, iconColor }) => {
 
   return (
     <>
-      {(authContext && authContext.pecfestId) &&
+      {authContext && authContext.pecfestId && (
         <>
-          <div className="pe-2 fst-italic" style={{ color: color }}>{authContext["pecfestId"]}</div>
+          <div className="pe-2 fst-italic" style={{ color: color }}>
+            {authContext["pecfestId"]}
+          </div>
           {showTooltip ? (
-            <OverlayTrigger placement="bottom" overlay={<Tooltip>Copied!</Tooltip>}>
+            <OverlayTrigger
+              placement="bottom"
+              overlay={<Tooltip>Copied!</Tooltip>}
+            >
               {copyButton}
             </OverlayTrigger>
           ) : (
             copyButton
           )}
         </>
-      }
+      )}
     </>
   );
 };

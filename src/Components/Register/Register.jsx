@@ -80,7 +80,7 @@ function Register({ onFlip, redirect }) {
     setLoading(true);
     createUserWithEmailAndPassword(auth, user.email, user.password)
       .then((userCredential) => {
-        const userData = { ...user };
+        const userData = { ...user, email: user.email.toLowerCase() };
         delete userData.password;
         createDoc("users", userData)
           .then((createdUser) => {
