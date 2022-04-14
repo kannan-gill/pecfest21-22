@@ -1,12 +1,14 @@
-import React from 'react'
-import ComingSoon from 'Pages/ComingSoon/ComingSoon';
-import Navbar from 'Components/Navbar';
+import React, { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 function Schedule() {
+  const navigate = useNavigate()
+  useEffect(() => {
+    window.open("https://www.google.com/", "_blank");
+    navigate("/");
+  })
   return (
-    <div className='vh-100' style={{background:"#fb6d62"}}>
-      Schedule
-    </div>
+    <></>
   )
 }
 
