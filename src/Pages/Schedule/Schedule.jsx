@@ -1,11 +1,8 @@
 import React,{useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
-import ComingSoon from 'Pages/ComingSoon/ComingSoon';
-import Navbar from 'Components/Navbar';
+
 
 function Schedule() {
-
-  
   const navigate = useNavigate();
 
   useEffect(()=>{
@@ -13,11 +10,8 @@ function Schedule() {
     navigate(-1);
   },[]);
 
- 
-
   return (
-    <div className='vh-100' style={{background:"#fb6d62"}}>
-    </div>
+    <></>
   )
 }
 
