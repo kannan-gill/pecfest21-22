@@ -94,7 +94,7 @@ function LazyAdmin() {
                 teamId: userTeamId[user.pecfestId],
                 prelimsLink: registeredUserObjects[userTeamId[user.pecfestId]],
               };
-              const { registeredEvents, emailVerified, ...finalUserData } =
+              const { registeredEvents, emailVerified, id, ...finalUserData } =
                 userData;
               finalUsers.push(finalUserData);
             });
@@ -109,7 +109,7 @@ function LazyAdmin() {
                 ...user,
                 prelimsLink: registeredUserObjects[user.id],
               };
-              const { registeredEvents, emailVerified, ...finalUserData } =
+              const { registeredEvents, emailVerified, id, ...finalUserData } =
                 userData;
               setFinalUserData((prev) => [...prev, finalUserData]);
             });
@@ -120,6 +120,7 @@ function LazyAdmin() {
       setFinalUserData([]);
     }
   };
+
 
   const verifyPassword = () => {
     if (pass === "g9bcDvrN?UQf$3b+") {

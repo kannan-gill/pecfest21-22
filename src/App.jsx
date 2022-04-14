@@ -23,6 +23,7 @@ import AuthProvider from "./context/AuthContext";
 import VerificationModalProvider from "./context/VerificationModalContext";
 import VerifyEmail from "Pages/VerifyEmail";
 import LazyAdmin from "Pages/LazyAdmin/LazyAdmin";
+import Schedule from 'Pages/Schedule/Schedule'
 
 function App() {
   const [isNavBarVisible, setIsNavbarVisible] = useState(true);
@@ -59,7 +60,7 @@ function App() {
         />
       ),
     },
-    { path: "/schedule", component: <ComingSoon /> },
+    { path: "/schedule", component: <Schedule /> },
     { path: "/admin", component: <Admin /> },
     { path: "/teamregister", component: <ComingSoon /> },
     { path: "/team", component: <Team /> },
