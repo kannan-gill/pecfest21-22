@@ -6,7 +6,7 @@ function Schedule() {
   const navigate = useNavigate();
 
   useEffect(()=>{
-    window.open('https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/PECfest%20schedule%20%20(1).pdf?alt=media&token=59c4a67e-8baa-4a4f-82ca-41d6b72beb8c', "_blank")
+    window.open('https://firebasestorage.googleapis.com/v0/b/pecfest-589fa.appspot.com/o/Pecfest%20Schedule.pdf?alt=media&token=93d5afe7-9654-4d3e-9156-ebbf283dd0cf', "_blank")
     navigate(-1);
   },[]);
 
