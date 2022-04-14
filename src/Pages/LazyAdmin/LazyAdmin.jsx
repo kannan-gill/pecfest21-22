@@ -15,7 +15,6 @@ function LazyAdmin() {
   const [finalUserData, setFinalUserData] = useState([]);
   const [showModal, setShowModal] = useState(true);
   const [pass, setPass] = useState("");
-  const [dataBackup, setDataBackup] = useState([]);
 
   const columns = [
     chosenComp["isTeamEvent"] ? "Team No." : "S.No",
@@ -122,27 +121,6 @@ function LazyAdmin() {
     }
   };
 
-  function dataBackupFunction(){
-    getList('stats').then(data=>{
-      setDataBackup(data);
-    });
-    console.log(dataBackup);
-
-    var data = dataBackup;
-    var fileName = 'dataBackup' + Date.now();
-    var exportType = exportFromJSON.types.xls;
-    exportFromJSON({ data, fileName, extension: "xls", exportType });
-
-
-    // fileSystem.writeFile("./newClient.json", eventsbackup, err=>{
-    //   if(err){
-    //     console.log("Error writing file" ,err)
-    //   } else {
-    //     console.log('JSON data is written to the file successfully')
-    //   }
-    //  })
-   
-  };
 
   const verifyPassword = () => {
     if (pass === "g9bcDvrN?UQf$3b+") {
