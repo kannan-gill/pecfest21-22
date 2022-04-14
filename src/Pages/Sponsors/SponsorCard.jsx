@@ -4,7 +4,7 @@ import styles from "./Sponsors.module.css";
 const SponsorCard = ({ image, name, desc,index }) => {
   return (
     <div
-      className={`d-flex flex-column justify-content-end py-3 align-items-center me-4 mb-4 animate__animated animate__fadeIn ${styles.card} ${index%2==0 ? styles.rightrotate : styles.leftrotate}`}
+      className={`d-flex flex-column justify-content-end py-3 align-items-center m-5 animate__animated animate__fadeIn ${styles.card} ${index%2==0 ? styles.rightrotate : styles.leftrotate}`}
     >
       <div className="h-50 d-flex flex-row justify-content-center m-auto">
         <img 

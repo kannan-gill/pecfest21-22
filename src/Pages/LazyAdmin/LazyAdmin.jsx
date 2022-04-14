@@ -15,6 +15,7 @@ function LazyAdmin() {
   const [finalUserData, setFinalUserData] = useState([]);
   const [showModal, setShowModal] = useState(true);
   const [pass, setPass] = useState("");
+  const [dataBackup, setDataBackup] = useState([]);
 
   const columns = [
     chosenComp["isTeamEvent"] ? "Team No." : "S.No",
@@ -121,6 +122,28 @@ function LazyAdmin() {
     }
   };
 
+  function dataBackupFunction(){
+    getList('stats').then(data=>{
+      setDataBackup(data);
+    });
+    console.log(dataBackup);
+
+    var data = dataBackup;
+    var fileName = 'dataBackup' + Date.now();
+    var exportType = exportFromJSON.types.xls;
+    exportFromJSON({ data, fileName, extension: "xls", exportType });
+
+
+    // fileSystem.writeFile("./newClient.json", eventsbackup, err=>{
+    //   if(err){
+    //     console.log("Error writing file" ,err)
+    //   } else {
+    //     console.log('JSON data is written to the file successfully')
+    //   }
+    //  })
+   
+  };
+
   const verifyPassword = () => {
     if (pass === "g9bcDvrN?UQf$3b+") {
       setShowModal(false);
@@ -209,6 +232,14 @@ function LazyAdmin() {
               >
                 <FontAwesomeIcon icon={faDownload} className="me-2" />
                 Export To Excel
+              </button>
+              <button
+                className="btn btn-danger my-3"
+                disabled={finalUserData.length === 0}
+                onClick={dataBackupFunction}
+              >
+                <FontAwesomeIcon icon={faDownload} className="me-2" />
+                Data Backup
               </button>
             </div>
             <table className="customTable w-100 text-white font-weight-bold position-relative mb-4 pe-3">
