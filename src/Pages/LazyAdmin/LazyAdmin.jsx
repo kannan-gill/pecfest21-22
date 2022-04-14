@@ -211,14 +211,6 @@ function LazyAdmin() {
                 <FontAwesomeIcon icon={faDownload} className="me-2" />
                 Export To Excel
               </button>
-              <button
-                className="btn btn-danger my-3"
-                disabled={finalUserData.length === 0}
-                onClick={dataBackupFunction}
-              >
-                <FontAwesomeIcon icon={faDownload} className="me-2" />
-                Data Backup
-              </button>
             </div>
             <table className="customTable w-100 text-white font-weight-bold position-relative mb-4 pe-3">
               <tr>
