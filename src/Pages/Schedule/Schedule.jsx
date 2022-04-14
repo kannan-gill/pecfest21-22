@@ -6,7 +6,7 @@ function Schedule() {
   useEffect(() => {
     window.open("https://www.google.com/", "_blank");
     navigate("/");
-  })
+  }, [])
   return (
     <></>
   )
