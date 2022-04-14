@@ -236,7 +236,7 @@ const EventDetails = ({ setAlwaysOpen }) => {
                           }}
                           title=""
                         >
-                          <h3 className="text-white">Already Registered!</h3>
+                          <h3 className="text-white">Registered Successfully!</h3>
                           {prelimLink && (
                             <div className="w-100 d-flex flex-column">
                               <p className="d-inline text-warning text-nowrap mb-0 mt-2">
