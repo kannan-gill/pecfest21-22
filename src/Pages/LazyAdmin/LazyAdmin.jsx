@@ -60,7 +60,6 @@ function LazyAdmin() {
     exportFromJSON({ data, fileName, extension: "xls", exportType });
   }
 
-
   const handleEventSelection = (comp) => {
     setFinalUserData([]);
     setChosenComp(comp);
@@ -79,11 +78,11 @@ function LazyAdmin() {
           );
           let members = [];
           participatingTeams.forEach((team, index) => {
+            registeredUserObjects[index+1] = registeredUserObjects[team.id];
+            delete registeredUserObjects[team.id];
             team.teamMembers.forEach((member) => {
               members.push(member);
-              registeredUserObjects[index] = registeredUserObjects[team.id];
-              delete registeredUserObjects[team.id];
-              userTeamId[member] = index+1;
+              userTeamId[member] = index + 1;
             });
           });
           let finalUsers = [];
@@ -120,7 +119,6 @@ function LazyAdmin() {
       setFinalUserData([]);
     }
   };
-
 
   const verifyPassword = () => {
     if (pass === "g9bcDvrN?UQf$3b+") {
