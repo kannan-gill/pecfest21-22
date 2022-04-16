@@ -244,7 +244,7 @@ const EventDetails = ({ setAlwaysOpen }) => {
                               </p>
                               <a
                                 target="_blank"
-                                href={`//${prelimLink}`}
+                                href={`${prelimLink}`}
                                 className="text-white text-truncate"
                               >
                                 {prelimLink}
